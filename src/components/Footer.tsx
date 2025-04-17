@@ -29,7 +29,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://github.com"
+                href="https://github.com/igaodeveloper"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
@@ -38,7 +38,7 @@ const Footer = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/igor-costa-oliveira-673866169/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
@@ -47,7 +47,7 @@ const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:contact@example.com"
+                href="igorhawking@gmail.com"
                 className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
                 aria-label="Email"
               >

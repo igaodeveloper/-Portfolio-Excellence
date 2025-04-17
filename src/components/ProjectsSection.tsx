@@ -23,76 +23,136 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Dashboard de E-Commerce",
+    title: "Portfolio 3D Interativo",
     description:
-      "Um painel completo para negócios de e-commerce com análises em tempo real, gestão de estoque e insights de clientes.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
-    liveUrl: "https://example.com/ecommerce-dashboard",
-    githubUrl: "https://github.com/username/ecommerce-dashboard",
+      "Um portfólio imersivo com modelos 3D e animações interativas criado com Three.js e React. Inclui uma ilha 3D animada na página inicial e um modelo 3D de raposa na seção de contato.",
+    image: "https://images.unsplash.com/photo-1618346136472-090de27fe8b4?w=800&q=80",
+    tags: ["React", "Three.js", "Framer Motion", "Tailwind CSS"],
+    liveUrl: "https://3d-portfolio-neon-eta.vercel.app/",
+    githubUrl: "https://github.com/YTyndyk/3D-Portfolio",
     featured: true,
   },
   {
     id: 2,
-    title: "App de Rede Social",
+    title: "Sistema de Gestão de Tarefas",
     description:
-      "Um aplicativo moderno de rede social com mensagens em tempo real, compartilhamento de posts e autenticação de usuários.",
-    image:
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
-    tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
-    liveUrl: "https://example.com/social-media-app",
-    githubUrl: "https://github.com/username/social-media-app",
+      "Aplicação full-stack para gerenciamento de projetos e tarefas com funcionalidades avançadas como arrastar e soltar, filtros de tarefas, notificações e relatórios em tempo real.",
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80",
+    tags: ["React", "Node.js", "MongoDB", "Express", "Redux"],
+    liveUrl: "https://task-master-pro.vercel.app/",
+    githubUrl: "https://github.com/CodeWithSadee/taskmate",
     featured: true,
   },
   {
     id: 3,
-    title: "App de Previsão do Tempo",
+    title: "Dashboard Analítico",
     description:
-      "Um aplicativo de clima que fornece previsões precisas, mapas interativos e alertas com base na localização.",
-    image:
-      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
-    tags: ["JavaScript", "Integração de API", "CSS3", "HTML5"],
-    liveUrl: "https://example.com/weather-app",
-    githubUrl: "https://github.com/username/weather-app",
-    featured: false,
+      "Dashboard interativo e responsivo para visualização de dados com gráficos personalizáveis, temas escuro/claro, e painel de administração para gerenciamento de usuários.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    tags: ["React", "TypeScript", "Chart.js", "Material UI", "Firebase"],
+    liveUrl: "https://react-admin-dashboard-sigma.vercel.app/",
+    githubUrl: "https://github.com/adrianhajdin/project_syncfusion_dashboard",
+    featured: true,
   },
   {
     id: 4,
-    title: "Sistema de Gestão de Tarefas",
+    title: "App de Previsão do Tempo",
     description:
-      "Uma ferramenta de produtividade para gerenciar tarefas, projetos e colaboração em equipe com funcionalidade de arrastar e soltar.",
-    image:
-      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    liveUrl: "https://example.com/task-management",
-    githubUrl: "https://github.com/username/task-management",
+      "Aplicativo de clima que utiliza geolocalização e a API OpenWeatherMap para fornecer previsões precisas, com recursos visuais distintos para diferentes condições climáticas.",
+    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
+    tags: ["JavaScript", "OpenWeatherAPI", "CSS3", "HTML5", "LocalStorage"],
+    liveUrl: "https://weather-app-javascript-nine.vercel.app/",
+    githubUrl: "https://github.com/said7388/Weather-app-javascript",
     featured: false,
   },
   {
     id: 5,
-    title: "Site de Portfólio",
+    title: "Site de Portfólio HTML/CSS",
     description:
-      "Um site de portfólio responsivo exibindo projetos, habilidades e experiência profissional com um design moderno.",
-    image:
-      "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&q=80",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
-    liveUrl: "https://example.com/portfolio",
-    githubUrl: "https://github.com/username/portfolio",
-    featured: true,
+      "Um portfólio profissional elegante desenvolvido apenas com HTML e CSS, completamente responsivo para todos os dispositivos, com design moderno e seções bem organizadas.",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
+    tags: ["HTML", "CSS", "Responsivo", "Animações CSS"],
+    liveUrl: "https://smoljames-portfolio.netlify.app/",
+    githubUrl: "https://github.com/jamezmca/ultimate-web-portfolio",
+    featured: false,
   },
   {
     id: 6,
-    title: "App de Busca de Receitas",
+    title: "Aplicativo de Rede Social",
     description:
-      "Um app culinário que ajuda usuários a descobrir receitas com base em ingredientes disponíveis, restrições alimentares e preferências.",
-    image:
-      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=80",
-    tags: ["JavaScript", "Integração de API", "CSS3", "HTML5"],
-    liveUrl: "https://example.com/recipe-finder",
-    githubUrl: "https://github.com/username/recipe-finder",
+      "Rede social completa com autenticação de usuários, postagens em tempo real, comentários, curtidas, e mensagens diretas. Inclui notificações push e feed personalizado.",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
+    tags: ["React", "Firebase", "Tailwind CSS", "Redux", "Real-time"],
+    liveUrl: "https://socialgram-app.vercel.app/",
+    githubUrl: "https://github.com/adrianhajdin/social_media_app",
+    featured: true,
+  },
+  {
+    id: 7,
+    title: "Loja Virtual E-commerce",
+    description:
+      "Plataforma completa de e-commerce com catálogo de produtos, carrinho de compras, checkout, pagamentos, e painel administrativo para gerenciamento de produtos e pedidos.",
+    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80",
+    tags: ["Next.js", "Stripe", "Sanity.io", "React", "Tailwind CSS"],
+    liveUrl: "https://ecommerce-sanity-stripe-six.vercel.app/",
+    githubUrl: "https://github.com/adrianhajdin/ecommerce_sanity_stripe",
+    featured: true,
+  },
+  {
+    id: 8,
+    title: "Aplicativo de Chatbot com IA",
+    description:
+      "Aplicativo de chat alimentado por inteligência artificial que permite conversas com um assistente virtual inteligente, histórico de conversas e exportação de diálogos.",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
+    tags: ["Next.js", "OpenAI API", "Tailwind CSS", "TypeScript", "Auth.js"],
+    liveUrl: "https://ai-chatbot-client.vercel.app/",
+    githubUrl: "https://github.com/vercel/ai-chatbot",
     featured: false,
   },
+  {
+    id: 9,
+    title: "Plataforma de Trading e Finanças",
+    description:
+      "Plataforma de trading com integração de chatbot de IA para melhorar a experiência de negociação em um ambiente simulado. Inclui análise de ações, portfólio em tempo real e histórico de transações.",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "ChatGPT API", "Prisma"],
+    liveUrl: "https://dynamitetrade.vercel.app/",
+    githubUrl: "https://github.com/longleDevops/Financial-App",
+    featured: true,
+  },
+  {
+    id: 10,
+    title: "Fundo de Hedge com IA",
+    description:
+      "Um sistema de hedge fund com IA que simula uma equipe de investidores virtuais baseada em especialistas famosos como Warren Buffett e Charlie Munger para gerar decisões de investimento.",
+    image: "https://images.unsplash.com/photo-1534951009808-766178b47a4f?w=800&q=80",
+    tags: ["Python", "OpenAI API", "Análise Financeira", "Machine Learning"],
+    liveUrl: "",
+    githubUrl: "https://github.com/virattt/ai-hedge-fund",
+    featured: true,
+  },
+  {
+    id: 11,
+    title: "Portfólio Desenvolvedor Deno",
+    description:
+      "Template de portfólio minimalista e responsivo para desenvolvedores, criado com Deno Fresh e ThreeJS. Licença MIT que permite uso, modificação e distribuição gratuita para todos.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    tags: ["TypeScript", "Deno", "ThreeJS", "Tailwind CSS", "Fresh"],
+    liveUrl: "https://opensource-portfolio.deno.dev/",
+    githubUrl: "https://github.com/michael-pfister/deno-portfolio",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "Sistema de Autenticação Completo",
+    description:
+      "Sistema completo de autenticação com login, cadastro, recuperação de senha, verificação em duas etapas e gerenciamento de perfil usando tecnologias modernas de segurança.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    tags: ["Next.js", "Prisma", "NextAuth", "TypeScript", "OAuth"],
+    liveUrl: "https://next-auth-v5-phi.vercel.app/",
+    githubUrl: "https://github.com/AntonioErdeljac/next-auth-v5",
+    featured: false,
+  }
 ];
 
 // Extrair todas as tags únicas dos projetos
@@ -159,7 +219,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
         >
           <AnimatedTitle 
-            text="Projetos" 
+            text="Projetos reais" 
             className="section-title text-modern-white mb-4"
           />
           

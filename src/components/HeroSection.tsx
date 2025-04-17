@@ -8,9 +8,9 @@ import { useParallax } from "@/lib/useParallax";
 import { useRef } from "react";
 
 const socialLinks = [
-  { icon: <Github size={24} />, url: "https://github.com", label: "GitHub" },
-  { icon: <Linkedin size={24} />, url: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <Mail size={24} />, url: "mailto:contact@example.com", label: "Email" },
+  { icon: <Github size={24} />, url: "https://github.com/igaodeveloper", label: "GitHub" },
+  { icon: <Linkedin size={24} />, url: "https://www.linkedin.com/in/igor-costa-oliveira-673866169/", label: "LinkedIn" },
+  { icon: <Mail size={24} />, url: "mailto:igorhawking@gmail.com", label: "Email" }
 ];
 
 const HeroSection = () => {
@@ -180,7 +180,7 @@ const HeroSection = () => {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+              src="/assets/perfil.jpg"
               alt="Developer Portrait"
               className="w-full h-full object-cover"
             />
