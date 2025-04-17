@@ -1,4 +1,3 @@
-import { Navigation } from "./layout/Navigation";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ProjectsSection from "./ProjectsSection";
@@ -15,7 +14,6 @@ import CodeEditor from "./CodeEditor";
 function Home() {
   return (
     <div className="w-full min-h-screen bg-[#121214]">
-      <Navigation />
       <main>
         <HeroSection />
         <AnimatedSection direction="up" delay={0.2}>
