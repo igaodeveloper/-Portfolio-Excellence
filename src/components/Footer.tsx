@@ -112,7 +112,7 @@ const Footer = () => {
 
           <div>
             <h3 className="text-modern-white font-bold text-lg mb-4">Contato</h3>
-            <p className="text-modern-gray mb-2">contato@exemplo.com</p>
+            <p className="text-modern-gray mb-2">igorhawking@gmail.com</p>
             <p className="text-modern-gray">São Paulo, Brasil</p>
           </div>
         </div>

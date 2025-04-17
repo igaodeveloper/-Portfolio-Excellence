@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, Briefcase, GraduationCap, Award } from "lucide-react";
+import { Calendar, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 type TimelineItem = {
@@ -9,10 +9,9 @@ type TimelineItem = {
   organization: string;
   period: string;
   description: string;
-  type: "work" | "education" | "award";
 };
 
-const timelineItems: TimelineItem[] = [
+const workItems: TimelineItem[] = [
   {
     id: 1,
     title: "Desenvolvedor Front-End Pleno",
@@ -20,7 +19,6 @@ const timelineItems: TimelineItem[] = [
     period: "2021 - Presente",
     description:
       "Lidero o desenvolvimento front-end de aplicativos empresariais, mentorei desenvolvedores juniores e implementei padrões modernos de arquitetura React.",
-    type: "work",
   },
   {
     id: 2,
@@ -29,36 +27,50 @@ const timelineItems: TimelineItem[] = [
     period: "2024 - 2025",
     description:
       "Desenvolvi aplicações web responsivas usando React, TypeScript e frameworks modernos de CSS. Colaborei com designers de UX para implementar interfaces com perfeição pixel a pixel.",
-    type: "work",
   },
   {
     id: 3,
-    title: "Bacharelado em Ciência da Computação",
-    organization: "Universidade Anhembi Morumbi",
-    period: "2023-2027",
+    title: "Desenvolvedor Front-End Júnior",
+    organization: "TechSmart Solutions",
+    period: "2020 - 2021",
     description:
-      "Especializei-me em tecnologias web e design de interfaces de usuário. Me formei com honras.",
-    type: "education",
+      "Atuei no desenvolvimento de interfaces interativas para sistemas de gestão empresarial, utilizando React, Redux e Material UI. Participei de sprints ágeis e implementei melhorias de usabilidade.",
   },
   {
     id: 4,
-    title: "Prêmio de Excelência em Desenvolvimento Web",
-    organization: "Conferência Regional de Tecnologia",
-    period: "2020",
+    title: "Freelancer Front-End",
+    organization: "Projetos Independentes",
+    period: "2019 - 2020",
     description:
-      "Reconhecido por contribuições excepcionais para as práticas de desenvolvimento front-end e projetos de código aberto.",
-    type: "award",
+      "Desenvolvi websites responsivos para pequenas empresas e startups utilizando HTML5, CSS3 e JavaScript. Implementei layouts modernos com foco em performance e experiência do usuário.",
+  },
+  {
+    id: 5,
+    title: "Estagiário de Desenvolvimento Web",
+    organization: "Digital Innovation Agency",
+    period: "2019 - 2019",
+    description:
+      "Auxiliei na implementação de landing pages e sistemas de e-commerce usando WordPress e JavaScript. Participei de reuniões de planejamento e aprendi sobre fluxos de trabalho profissionais.",
+  },
+  {
+    id: 6,
+    title: "Desenvolvedor Front-End Voluntário",
+    organization: "ONG Educação Para Todos",
+    period: "2018 - 2019",
+    description:
+      "Colaborei no desenvolvimento de uma plataforma educacional acessível para comunidades carentes, utilizando Vue.js e Bootstrap. Implementei recursos de acessibilidade e otimizei a experiência mobile.",
+  },
+  {
+    id: 7,
+    title: "Auxiliar de Desenvolvimento Web",
+    organization: "Agência CreativeDev",
+    period: "2018 - 2018",
+    description:
+      "Participei da manutenção de sites corporativos e da implementação de novas funcionalidades utilizando jQuery e SASS. Realizei tarefas de otimização de código e integração com APIs de terceiros.",
   },
 ];
 
 const AboutSection = () => {
-  const [activeTab, setActiveTab] = useState<"all" | "work" | "education" | "award">("all");
-
-  const filteredItems =
-    activeTab === "all"
-      ? timelineItems
-      : timelineItems.filter((item) => item.type === activeTab);
-
   return (
     <section id="about" className="py-20 px-6 bg-modern-darker">
       <div className="container-section">
@@ -104,53 +116,11 @@ const AboutSection = () => {
           className="space-y-8"
         >
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-            <h3 className="text-2xl font-bold text-modern-white">Experiência & Educação</h3>
-            <div className="flex flex-wrap gap-2">
-              <Badge
-                onClick={() => setActiveTab("all")}
-                className={`px-3 py-1 cursor-pointer text-modern-white ${
-                  activeTab === "all" 
-                    ? "bg-modern-accent hover:bg-modern-accent/90" 
-                    : "bg-modern-dark hover:bg-modern-dark/70"
-                }`}
-              >
-                Todos
-              </Badge>
-              <Badge
-                onClick={() => setActiveTab("work")}
-                className={`px-3 py-1 cursor-pointer text-modern-white ${
-                  activeTab === "work" 
-                    ? "bg-modern-accent hover:bg-modern-accent/90" 
-                    : "bg-modern-dark hover:bg-modern-dark/70"
-                }`}
-              >
-                Trabalho
-              </Badge>
-              <Badge
-                onClick={() => setActiveTab("education")}
-                className={`px-3 py-1 cursor-pointer text-modern-white ${
-                  activeTab === "education" 
-                    ? "bg-modern-accent hover:bg-modern-accent/90" 
-                    : "bg-modern-dark hover:bg-modern-dark/70"
-                }`}
-              >
-                Educação
-              </Badge>
-              <Badge
-                onClick={() => setActiveTab("award")}
-                className={`px-3 py-1 cursor-pointer text-modern-white ${
-                  activeTab === "award" 
-                    ? "bg-modern-accent hover:bg-modern-accent/90" 
-                    : "bg-modern-dark hover:bg-modern-dark/70"
-                }`}
-              >
-                Prêmios
-              </Badge>
-            </div>
+            <h3 className="text-2xl font-bold text-modern-white">Experiência</h3>
           </div>
 
           <div className="relative border-l-2 border-modern-accent/30 pl-8 space-y-12 ml-4">
-            {filteredItems.map((item, index) => (
+            {workItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, x: -10 }}
@@ -160,13 +130,7 @@ const AboutSection = () => {
                 className="relative"
               >
                 <div className="absolute -left-[42px] bg-modern-darker p-1 rounded-full border-2 border-modern-accent">
-                  {item.type === "work" ? (
-                    <Briefcase className="w-5 h-5 text-modern-accent" />
-                  ) : item.type === "education" ? (
-                    <GraduationCap className="w-5 h-5 text-modern-accent" />
-                  ) : (
-                    <Award className="w-5 h-5 text-modern-accent" />
-                  )}
+                  <Briefcase className="w-5 h-5 text-modern-accent" />
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center mb-2 gap-2">
                   <h4 className="text-xl font-semibold text-modern-white">{item.title}</h4>

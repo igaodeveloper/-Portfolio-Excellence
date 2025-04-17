@@ -10,22 +10,28 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: "Company Name 1",
-    role: "Frontend Developer",
+    company: "Santander",
+    role: "Senior Frontend Developer",
     period: "2023 - Present",
-    description: "Led the development of modern web applications using React, TypeScript, and Tailwind CSS. Implemented responsive designs and optimized performance."
+    description: "Desenvolvimento e otimização de aplicações bancárias com React e TypeScript. Implementação de soluções seguras e responsivas para internet banking, melhorando a experiência do usuário e reduzindo o tempo de carregamento em 40%."
   },
   {
-    company: "Company Name 2",
-    role: "UX Designer & Frontend Developer",
-    period: "2022 - 2023",
-    description: "Designed and developed user interfaces for various clients. Created intuitive user experiences and implemented them using modern web technologies."
+    company: "GOV",
+    role: "Desenvolvedor Full Stack",
+    period: "2021 - 2023",
+    description: "Desenvolvimento de sistemas governamentais utilizando Node.js e React. Integração com APIs de serviços públicos e implementação de autenticação segura. Participação em projetos de modernização de plataformas digitais de atendimento ao cidadão."
   },
   {
-    company: "Company Name 3",
-    role: "Junior Web Developer",
-    period: "2021 - 2022",
-    description: "Worked on maintaining and improving existing websites. Collaborated with the design team to implement new features and layouts."
+    company: "Stefanini",
+    role: "Desenvolvedor Frontend",
+    period: "2020 - 2021",
+    description: "Atuação em projetos para grandes clientes do setor financeiro e de telecomunicações. Desenvolvimento de interfaces com Angular e integração com backends Java. Trabalho em equipes ágeis seguindo metodologia Scrum."
+  },
+  {
+    company: "RHSYSTEM",
+    role: "Desenvolvedor Web Junior",
+    period: "2019 - 2020",
+    description: "Desenvolvimento e manutenção de sistemas de gestão de recursos humanos. Implementação de recursos para otimização de processos de recrutamento e seleção. Criação de relatórios dinâmicos e painéis administrativos."
   },
 ];
 

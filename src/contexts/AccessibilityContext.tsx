@@ -44,6 +44,7 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
         recognition.start();
       }
       setIsVoiceEnabled(!isVoiceEnabled);
+      window.dispatchEvent(new CustomEvent('toggleVoiceCommands'));
     }
   };
 

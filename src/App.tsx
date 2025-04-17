@@ -1,11 +1,10 @@
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy } from "react";
 import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import CustomCursor from "./components/CustomCursor";
 import SmoothScroll from "./components/SmoothScroll";
 import HiddenAdminButton from "./components/HiddenAdminButton";
-import WelcomeScreen from "./components/WelcomeScreen";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 
 // Lazy load admin components
@@ -19,6 +18,9 @@ const Dashboard = lazy(() =>
     default: module.Dashboard,
   })),
 );
+
+// Lazy load the landing page builder
+const LandingPageBuilder = lazy(() => import("./pages/LandingPageBuilder"));
 
 // Import our custom ProtectedRoute instead of the simplified version
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
@@ -35,6 +37,7 @@ function AppRoutes() {
       <>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/landing-page-builder" element={<LandingPageBuilder />} />
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
           <Route path="/admin/login" element={<LoginForm />} />
           <Route
@@ -54,16 +57,10 @@ function AppRoutes() {
 }
 
 function App() {
-  const [showWelcome, setShowWelcome] = useState(true);
-
   return (
     <AccessibilityProvider>
       <SmoothScroll>
-        {showWelcome ? (
-          <WelcomeScreen onComplete={() => setShowWelcome(false)} />
-        ) : (
-          <AppRoutes />
-        )}
+        <AppRoutes />
         <CustomCursor />
         <HiddenAdminButton />
       </SmoothScroll>

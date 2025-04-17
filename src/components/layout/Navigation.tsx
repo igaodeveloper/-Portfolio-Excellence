@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Search } from "lucide-react"
+import { Search, Code } from "lucide-react"
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/#code-editor", label: "Editor de Código", icon: <Code className="h-4 w-4 mr-1" /> },
   { href: "/blog", label: "Blog" },
   { href: "/cheatsheets", label: "Cheatsheets" },
   { href: "/glossary", label: "Glossary" },
@@ -29,8 +30,9 @@ export function Navigation() {
             <Link
               key={item.href}
               to={item.href}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="flex items-center transition-colors hover:text-foreground/80 text-foreground/60"
             >
+              {item.icon && item.icon}
               {item.label}
             </Link>
           ))}
