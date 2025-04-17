@@ -3,6 +3,8 @@ import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import CustomCursor from "./components/CustomCursor";
+import SmoothScroll from "./components/SmoothScroll";
+import HiddenAdminButton from "./components/HiddenAdminButton";
 
 // Lazy load admin components
 const LoginForm = lazy(() =>
@@ -16,11 +18,8 @@ const Dashboard = lazy(() =>
   })),
 );
 
-// Simplified protected route component
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  // Always allow access in this simplified version
-  return <>{children}</>;
-};
+// Import our custom ProtectedRoute instead of the simplified version
+const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
 
 function AppRoutes() {
   return (
@@ -34,7 +33,8 @@ function AppRoutes() {
       <>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<LoginForm />} />
+          <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+          <Route path="/admin/login" element={<LoginForm />} />
           <Route
             path="/admin/dashboard/*"
             element={
@@ -43,6 +43,7 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </>
@@ -52,10 +53,11 @@ function AppRoutes() {
 
 function App() {
   return (
-    <>
+    <SmoothScroll>
       <AppRoutes />
       <CustomCursor />
-    </>
+      <HiddenAdminButton />
+    </SmoothScroll>
   );
 }
 

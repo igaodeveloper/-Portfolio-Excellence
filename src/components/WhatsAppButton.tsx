@@ -1,12 +1,10 @@
+// components/WhatsAppButton.tsx
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
-interface WhatsAppButtonProps {
-  phoneNumber: string;
-  message?: string;
-}
-
-export default function WhatsAppButton({ phoneNumber, message = "Olá! Vim através do seu portfólio." }: WhatsAppButtonProps) {
+export default function WhatsAppButton() {
+  const phoneNumber = "5511982928508";
+  const message = "Olá! Vim através do seu portfólio.";
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
@@ -26,4 +24,4 @@ export default function WhatsAppButton({ phoneNumber, message = "Olá! Vim atrav
       <span className="hidden md:inline font-medium">Chame no Whatsapp</span>
     </motion.button>
   );
-} 
+}

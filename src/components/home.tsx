@@ -38,7 +38,7 @@ function Home() {
       <AnimatedSection direction="up" delay={0.1}>
         <Footer />
       </AnimatedSection>
-      <WhatsAppButton phoneNumber="+55 (11)98292-8508" />
+      <WhatsAppButton />
     </div>
   );
 }

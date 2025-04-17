@@ -48,7 +48,7 @@ const NavigationMenu = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8">
+        <ul className="hidden md:flex space-x-8 items-center">
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
