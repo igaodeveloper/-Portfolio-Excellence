@@ -14,7 +14,17 @@ const WelcomeScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
   const [typedText, setTypedText] = useState('');
   const { isHighContrastMode, toggleHighContrastMode, isVoiceEnabled, toggleVoiceCommands } = useAccessibility();
   const { isPlaying, toggleSound } = useAmbientSound();
-  const fullText = "Olá, sou Igor — desenvolvedor fullstack apaixonado por criar experiências digitais impactantes";
+  const fullText = "Olá, sou Igor — desenvolvedor front-end apaixonado por criar experiencias digitais impactantes"
+
+  // Handle portfolio navigation
+  const handlePortfolioClick = () => {
+    onComplete(); // Keep the original onComplete callback
+    // Smooth scroll to projects section
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Typing effect
   useEffect(() => {
@@ -107,8 +117,12 @@ const WelcomeScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
           className="w-24 h-24 mb-12 relative"
         >
           <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-500 to-teal-500 p-1">
-            <div className="w-full h-full rounded-full bg-slate-900 p-1 flex items-center justify-center">
-              <span className="text-3xl">IH</span>
+            <div className="w-full h-full rounded-full overflow-hidden">
+              <img 
+                src="/public/avatar.png"
+                alt="Igor - Frontend Developer" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </motion.div>
@@ -172,7 +186,7 @@ const WelcomeScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
             className="pt-8"
           >
             <motion.button
-              onClick={onComplete}
+              onClick={handlePortfolioClick}
               className="px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-teal-500 rounded-full 
                        hover:from-blue-600 hover:to-teal-600 transform transition-all duration-300 
                        shadow-lg hover:shadow-xl shadow-blue-500/20"
@@ -210,11 +224,10 @@ const WelcomeScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         </motion.div>
       </div>
 
-      <style jsx global>{`
+      <style>{`
         .high-contrast {
           filter: contrast(150%) brightness(120%);
         }
-        
         .terminal-text {
           font-family: 'Fira Code', monospace;
         }
