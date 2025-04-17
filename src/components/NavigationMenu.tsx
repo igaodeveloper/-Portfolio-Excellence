@@ -56,8 +56,9 @@ const NavigationMenu = () => {
           to="/"
           className="text-2xl font-bold transition-colors text-white"
         >
-          <span className="text-blue-600">Port</span>
-          <span className="text-white">dev</span>
+          <span className="text-blue-600">igao</span>
+          <span className="text-white">devs_</span>
+          <span className="text-red-600">404</span>
         </Link>
 
         {/* Desktop Navigation */}
