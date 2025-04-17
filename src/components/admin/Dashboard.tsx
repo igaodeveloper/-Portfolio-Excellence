@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { LogoutButton } from "./Auth";
-import { useAuth } from "../../services/auth";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import {
@@ -505,7 +504,6 @@ const PlaceholderSection = ({ title }: { title: string }) => (
 // Main Dashboard component
 export const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { user } = useAuth();
   const location = useLocation();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -577,8 +575,8 @@ export const Dashboard = () => {
               <User className="h-5 w-5" />
             </div>
             <div>
-              <p className="font-medium">{user?.displayName || "Admin User"}</p>
-              <p className="text-xs text-muted-foreground">{user?.email}</p>
+              <p className="font-medium">Admin User</p>
+              <p className="text-xs text-muted-foreground">admin@example.com</p>
             </div>
           </div>
 

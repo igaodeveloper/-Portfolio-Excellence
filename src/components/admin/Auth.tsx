@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../services/auth";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -18,18 +17,18 @@ import { Loader2, LogOut } from "lucide-react";
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, loading, error } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      await login(email, password);
+    // Disabled functionality
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
       navigate("/admin/dashboard");
-    } catch (err) {
-      // Error is handled by the auth context
-    }
+    }, 1000);
   };
 
   return (
@@ -91,12 +90,15 @@ export const LoginForm = () => {
 };
 
 export const LogoutButton = () => {
-  const { logout, loading } = useAuth();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout();
-    navigate("/admin");
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/admin");
+    }, 500);
   };
 
   return (

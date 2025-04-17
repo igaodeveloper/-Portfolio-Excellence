@@ -2,7 +2,6 @@ import { Suspense, lazy } from "react";
 import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
-import { AuthProvider, useAuth } from "./services/auth";
 
 // Lazy load admin components
 const LoginForm = lazy(() =>
@@ -16,22 +15,9 @@ const Dashboard = lazy(() =>
   })),
 );
 
-// Protected route component
+// Simplified protected route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthenticated, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        Loading...
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/admin" replace />;
-  }
-
+  // Always allow access in this simplified version
   return <>{children}</>;
 };
 
@@ -64,11 +50,7 @@ function AppRoutes() {
 }
 
 function App() {
-  return (
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
-  );
+  return <AppRoutes />;
 }
 
 export default App;

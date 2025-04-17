@@ -1,75 +1,92 @@
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollToNext = () => {
-    if (scrollRef.current) {
-      const nextSection = scrollRef.current.nextElementSibling as HTMLElement;
-      if (nextSection) {
-        nextSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   return (
-    <section
-      ref={scrollRef}
-      className="relative min-h-screen flex flex-col justify-center items-center bg-background px-6 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 to-transparent dark:from-blue-950/10 dark:to-transparent z-0" />
-
-      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-6 py-20">
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col space-y-6"
+          className="flex flex-col space-y-8"
         >
-          <div className="space-y-2">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-xl md:text-2xl font-medium text-blue-600 dark:text-blue-400"
-            >
-              Hello, I'm
-            </motion.h2>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight"
-            >
-              Front-End Engineer
-            </motion.h1>
-          </div>
-
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-xl md:text-2xl font-medium text-accent"
+          >
+            Bem-vindo ao meu portfólio
+          </motion.h2>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-modern-white tracking-tight"
+          >
+            Desenvolvedor <br />
+            <span className="text-accent">Front-end</span> &{" "}
+            <br className="md:hidden" />
+            <span className="text-accent">UI Designer</span>
+          </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-xl"
+            className="text-lg md:text-xl text-modern-light max-w-xl"
           >
-            I build exceptional digital experiences with modern technologies,
-            focusing on responsive design, performance, and accessibility.
+            Criando experiências digitais modernas e acessíveis com foco em
+            usabilidade e performance.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-wrap gap-4 pt-4"
+            className="flex flex-wrap gap-6 pt-4"
           >
-            <Button size="lg" className="rounded-full">
-              View My Work
+            <Button
+              size="lg"
+              className="rounded-md bg-accent hover:bg-accent/80 text-modern-white font-medium group flex items-center gap-2 transition-all duration-300"
+            >
+              Ver projetos
+              <ArrowRight
+                size={18}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full">
-              Download Resume
-            </Button>
+            <div className="flex items-center space-x-6">
+              <motion.a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-modern-light hover:text-accent transition-colors duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Github size={24} />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-modern-light hover:text-accent transition-colors duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Linkedin size={24} />
+              </motion.a>
+              <motion.a
+                href="mailto:contact@example.com"
+                className="text-modern-light hover:text-accent transition-colors duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Mail size={24} />
+              </motion.a>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -77,30 +94,40 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative aspect-square max-w-md mx-auto lg:ml-auto"
+          className="relative aspect-square max-w-md mx-auto lg:ml-auto hidden lg:block"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-20 blur-3xl" />
-          <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-background shadow-xl">
+          <div className="absolute inset-0 bg-gradient-to-tr from-accent to-accent/30 rounded-full opacity-20 blur-3xl" />
+          <motion.div
+            className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-modern-light/10 shadow-xl"
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+          >
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-              alt="Front-End Engineer Portrait"
+              alt="Developer Portrait"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        onClick={scrollToNext}
+        transition={{ delay: 1.2, duration: 0.8 }}
       >
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-sm text-muted-foreground">Scroll Down</span>
-          <ArrowDown className="animate-bounce text-muted-foreground" />
-        </div>
+        <motion.div
+          className="w-8 h-12 border-2 border-modern-light/30 rounded-full flex justify-center items-start p-1"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          <motion.div
+            className="w-1 h-3 bg-accent rounded-full"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          />
+        </motion.div>
       </motion.div>
     </section>
   );
