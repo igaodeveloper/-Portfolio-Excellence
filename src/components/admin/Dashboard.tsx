@@ -13,6 +13,8 @@ import {
   X,
   User,
 } from "lucide-react";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "../ui/input";
 
 // Placeholder components for dashboard sections
 const DashboardOverview = () => (

@@ -15,46 +15,44 @@ type TimelineItem = {
 const timelineItems: TimelineItem[] = [
   {
     id: 1,
-    title: "Senior Front-End Developer",
-    organization: "Tech Innovations Inc.",
-    period: "2021 - Present",
+    title: "Desenvolvedor Front-End Pleno",
+    organization: "Appezshop",
+    period: "2021 - Presente",
     description:
-      "Lead front-end development for enterprise applications, mentoring junior developers and implementing modern React architecture patterns.",
+      "Lidero o desenvolvimento front-end de aplicativos empresariais, mentorei desenvolvedores juniores e implementei padrões modernos de arquitetura React.",
     type: "work",
   },
   {
     id: 2,
-    title: "Front-End Developer",
-    organization: "Digital Solutions Ltd.",
-    period: "2018 - 2021",
+    title: "Desenvolvedor Front-End",
+    organization: "LATAM",
+    period: "2024 - 2025",
     description:
-      "Developed responsive web applications using React, TypeScript, and modern CSS frameworks. Collaborated with UX designers to implement pixel-perfect interfaces.",
+      "Desenvolvi aplicações web responsivas usando React, TypeScript e frameworks modernos de CSS. Colaborei com designers de UX para implementar interfaces com perfeição pixel a pixel.",
     type: "work",
   },
   {
     id: 3,
-    title: "Bachelor's Degree in Computer Science",
-    organization: "University of Technology",
-    period: "2014 - 2018",
+    title: "Bacharelado em Ciência da Computação",
+    organization: "Universidade Anhembi Morumbi",
+    period: "2023-2027",
     description:
-      "Specialized in web technologies and user interface design. Graduated with honors.",
+      "Especializei-me em tecnologias web e design de interfaces de usuário. Me formei com honras.",
     type: "education",
   },
   {
     id: 4,
-    title: "Web Development Excellence Award",
-    organization: "Regional Tech Conference",
+    title: "Prêmio de Excelência em Desenvolvimento Web",
+    organization: "Conferência Regional de Tecnologia",
     period: "2020",
     description:
-      "Recognized for outstanding contributions to front-end development practices and open-source projects.",
+      "Reconhecido por contribuições excepcionais para as práticas de desenvolvimento front-end e projetos de código aberto.",
     type: "award",
   },
 ];
 
 const AboutSection = () => {
-  const [activeTab, setActiveTab] = useState<
-    "all" | "work" | "education" | "award"
-  >("all");
+  const [activeTab, setActiveTab] = useState<"all" | "work" | "education" | "award">("all");
 
   const filteredItems =
     activeTab === "all"
@@ -62,75 +60,41 @@ const AboutSection = () => {
       : timelineItems.filter((item) => item.type === activeTab);
 
   return (
-    <section id="about" className="py-20 px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-6 bg-modern-darker">
+      <div className="container-section">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A passionate front-end engineer with a keen eye for design and a
-            commitment to creating exceptional user experiences.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h3 className="text-2xl font-bold">My Journey</h3>
-            <p className="text-muted-foreground">
-              With over 5 years of experience in front-end development, I've
-              dedicated my career to crafting beautiful, functional, and
-              accessible web experiences. My approach combines technical
-              expertise with a deep understanding of user needs and design
-              principles.
-            </p>
-            <p className="text-muted-foreground">
-              I specialize in building responsive, performant applications using
-              modern JavaScript frameworks, with a particular focus on React and
-              its ecosystem. I'm passionate about clean code, component-based
-              architecture, and staying at the forefront of web technologies.
-            </p>
-            <p className="text-muted-foreground">
-              When I'm not coding, you can find me exploring new design trends,
-              contributing to open-source projects, or sharing knowledge through
-              technical writing and mentorship.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h3 className="text-2xl font-bold">Technical Skills</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <SkillCard title="React" level={5} />
-              <SkillCard title="TypeScript" level={4} />
-              <SkillCard title="JavaScript" level={5} />
-              <SkillCard title="HTML/CSS" level={5} />
-              <SkillCard title="Tailwind CSS" level={5} />
-              <SkillCard title="Next.js" level={4} />
-              <SkillCard title="Redux" level={4} />
-              <SkillCard title="GraphQL" level={3} />
-              <SkillCard title="Jest" level={4} />
-              <SkillCard title="Figma" level={3} />
-              <SkillCard title="Git" level={4} />
-              <SkillCard title="Webpack" level={3} />
+          <h2 className="section-title text-modern-white">Quem Sou</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8">
+            <div className="space-y-6">
+              <p className="text-modern-gray text-lg leading-relaxed">
+                Com mais de <span className="text-modern-accent">4 anos de experiência</span> em desenvolvimento front-end, dediquei minha carreira a criar experiências web bonitas, funcionais e acessíveis. Minha abordagem combina conhecimento técnico com uma profunda compreensão das necessidades do usuário e dos princípios de design.
+              </p>
+              <p className="text-modern-gray text-lg leading-relaxed">
+                Sou especializado na criação de aplicações responsivas e performáticas usando frameworks modernos de JavaScript, com foco especial em <span className="text-modern-accent2">React</span> e seu ecossistema. Sou apaixonado por código limpo, arquitetura baseada em componentes e por estar na vanguarda das tecnologias web.
+              </p>
             </div>
-          </motion.div>
-        </div>
+            <div className="space-y-6">
+              <p className="text-modern-gray text-lg leading-relaxed">
+                Quando não estou programando, você pode me encontrar explorando novas tendências de design, contribuindo para projetos de código aberto ou compartilhando conhecimento através de escrita técnica e mentoria.
+              </p>
+              <div className="flex flex-wrap gap-3 mt-4">
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">React</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">TypeScript</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">Next.js</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">Tailwind CSS</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">UI/UX Design</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">Figma</Badge>
+                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">Node.js</Badge>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -139,37 +103,53 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="space-y-8"
         >
-          <div className="flex justify-between items-center">
-            <h3 className="text-2xl font-bold">Experience & Education</h3>
-            <div className="flex space-x-2">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <h3 className="text-2xl font-bold text-modern-white">Experiência & Educação</h3>
+            <div className="flex flex-wrap gap-2">
               <Badge
                 onClick={() => setActiveTab("all")}
-                className={`px-3 py-1 cursor-pointer ${activeTab === "all" ? "bg-primary" : "bg-secondary"}`}
+                className={`px-3 py-1 cursor-pointer text-modern-white ${
+                  activeTab === "all" 
+                    ? "bg-modern-accent hover:bg-modern-accent/90" 
+                    : "bg-modern-dark hover:bg-modern-dark/70"
+                }`}
               >
-                All
+                Todos
               </Badge>
               <Badge
                 onClick={() => setActiveTab("work")}
-                className={`px-3 py-1 cursor-pointer ${activeTab === "work" ? "bg-blue-500" : "bg-secondary"}`}
+                className={`px-3 py-1 cursor-pointer text-modern-white ${
+                  activeTab === "work" 
+                    ? "bg-modern-accent hover:bg-modern-accent/90" 
+                    : "bg-modern-dark hover:bg-modern-dark/70"
+                }`}
               >
-                Work
+                Trabalho
               </Badge>
               <Badge
                 onClick={() => setActiveTab("education")}
-                className={`px-3 py-1 cursor-pointer ${activeTab === "education" ? "bg-green-500" : "bg-secondary"}`}
+                className={`px-3 py-1 cursor-pointer text-modern-white ${
+                  activeTab === "education" 
+                    ? "bg-modern-accent hover:bg-modern-accent/90" 
+                    : "bg-modern-dark hover:bg-modern-dark/70"
+                }`}
               >
-                Education
+                Educação
               </Badge>
               <Badge
                 onClick={() => setActiveTab("award")}
-                className={`px-3 py-1 cursor-pointer ${activeTab === "award" ? "bg-amber-500" : "bg-secondary"}`}
+                className={`px-3 py-1 cursor-pointer text-modern-white ${
+                  activeTab === "award" 
+                    ? "bg-modern-accent hover:bg-modern-accent/90" 
+                    : "bg-modern-dark hover:bg-modern-dark/70"
+                }`}
               >
-                Awards
+                Prêmios
               </Badge>
             </div>
           </div>
 
-          <div className="relative border-l-2 border-border pl-8 space-y-12 ml-4">
+          <div className="relative border-l-2 border-modern-accent/30 pl-8 space-y-12 ml-4">
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -179,48 +159,32 @@ const AboutSection = () => {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="absolute -left-[42px] bg-background p-1 rounded-full border-2 border-border">
+                <div className="absolute -left-[42px] bg-modern-darker p-1 rounded-full border-2 border-modern-accent">
                   {item.type === "work" ? (
-                    <Briefcase className="w-5 h-5 text-blue-500" />
+                    <Briefcase className="w-5 h-5 text-modern-accent" />
                   ) : item.type === "education" ? (
-                    <GraduationCap className="w-5 h-5 text-green-500" />
+                    <GraduationCap className="w-5 h-5 text-modern-accent" />
                   ) : (
-                    <Award className="w-5 h-5 text-amber-500" />
+                    <Award className="w-5 h-5 text-modern-accent" />
                   )}
                 </div>
-                <div className="flex items-center mb-2">
-                  <h4 className="text-xl font-semibold">{item.title}</h4>
-                  <div className="ml-auto flex items-center text-sm text-muted-foreground">
+                <div className="flex flex-col md:flex-row md:items-center mb-2 gap-2">
+                  <h4 className="text-xl font-semibold text-modern-white">{item.title}</h4>
+                  <div className="md:ml-auto flex items-center text-sm text-modern-gray">
                     <Calendar className="w-4 h-4 mr-1" />
                     {item.period}
                   </div>
                 </div>
-                <p className="text-primary font-medium mb-2">
+                <p className="text-modern-accent2 font-medium mb-2">
                   {item.organization}
                 </p>
-                <p className="text-muted-foreground">{item.description}</p>
+                <p className="text-modern-gray">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
     </section>
-  );
-};
-
-const SkillCard = ({ title, level }: { title: string; level: number }) => {
-  return (
-    <div className="bg-card rounded-lg p-4 border border-border hover:border-primary transition-colors duration-300">
-      <h4 className="font-medium mb-2">{title}</h4>
-      <div className="flex space-x-1">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 rounded-full flex-1 ${i < level ? "bg-primary" : "bg-secondary"}`}
-          />
-        ))}
-      </div>
-    </div>
   );
 };
 

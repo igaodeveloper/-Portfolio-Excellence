@@ -1,22 +1,29 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <footer className="bg-[#121214] py-12 px-6 border-t border-[#323238]">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-modern-darker py-12 px-6 border-t border-modern-accent/10">
+      <div className="container-section">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
             <Link
               to="/"
-              className="text-2xl font-bold hover:text-[#00D2DF] transition-colors text-white mb-4 inline-block"
+              className="text-2xl font-bold transition-colors text-modern-white mb-4 inline-block"
             >
-              <span className="text-[#00D2DF]">Iuri</span>
-              <span>Code</span>
+              <span className="text-modern-accent">Port</span>
+              <span>fólio</span>
             </Link>
-            <p className="text-[#C4C4CC] mb-6">
+            <p className="text-modern-gray mb-6">
               Desenvolvedor Front-end & UI Designer apaixonado por criar
               experiências digitais intuitivas e impactantes.
             </p>
@@ -25,7 +32,7 @@ const Footer = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#202024] p-3 rounded-lg text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
                 aria-label="GitHub"
               >
                 <Github size={20} />
@@ -34,14 +41,14 @@ const Footer = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#202024] p-3 rounded-lg text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={20} />
               </a>
               <a
                 href="mailto:contact@example.com"
-                className="bg-[#202024] p-3 rounded-lg text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
                 aria-label="Email"
               >
                 <Mail size={20} />
@@ -50,12 +57,12 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Links Rápidos</h3>
+            <h3 className="text-modern-white font-bold text-lg mb-4">Links Rápidos</h3>
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/"
-                  className="text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                  to="/#home"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
                 >
                   Home
                 </Link>
@@ -63,15 +70,31 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#about"
-                  className="text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
                 >
-                  Sobre
+                  Quem sou
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/#experience"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                >
+                  Experiências
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/#services"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                >
+                  Serviços
                 </Link>
               </li>
               <li>
                 <Link
                   to="/#projects"
-                  className="text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
                 >
                   Projetos
                 </Link>
@@ -79,33 +102,32 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#skills"
-                  className="text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
+                  className="text-modern-gray hover:text-modern-accent transition-colors"
                 >
-                  Habilidades
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/#contact"
-                  className="text-[#C4C4CC] hover:text-[#00D2DF] transition-colors"
-                >
-                  Contato
+                  Conhecimentos
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Contato</h3>
-            <p className="text-[#C4C4CC] mb-2">contato@exemplo.com</p>
-            <p className="text-[#C4C4CC]">São Paulo, Brasil</p>
+            <h3 className="text-modern-white font-bold text-lg mb-4">Contato</h3>
+            <p className="text-modern-gray mb-2">contato@exemplo.com</p>
+            <p className="text-modern-gray">São Paulo, Brasil</p>
           </div>
         </div>
 
-        <div className="border-t border-[#323238] pt-6 text-center">
-          <p className="text-[#C4C4CC]">
-            © {currentYear} IuriCode. Todos os direitos reservados.
+        <div className="border-t border-modern-accent/10 pt-6 flex justify-between items-center">
+          <p className="text-modern-gray">
+            © {currentYear} Portfólio. Todos os direitos reservados.
           </p>
+          <button 
+            onClick={scrollToTop}
+            className="p-3 bg-modern-dark rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
+            aria-label="Voltar ao topo"
+          >
+            <ArrowUp size={20} />
+          </button>
         </div>
       </div>
     </footer>

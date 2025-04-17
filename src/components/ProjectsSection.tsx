@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AnimatedTitle } from "@/components/ui/animated-text";
+import { TiltCard } from "@/components/ui/tilt-card";
+import { fadeIn, staggerContainer } from "@/lib/animations";
+import { AnimatedItem } from "./AnimatedSection";
 
 type Project = {
   id: number;
@@ -18,9 +22,9 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Dashboard",
+    title: "Dashboard de E-Commerce",
     description:
-      "A comprehensive dashboard for e-commerce businesses with real-time analytics, inventory management, and customer insights.",
+      "Um painel completo para negócios de e-commerce com análises em tempo real, gestão de estoque e insights de clientes.",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     tags: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
@@ -30,9 +34,9 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Social Media App",
+    title: "App de Rede Social",
     description:
-      "A modern social media application with real-time messaging, post sharing, and user authentication.",
+      "Um aplicativo moderno de rede social com mensagens em tempo real, compartilhamento de posts e autenticação de usuários.",
     image:
       "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",
     tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
@@ -42,21 +46,21 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Weather Forecast App",
+    title: "App de Previsão do Tempo",
     description:
-      "A weather application that provides accurate forecasts, interactive maps, and location-based weather alerts.",
+      "Um aplicativo de clima que fornece previsões precisas, mapas interativos e alertas com base na localização.",
     image:
       "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80",
-    tags: ["JavaScript", "API Integration", "CSS3", "HTML5"],
+    tags: ["JavaScript", "Integração de API", "CSS3", "HTML5"],
     liveUrl: "https://example.com/weather-app",
     githubUrl: "https://github.com/username/weather-app",
     featured: false,
   },
   {
     id: 4,
-    title: "Task Management System",
+    title: "Sistema de Gestão de Tarefas",
     description:
-      "A productivity tool for managing tasks, projects, and team collaboration with drag-and-drop functionality.",
+      "Uma ferramenta de produtividade para gerenciar tarefas, projetos e colaboração em equipe com funcionalidade de arrastar e soltar.",
     image:
       "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
     tags: ["React", "Node.js", "MongoDB", "Express"],
@@ -66,9 +70,9 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    title: "Portfolio Website",
+    title: "Site de Portfólio",
     description:
-      "A responsive portfolio website showcasing projects, skills, and professional experience with a modern design.",
+      "Um site de portfólio responsivo exibindo projetos, habilidades e experiência profissional com um design moderno.",
     image:
       "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&q=80",
     tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
@@ -78,12 +82,12 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Recipe Finder App",
+    title: "App de Busca de Receitas",
     description:
-      "A culinary application that helps users discover recipes based on available ingredients, dietary restrictions, and preferences.",
+      "Um app culinário que ajuda usuários a descobrir receitas com base em ingredientes disponíveis, restrições alimentares e preferências.",
     image:
       "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=80",
-    tags: ["JavaScript", "API Integration", "CSS3", "HTML5"],
+    tags: ["JavaScript", "Integração de API", "CSS3", "HTML5"],
     liveUrl: "https://example.com/recipe-finder",
     githubUrl: "https://github.com/username/recipe-finder",
     featured: false,
@@ -91,163 +95,216 @@ const projects: Project[] = [
 ];
 
 const categories = [
-  "All",
+  "Todos",
   "React",
   "TypeScript",
   "JavaScript",
   "Node.js",
-  "API Integration",
+  "Integração de API",
   "Tailwind CSS",
 ];
 
 const ProjectsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Todos");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const filteredProjects =
-    activeCategory === "All"
+    activeCategory === "Todos"
       ? projects
       : projects.filter((project) => project.tags.includes(activeCategory));
 
   return (
-    <section id="projects" className="py-20 px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore my recent work and personal projects that showcase my skills
-            and expertise in front-end development.
-          </p>
-        </motion.div>
+    <section id="projects" className="py-20 px-6 bg-modern-darker">
+      <div className="container-section">
+        <AnimatedTitle 
+          text="Projetos" 
+          className="section-title text-modern-white mb-12"
+        />
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          variants={staggerContainer(0.05)}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {categories.map((category) => (
-            <Button
+          {categories.map((category, index) => (
+            <AnimatedItem
               key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveCategory(category)}
-              className="rounded-full"
+              direction="up"
+              delay={index * 0.05}
             >
-              {category}
-            </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setActiveCategory(category)}
+                className={`rounded-full border border-modern-accent/20 hover:bg-modern-accent/10 hover:text-modern-accent ${
+                  activeCategory === category 
+                    ? "bg-modern-accent/10 text-modern-accent" 
+                    : "text-modern-gray"
+                }`}
+              >
+                {category}
+              </Button>
+            </AnimatedItem>
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <motion.div
+        <motion.div
+          variants={staggerContainer(0.05)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredProjects.map((project, index) => (
+            <AnimatedItem
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-xl overflow-hidden shadow-lg border border-border hover:shadow-xl transition-shadow duration-300"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
+              direction="up"
+              delay={index * 0.05}
             >
-              <div className="relative overflow-hidden aspect-video">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 ease-in-out"
-                  style={{
-                    transform:
-                      hoveredProject === project.id
-                        ? "scale(1.05)"
-                        : "scale(1)",
-                  }}
-                />
-                {project.featured && (
-                  <div className="absolute top-4 left-4">
-                    <Badge
-                      variant="default"
-                      className="bg-blue-500 hover:bg-blue-600"
-                    >
-                      Featured
-                    </Badge>
-                  </div>
-                )}
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="font-normal"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-3">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                        aria-label={`GitHub repository for ${project.title}`}
+              <TiltCard
+                className="h-full card-hover bg-modern-dark rounded-lg overflow-hidden border border-modern-accent/10"
+                glareEnabled={true}
+                glareMaxOpacity={0.1}
+                scale={1.02}
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
+              >
+                <div 
+                  className="relative overflow-hidden aspect-video"
+                  onMouseEnter={() => setHoveredProject(project.id)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                    initial={{ scale: 1 }}
+                    animate={{
+                      scale: hoveredProject === project.id ? 1.05 : 1
+                    }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  />
+                  
+                  {project.featured && (
+                    <div className="absolute top-4 left-4">
+                      <Badge
+                        className="bg-modern-accent2 hover:bg-modern-accent2/90 border-none text-modern-white"
                       >
-                        <Github size={20} />
-                      </a>
-                    )}
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                        aria-label={`Live demo for ${project.title}`}
-                      >
-                        <ExternalLink size={20} />
-                      </a>
-                    )}
-                  </div>
-                  <Button variant="ghost" size="sm" className="group">
-                    View Details
-                    <ArrowRight
-                      size={16}
-                      className="ml-2 group-hover:translate-x-1 transition-transform"
-                    />
-                  </Button>
+                        Destaque
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-modern-dark to-transparent opacity-0"
+                    animate={{
+                      opacity: hoveredProject === project.id ? 0.6 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
                 </div>
-              </div>
-            </motion.div>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-modern-white mb-2">{project.title}</h3>
+                  <p className="text-modern-gray mb-4 line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex space-x-3">
+                      {project.githubUrl && (
+                        <motion.a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-modern-gray hover:text-modern-accent transition-colors"
+                          aria-label={`Repositório GitHub de ${project.title}`}
+                          whileHover={{ y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Github size={20} />
+                        </motion.a>
+                      )}
+                      {project.liveUrl && (
+                        <motion.a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-modern-gray hover:text-modern-accent transition-colors"
+                          aria-label={`Demo online de ${project.title}`}
+                          whileHover={{ y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <ExternalLink size={20} />
+                        </motion.a>
+                      )}
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="group text-modern-gray hover:text-modern-accent hover:bg-transparent"
+                    >
+                      Ver Detalhes
+                      <motion.div
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <ArrowRight size={16} className="ml-2" />
+                      </motion.div>
+                    </Button>
+                  </div>
+                </div>
+              </TiltCard>
+            </AnimatedItem>
           ))}
-        </div>
+        </motion.div>
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No projects found in this category.
+            <p className="text-modern-gray">
+              Nenhum projeto encontrado nesta categoria.
             </p>
           </div>
         )}
 
-        <div className="text-center mt-12">
-          <Button size="lg" className="rounded-full">
-            View All Projects
+        <motion.div 
+          variants={fadeIn("up", 0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Button 
+            size="lg" 
+            className="rounded bg-modern-dark hover:bg-modern-dark/80 text-modern-white border border-modern-accent/20 group"
+          >
+            Ver mais projetos
+            <motion.div
+              initial={{ x: 0, opacity: 0.5 }}
+              animate={{ x: [0, 5, 0], opacity: 1 }}
+              transition={{ 
+                repeat: Infinity, 
+                repeatType: "loop", 
+                duration: 2,
+                ease: "easeInOut" 
+              }}
+            >
+              <ArrowRight size={16} className="ml-2" />
+            </motion.div>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

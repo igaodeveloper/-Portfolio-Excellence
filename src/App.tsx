@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
+import CustomCursor from "./components/CustomCursor";
 
 // Lazy load admin components
 const LoginForm = lazy(() =>
@@ -50,7 +51,12 @@ function AppRoutes() {
 }
 
 function App() {
-  return <AppRoutes />;
+  return (
+    <>
+      <AppRoutes />
+      <CustomCursor />
+    </>
+  );
 }
 
 export default App;

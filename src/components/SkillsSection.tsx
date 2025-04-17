@@ -1,198 +1,307 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { AnimatedTitle } from "@/components/ui/animated-text";
+import { FloatingIconGrid } from "@/components/ui/floating-icon";
+import { fadeIn, staggerContainer } from "@/lib/animations";
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiSass,
+  SiGit,
+  SiFigma,
+  SiNodedotjs,
+  SiAdobephotoshop,
+  SiPython,
+  SiVuedotjs,
+  SiVite,
+  SiAngular,
+  SiIonic,
+  SiReactivex,
+  SiExpo,
+  SiWordpress,
+  SiUnity,
+} from "react-icons/si";
 
 type Skill = {
   name: string;
   level: number; // 1-5
   category: string;
-  icon: string;
+  icon: React.ReactNode;
+  color: string;
 };
 
 type SkillCategory = {
   name: string;
-  color: string;
 };
 
 const skillCategories: SkillCategory[] = [
-  { name: "Frontend", color: "bg-blue-500" },
-  { name: "Backend", color: "bg-purple-500" },
-  { name: "Design", color: "bg-pink-500" },
-  { name: "Tools", color: "bg-amber-500" },
-  { name: "Soft Skills", color: "bg-emerald-500" },
+  { name: "Todos" },
+  { name: "Frontend" },
+  { name: "Backend" },
+  { name: "Mobile" },
+  { name: "Design" },
+  { name: "Ferramentas" },
+  { name: "Games" },
 ];
 
 const skills: Skill[] = [
-  // Frontend
-  { name: "React", level: 5, category: "Frontend", icon: "⚛️" },
-  { name: "TypeScript", level: 4, category: "Frontend", icon: "TS" },
-  { name: "JavaScript", level: 5, category: "Frontend", icon: "JS" },
-  { name: "HTML5", level: 5, category: "Frontend", icon: "🌐" },
-  { name: "CSS3", level: 5, category: "Frontend", icon: "🎨" },
-  { name: "Tailwind CSS", level: 5, category: "Frontend", icon: "🌊" },
-  { name: "Next.js", level: 4, category: "Frontend", icon: "⏭️" },
-  { name: "Vue.js", level: 3, category: "Frontend", icon: "🟢" },
-
-  // Backend
-  { name: "Node.js", level: 4, category: "Backend", icon: "🟩" },
-  { name: "Express", level: 4, category: "Backend", icon: "🚂" },
-  { name: "MongoDB", level: 3, category: "Backend", icon: "🍃" },
-  { name: "Firebase", level: 4, category: "Backend", icon: "🔥" },
-  { name: "GraphQL", level: 3, category: "Backend", icon: "⚙️" },
-
-  // Design
-  { name: "Figma", level: 4, category: "Design", icon: "🎭" },
-  { name: "Adobe XD", level: 3, category: "Design", icon: "🎨" },
-  { name: "UI/UX", level: 4, category: "Design", icon: "🖌️" },
-  { name: "Responsive Design", level: 5, category: "Design", icon: "📱" },
-
-  // Tools
-  { name: "Git", level: 4, category: "Tools", icon: "🔄" },
-  { name: "Webpack", level: 3, category: "Tools", icon: "📦" },
-  { name: "Jest", level: 3, category: "Tools", icon: "🃏" },
-  { name: "Docker", level: 2, category: "Tools", icon: "🐳" },
-
-  // Soft Skills
-  { name: "Communication", level: 5, category: "Soft Skills", icon: "🗣️" },
-  { name: "Teamwork", level: 5, category: "Soft Skills", icon: "👥" },
-  { name: "Problem Solving", level: 5, category: "Soft Skills", icon: "🧩" },
-  { name: "Time Management", level: 4, category: "Soft Skills", icon: "⏰" },
+  {
+    icon: <SiHtml5 className="w-8 h-8" />,
+    name: "HTML",
+    color: "text-[#E34F26]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiCss3 className="w-8 h-8" />,
+    name: "CSS",
+    color: "text-[#1572B6]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiJavascript className="w-8 h-8" />,
+    name: "JavaScript",
+    color: "text-[#F7DF1E]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiReact className="w-8 h-8" />,
+    name: "React",
+    color: "text-[#61DAFB]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiTypescript className="w-8 h-8" />,
+    name: "TypeScript",
+    color: "text-[#3178C6]",
+    level: 4,
+    category: "Frontend",
+  },
+  {
+    icon: <SiTailwindcss className="w-8 h-8" />,
+    name: "Tailwind",
+    color: "text-[#06B6D4]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiNextdotjs className="w-8 h-8" />,
+    name: "Next.js",
+    color: "text-white",
+    level: 4,
+    category: "Frontend",
+  },
+  {
+    icon: <SiVuedotjs className="w-8 h-8" />,
+    name: "Vue",
+    color: "text-[#4FC08D]",
+    level: 4,
+    category: "Frontend",
+  },
+  {
+    icon: <SiAngular className="w-8 h-8" />,
+    name: "Angular",
+    color: "text-[#DD0031]",
+    level: 3,
+    category: "Frontend",
+  },
+  {
+    icon: <SiSass className="w-8 h-8" />,
+    name: "Sass",
+    color: "text-[#CC6699]",
+    level: 5,
+    category: "Frontend",
+  },
+  {
+    icon: <SiVite className="w-8 h-8" />,
+    name: "Vite",
+    color: "text-[#646CFF]",
+    level: 4,
+    category: "Ferramentas",
+  },
+  {
+    icon: <SiReactivex className="w-8 h-8" />,
+    name: "React Native",
+    color: "text-[#61DAFB]",
+    level: 4,
+    category: "Mobile",
+  },
+  {
+    icon: <SiExpo className="w-8 h-8" />,
+    name: "Expo",
+    color: "text-white",
+    level: 4,
+    category: "Mobile",
+  },
+  {
+    icon: <SiIonic className="w-8 h-8" />,
+    name: "Ionic",
+    color: "text-[#3880FF]",
+    level: 3,
+    category: "Mobile",
+  },
+  {
+    icon: <SiNodedotjs className="w-8 h-8" />,
+    name: "Node.js",
+    color: "text-[#339933]",
+    level: 4,
+    category: "Backend",
+  },
+  {
+    icon: <SiPython className="w-8 h-8" />,
+    name: "Python",
+    color: "text-[#3776AB]",
+    level: 4,
+    category: "Backend",
+  },
+  {
+    icon: <SiWordpress className="w-8 h-8" />,
+    name: "WordPress",
+    color: "text-[#21759B]",
+    level: 4,
+    category: "Frontend",
+  },
+  {
+    icon: <SiUnity className="w-8 h-8" />,
+    name: "Unity",
+    color: "text-white",
+    level: 3,
+    category: "Games",
+  },
+  {
+    icon: <SiGit className="w-8 h-8" />,
+    name: "Git",
+    color: "text-[#F05032]",
+    level: 4,
+    category: "Ferramentas",
+  },
+  {
+    icon: <SiFigma className="w-8 h-8" />,
+    name: "Figma",
+    color: "text-[#F24E1E]",
+    level: 4,
+    category: "Design",
+  },
+  {
+    icon: <SiAdobephotoshop className="w-8 h-8" />,
+    name: "Photoshop",
+    color: "text-[#31A8FF]",
+    level: 3,
+    category: "Design",
+  },
 ];
 
 const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("Todos");
 
   const filteredSkills =
-    activeCategory === "All"
+    activeCategory === "Todos"
       ? skills
       : skills.filter((skill) => skill.category === activeCategory);
 
   return (
-    <section id="skills" className="py-20 px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive overview of my technical expertise and proficiency
-            levels across various technologies and domains.
-          </p>
-        </motion.div>
+    <section id="skills" className="py-20 px-6 bg-modern-dark">
+      <div className="container-section">
+        <AnimatedTitle 
+          text="Conhecimentos" 
+          className="section-title text-modern-white mb-12"
+        />
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          variants={staggerContainer(0.05)}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          <Badge
-            onClick={() => setActiveCategory("All")}
-            className={`px-4 py-2 cursor-pointer text-sm ${activeCategory === "All" ? "bg-primary" : "bg-secondary"}`}
-          >
-            All
-          </Badge>
-          {skillCategories.map((category) => (
-            <Badge
+          {skillCategories.map((category, index) => (
+            <motion.div
               key={category.name}
-              onClick={() => setActiveCategory(category.name)}
-              className={`px-4 py-2 cursor-pointer text-sm ${activeCategory === category.name ? category.color : "bg-secondary"}`}
+              variants={fadeIn("up", index * 0.05)}
             >
-              {category.name}
-            </Badge>
+              <Badge
+                onClick={() => setActiveCategory(category.name)}
+                className={`px-4 py-2 cursor-pointer text-sm border-none text-modern-white ${
+                  activeCategory === category.name 
+                    ? "bg-modern-accent hover:bg-modern-accent/90" 
+                    : "bg-modern-darker hover:bg-modern-darker/90"
+                }`}
+              >
+                {category.name}
+              </Badge>
+            </motion.div>
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredSkills.map((skill) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-xl p-6 border border-border hover:border-primary transition-all duration-300 relative"
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 flex items-center justify-center text-xl bg-primary/10 rounded-lg mr-3">
-                  {skill.icon}
-                </div>
-                <h3 className="font-medium text-lg">{skill.name}</h3>
-              </div>
-
-              <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+        <FloatingIconGrid
+          icons={filteredSkills.map(skill => ({
+            id: skill.name,
+            icon: (
+              <div className="relative group">
+                <motion.div 
+                  className="flex flex-col items-center justify-center bg-modern-darker p-6 rounded-xl relative z-10 overflow-hidden border border-modern-accent/10"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className={`mb-3 ${skill.color}`}>
+                    {skill.icon}
+                  </div>
+                  <h3 className="text-modern-white font-medium text-center">
+                    {skill.name}
+                  </h3>
+                  <div className="mt-3 w-full space-y-1">
+                    <div className="w-full h-1.5 bg-modern-dark rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-modern-accent rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level * 20}%` }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                    <p className="text-xs text-modern-gray text-right">
+                      {skill.level}/5
+                    </p>
+                  </div>
+                  
+                  <motion.div 
+                    className="absolute bottom-0 left-0 w-full h-1 bg-modern-accent"
+                    initial={{ scaleX: 0, originX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+                
                 <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level * 20}%` }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className={`h-full ${getColorForLevel(skill.level)}`}
+                  className="absolute inset-0 bg-gradient-to-t from-modern-accent/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
+            ),
+            className: "p-1"
+          }))}
+          gridClassName="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
+          staggerDelay={0.05}
+        />
 
-              <div className="mt-2 flex justify-between text-xs text-muted-foreground">
-                <span>Beginner</span>
-                <span>Expert</span>
-              </div>
-
-              {hoveredSkill === skill.name && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-popover text-popover-foreground px-3 py-2 rounded-md shadow-lg text-sm whitespace-nowrap z-10"
-                >
-                  {getLevelLabel(skill.level)}
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-popover"></div>
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </div>
+        {filteredSkills.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-modern-gray">
+              Nenhuma habilidade encontrada nesta categoria.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
-};
-
-const getColorForLevel = (level: number): string => {
-  switch (level) {
-    case 1:
-      return "bg-red-500";
-    case 2:
-      return "bg-orange-500";
-    case 3:
-      return "bg-yellow-500";
-    case 4:
-      return "bg-blue-500";
-    case 5:
-      return "bg-green-500";
-    default:
-      return "bg-gray-500";
-  }
-};
-
-const getLevelLabel = (level: number): string => {
-  switch (level) {
-    case 1:
-      return "Basic Knowledge";
-    case 2:
-      return "Familiar";
-    case 3:
-      return "Proficient";
-    case 4:
-      return "Advanced";
-    case 5:
-      return "Expert";
-    default:
-      return "Unknown";
-  }
 };
 
 export default SkillsSection;

@@ -18,11 +18,12 @@ const NavigationMenu = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Sobre", path: "/#about" },
+    { name: "Home", path: "/#home" },
+    { name: "Quem sou", path: "/#about" },
+    { name: "Experiências", path: "/#experience" },
     { name: "Projetos", path: "/#projects" },
-    { name: "Habilidades", path: "/#skills" },
-    { name: "Contato", path: "/#contact" },
+    { name: "Serviços", path: "/#services" },
+    { name: "Conhecimentos", path: "/#skills" },
   ];
 
   return (
@@ -31,7 +32,7 @@ const NavigationMenu = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-300 py-5 px-6 md:px-12",
         scrolled
           ? "bg-modern-dark/90 backdrop-blur-md shadow-md"
           : "bg-transparent",
@@ -40,41 +41,35 @@ const NavigationMenu = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <Link
           to="/"
-          className="text-2xl font-bold hover:text-accent transition-colors text-modern-white"
+          className="text-2xl font-bold transition-colors text-modern-white"
         >
-          <span className="text-accent">Port</span>
+          <span className="text-modern-accent">Port</span>
           <span>fólio</span>
         </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-8">
-          {navItems.map((item, index) => (
-            <motion.li
-              key={item.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index, duration: 0.5 }}
-            >
+          {navItems.map((item) => (
+            <li key={item.name}>
               <Link
                 to={item.path}
-                className="text-modern-white hover:text-accent transition-colors font-medium relative group"
+                className="text-modern-white hover:text-modern-accent transition-colors font-medium text-sm uppercase tracking-wide relative group"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-modern-accent transition-all duration-300 group-hover:w-full"></span>
               </Link>
-            </motion.li>
+            </li>
           ))}
         </ul>
 
         {/* Mobile Navigation Toggle */}
-        <motion.button
-          whileTap={{ scale: 0.95 }}
+        <button
           className="md:hidden text-modern-white"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
+        </button>
 
         {/* Mobile Navigation Menu */}
         <AnimatePresence>
@@ -87,21 +82,16 @@ const NavigationMenu = () => {
               className="md:hidden fixed inset-0 top-16 bg-modern-dark/95 backdrop-blur-md z-40"
             >
               <ul className="flex flex-col items-center justify-center h-full space-y-8">
-                {navItems.map((item, index) => (
-                  <motion.li
-                    key={item.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index, duration: 0.3 }}
-                  >
+                {navItems.map((item) => (
+                  <li key={item.name}>
                     <Link
                       to={item.path}
-                      className="text-xl font-medium text-modern-white hover:text-accent transition-colors"
+                      className="text-lg font-medium text-modern-white hover:text-modern-accent transition-colors uppercase tracking-wide"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
                     </Link>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>
