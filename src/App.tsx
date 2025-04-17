@@ -1,10 +1,12 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import CustomCursor from "./components/CustomCursor";
 import SmoothScroll from "./components/SmoothScroll";
 import HiddenAdminButton from "./components/HiddenAdminButton";
+import WelcomeScreen from "./components/WelcomeScreen";
+import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 
 // Lazy load admin components
 const LoginForm = lazy(() =>
@@ -52,12 +54,20 @@ function AppRoutes() {
 }
 
 function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+
   return (
-    <SmoothScroll>
-      <AppRoutes />
-      <CustomCursor />
-      <HiddenAdminButton />
-    </SmoothScroll>
+    <AccessibilityProvider>
+      <SmoothScroll>
+        {showWelcome ? (
+          <WelcomeScreen onComplete={() => setShowWelcome(false)} />
+        ) : (
+          <AppRoutes />
+        )}
+        <CustomCursor />
+        <HiddenAdminButton />
+      </SmoothScroll>
+    </AccessibilityProvider>
   );
 }
 

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { ThemeToggle } from "@/components/theme/ThemeToggle"
 import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 
@@ -41,7 +40,6 @@ export function Navigation() {
             <Search className="h-5 w-5" />
             <span className="sr-only">Search</span>
           </Button>
-          <ThemeToggle />
         </div>
       </div>
     </header>

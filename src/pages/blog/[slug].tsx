@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { TableOfContents } from "@/components/blog/TableOfContents"
-import { MDXContent } from "@/components/blog/MDXContent"
 
 export default function BlogPostPage() {
   const { slug } = useParams()
@@ -78,7 +77,6 @@ export default function BlogPostPage() {
 
           <div className="relative">
             <article className="prose prose-gray dark:prose-invert max-w-none">
-              <MDXContent content={post.content} />
             </article>
 
             <div className="hidden xl:block">

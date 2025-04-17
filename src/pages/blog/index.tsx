@@ -5,7 +5,6 @@ import { posts, categories } from "@/data/blog-data"
 import { BlogPost } from "@/types/blog"
 import { Input } from "@/components/ui/input"
 import CategoryFilter from "@/components/blog/CategoryFilter"
-import { BlogCard } from "@/components/blog/BlogCard"
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -62,7 +61,15 @@ export default function BlogPage() {
         className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {filteredPosts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <motion.div
+            key={post.slug}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 }
+            }}
+          >
+            
+          </motion.div>
         ))}
       </motion.div>
 
