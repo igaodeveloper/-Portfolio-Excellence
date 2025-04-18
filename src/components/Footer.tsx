@@ -12,7 +12,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 py-16 px-6 border-t border-gray-700" role="contentinfo">
+    <footer
+      className="bg-gray-900 py-16 px-6 border-t border-gray-700"
+      role="contentinfo"
+    >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* About Section */}
@@ -60,7 +63,9 @@ const Footer = () => {
 
           {/* Quick Links Section */}
           <div className="animate__animated animate__fadeIn animate__delay-1s">
-            <h3 className="text-white font-semibold text-xl mb-4">Links Rápidos</h3>
+            <h3 className="text-white font-semibold text-xl mb-4">
+              Links Rápidos
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -133,9 +138,7 @@ const Footer = () => {
                   +55 (11) 98292-8508
                 </a>
               </div>
-              <div className="text-gray-400">
-                São Paulo, Brasil
-              </div>
+              <div className="text-gray-400">São Paulo, Brasil</div>
             </div>
           </div>
         </div>
