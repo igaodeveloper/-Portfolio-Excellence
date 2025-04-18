@@ -9,8 +9,6 @@ import {
   Send,
   Menu,
   X,
-  Moon,
-  Sun,
   BookOpen,
 } from 'lucide-react';
 import { useAccessibility } from '../contexts/AccessibilityContext';
@@ -101,32 +99,32 @@ const Navbar = () => {
               </button>
             ),
           )}
-          <button
+
+          {/* Animated Programming Button */}
+          <motion.button
             onClick={toggleHighContrast}
             className="ml-2 p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-            aria-label="Toggle high contrast mode"
+            aria-label="Programming Mode"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
           >
-            {highContrast ? (
-              <Sun className="w-4 h-4" />
-            ) : (
-              <Moon className="w-4 h-4" />
-            )}
-          </button>
+            <span className="text-xl font-mono">{`{}`}</span>
+          </motion.button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center md:hidden">
-          <button
+          <motion.button
             onClick={toggleHighContrast}
             className="mr-2 p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-            aria-label="Toggle high contrast mode"
+            aria-label="Programming Mode"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
           >
-            {highContrast ? (
-              <Sun className="w-4 h-4" />
-            ) : (
-              <Moon className="w-4 h-4" />
-            )}
-          </button>
+            <span className="text-xl font-mono">{`{}`}</span>
+          </motion.button>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 rounded-full hover:bg-white/10 transition-colors"

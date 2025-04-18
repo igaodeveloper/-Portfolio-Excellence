@@ -57,24 +57,23 @@ const BlogPage = () => {
 
   return (
     <div
-      className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
+      className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-white'}`}
     >
       <Navbar />
 
-      <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-        <div className="container mx-auto">
+      <header className="pt-32 pb-20 px-4 md:px-8 bg-gradient-to-r from-teal-500 to-blue-600 text-white shadow-md">
+        <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-5xl font-extrabold mb-4 leading-tight tracking-tight">
               Blog Dev Frontend
             </h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Artigos sobre desenvolvimento frontend, performance,
-              acessibilidade e experiência do usuário.
+              Aprofunde-se em tópicos de frontend, performance, acessibilidade e
+              design de interfaces.
             </p>
           </motion.div>
         </div>
@@ -83,12 +82,12 @@ const BlogPage = () => {
       <main className="container mx-auto px-4 py-12">
         {/* Search and filter */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
-          <div className="relative w-full md:w-72">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <Input
               type="text"
-              placeholder="Pesquisar artigos..."
-              className="pl-10 w-full"
+              placeholder="Pesquise artigos..."
+              className="pl-10 w-full text-gray-700 dark:text-white"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -97,8 +96,8 @@ const BlogPage = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
-                  <Filter className="h-4 w-4" />
-                  {selectedCategory ? selectedCategory : 'Categorias'}
+                  <Filter className="h-5 w-5 text-gray-500" />
+                  {selectedCategory || 'Categorias'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -121,21 +120,18 @@ const BlogPage = () => {
               onClick={toggleTheme}
               className="rounded-full"
             >
-              {isDarkMode ? (
-                <span className="sr-only">Light mode</span>
-              ) : (
-                <span className="sr-only">Dark mode</span>
-              )}
               <i
-                className={`text-xl ${isDarkMode ? 'ri-sun-line' : 'ri-moon-line'}`}
+                className={`text-2xl ${
+                  isDarkMode ? 'ri-sun-line' : 'ri-moon-line'
+                }`}
               ></i>
             </Button>
           </div>
         </div>
 
         {/* Featured posts */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 dark:text-white">
+        <section className="mb-20">
+          <h2 className="text-3xl font-semibold mb-8 text-gray-800 dark:text-white">
             Posts em Destaque
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -143,13 +139,13 @@ const BlogPage = () => {
               <motion.article
                 key={post.id}
                 whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform relative"
+                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform relative hover:shadow-xl"
               >
                 <Link to={`/blog/${post.slug}`} className="block">
                   <img
                     src={post.coverImage}
                     alt={post.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-56 object-cover"
                   />
                   <div className="p-6">
                     <div className="flex flex-wrap gap-2 mb-3">
@@ -162,7 +158,7 @@ const BlogPage = () => {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-xl font-bold mb-2 dark:text-white">
+                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
                       {post.title}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
@@ -191,7 +187,7 @@ const BlogPage = () => {
 
         {/* Regular posts */}
         <section>
-          <h2 className="text-2xl font-bold mb-8 dark:text-white">
+          <h2 className="text-3xl font-semibold mb-8 text-gray-800 dark:text-white">
             Todos os Artigos
           </h2>
           {filteredPosts.length > 0 ? (
@@ -201,7 +197,7 @@ const BlogPage = () => {
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg relative"
+                  className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform hover:shadow-xl relative"
                 >
                   <Link to={`/blog/${post.slug}`} className="block">
                     <img
@@ -220,7 +216,7 @@ const BlogPage = () => {
                           </span>
                         ))}
                       </div>
-                      <h3 className="text-xl font-bold mb-2 dark:text-white">
+                      <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
                         {post.title}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">

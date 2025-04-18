@@ -521,7 +521,7 @@ const BlogPostPage = () => {
                       to={`/blog/${relatedPost.slug}`}
                       className="block group"
                     >
-                      <div className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform group-hover:shadow-lg">
+                      <div className="bg-dark dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform group-hover:shadow-lg">
                         <div className="relative h-48 overflow-hidden">
                           <img
                             src={relatedPost.coverImage}
