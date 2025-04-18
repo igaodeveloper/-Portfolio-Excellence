@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUp, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -12,59 +12,61 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-modern-darker py-12 px-6 border-t border-modern-accent/10">
-      <div className="container-section">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div>
+    <footer className="bg-gray-900 py-16 px-6 border-t border-gray-700" role="contentinfo">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+          {/* About Section */}
+          <div className="animate__animated animate__fadeIn animate__delay-0.5s">
             <Link
               to="/"
-              className="text-2xl font-bold transition-colors text-modern-white mb-4 inline-block"
+              className="text-3xl font-bold transition-all text-white mb-4 inline-block hover:text-teal-500"
+              aria-label="Ir para a página inicial"
             >
-              <span className="text-modern-accent">Port</span>
-              <span>fólio</span>
+              <span className="text-teal-500">igao</span>
+              <span>devs_404</span>
             </Link>
-            <p className="text-modern-gray mb-6">
+            <p className="text-gray-400 mb-6">
               Desenvolvedor Front-end & UI Designer apaixonado por criar
               experiências digitais intuitivas e impactantes.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-6">
               <a
                 href="https://github.com/igaodeveloper"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
-                aria-label="GitHub"
+                className="bg-gray-800 p-3 rounded-full text-white hover:text-teal-500 hover:scale-105 transition-all"
+                aria-label="Perfil do GitHub"
               >
-                <Github size={20} />
+                <Github size={24} />
               </a>
               <a
                 href="https://www.linkedin.com/in/igor-costa-oliveira-673866169/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
-                aria-label="LinkedIn"
+                className="bg-gray-800 p-3 rounded-full text-white hover:text-teal-500 hover:scale-105 transition-all"
+                aria-label="Perfil do LinkedIn"
               >
-                <Linkedin size={20} />
+                <Linkedin size={24} />
               </a>
               <a
-                href="igorhawking@gmail.com"
-                className="bg-modern-dark p-3 rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
-                aria-label="Email"
+                href="mailto:igorhawking@gmail.com"
+                className="bg-gray-800 p-3 rounded-full text-white hover:text-teal-500 hover:scale-105 transition-all"
+                aria-label="Enviar e-mail"
               >
-                <Mail size={20} />
+                <Mail size={24} />
               </a>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-modern-white font-bold text-lg mb-4">
-              Links Rápidos
-            </h3>
+          {/* Quick Links Section */}
+          <div className="animate__animated animate__fadeIn animate__delay-1s">
+            <h3 className="text-white font-semibold text-xl mb-4">Links Rápidos</h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   to="/#home"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Home"
                 >
                   Home
                 </Link>
@@ -72,7 +74,8 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#about"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Quem sou"
                 >
                   Quem sou
                 </Link>
@@ -80,7 +83,8 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#experience"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Experiências"
                 >
                   Experiências
                 </Link>
@@ -88,7 +92,8 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#services"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Serviços"
                 >
                   Serviços
                 </Link>
@@ -96,7 +101,8 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#projects"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Projetos"
                 >
                   Projetos
                 </Link>
@@ -104,7 +110,8 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#skills"
-                  className="text-modern-gray hover:text-modern-accent transition-colors"
+                  className="text-gray-400 hover:text-teal-500 transition-all"
+                  aria-label="Ir para a seção Conhecimentos"
                 >
                   Conhecimentos
                 </Link>
@@ -112,25 +119,38 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-modern-white font-bold text-lg mb-4">
-              Contato
-            </h3>
-            <p className="text-modern-gray mb-2">igorhawking@gmail.com</p>
-            <p className="text-modern-gray">São Paulo, Brasil</p>
+          {/* Contact Section */}
+          <div className="animate__animated animate__fadeIn animate__delay-1.5s">
+            <h3 className="text-white font-semibold text-xl mb-4">Contato</h3>
+            <div className="space-y-4">
+              <div className="flex items-center text-gray-400 hover:text-teal-500 transition-all">
+                <Mail className="mr-3" size={24} />
+                <p>igorhawking@gmail.com</p>
+              </div>
+              <div className="flex items-center text-gray-400 hover:text-teal-500 transition-all">
+                <Phone className="mr-3" size={24} />
+                <a href="tel:+5511982928508" className="hover:text-teal-500">
+                  +55 (11) 98292-8508
+                </a>
+              </div>
+              <div className="text-gray-400">
+                São Paulo, Brasil
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-modern-accent/10 pt-6 flex justify-between items-center">
-          <p className="text-modern-gray">
-            © {currentYear} Portfólio. Todos os direitos reservados.
+        {/* Footer Bottom */}
+        <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
+          <p className="text-gray-400">
+            © {currentYear} igaodevs_404. Todos os direitos reservados.
           </p>
           <button
             onClick={scrollToTop}
-            className="p-3 bg-modern-dark rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
+            className="p-3 bg-gray-800 rounded-full text-white hover:text-teal-500 hover:scale-105 transition-all"
             aria-label="Voltar ao topo"
           >
-            <ArrowUp size={20} />
+            <ArrowUp size={24} />
           </button>
         </div>
       </div>

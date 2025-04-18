@@ -27,6 +27,7 @@ const ContactSection = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
+    subject: '', // Campo de assunto adicionado
     message: '',
   });
 
@@ -50,11 +51,11 @@ const ContactSection = () => {
     // Simulando uma requisição com atraso
     setTimeout(() => {
       console.log('Formulário enviado:', formState);
-      setFormState({ name: '', email: '', message: '' });
+      setFormState({ name: '', email: '', subject: '', message: '' }); // Limpa o formulário
       setIsSubmitting(false);
       setIsSubmitted(true);
 
-      // Reset submitted state after 3 seconds
+      // Resetando o estado de envio após 3 segundos
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
@@ -66,14 +67,13 @@ const ContactSection = () => {
       id="contact"
       className="py-20 px-6 bg-[#121214] relative overflow-hidden"
     >
-      {/* Background decorative elements */}
+      {/* Elementos decorativos de fundo */}
       <motion.div
         className="absolute top-40 right-0 w-96 h-96 rounded-full bg-modern-accent/5 blur-3xl"
         variants={pulseVariants}
         initial="initial"
         animate="animate"
       />
-
       <motion.div
         className="absolute bottom-20 left-10 w-64 h-64 rounded-full bg-modern-accent2/5 blur-3xl"
         animate={{
@@ -93,7 +93,6 @@ const ContactSection = () => {
             text="Contato"
             className="text-3xl md:text-4xl font-bold mb-4 text-white"
           />
-
           <AnimatedWords
             text="Interessado em trabalhar juntos? Preencha o formulário abaixo ou entre em contato através das minhas redes sociais."
             className="text-[#C4C4CC] max-w-2xl mx-auto"
@@ -183,7 +182,7 @@ const ContactSection = () => {
             variants={fadeIn('left', 0.3)}
             className="bg-[#202024] rounded-lg p-8 relative overflow-hidden"
           >
-            {/* Form decorative elements */}
+            {/* Elementos decorativos do formulário */}
             <motion.div
               className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#00D2DF]/5 blur-xl"
               animate={{
@@ -257,7 +256,23 @@ const ContactSection = () => {
                   />
                 </motion.div>
 
+                {/* Campo de Assunto adicionado */}
                 <motion.div variants={fadeIn('up', 0.2)}>
+                  <label htmlFor="subject" className="block text-white mb-2">
+                    Assunto
+                  </label>
+                  <Input
+                    id="subject"
+                    name="subject"
+                    value={formState.subject}
+                    onChange={handleChange}
+                    placeholder="Assunto da mensagem"
+                    required
+                    className="bg-[#121214] border-[#323238] text-white placeholder:text-[#7C7C8A] focus:border-[#00D2DF] transition-colors"
+                  />
+                </motion.div>
+
+                <motion.div variants={fadeIn('up', 0.3)}>
                   <label htmlFor="message" className="block text-white mb-2">
                     Mensagem
                   </label>
