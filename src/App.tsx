@@ -22,6 +22,14 @@ const Dashboard = lazy(() =>
 // Lazy load the landing page builder
 const LandingPageBuilder = lazy(() => import("./pages/LandingPageBuilder"));
 
+// Lazy load blog pages
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+
 // Import our custom ProtectedRoute instead of the simplified version
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
 
@@ -40,6 +48,16 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/landing-page-builder" element={<LandingPageBuilder />} />
+          
+          {/* Blog Routes */}
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/blog/categoria/:slug" element={<CategoryPage />} />
+          <Route path="/blog/sobre" element={<AboutPage />} />
+          <Route path="/blog/projetos" element={<ProjectsPage />} />
+          <Route path="/blog/contato" element={<ContactPage />} />
+          
+          {/* Admin Routes */}
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
           <Route path="/admin/login" element={<LoginForm />} />
           <Route

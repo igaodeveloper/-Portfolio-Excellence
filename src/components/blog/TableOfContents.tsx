@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { Link } from "react-scroll"
 
-interface Heading {
+type TocItem = {
   id: string
-  text: string
+  title: string
   level: number
 }
 
 interface TableOfContentsProps {
-  content: string
+  toc: TocItem[]
 }
 
-export function TableOfContents({ content }: TableOfContentsProps) {
+const TableOfContents = ({ toc }: TableOfContentsProps) => {
   const [activeId, setActiveId] = useState<string>("")
-  const [headings, setHeadings] = useState<Heading[]>([])
-
-  useEffect(() => {
-    // Extract headings from markdown content
-    const headingRegex = /^(#{1,6})\s+(.+)$/gm
-    const matches = Array.from(content.matchAll(headingRegex))
-    const extractedHeadings = matches.map((match) => ({
-      id: match[2].toLowerCase().replace(/[^\w]+/g, "-"),
-      text: match[2],
-      level: match[1].length,
-    }))
-    setHeadings(extractedHeadings)
-  }, [content])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,47 +23,64 @@ export function TableOfContents({ content }: TableOfContentsProps) {
           }
         })
       },
-      { rootMargin: "-80px 0px -80% 0px" }
+      {
+        rootMargin: "-100px 0px -80% 0px",
+        threshold: 0,
+      }
     )
 
-    headings.forEach((heading) => {
-      const element = document.getElementById(heading.id)
+    // Observe all headings
+    toc.forEach((item) => {
+      const element = document.getElementById(item.id)
       if (element) {
         observer.observe(element)
       }
     })
 
     return () => {
-      headings.forEach((heading) => {
-        const element = document.getElementById(heading.id)
+      // Cleanup observer
+      toc.forEach((item) => {
+        const element = document.getElementById(item.id)
         if (element) {
           observer.unobserve(element)
         }
       })
     }
-  }, [headings])
+  }, [toc])
 
-  if (headings.length === 0) {
+  if (toc.length === 0) {
     return null
   }
 
   return (
-    <nav className="space-y-1">
-      <div className="font-medium">Table of Contents</div>
-      {headings.map((heading) => (
-        <Link
-          key={heading.id}
-          to={`#${heading.id}`}
-          className={`block text-sm transition-colors ${
-            activeId === heading.id
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-          style={{ paddingLeft: `${(heading.level - 1) * 12}px` }}
-        >
-          {heading.text}
-        </Link>
-      ))}
+    <nav className="table-of-contents text-sm">
+      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+        {toc.map((item) => (
+          <li
+            key={item.id}
+            className={`${
+              item.level === 2 ? "pl-0" : item.level === 3 ? "pl-4" : "pl-6"
+            }`}
+          >
+            <Link
+              to={item.id}
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+              className={`block py-1 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors ${
+                activeId === item.id
+                  ? "text-blue-600 dark:text-blue-400 font-medium"
+                  : ""
+              }`}
+            >
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   )
-} 
+}
+
+export default TableOfContents 
