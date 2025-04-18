@@ -4,9 +4,12 @@ import {
   getSkillById,
   createSkill,
   updateSkill,
-  deleteSkill
+  deleteSkill,
 } from '../controllers/skills.js';
-import { skillValidationRules, idParamValidation } from '../middleware/validators.js';
+import {
+  skillValidationRules,
+  idParamValidation,
+} from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
 import { adminMiddleware } from '../middleware/auth.js';
 
@@ -31,20 +34,39 @@ router.get('/:id', idParamValidation, validateRequest, getSkillById);
  * @desc    Create a new skill
  * @access  Private (Admin)
  */
-router.post('/', adminMiddleware, skillValidationRules, validateRequest, createSkill);
+router.post(
+  '/',
+  adminMiddleware,
+  skillValidationRules,
+  validateRequest,
+  createSkill,
+);
 
 /**
  * @route   PUT /api/skills/:id
  * @desc    Update a skill
  * @access  Private (Admin)
  */
-router.put('/:id', adminMiddleware, idParamValidation, skillValidationRules, validateRequest, updateSkill);
+router.put(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  skillValidationRules,
+  validateRequest,
+  updateSkill,
+);
 
 /**
  * @route   DELETE /api/skills/:id
  * @desc    Delete a skill
  * @access  Private (Admin)
  */
-router.delete('/:id', adminMiddleware, idParamValidation, validateRequest, deleteSkill);
+router.delete(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  validateRequest,
+  deleteSkill,
+);
 
-export default router; 
+export default router;

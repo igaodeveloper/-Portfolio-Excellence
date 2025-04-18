@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 import {
   Card,
   CardContent,
@@ -10,17 +10,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Alert, AlertDescription } from "../ui/alert";
-import { Loader2, LogOut } from "lucide-react";
+} from '../ui/card';
+import { Alert, AlertDescription } from '../ui/alert';
+import { Loader2, LogOut } from 'lucide-react';
 
 // Your personal admin credentials - replace with your own
-const ADMIN_EMAIL = "admin@example.com";
-const ADMIN_PASSWORD = "password123";
+const ADMIN_EMAIL = 'admin@example.com';
+const ADMIN_PASSWORD = 'password123';
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const LoginForm = () => {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      const from = location.state?.from?.pathname || "/admin/dashboard";
+      const from = location.state?.from?.pathname || '/admin/dashboard';
       navigate(from, { replace: true });
     }
   }, [navigate, location]);
@@ -39,7 +39,7 @@ export const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       // Simulate authentication check
       // In a real app, this would be an API call to your backend
@@ -47,18 +47,18 @@ export const LoginForm = () => {
         // Create and store auth token
         const token = btoa(`${email}:${Date.now()}`);
         localStorage.setItem('authToken', token);
-        
+
         // Navigate to dashboard after successful login
         setTimeout(() => {
           setLoading(false);
-          navigate("/admin/dashboard");
+          navigate('/admin/dashboard');
         }, 800);
       } else {
-        throw new Error("Invalid email or password");
+        throw new Error('Invalid email or password');
       }
     } catch (err) {
       setLoading(false);
-      setError(err instanceof Error ? err.message : "Login failed");
+      setError(err instanceof Error ? err.message : 'Login failed');
     }
   };
 
@@ -66,12 +66,14 @@ export const LoginForm = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-b from-slate-900 to-black">
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-primary mb-2">Área Restrita</h1>
+          <h1 className="text-2xl font-bold text-primary mb-2">
+            Área Restrita
+          </h1>
           <p className="text-muted-foreground">
             Esta área é exclusiva para o proprietário do portfólio
           </p>
         </div>
-        
+
         <Card className="w-full max-w-md mx-auto border-primary/20">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold">Acesso Admin</CardTitle>
@@ -117,16 +119,16 @@ export const LoginForm = () => {
                     Autenticando...
                   </>
                 ) : (
-                  "Entrar"
+                  'Entrar'
                 )}
               </Button>
             </form>
           </CardContent>
           <CardFooter>
-            <Button 
-              variant="outline" 
-              className="w-full" 
-              onClick={() => window.location.href = '/'}
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => (window.location.href = '/')}
             >
               Voltar ao Portfólio
             </Button>
@@ -143,13 +145,13 @@ export const LogoutButton = () => {
 
   const handleLogout = async () => {
     setLoading(true);
-    
+
     // Remove auth token from storage
     localStorage.removeItem('authToken');
-    
+
     setTimeout(() => {
       setLoading(false);
-      navigate("/admin/login");
+      navigate('/admin/login');
     }, 500);
   };
 

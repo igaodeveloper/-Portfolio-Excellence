@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { textContainer, textCharacter } from "@/lib/animations";
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { textContainer, textCharacter } from '@/lib/animations';
 
 interface AnimatedTextProps {
   text: string;
@@ -9,7 +9,7 @@ interface AnimatedTextProps {
   delayOffset?: number;
   staggerChildren?: number;
   charClassName?: string;
-  type?: "heading" | "paragraph" | "custom";
+  type?: 'heading' | 'paragraph' | 'custom';
 }
 
 export function AnimatedCharacters({
@@ -19,19 +19,19 @@ export function AnimatedCharacters({
   delayOffset = 0,
   staggerChildren = 0.04,
   charClassName,
-  type = "heading",
+  type = 'heading',
 }: AnimatedTextProps) {
   // Divide o texto em palavras e caracteres
-  const words = text.split(" ");
+  const words = text.split(' ');
 
   // Variante personalizada baseada nos parâmetros
   const container = {
     hidden: { opacity: 0 },
     show: (i = 1) => ({
       opacity: 1,
-      transition: { 
-        staggerChildren: staggerChildren, 
-        delayChildren: delayOffset * i 
+      transition: {
+        staggerChildren: staggerChildren,
+        delayChildren: delayOffset * i,
       },
     }),
   };
@@ -41,7 +41,7 @@ export function AnimatedCharacters({
       opacity: 0,
       y: 20,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
         stiffness: 100,
       },
@@ -50,32 +50,30 @@ export function AnimatedCharacters({
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
         stiffness: 100,
       },
     },
   };
 
-  const baseClassName = type === "heading" 
-    ? "inline-block text-modern-white"
-    : type === "paragraph"
-      ? "inline-block text-modern-gray"
-      : "";
+  const baseClassName =
+    type === 'heading'
+      ? 'inline-block text-modern-white'
+      : type === 'paragraph'
+        ? 'inline-block text-modern-gray'
+        : '';
 
   return (
     <motion.div
-      className={cn("overflow-hidden flex flex-wrap", className)}
+      className={cn('overflow-hidden flex flex-wrap', className)}
       variants={container}
       initial="hidden"
       whileInView="show"
       viewport={{ once }}
     >
       {words.map((word, index) => (
-        <motion.span
-          key={index}
-          className="mr-1 overflow-hidden"
-        >
+        <motion.span key={index} className="mr-1 overflow-hidden">
           {Array.from(word).map((char, charIndex) => (
             <motion.span
               key={`${index}-${charIndex}`}
@@ -85,19 +83,19 @@ export function AnimatedCharacters({
               {char}
             </motion.span>
           ))}
-          {index !== words.length - 1 && " "}
+          {index !== words.length - 1 && ' '}
         </motion.span>
       ))}
     </motion.div>
   );
 }
 
-export function AnimatedTitle({ 
-  text, 
-  className, 
+export function AnimatedTitle({
+  text,
+  className,
   once = true,
   delayOffset = 0,
-}: Omit<AnimatedTextProps, "type" | "charClassName"> & { className?: string }) {
+}: Omit<AnimatedTextProps, 'type' | 'charClassName'> & { className?: string }) {
   return (
     <motion.h2
       className={className}
@@ -116,12 +114,12 @@ export function AnimatedWords({
   className,
   once = true,
   delayOffset = 0,
-}: Omit<AnimatedTextProps, "type" | "charClassName"> & { className?: string }) {
-  const words = text.split(" ");
-  
+}: Omit<AnimatedTextProps, 'type' | 'charClassName'> & { className?: string }) {
+  const words = text.split(' ');
+
   return (
-    <motion.p 
-      className={cn("flex flex-wrap", className)}
+    <motion.p
+      className={cn('flex flex-wrap', className)}
       initial="hidden"
       whileInView="visible"
       viewport={{ once }}
@@ -132,10 +130,10 @@ export function AnimatedWords({
           className="mr-1"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.5, 
-            delay: delayOffset + (i * 0.07),
-            ease: [0.2, 0.65, 0.3, 0.9]
+          transition={{
+            duration: 0.5,
+            delay: delayOffset + i * 0.07,
+            ease: [0.2, 0.65, 0.3, 0.9],
           }}
           viewport={{ once }}
         >
@@ -144,4 +142,4 @@ export function AnimatedWords({
       ))}
     </motion.p>
   );
-} 
+}

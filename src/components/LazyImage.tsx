@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, ImgHTMLAttributes } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-interface LazyImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'loading'> {
+interface LazyImageProps
+  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'loading'> {
   src: string;
   alt: string;
   placeholderSrc?: string;
@@ -32,19 +33,19 @@ const LazyImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(placeholderSrc || '');
   const imageRef = useRef<HTMLImageElement>(null);
-  
+
   // Configurar IntersectionObserver com o hook
   const { ref, inView } = useInView({
     threshold,
     triggerOnce: true,
   });
-  
+
   // Combinar refs
   const setRefs = (element: HTMLImageElement | null) => {
     ref(element);
     imageRef.current = element;
   };
-  
+
   // Carregar a imagem quando estiver em view ou se instantLoad for true
   useEffect(() => {
     if (instantLoad || inView) {
@@ -54,11 +55,13 @@ const LazyImage = ({
         setCurrentSrc(src);
         setIsLoaded(true);
       };
-      
+
       // Aplicar dicas ao navegador para otimizar o carregamento
       if (imageRef.current) {
         if ('fetchPriority' in imageRef.current) {
-          (imageRef.current as any).fetchPriority = instantLoad ? 'high' : 'auto';
+          (imageRef.current as any).fetchPriority = instantLoad
+            ? 'high'
+            : 'auto';
         }
         if ('loading' in imageRef.current) {
           imageRef.current.loading = instantLoad ? 'eager' : 'lazy';
@@ -69,13 +72,14 @@ const LazyImage = ({
       }
     }
   }, [src, inView, instantLoad]);
-  
+
   // Definir classes dinâmicas
   const imageClasses = `${className} ${isLoaded ? loadedClassName : loadingClassName}`;
-  
+
   // Aplicar dimensões corretas para evitar layout shift
-  const aspectRatio = width && height ? { aspectRatio: `${width} / ${height}` } : {};
-  
+  const aspectRatio =
+    width && height ? { aspectRatio: `${width} / ${height}` } : {};
+
   // Renderizar o blurhash como fallback se fornecido
   let blurStyle = {};
   if (blurhash && !isLoaded) {
@@ -86,7 +90,7 @@ const LazyImage = ({
       filter: 'blur(20px)',
     };
   }
-  
+
   return (
     <img
       ref={setRefs}
@@ -104,4 +108,4 @@ const LazyImage = ({
   );
 };
 
-export default LazyImage; 
+export default LazyImage;

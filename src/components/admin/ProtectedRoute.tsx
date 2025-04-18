@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { ReactNode, useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     // Check if user is authenticated
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem('authToken');
     setIsAuthenticated(!!token);
   }, []);
 
@@ -36,4 +36,4 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   return <>{children}</>;
 };
 
-export default ProtectedRoute; 
+export default ProtectedRoute;

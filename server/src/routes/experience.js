@@ -4,9 +4,12 @@ import {
   getExperienceById,
   createExperience,
   updateExperience,
-  deleteExperience
+  deleteExperience,
 } from '../controllers/experience.js';
-import { experienceValidationRules, idParamValidation } from '../middleware/validators.js';
+import {
+  experienceValidationRules,
+  idParamValidation,
+} from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
 import { adminMiddleware } from '../middleware/auth.js';
 
@@ -31,20 +34,39 @@ router.get('/:id', idParamValidation, validateRequest, getExperienceById);
  * @desc    Create a new experience
  * @access  Private (Admin)
  */
-router.post('/', adminMiddleware, experienceValidationRules, validateRequest, createExperience);
+router.post(
+  '/',
+  adminMiddleware,
+  experienceValidationRules,
+  validateRequest,
+  createExperience,
+);
 
 /**
  * @route   PUT /api/experience/:id
  * @desc    Update an experience
  * @access  Private (Admin)
  */
-router.put('/:id', adminMiddleware, idParamValidation, experienceValidationRules, validateRequest, updateExperience);
+router.put(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  experienceValidationRules,
+  validateRequest,
+  updateExperience,
+);
 
 /**
  * @route   DELETE /api/experience/:id
  * @desc    Delete an experience
  * @access  Private (Admin)
  */
-router.delete('/:id', adminMiddleware, idParamValidation, validateRequest, deleteExperience);
+router.delete(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  validateRequest,
+  deleteExperience,
+);
 
-export default router; 
+export default router;

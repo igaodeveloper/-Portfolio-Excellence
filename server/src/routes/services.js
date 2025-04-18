@@ -4,9 +4,12 @@ import {
   getServiceById,
   createService,
   updateService,
-  deleteService
+  deleteService,
 } from '../controllers/services.js';
-import { serviceValidationRules, idParamValidation } from '../middleware/validators.js';
+import {
+  serviceValidationRules,
+  idParamValidation,
+} from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
 import { adminMiddleware } from '../middleware/auth.js';
 
@@ -31,20 +34,39 @@ router.get('/:id', idParamValidation, validateRequest, getServiceById);
  * @desc    Create a new service
  * @access  Private (Admin)
  */
-router.post('/', adminMiddleware, serviceValidationRules, validateRequest, createService);
+router.post(
+  '/',
+  adminMiddleware,
+  serviceValidationRules,
+  validateRequest,
+  createService,
+);
 
 /**
  * @route   PUT /api/services/:id
  * @desc    Update a service
  * @access  Private (Admin)
  */
-router.put('/:id', adminMiddleware, idParamValidation, serviceValidationRules, validateRequest, updateService);
+router.put(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  serviceValidationRules,
+  validateRequest,
+  updateService,
+);
 
 /**
  * @route   DELETE /api/services/:id
  * @desc    Delete a service
  * @access  Private (Admin)
  */
-router.delete('/:id', adminMiddleware, idParamValidation, validateRequest, deleteService);
+router.delete(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  validateRequest,
+  deleteService,
+);
 
-export default router; 
+export default router;

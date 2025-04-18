@@ -27,10 +27,12 @@ Backend API for the Portfolio Excellence project. This API provides endpoints fo
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/login` - Login and get token
 - `GET /api/auth/me` - Get current user info
 
 ### Projects
+
 - `GET /api/projects` - Get all projects
 - `GET /api/projects/featured` - Get featured projects
 - `GET /api/projects/:id` - Get project by ID
@@ -39,10 +41,12 @@ Backend API for the Portfolio Excellence project. This API provides endpoints fo
 - `DELETE /api/projects/:id` - Delete a project (admin only)
 
 ### Profile
+
 - `GET /api/profile` - Get profile data
 - `PUT /api/profile` - Update profile data (admin only)
 
 ### Skills
+
 - `GET /api/skills` - Get all skills
 - `GET /api/skills/:id` - Get skill by ID
 - `POST /api/skills` - Create a new skill (admin only)
@@ -50,6 +54,7 @@ Backend API for the Portfolio Excellence project. This API provides endpoints fo
 - `DELETE /api/skills/:id` - Delete a skill (admin only)
 
 ### Experience
+
 - `GET /api/experience` - Get all experiences
 - `GET /api/experience/:id` - Get experience by ID
 - `POST /api/experience` - Create a new experience (admin only)
@@ -57,6 +62,7 @@ Backend API for the Portfolio Excellence project. This API provides endpoints fo
 - `DELETE /api/experience/:id` - Delete an experience (admin only)
 
 ### Services
+
 - `GET /api/services` - Get all services
 - `GET /api/services/:id` - Get service by ID
 - `POST /api/services` - Create a new service (admin only)
@@ -64,6 +70,7 @@ Backend API for the Portfolio Excellence project. This API provides endpoints fo
 - `DELETE /api/services/:id` - Delete a service (admin only)
 
 ### Analytics
+
 - `GET /api/analytics` - Get analytics data (admin only)
 - `PUT /api/analytics` - Update analytics data (admin only)
 - `POST /api/analytics/pageview` - Record page view
@@ -95,4 +102,4 @@ Password: password123
 
 ## License
 
-MIT 
+MIT

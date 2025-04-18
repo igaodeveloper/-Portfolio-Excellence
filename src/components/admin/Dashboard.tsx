@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
-import { LogoutButton } from "./Auth";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { useState } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { LogoutButton } from './Auth';
+import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
 import {
   LayoutDashboard,
   BarChart3,
@@ -12,9 +12,9 @@ import {
   Menu,
   X,
   User,
-} from "lucide-react";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "../ui/input";
+} from 'lucide-react';
+import { Label } from '@radix-ui/react-label';
+import { Input } from '../ui/input';
 
 // Placeholder components for dashboard sections
 const DashboardOverview = () => (
@@ -198,7 +198,7 @@ const AnalyticsSection = () => (
             <div className="w-full bg-accent/30 rounded-full h-2">
               <div
                 className="bg-primary h-2 rounded-full"
-                style={{ width: "75%" }}
+                style={{ width: '75%' }}
               ></div>
             </div>
           </div>
@@ -210,7 +210,7 @@ const AnalyticsSection = () => (
             <div className="w-full bg-accent/30 rounded-full h-2">
               <div
                 className="bg-primary h-2 rounded-full"
-                style={{ width: "45%" }}
+                style={{ width: '45%' }}
               ></div>
             </div>
           </div>
@@ -222,7 +222,7 @@ const AnalyticsSection = () => (
             <div className="w-full bg-accent/30 rounded-full h-2">
               <div
                 className="bg-primary h-2 rounded-full"
-                style={{ width: "30%" }}
+                style={{ width: '30%' }}
               ></div>
             </div>
           </div>
@@ -513,28 +513,28 @@ export const Dashboard = () => {
   // Navigation items
   const navItems = [
     {
-      path: "/admin/dashboard",
-      label: "Overview",
+      path: '/admin/dashboard',
+      label: 'Overview',
       icon: <LayoutDashboard className="h-5 w-5" />,
     },
     {
-      path: "/admin/dashboard/analytics",
-      label: "Analytics",
+      path: '/admin/dashboard/analytics',
+      label: 'Analytics',
       icon: <BarChart3 className="h-5 w-5" />,
     },
     {
-      path: "/admin/dashboard/content",
-      label: "Content Editor",
+      path: '/admin/dashboard/content',
+      label: 'Content Editor',
       icon: <FileEdit className="h-5 w-5" />,
     },
     {
-      path: "/admin/dashboard/projects",
-      label: "Projects",
+      path: '/admin/dashboard/projects',
+      label: 'Projects',
       icon: <FolderKanban className="h-5 w-5" />,
     },
     {
-      path: "/admin/dashboard/media",
-      label: "Media Upload",
+      path: '/admin/dashboard/media',
+      label: 'Media Upload',
       icon: <Upload className="h-5 w-5" />,
     },
   ];
@@ -554,7 +554,7 @@ export const Dashboard = () => {
 
       {/* Sidebar */}
       <aside
-        className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
+        className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
                    lg:translate-x-0 fixed lg:relative z-40 w-64 h-full transition-transform duration-300 
                    bg-card border-r shadow-sm`}
       >
@@ -590,7 +590,7 @@ export const Dashboard = () => {
                   key={item.path}
                   to={item.path}
                   className={`flex items-center space-x-3 px-3 py-2 rounded-md transition-colors 
-                            ${isActive ? "bg-primary text-primary-foreground" : "hover:bg-accent"}`}
+                            ${isActive ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'}`}
                   onClick={() =>
                     window.innerWidth < 1024 && setSidebarOpen(false)
                   }
@@ -614,7 +614,7 @@ export const Dashboard = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <h1 className="text-2xl font-bold">
               {navItems.find((item) => item.path === location.pathname)
-                ?.label || "Dashboard"}
+                ?.label || 'Dashboard'}
             </h1>
             <div className="mt-2 sm:mt-0">
               <Button variant="outline" size="sm" asChild>

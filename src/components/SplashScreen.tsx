@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -44,27 +44,27 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 100, 
-                delay: 0.2, 
-                duration: 0.8 
+              transition={{
+                type: 'spring',
+                stiffness: 100,
+                delay: 0.2,
+                duration: 0.8,
               }}
               className="relative mb-8"
             >
-              <motion.div 
+              <motion.div
                 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-500 to-red-500"
                 animate={{
                   background: [
-                    "linear-gradient(to right, #8B5CF6, #EC4899, #EF4444)",
-                    "linear-gradient(to right, #3B82F6, #10B981, #F59E0B)",
-                    "linear-gradient(to right, #8B5CF6, #EC4899, #EF4444)",
+                    'linear-gradient(to right, #8B5CF6, #EC4899, #EF4444)',
+                    'linear-gradient(to right, #3B82F6, #10B981, #F59E0B)',
+                    'linear-gradient(to right, #8B5CF6, #EC4899, #EF4444)',
                   ],
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  repeatType: "reverse",
+                  repeatType: 'reverse',
                 }}
               >
                 PORTFOLIO
@@ -81,7 +81,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: "80%" }}
+              animate={{ width: '80%' }}
               transition={{ duration: 0.5, delay: 1 }}
               className="w-4/5 max-w-md relative h-1 bg-gray-800 rounded-full overflow-hidden mb-4"
             >
@@ -91,20 +91,20 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               />
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
               className="text-gray-400 text-sm"
             >
-              {progress === 100 ? "Pronto!" : "Carregando..."}
+              {progress === 100 ? 'Pronto!' : 'Carregando...'}
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 50 }}
-              animate={{ 
-                opacity: progress === 100 ? 1 : 0, 
-                y: progress === 100 ? 0 : 50 
+              animate={{
+                opacity: progress === 100 ? 1 : 0,
+                y: progress === 100 ? 0 : 50,
               }}
               transition={{ duration: 0.5 }}
               className="mt-6"
@@ -133,19 +133,19 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               <motion.div
                 key={i}
                 className="absolute w-3 h-3 bg-white rounded-full"
-                initial={{ 
-                  x: Math.random() * window.innerWidth, 
+                initial={{
+                  x: Math.random() * window.innerWidth,
                   y: Math.random() * window.innerHeight,
-                  opacity: 0.1 + Math.random() * 0.3
+                  opacity: 0.1 + Math.random() * 0.3,
                 }}
                 animate={{
-                  y: [null, "-100vh"],
+                  y: [null, '-100vh'],
                 }}
                 transition={{
                   duration: 5 + Math.random() * 10,
                   repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "linear",
+                  repeatType: 'loop',
+                  ease: 'linear',
                   delay: Math.random() * 5,
                 }}
                 style={{
@@ -161,4 +161,4 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   );
 };
 
-export default SplashScreen; 
+export default SplashScreen;

@@ -2,83 +2,138 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <meta name="description" content="Portfólio profissional de desenvolvedor front-end, apresentando projetos e habilidades em React, TypeScript e desenvolvimento web moderno." />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <meta
+      name="description"
+      content="Portfólio profissional de desenvolvedor front-end, apresentando projetos e habilidades em React, TypeScript e desenvolvimento web moderno."
+    />
     <meta name="theme-color" content="#ffffff" />
-    
+
     <!-- Performance: Preload de recursos críticos -->
     <link rel="preload" href="/src/main.tsx" as="script" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    
+
     <!-- Preconnect para domínios externos -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Carregamento otimizado de fontes -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      />
     </noscript>
-    
+
     <!-- DNS Prefetch para recursos comuns -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    
+
     <!-- Meta tags para SEO e compartilhamento social -->
     <meta property="og:title" content="Portfólio | Desenvolvedor Front-end" />
-    <meta property="og:description" content="Projetos e habilidades em desenvolvimento web moderno com React, TypeScript e outras tecnologias." />
+    <meta
+      property="og:description"
+      content="Projetos e habilidades em desenvolvimento web moderno com React, TypeScript e outras tecnologias."
+    />
     <meta property="og:image" content="/social-preview.png" />
     <meta property="og:url" content="https://seusite.com" />
     <meta name="twitter:card" content="summary_large_image" />
-    
+
     <!-- Segurança e cache -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="referrer" content="strict-origin" />
     <meta http-equiv="Cache-Control" content="max-age=31536000" />
-    
+
     <title>igaodevs_404 | Desenvolvedor Front-end</title>
   </head>
   <body>
     <!-- Elemento principal de montagem -->
     <div id="root">
       <!-- Fallback para carregamento que previne layout shift -->
-      <div style="display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: #ffffff;">
-        <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          width: 100vw;
+          background-color: #ffffff;
+        "
+      >
+        <div
+          style="
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+          "
+        ></div>
       </div>
       <style>
         @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       </style>
     </div>
 
     <!-- Scripts principais -->
     <script type="module" src="/src/main.tsx"></script>
-    
+
     <!-- Script de tratamento de erros -->
-    <script src="https://api.tempolabs.ai/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js" defer></script>
-    
+    <script
+      src="https://api.tempolabs.ai/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js"
+      defer
+    ></script>
+
     <!-- Adicionar atributo de performance ao script de análise -->
     <script>
       // Detector de performance
       window.addEventListener('load', () => {
-        if ('performance' in window && 'measure' in performance && 'getEntriesByType' in performance) {
+        if (
+          'performance' in window &&
+          'measure' in performance &&
+          'getEntriesByType' in performance
+        ) {
           // Calcular FCP (First Contentful Paint)
           const perfEntries = performance.getEntriesByType('paint');
-          const fcpEntry = perfEntries.find(entry => entry.name === 'first-contentful-paint');
+          const fcpEntry = perfEntries.find(
+            (entry) => entry.name === 'first-contentful-paint',
+          );
           if (fcpEntry) {
             console.log('FCP:', fcpEntry.startTime);
           }
-          
+
           // Tentar registrar métricas para LCP (Largest Contentful Paint)
           const observer = new PerformanceObserver((list) => {
             const entries = list.getEntries();
             const lastEntry = entries[entries.length - 1];
             console.log('LCP:', lastEntry.startTime);
           });
-          observer.observe({ type: 'largest-contentful-paint', buffered: true });
+          observer.observe({
+            type: 'largest-contentful-paint',
+            buffered: true,
+          });
         }
       });
     </script>

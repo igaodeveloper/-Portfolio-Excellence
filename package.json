@@ -10,7 +10,8 @@
     "build-no-errors": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts"
+    "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
@@ -81,6 +82,7 @@
     "@vitejs/plugin-react-swc": "^3.8.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+    "prettier": "^3.5.3",
     "rollup-plugin-visualizer": "^5.14.0",
     "tailwindcss": "3.4.1",
     "tempo-devtools": "^2.0.99",

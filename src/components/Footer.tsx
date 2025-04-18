@@ -1,13 +1,13 @@
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -57,7 +57,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-modern-white font-bold text-lg mb-4">Links Rápidos</h3>
+            <h3 className="text-modern-white font-bold text-lg mb-4">
+              Links Rápidos
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -111,7 +113,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-modern-white font-bold text-lg mb-4">Contato</h3>
+            <h3 className="text-modern-white font-bold text-lg mb-4">
+              Contato
+            </h3>
             <p className="text-modern-gray mb-2">igorhawking@gmail.com</p>
             <p className="text-modern-gray">São Paulo, Brasil</p>
           </div>
@@ -121,7 +125,7 @@ const Footer = () => {
           <p className="text-modern-gray">
             © {currentYear} Portfólio. Todos os direitos reservados.
           </p>
-          <button 
+          <button
             onClick={scrollToTop}
             className="p-3 bg-modern-dark rounded-lg text-modern-gray hover:text-modern-accent transition-colors"
             aria-label="Voltar ao topo"

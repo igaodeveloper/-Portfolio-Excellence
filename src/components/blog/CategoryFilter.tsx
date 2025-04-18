@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Check, ChevronDown } from "lucide-react";
-import { Button } from "../ui/button";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Check, ChevronDown } from 'lucide-react';
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Badge } from "../ui/badge";
+} from '../ui/dropdown-menu';
+import { Badge } from '../ui/badge';
 
 interface Category {
   id: string;
@@ -24,7 +24,7 @@ interface CategoryFilterProps {
   selectedCategory: string | null;
   onChange: (category: string | null) => void;
   showCounts?: boolean;
-  variant?: "dropdown" | "badges" | "pills";
+  variant?: 'dropdown' | 'badges' | 'pills';
 }
 
 const CategoryFilter = ({
@@ -32,15 +32,15 @@ const CategoryFilter = ({
   selectedCategory,
   onChange,
   showCounts = true,
-  variant = "dropdown",
+  variant = 'dropdown',
 }: CategoryFilterProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (variant === "badges") {
+  if (variant === 'badges') {
     return (
       <div className="flex flex-wrap gap-2">
         <Badge
-          variant={selectedCategory === null ? "default" : "outline"}
+          variant={selectedCategory === null ? 'default' : 'outline'}
           className="cursor-pointer"
           onClick={() => onChange(null)}
         >
@@ -50,24 +50,28 @@ const CategoryFilter = ({
         {categories.map((category) => (
           <Badge
             key={category.id}
-            variant={selectedCategory === category.name ? "default" : "outline"}
+            variant={selectedCategory === category.name ? 'default' : 'outline'}
             className="cursor-pointer"
             onClick={() => onChange(category.name)}
           >
             {category.name}
-            {showCounts && category.count !== undefined && ` (${category.count})`}
-            {selectedCategory === category.name && <Check className="ml-1 h-3 w-3" />}
+            {showCounts &&
+              category.count !== undefined &&
+              ` (${category.count})`}
+            {selectedCategory === category.name && (
+              <Check className="ml-1 h-3 w-3" />
+            )}
           </Badge>
         ))}
       </div>
     );
   }
 
-  if (variant === "pills") {
+  if (variant === 'pills') {
     return (
       <div className="flex flex-wrap gap-2">
         <Button
-          variant={selectedCategory === null ? "default" : "outline"}
+          variant={selectedCategory === null ? 'default' : 'outline'}
           size="sm"
           className="rounded-full"
           onClick={() => onChange(null)}
@@ -77,13 +81,15 @@ const CategoryFilter = ({
         {categories.map((category) => (
           <Button
             key={category.id}
-            variant={selectedCategory === category.name ? "default" : "outline"}
+            variant={selectedCategory === category.name ? 'default' : 'outline'}
             size="sm"
             className="rounded-full"
             onClick={() => onChange(category.name)}
           >
             {category.name}
-            {showCounts && category.count !== undefined && ` (${category.count})`}
+            {showCounts &&
+              category.count !== undefined &&
+              ` (${category.count})`}
           </Button>
         ))}
       </div>
@@ -96,7 +102,7 @@ const CategoryFilter = ({
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2">
           <span>
-            {selectedCategory ? selectedCategory : "Todas as categorias"}
+            {selectedCategory ? selectedCategory : 'Todas as categorias'}
           </span>
           <ChevronDown className="h-4 w-4 opacity-50" />
         </Button>
@@ -137,4 +143,4 @@ const CategoryFilter = ({
   );
 };
 
-export default CategoryFilter; 
+export default CategoryFilter;

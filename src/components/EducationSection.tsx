@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { Calendar, GraduationCap, Award } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Calendar, GraduationCap, Award } from 'lucide-react';
 
 type EducationItem = {
   id: number;
@@ -7,72 +7,72 @@ type EducationItem = {
   organization: string;
   period: string;
   description: string;
-  type: "education" | "award";
+  type: 'education' | 'award';
 };
 
 const educationItems: EducationItem[] = [
   {
     id: 1,
-    title: "Bacharelado em Ciência da Computação",
-    organization: "Universidade Anhembi Morumbi",
-    period: "2023-2027",
+    title: 'Bacharelado em Ciência da Computação',
+    organization: 'Universidade Anhembi Morumbi',
+    period: '2023-2027',
     description:
-      "Especializei-me em tecnologias web e design de interfaces de usuário. Me formei com honras.",
-    type: "education",
+      'Especializei-me em tecnologias web e design de interfaces de usuário. Me formei com honras.',
+    type: 'education',
   },
   {
     id: 2,
-    title: "Prêmio de Excelência em Desenvolvimento Web",
-    organization: "Conferência Regional de Tecnologia",
-    period: "2020",
+    title: 'Prêmio de Excelência em Desenvolvimento Web',
+    organization: 'Conferência Regional de Tecnologia',
+    period: '2020',
     description:
-      "Reconhecido por contribuições excepcionais para as práticas de desenvolvimento front-end e projetos de código aberto.",
-    type: "award",
+      'Reconhecido por contribuições excepcionais para as práticas de desenvolvimento front-end e projetos de código aberto.',
+    type: 'award',
   },
   {
     id: 3,
-    title: "Curso de Especialização em React",
-    organization: "Digital Innovation One",
-    period: "2022",
+    title: 'Curso de Especialização em React',
+    organization: 'Digital Innovation One',
+    period: '2022',
     description:
-      "Desenvolvimento de aplicações modernas com React, Redux e TypeScript, com foco em performance e acessibilidade.",
-    type: "education",
+      'Desenvolvimento de aplicações modernas com React, Redux e TypeScript, com foco em performance e acessibilidade.',
+    type: 'education',
   },
   {
     id: 4,
-    title: "Bootcamp Desenvolvimento Full Stack",
-    organization: "Rocketseat",
-    period: "2021-2022",
+    title: 'Bootcamp Desenvolvimento Full Stack',
+    organization: 'Rocketseat',
+    period: '2021-2022',
     description:
-      "Imersão intensiva em desenvolvimento web com Node.js, React e React Native, criando aplicações completas do backend ao frontend.",
-    type: "education",
+      'Imersão intensiva em desenvolvimento web com Node.js, React e React Native, criando aplicações completas do backend ao frontend.',
+    type: 'education',
   },
   {
     id: 5,
-    title: "Certificação AWS Cloud Practitioner",
-    organization: "Amazon Web Services",
-    period: "2023",
+    title: 'Certificação AWS Cloud Practitioner',
+    organization: 'Amazon Web Services',
+    period: '2023',
     description:
-      "Fundamentos de computação em nuvem, incluindo arquitetura, segurança e modelos de preço da AWS.",
-    type: "education",
+      'Fundamentos de computação em nuvem, incluindo arquitetura, segurança e modelos de preço da AWS.',
+    type: 'education',
   },
   {
     id: 6,
-    title: "Curso de UX/UI Design",
-    organization: "Origamid",
-    period: "2022",
+    title: 'Curso de UX/UI Design',
+    organization: 'Origamid',
+    period: '2022',
     description:
-      "Princípios de design de interface, experiência do usuário, prototipagem e design responsivo com foco em aplicações web.",
-    type: "education",
+      'Princípios de design de interface, experiência do usuário, prototipagem e design responsivo com foco em aplicações web.',
+    type: 'education',
   },
   {
     id: 7,
-    title: "Formação em Inteligência Artificial",
-    organization: "Alura",
-    period: "2023",
+    title: 'Formação em Inteligência Artificial',
+    organization: 'Alura',
+    period: '2023',
     description:
-      "Estudo aprofundado sobre machine learning, processamento de linguagem natural e visão computacional com Python e TensorFlow.",
-    type: "education",
+      'Estudo aprofundado sobre machine learning, processamento de linguagem natural e visão computacional com Python e TensorFlow.',
+    type: 'education',
   },
 ];
 
@@ -80,7 +80,7 @@ export default function EducationSection() {
   return (
     <section id="education" className="py-20 px-6 bg-modern-dark">
       <div className="container-section">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -88,7 +88,7 @@ export default function EducationSection() {
         >
           <h2 className="section-title text-modern-white">Educação</h2>
         </motion.div>
-        
+
         <div className="relative border-l-2 border-modern-accent/30 pl-8 space-y-12 ml-4">
           {educationItems.map((item, index) => (
             <motion.div
@@ -100,14 +100,16 @@ export default function EducationSection() {
               className="relative"
             >
               <div className="absolute -left-[42px] bg-modern-dark p-1 rounded-full border-2 border-modern-accent">
-                {item.type === "education" ? (
+                {item.type === 'education' ? (
                   <GraduationCap className="w-5 h-5 text-modern-accent" />
                 ) : (
                   <Award className="w-5 h-5 text-modern-accent" />
                 )}
               </div>
               <div className="flex flex-col md:flex-row md:items-center mb-2 gap-2">
-                <h4 className="text-xl font-semibold text-modern-white">{item.title}</h4>
+                <h4 className="text-xl font-semibold text-modern-white">
+                  {item.title}
+                </h4>
                 <div className="md:ml-auto flex items-center text-sm text-modern-gray">
                   <Calendar className="w-4 h-4 mr-1" />
                   {item.period}
@@ -123,4 +125,4 @@ export default function EducationSection() {
       </div>
     </section>
   );
-} 
+}

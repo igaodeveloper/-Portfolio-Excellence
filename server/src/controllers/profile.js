@@ -33,5 +33,5 @@ export const updateProfileData = (req, res) => {
 
 export default {
   getProfileData,
-  updateProfileData
-}; 
+  updateProfileData,
+};

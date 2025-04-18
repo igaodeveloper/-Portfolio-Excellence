@@ -38,7 +38,7 @@ const apiLimiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
   standardHeaders: true,
   legacyHeaders: false,
-  message: 'Too many requests, please try again later.'
+  message: 'Too many requests, please try again later.',
 });
 
 // Apply rate limiter to all API endpoints
@@ -64,8 +64,8 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
     error: {
       message: err.message || 'Internal Server Error',
-      stack: process.env.NODE_ENV === 'production' ? undefined : err.stack
-    }
+      stack: process.env.NODE_ENV === 'production' ? undefined : err.stack,
+    },
   });
 });
 
@@ -78,4 +78,4 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API is available at http://localhost:${PORT}/api`);
-}); 
+});

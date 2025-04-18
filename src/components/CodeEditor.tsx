@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
 import { motion } from 'framer-motion';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ResizablePanel, ResizableHandle, ResizablePanelGroup } from "@/components/ui/resizable";
-import { 
-  Play, 
-  RotateCcw, 
-  Maximize, 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+  ResizablePanel,
+  ResizableHandle,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+import {
+  Play,
+  RotateCcw,
+  Maximize,
   Save,
   Terminal,
   Download,
@@ -16,16 +20,20 @@ import {
   Copy,
   Trash2,
   Moon,
-  Sun
-} from "lucide-react";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-
+  Sun,
+} from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 // Código HTML, CSS e JS padrão com tema Dracula
 const defaultHTMLCode = `<!DOCTYPE html>
@@ -190,15 +198,17 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
   const [jsCode, setJsCode] = useState(defaultJSCode);
   const [preview, setPreview] = useState('');
   const [fileName, setFileName] = useState('dracula-editor');
-  const [theme, setTheme] = useState<'dracula' | 'vs-dark' | 'vs-light'>('dracula');
+  const [theme, setTheme] = useState<'dracula' | 'vs-dark' | 'vs-light'>(
+    'dracula',
+  );
   const [fontSize, setFontSize] = useState(14);
   const [consoleOutput, setConsoleOutput] = useState<string[]>([]);
   const [showConsole, setShowConsole] = useState(false);
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [activeTab, setActiveTab] = useState('html');
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
+
   // Configurar tema Dracula para o Monaco Editor
   useEffect(() => {
     const setupDraculaTheme = async () => {
@@ -223,21 +233,20 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
           'editor.selectionBackground': '#44475a',
           'editor.inactiveSelectionBackground': '#44475a75',
           'editorCursor.foreground': '#f8f8f2',
-        }
+        },
       });
     };
-    
+
     setupDraculaTheme();
   }, []);
-  
+
   // Função para atualizar a visualização
   const updatePreview = useCallback(() => {
     // Limpar console
     setConsoleOutput([]);
-    
+
     // Console interceptor para capturar logs
-    const consoleInterceptor = 
-      `<script>
+    const consoleInterceptor = `<script>
         (function(){
           const originalConsole = window.console;
           window.console = {
@@ -279,10 +288,9 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
           });
         })();
       </script>`;
-    
+
     // Gerar o código combinado (HTML + CSS + JS)
-    const combinedCode = 
-      `<html>
+    const combinedCode = `<html>
         <head>
           <style>${cssCode}</style>
           ${consoleInterceptor}
@@ -292,79 +300,84 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
           <script>${jsCode}</script>
         </body>
       </html>`;
-    
+
     setPreview(combinedCode);
   }, [htmlCode, cssCode, jsCode]);
-  
+
   // Atualizar preview quando o código é alterado e autoRefresh está ativo
   useEffect(() => {
     if (autoRefresh) {
       updatePreview();
     }
   }, [htmlCode, cssCode, jsCode, autoRefresh, updatePreview]);
-  
+
   // Ouvir mensagens do iframe (console logs)
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.type) {
         const { type, data } = event.data;
-        
+
         switch (type) {
           case 'console.log':
           case 'console.info':
-            setConsoleOutput(prev => [...prev, `log: ${data}`]);
+            setConsoleOutput((prev) => [...prev, `log: ${data}`]);
             break;
           case 'console.warn':
-            setConsoleOutput(prev => [...prev, `warn: ${data}`]);
+            setConsoleOutput((prev) => [...prev, `warn: ${data}`]);
             break;
           case 'console.error':
           case 'error':
-            setConsoleOutput(prev => [...prev, `error: ${data}`]);
+            setConsoleOutput((prev) => [...prev, `error: ${data}`]);
             break;
         }
       }
     };
-    
+
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, []);
-  
+
   // Manipuladores de eventos
-  
+
   // Resetar código para os valores padrão
   const handleReset = () => {
-    if (window.confirm("Tem certeza que deseja restaurar o código padrão? Todas as alterações serão perdidas.")) {
+    if (
+      window.confirm(
+        'Tem certeza que deseja restaurar o código padrão? Todas as alterações serão perdidas.',
+      )
+    ) {
       setHtmlCode(defaultHTMLCode);
       setCssCode(defaultCSSCode);
       setJsCode(defaultJSCode);
       setConsoleOutput([]);
     }
   };
-  
+
   // Salvar projeto como arquivo JSON
   const handleSave = () => {
     const project = {
       name: fileName,
       html: htmlCode,
       css: cssCode,
-      js: jsCode
+      js: jsCode,
     };
-    
-    const blob = new Blob([JSON.stringify(project)], { type: 'application/json' });
+
+    const blob = new Blob([JSON.stringify(project)], {
+      type: 'application/json',
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `${fileName}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    
-    setConsoleOutput(prev => [...prev, `log: Projeto "${fileName}" salvo!`]);
+
+    setConsoleOutput((prev) => [...prev, `log: Projeto "${fileName}" salvo!`]);
   };
-  
+
   // Exportar como HTML
   const handleExportHTML = () => {
-    const fullHTML = 
-      `<!DOCTYPE html>
+    const fullHTML = `<!DOCTYPE html>
       <html lang="pt-BR">
       <head>
         <meta charset="UTF-8">
@@ -377,7 +390,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
         <script>${jsCode}</script>
       </body>
       </html>`;
-    
+
     const blob = new Blob([fullHTML], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -385,52 +398,61 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
     a.download = `${fileName}.html`;
     a.click();
     URL.revokeObjectURL(url);
-    
-    setConsoleOutput(prev => [...prev, `log: Exportado para ${fileName}.html`]);
+
+    setConsoleOutput((prev) => [
+      ...prev,
+      `log: Exportado para ${fileName}.html`,
+    ]);
   };
-  
+
   // Importar projeto
   const handleImport = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-  
+
   // Processar arquivo importado
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    
+
     const reader = new FileReader();
     reader.onload = (event) => {
       try {
         const content = event.target?.result as string;
         const project = JSON.parse(content);
-        
+
         if (project.html && project.css && project.js) {
           setFileName(project.name || 'projeto-importado');
           setHtmlCode(project.html);
           setCssCode(project.css);
           setJsCode(project.js);
-          setConsoleOutput(prev => [...prev, `log: Projeto "${project.name}" importado!`]);
+          setConsoleOutput((prev) => [
+            ...prev,
+            `log: Projeto "${project.name}" importado!`,
+          ]);
         } else {
           throw new Error('Formato de arquivo inválido');
         }
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
-        setConsoleOutput(prev => [...prev, `error: Erro ao importar: ${errorMessage}`]);
+        const errorMessage =
+          error instanceof Error ? error.message : 'Erro desconhecido';
+        setConsoleOutput((prev) => [
+          ...prev,
+          `error: Erro ao importar: ${errorMessage}`,
+        ]);
       }
     };
     reader.readAsText(file);
-    
+
     // Limpar o input
     e.target.value = '';
   };
-  
+
   // Copiar código para área de transferência
   const handleCopyCode = () => {
-    const fullHTML = 
-      `<!DOCTYPE html>
+    const fullHTML = `<!DOCTYPE html>
       <html lang="pt-BR">
       <head>
         <meta charset="UTF-8">
@@ -443,24 +465,32 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
         <script>${jsCode}</script>
       </body>
       </html>`;
-    
-    navigator.clipboard.writeText(fullHTML)
-      .then(() => setConsoleOutput(prev => [...prev, 'log: Código copiado!']))
-      .catch(err => setConsoleOutput(prev => [...prev, `error: Erro ao copiar: ${err.message}`]));
+
+    navigator.clipboard
+      .writeText(fullHTML)
+      .then(() => setConsoleOutput((prev) => [...prev, 'log: Código copiado!']))
+      .catch((err) =>
+        setConsoleOutput((prev) => [
+          ...prev,
+          `error: Erro ao copiar: ${err.message}`,
+        ]),
+      );
   };
-  
+
   // Limpar console
   const handleClearConsole = () => {
     setConsoleOutput([]);
   };
-  
+
   // Alterna o tema
   const toggleTheme = () => {
     setTheme(theme === 'dracula' ? 'vs-light' : 'dracula');
   };
 
   return (
-    <div className={`w-full h-[800px] bg-[#282a36] rounded-lg shadow-lg overflow-hidden ${className}`}>
+    <div
+      className={`w-full h-[800px] bg-[#282a36] rounded-lg shadow-lg overflow-hidden ${className}`}
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -470,60 +500,97 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
         {/* Barra superior */}
         <div className="flex items-center justify-between px-4 py-2 bg-[#343746] border-b border-[#44475a]">
           <div className="flex items-center space-x-4">
-            <input 
-              type="text" 
-              value={fileName} 
+            <input
+              type="text"
+              value={fileName}
               onChange={(e) => setFileName(e.target.value)}
               className="bg-[#44475a] text-[#f8f8f2] px-3 py-1 rounded text-sm outline-none border border-[#44475a] focus:border-[#bd93f9]"
               placeholder="Nome do projeto"
             />
-            
+
             {/* Menu de opções */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
+                >
                   Opções
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={handleSave}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={handleSave}
+                >
                   <Save size={14} className="mr-2" /> Salvar Projeto
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={handleExportHTML}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={handleExportHTML}
+                >
                   <Download size={14} className="mr-2" /> Exportar HTML
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={handleImport}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={handleImport}
+                >
                   <Upload size={14} className="mr-2" /> Importar Projeto
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={handleCopyCode}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={handleCopyCode}
+                >
                   <Copy size={14} className="mr-2" /> Copiar Código
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={handleReset}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={handleReset}
+                >
                   <RotateCcw size={14} className="mr-2" /> Restaurar Padrão
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={toggleTheme}>
-                  {theme === 'dracula' ? <Sun size={14} className="mr-2" /> : <Moon size={14} className="mr-2" />}
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={toggleTheme}
+                >
+                  {theme === 'dracula' ? (
+                    <Sun size={14} className="mr-2" />
+                  ) : (
+                    <Moon size={14} className="mr-2" />
+                  )}
                   {theme === 'dracula' ? 'Tema Claro' : 'Tema Dracula'}
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={() => setFontSize(fontSize + 1)}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={() => setFontSize(fontSize + 1)}
+                >
                   Aumentar Fonte
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={() => setFontSize(Math.max(10, fontSize - 1))}>
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={() => setFontSize(Math.max(10, fontSize - 1))}
+                >
                   Diminuir Fonte
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer" onClick={() => setAutoRefresh(!autoRefresh)}>
-                  {autoRefresh ? 'Desativar Auto Refresh' : 'Ativar Auto Refresh'}
+                <DropdownMenuItem
+                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                  onClick={() => setAutoRefresh(!autoRefresh)}
+                >
+                  {autoRefresh
+                    ? 'Desativar Auto Refresh'
+                    : 'Ativar Auto Refresh'}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     size="sm"
                     className={`h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a] ${showConsole ? 'bg-[#44475a]' : ''}`}
                     onClick={() => setShowConsole(!showConsole)}
@@ -531,16 +598,21 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                     <Terminal size={14} />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">Console</TooltipContent>
+                <TooltipContent
+                  side="bottom"
+                  className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
+                >
+                  Console
+                </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            
+
             {!autoRefresh && (
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       className="h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
                       onClick={updatePreview}
@@ -548,13 +620,18 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                       <Play size={14} />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">Executar</TooltipContent>
+                  <TooltipContent
+                    side="bottom"
+                    className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
+                  >
+                    Executar
+                  </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             )}
           </div>
         </div>
-        
+
         {/* Conteúdo principal */}
         <div className="flex-1 overflow-hidden">
           <ResizablePanelGroup direction="horizontal">
@@ -562,14 +639,37 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
             <ResizablePanel defaultSize={50}>
               <Card className="h-full border-0 rounded-none bg-[#282a36]">
                 <CardContent className="p-0 h-full">
-                  <Tabs defaultValue="html" value={activeTab} onValueChange={setActiveTab} className="h-full">
+                  <Tabs
+                    defaultValue="html"
+                    value={activeTab}
+                    onValueChange={setActiveTab}
+                    className="h-full"
+                  >
                     <TabsList className="bg-[#343746] border-b border-[#44475a] h-9 rounded-none px-2 w-full justify-start">
-                      <TabsTrigger value="html" className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]">HTML</TabsTrigger>
-                      <TabsTrigger value="css" className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]">CSS</TabsTrigger>
-                      <TabsTrigger value="js" className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]">JS</TabsTrigger>
+                      <TabsTrigger
+                        value="html"
+                        className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]"
+                      >
+                        HTML
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="css"
+                        className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]"
+                      >
+                        CSS
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="js"
+                        className="data-[state=active]:bg-[#282a36] h-8 rounded-sm text-[#f8f8f2]"
+                      >
+                        JS
+                      </TabsTrigger>
                     </TabsList>
-                    
-                    <TabsContent value="html" className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]">
+
+                    <TabsContent
+                      value="html"
+                      className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]"
+                    >
                       <Editor
                         height="100%"
                         defaultLanguage="html"
@@ -588,7 +688,10 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                       />
                     </TabsContent>
 
-                    <TabsContent value="css" className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]">
+                    <TabsContent
+                      value="css"
+                      className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]"
+                    >
                       <Editor
                         height="100%"
                         defaultLanguage="css"
@@ -607,7 +710,10 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                       />
                     </TabsContent>
 
-                    <TabsContent value="js" className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]">
+                    <TabsContent
+                      value="js"
+                      className="flex-1 overflow-hidden mt-0 p-0 h-[calc(100%-36px)]"
+                    >
                       <Editor
                         height="100%"
                         defaultLanguage="javascript"
@@ -630,7 +736,10 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
               </Card>
             </ResizablePanel>
 
-            <ResizableHandle withHandle className="bg-[#343746] hover:bg-[#bd93f9]" />
+            <ResizableHandle
+              withHandle
+              className="bg-[#343746] hover:bg-[#bd93f9]"
+            />
 
             {/* Painel de visualização */}
             <ResizablePanel defaultSize={50}>
@@ -639,14 +748,16 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                   <div className="p-2 border-b border-[#343746] bg-[#343746] flex justify-between items-center">
                     <div className="flex items-center space-x-2">
                       <Play size={14} className="text-[#bd93f9]" />
-                      <span className="text-[#f8f8f2] text-sm">Visualização</span>
+                      <span className="text-[#f8f8f2] text-sm">
+                        Visualização
+                      </span>
                     </div>
-                    
+
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button 
-                            variant="ghost" 
+                          <Button
+                            variant="ghost"
                             size="icon"
                             className="h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
                             onClick={() => {
@@ -660,13 +771,22 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                             <Maximize size={14} />
                           </Button>
                         </TooltipTrigger>
-                        <TooltipContent side="bottom" className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">Abrir em Nova Aba</TooltipContent>
+                        <TooltipContent
+                          side="bottom"
+                          className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
+                        >
+                          Abrir em Nova Aba
+                        </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   </div>
-                  
-                  <div className={`flex flex-col ${showConsole ? 'h-[calc(100%-33px)]' : 'h-[calc(100%-33px)]'}`}>
-                    <div className={`bg-[#282a36] ${showConsole ? 'h-[70%]' : 'h-full'}`}>
+
+                  <div
+                    className={`flex flex-col ${showConsole ? 'h-[calc(100%-33px)]' : 'h-[calc(100%-33px)]'}`}
+                  >
+                    <div
+                      className={`bg-[#282a36] ${showConsole ? 'h-[70%]' : 'h-full'}`}
+                    >
                       <iframe
                         title="Visualização do Projeto"
                         srcDoc={preview}
@@ -674,14 +794,14 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                         sandbox="allow-scripts"
                       />
                     </div>
-                    
+
                     {/* Console */}
                     {showConsole && (
                       <div className="h-[30%] bg-[#282a36] border-t border-[#343746] overflow-auto">
                         <div className="flex justify-between items-center p-2 bg-[#343746] text-[#f8f8f2] text-xs">
                           <span>Console</span>
-                          <Button 
-                            variant="ghost" 
+                          <Button
+                            variant="ghost"
                             size="sm"
                             onClick={handleClearConsole}
                             className="h-6 text-xs text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
@@ -690,25 +810,31 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                             Limpar
                           </Button>
                         </div>
-                        
+
                         <div className="p-2 font-mono text-xs overflow-auto max-h-[calc(100%-28px)]">
                           {consoleOutput.length > 0 ? (
                             consoleOutput.map((output, index) => {
                               const isError = output.startsWith('error:');
                               const isWarn = output.startsWith('warn:');
                               let textColor = 'text-[#f8f8f2]';
-                              
+
                               if (isError) textColor = 'text-[#ff5555]';
                               else if (isWarn) textColor = 'text-[#ffb86c]';
-                              
+
                               return (
-                                <div key={index} className={`${textColor} py-1 border-b border-[#343746]`}>
+                                <div
+                                  key={index}
+                                  className={`${textColor} py-1 border-b border-[#343746]`}
+                                >
                                   &gt; {output}
                                 </div>
                               );
                             })
                           ) : (
-                            <div className="text-[#6272a4] py-1">Console vazio. Use console.log() para ver mensagens aqui.</div>
+                            <div className="text-[#6272a4] py-1">
+                              Console vazio. Use console.log() para ver
+                              mensagens aqui.
+                            </div>
                           )}
                         </div>
                       </div>
@@ -719,7 +845,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
             </ResizablePanel>
           </ResizablePanelGroup>
         </div>
-        
+
         {/* Input invisível para upload de arquivo */}
         <input
           type="file"
@@ -728,12 +854,14 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
           accept=".json"
           className="hidden"
         />
-        
+
         {/* Barra de status */}
         <div className="flex items-center justify-between px-4 py-1 bg-[#bd93f9] text-[#282a36] text-xs">
           <span>{fileName}.html</span>
           <div className="flex items-center space-x-4">
-            <span>{autoRefresh ? 'Atualização: Auto' : 'Atualização: Manual'}</span>
+            <span>
+              {autoRefresh ? 'Atualização: Auto' : 'Atualização: Manual'}
+            </span>
             <span>{activeTab.toUpperCase()}</span>
           </div>
         </div>

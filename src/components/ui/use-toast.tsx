@@ -1,8 +1,8 @@
-import { error } from "console";
-import { useEffect, useState } from "react";
-import * as React from "react";
+import { error } from 'console';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 
-export type ToastVariant = "default" | "destructive";
+export type ToastVariant = 'default' | 'destructive';
 
 export interface Toast {
   id: string;
@@ -64,7 +64,13 @@ function removeToast(id: string) {
   }
 }
 
-export function useToast(p0?: { variant: string; title?: string | undefined; description?: string | undefined; action?: React.ReactNode; duration?: number | undefined; }) {
+export function useToast(p0?: {
+  variant: string;
+  title?: string | undefined;
+  description?: string | undefined;
+  action?: React.ReactNode;
+  duration?: number | undefined;
+}) {
   const [state, setState] = useState<ToasterToast[]>([]);
 
   useEffect(() => {
@@ -106,9 +112,9 @@ export function Toast({ toast }: { toast: ToasterToast }) {
   return (
     <div
       className={`group pointer-events-auto relative w-full max-w-sm overflow-hidden rounded-lg p-4 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full ${
-        toast.variant === "destructive"
-          ? "bg-red-600 text-white"
-          : "bg-white text-gray-950 dark:bg-gray-800 dark:text-gray-50"
+        toast.variant === 'destructive'
+          ? 'bg-red-600 text-white'
+          : 'bg-white text-gray-950 dark:bg-gray-800 dark:text-gray-50'
       }`}
     >
       <div className="flex">
@@ -161,15 +167,16 @@ export function Toaster() {
 
 // Helper function for easier use
 export const toast = {
-  success: (props: Omit<Toast, "id" | "variant">) => {
+  success: (props: Omit<Toast, 'id' | 'variant'>) => {
     const { toast: toastFn } = useToast();
     return toastFn({
-        ...props, variant: "default",
-        id: ""
+      ...props,
+      variant: 'default',
+      id: '',
     });
   },
-  error: (props: Omit<Toast, "id" | "variant">) => {
+  error: (props: Omit<Toast, 'id' | 'variant'>) => {
     const { toast: toastFn } = useToast();
-    return useToast({ ...props, variant: "destructive" });
+    return useToast({ ...props, variant: 'destructive' });
   },
-}; 
+};

@@ -6,11 +6,11 @@ import { body, param, validationResult } from 'express-validator';
 export const validateRequest = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ 
-      error: { 
+    return res.status(400).json({
+      error: {
         message: 'Validation failed',
-        details: errors.array() 
-      } 
+        details: errors.array(),
+      },
     });
   }
   next();
@@ -20,12 +20,10 @@ export const validateRequest = (req, res, next) => {
  * Auth validation rules
  */
 export const loginValidationRules = [
-  body('email')
-    .isEmail()
-    .withMessage('Please provide a valid email address'),
+  body('email').isEmail().withMessage('Please provide a valid email address'),
   body('password')
     .isLength({ min: 6 })
-    .withMessage('Password must be at least 6 characters long')
+    .withMessage('Password must be at least 6 characters long'),
 ];
 
 /**
@@ -44,18 +42,12 @@ export const profileValidationRules = [
     .withMessage('Title must be a string')
     .isLength({ min: 2, max: 100 })
     .withMessage('Title must be between 2 and 100 characters'),
-  body('bio')
-    .optional()
-    .isString()
-    .withMessage('Bio must be a string'),
+  body('bio').optional().isString().withMessage('Bio must be a string'),
   body('email')
     .optional()
     .isEmail()
     .withMessage('Please provide a valid email address'),
-  body('phone')
-    .optional()
-    .isString()
-    .withMessage('Phone must be a string'),
+  body('phone').optional().isString().withMessage('Phone must be a string'),
   body('location')
     .optional()
     .isString()
@@ -63,7 +55,7 @@ export const profileValidationRules = [
   body('socialLinks')
     .optional()
     .isObject()
-    .withMessage('Social links must be an object')
+    .withMessage('Social links must be an object'),
 ];
 
 /**
@@ -82,13 +74,11 @@ export const projectValidationRules = [
     .isLength({ min: 2, max: 100 })
     .withMessage('Slug must be between 2 and 100 characters')
     .matches(/^[a-z0-9-]+$/)
-    .withMessage('Slug can only contain lowercase letters, numbers, and hyphens'),
-  body('description')
-    .isString()
-    .withMessage('Description must be a string'),
-  body('technologies')
-    .isArray()
-    .withMessage('Technologies must be an array'),
+    .withMessage(
+      'Slug can only contain lowercase letters, numbers, and hyphens',
+    ),
+  body('description').isString().withMessage('Description must be a string'),
+  body('technologies').isArray().withMessage('Technologies must be an array'),
   body('imageUrl')
     .optional()
     .isURL()
@@ -108,7 +98,7 @@ export const projectValidationRules = [
   body('order')
     .optional()
     .isInt({ min: 1 })
-    .withMessage('Order must be a positive integer')
+    .withMessage('Order must be a positive integer'),
 ];
 
 /**
@@ -120,12 +110,10 @@ export const skillValidationRules = [
     .withMessage('Name must be a string')
     .isLength({ min: 2, max: 50 })
     .withMessage('Name must be between 2 and 50 characters'),
-  body('category')
-    .isString()
-    .withMessage('Category must be a string'),
+  body('category').isString().withMessage('Category must be a string'),
   body('level')
     .isInt({ min: 1, max: 100 })
-    .withMessage('Level must be an integer between 1 and 100')
+    .withMessage('Level must be an integer between 1 and 100'),
 ];
 
 /**
@@ -157,12 +145,8 @@ export const experienceValidationRules = [
     .withMessage('End date must be a string')
     .matches(/^\d{4}-\d{2}-\d{2}$/)
     .withMessage('End date must be in YYYY-MM-DD format'),
-  body('current')
-    .isBoolean()
-    .withMessage('Current must be a boolean'),
-  body('description')
-    .isString()
-    .withMessage('Description must be a string')
+  body('current').isBoolean().withMessage('Current must be a boolean'),
+  body('description').isString().withMessage('Description must be a string'),
 ];
 
 /**
@@ -174,23 +158,17 @@ export const serviceValidationRules = [
     .withMessage('Title must be a string')
     .isLength({ min: 2, max: 100 })
     .withMessage('Title must be between 2 and 100 characters'),
-  body('description')
-    .isString()
-    .withMessage('Description must be a string'),
-  body('icon')
-    .isString()
-    .withMessage('Icon must be a string'),
+  body('description').isString().withMessage('Description must be a string'),
+  body('icon').isString().withMessage('Icon must be a string'),
   body('order')
     .optional()
     .isInt({ min: 1 })
-    .withMessage('Order must be a positive integer')
+    .withMessage('Order must be a positive integer'),
 ];
 
 // ID parameter validation
 export const idParamValidation = [
-  param('id')
-    .notEmpty()
-    .withMessage('ID parameter is required')
+  param('id').notEmpty().withMessage('ID parameter is required'),
 ];
 
 export default {
@@ -201,5 +179,5 @@ export default {
   skillValidationRules,
   experienceValidationRules,
   serviceValidationRules,
-  idParamValidation
-}; 
+  idParamValidation,
+};

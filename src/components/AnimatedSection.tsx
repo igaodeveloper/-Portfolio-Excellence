@@ -76,12 +76,13 @@ export const AnimatedItem = ({
   duration = 0.5,
 }: Omit<AnimatedSectionProps, 'staggerChildren' | 'staggerDelay'>) => {
   const distance = 50;
-  
+
   const variants = {
     hidden: {
       opacity: 0,
       y: direction === 'up' ? distance : direction === 'down' ? -distance : 0,
-      x: direction === 'left' ? distance : direction === 'right' ? -distance : 0,
+      x:
+        direction === 'left' ? distance : direction === 'right' ? -distance : 0,
     },
     visible: {
       opacity: 1,
@@ -100,4 +101,4 @@ export const AnimatedItem = ({
       {children}
     </motion.div>
   );
-}; 
+};

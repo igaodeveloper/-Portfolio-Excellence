@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { ReactNode } from 'react';
 
 type FloatingIconProps = {
   icon: ReactNode;
@@ -26,32 +26,32 @@ export function FloatingIcon({
   return (
     <motion.div
       className={cn(
-        "relative flex items-center justify-center",
-        hoverable ? "cursor-pointer" : "",
-        className
+        'relative flex items-center justify-center',
+        hoverable ? 'cursor-pointer' : '',
+        className,
       )}
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ 
-        type: "spring", 
-        stiffness: 50, 
-        damping: 10, 
-        delay 
+      transition={{
+        type: 'spring',
+        stiffness: 50,
+        damping: 10,
+        delay,
       }}
       whileHover={hoverable ? { scale: 1.1 } : undefined}
       whileTap={hoverable ? { scale: 0.95 } : undefined}
       onClick={onClick}
     >
       <motion.div
-        className={cn("relative z-10", iconClassName)}
-        animate={{ 
-          y: [-amplitude, 0, -amplitude] 
+        className={cn('relative z-10', iconClassName)}
+        animate={{
+          y: [-amplitude, 0, -amplitude],
         }}
-        transition={{ 
-          repeat: Infinity, 
-          duration, 
-          ease: "easeInOut",
-          delay 
+        transition={{
+          repeat: Infinity,
+          duration,
+          ease: 'easeInOut',
+          delay,
         }}
       >
         {icon}
@@ -78,12 +78,17 @@ export function FloatingIconGrid({
   staggerDelay = 0.1,
 }: FloatingIconGridProps) {
   return (
-    <div className={cn("grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4", gridClassName)}>
+    <div
+      className={cn(
+        'grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4',
+        gridClassName,
+      )}
+    >
       {icons.map((item, index) => (
         <FloatingIcon
           key={item.id}
           icon={item.icon}
-          className={cn("w-full aspect-square", itemClassName, item.className)}
+          className={cn('w-full aspect-square', itemClassName, item.className)}
           delay={index * staggerDelay}
           amplitude={Math.random() * 8 + 5}
           duration={Math.random() * 2 + 2}
@@ -105,15 +110,15 @@ export function PulsatingIcon({
   icon,
   className,
   iconClassName,
-  pulseColor = "rgba(0, 210, 223, 0.2)",
+  pulseColor = 'rgba(0, 210, 223, 0.2)',
   onClick,
 }: PulsatingIconProps) {
   return (
     <motion.div
-      className={cn("relative flex items-center justify-center", className)}
+      className={cn('relative flex items-center justify-center', className)}
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 50, damping: 10 }}
+      transition={{ type: 'spring', stiffness: 50, damping: 10 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
@@ -132,14 +137,12 @@ export function PulsatingIcon({
         }}
         transition={{
           duration: 2.5,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           repeat: Infinity,
-          repeatType: "loop",
+          repeatType: 'loop',
         }}
       />
-      <div className={cn("relative z-10", iconClassName)}>
-        {icon}
-      </div>
+      <div className={cn('relative z-10', iconClassName)}>{icon}</div>
     </motion.div>
   );
-} 
+}

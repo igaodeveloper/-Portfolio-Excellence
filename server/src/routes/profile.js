@@ -1,8 +1,5 @@
 import express from 'express';
-import {
-  getProfileData,
-  updateProfileData
-} from '../controllers/profile.js';
+import { getProfileData, updateProfileData } from '../controllers/profile.js';
 import { profileValidationRules } from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
 import { adminMiddleware } from '../middleware/auth.js';
@@ -21,6 +18,12 @@ router.get('/', getProfileData);
  * @desc    Update profile data
  * @access  Private (Admin)
  */
-router.put('/', adminMiddleware, profileValidationRules, validateRequest, updateProfileData);
+router.put(
+  '/',
+  adminMiddleware,
+  profileValidationRules,
+  validateRequest,
+  updateProfileData,
+);
 
-export default router; 
+export default router;

@@ -5,9 +5,12 @@ import {
   getFeaturedProjects,
   createProject,
   updateProject,
-  deleteProject
+  deleteProject,
 } from '../controllers/projects.js';
-import { projectValidationRules, idParamValidation } from '../middleware/validators.js';
+import {
+  projectValidationRules,
+  idParamValidation,
+} from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
 import { adminMiddleware } from '../middleware/auth.js';
 
@@ -39,20 +42,39 @@ router.get('/:id', idParamValidation, validateRequest, getProjectById);
  * @desc    Create a new project
  * @access  Private (Admin)
  */
-router.post('/', adminMiddleware, projectValidationRules, validateRequest, createProject);
+router.post(
+  '/',
+  adminMiddleware,
+  projectValidationRules,
+  validateRequest,
+  createProject,
+);
 
 /**
  * @route   PUT /api/projects/:id
  * @desc    Update a project
  * @access  Private (Admin)
  */
-router.put('/:id', adminMiddleware, idParamValidation, projectValidationRules, validateRequest, updateProject);
+router.put(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  projectValidationRules,
+  validateRequest,
+  updateProject,
+);
 
 /**
  * @route   DELETE /api/projects/:id
  * @desc    Delete a project
  * @access  Private (Admin)
  */
-router.delete('/:id', adminMiddleware, idParamValidation, validateRequest, deleteProject);
+router.delete(
+  '/:id',
+  adminMiddleware,
+  idParamValidation,
+  validateRequest,
+  deleteProject,
+);
 
-export default router; 
+export default router;

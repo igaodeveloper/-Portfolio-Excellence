@@ -20,4 +20,4 @@ router.post('/login', loginValidationRules, validateRequest, login);
  */
 router.get('/me', authMiddleware, getMe);
 
-export default router; 
+export default router;

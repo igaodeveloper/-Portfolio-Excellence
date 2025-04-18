@@ -3,7 +3,7 @@ import {
   getAnalyticsData,
   updateAnalyticsData,
   recordPageView,
-  recordProjectView
+  recordProjectView,
 } from '../controllers/analytics.js';
 import { idParamValidation } from '../middleware/validators.js';
 import { validateRequest } from '../middleware/validators.js';
@@ -37,6 +37,11 @@ router.post('/pageview', recordPageView);
  * @desc    Record project view
  * @access  Public
  */
-router.post('/project/:projectId', idParamValidation, validateRequest, recordProjectView);
+router.post(
+  '/project/:projectId',
+  idParamValidation,
+  validateRequest,
+  recordProjectView,
+);
 
-export default router; 
+export default router;
