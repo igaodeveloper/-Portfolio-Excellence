@@ -10,10 +10,12 @@ import ServicesSection from "./ServicesSection";
 import WhatsAppButton from "./WhatsAppButton";
 import AnimatedSection from "./AnimatedSection";
 import CodeEditor from "./CodeEditor";
+import Navbar from "./Navbar";
 
 function Home() {
   return (
     <div className="w-full min-h-screen bg-[#121214]">
+      <Navbar />
       <main>
         <HeroSection />
         <AnimatedSection direction="up" delay={0.2}>

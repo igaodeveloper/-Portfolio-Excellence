@@ -26,6 +26,8 @@ const LandingPageBuilder = lazy(() => import("./pages/LandingPageBuilder"));
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute"));
 
 function AppRoutes() {
+  const tempoRoutes = import.meta.env.VITE_TEMPO === "true" ? useRoutes(routes) : null;
+
   return (
     <Suspense
       fallback={
@@ -50,7 +52,7 @@ function AppRoutes() {
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+        {tempoRoutes}
       </>
     </Suspense>
   );

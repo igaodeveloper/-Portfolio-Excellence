@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build-netlify": "tsc && vite build --mode production",
     "build-no-errors": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -78,6 +79,7 @@
     "@vitejs/plugin-react-swc": "^3.8.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+    "rollup-plugin-visualizer": "^5.14.0",
     "tailwindcss": "3.4.1",
     "tempo-devtools": "^2.0.99",
     "typescript": "^5.8.2",

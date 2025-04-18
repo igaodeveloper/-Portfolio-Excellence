@@ -180,7 +180,7 @@ const HeroSection = () => {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <img
-              src="/assets/perfil.jpg"
+              src="/perfil.jpg"
               alt="Developer Portrait"
               className="w-full h-full object-cover"
             />

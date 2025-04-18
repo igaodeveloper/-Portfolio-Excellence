@@ -2,6 +2,200 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Otimizações para reduzir o CLS (Cumulative Layout Shift) */
+html {
+  scroll-padding-top: 4rem;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Otimizações de desempenho para animações */
+@layer utilities {
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Otimizações para animações */
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Estilos base da página */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Estilos do modo de acessibilidade */
+body.reduced-motion * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+body.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #ffff00;
+  --primary-foreground: #000000;
+  --muted: #ffffff;
+  --muted-foreground: #000000;
+  
+  /* Aumentar contraste geral */
+  img, video {
+    filter: contrast(1.2);
+  }
+  
+  /* Melhorar visibilidade de links */
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+}
+
+body.larger-text {
+  font-size: 125% !important;
+  
+  p, li, h1, h2, h3, h4, h5, h6, button, a, span, div {
+    line-height: 1.6 !important;
+  }
+}
+
+/* Otimizações de cursor personalizado */
+body.custom-cursor {
+  cursor: none !important;
+}
+
+body.custom-cursor a,
+body.custom-cursor button,
+body.custom-cursor [role="button"],
+body.custom-cursor input,
+body.custom-cursor select,
+body.custom-cursor textarea,
+body.custom-cursor [tabindex]:not([tabindex="-1"]) {
+  cursor: none !important;
+}
+
+/* Otimizações para o carregamento de imagens */
+.image-loading {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-loaded {
+  opacity: 1;
+}
+
+/* Otimizações para evitar saltos de layout */
+.content-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.5s infinite;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Otimização para fontes */
+@layer base {
+  html {
+    font-display: swap;
+    text-rendering: optimizeSpeed;
+  }
+}
+
+/* Otimizações para transições */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms, transform 200ms;
+}
+
+/* Otimizações para o scroll suave */
+body.smooth-scroll-enabled {
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none; /* Evita bounce no iOS e Chrome */
+}
+
+/* Otimizações para carregamento */
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Adicionar suporte a print */
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+  
+  body {
+    font-size: 12pt;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.9em;
+  }
+}
+
+/* Otimizações para tela */
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
 @layer base {
   :root {
     --background: 240 3% 7%;

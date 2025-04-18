@@ -12,25 +12,25 @@ const experiences: Experience[] = [
   {
     company: "Santander",
     role: "Senior Frontend Developer",
-    period: "2023 - Present",
+    period: "2023",
     description: "Desenvolvimento e otimização de aplicações bancárias com React e TypeScript. Implementação de soluções seguras e responsivas para internet banking, melhorando a experiência do usuário e reduzindo o tempo de carregamento em 40%."
   },
   {
     company: "GOV",
     role: "Desenvolvedor Full Stack",
-    period: "2021 - 2023",
+    period: "2021 - 2022",
     description: "Desenvolvimento de sistemas governamentais utilizando Node.js e React. Integração com APIs de serviços públicos e implementação de autenticação segura. Participação em projetos de modernização de plataformas digitais de atendimento ao cidadão."
   },
   {
     company: "Stefanini",
     role: "Desenvolvedor Frontend",
-    period: "2020 - 2021",
+    period: "2024 - 2025",
     description: "Atuação em projetos para grandes clientes do setor financeiro e de telecomunicações. Desenvolvimento de interfaces com Angular e integração com backends Java. Trabalho em equipes ágeis seguindo metodologia Scrum."
   },
   {
     company: "RHSYSTEM",
-    role: "Desenvolvedor Web Junior",
-    period: "2019 - 2020",
+    role: "Desenvolvedor front end plaeno",
+    period: "2025 - presente",
     description: "Desenvolvimento e manutenção de sistemas de gestão de recursos humanos. Implementação de recursos para otimização de processos de recrutamento e seleção. Criação de relatórios dinâmicos e painéis administrativos."
   },
 ];
