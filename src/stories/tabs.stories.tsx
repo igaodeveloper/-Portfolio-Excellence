@@ -1,18 +1,18 @@
 // [build] library: 'shadcn'
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "../components/ui/tabs";
+} from '../components/ui/tabs';
 
 const meta = {
-  title: "ui/Tabs",
+  title: 'ui/Tabs',
   component: Tabs,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -63,6 +63,6 @@ export const Base = {
     </Tabs>
   ),
   args: {
-    defaultValue: "account",
+    defaultValue: 'account',
   },
 };

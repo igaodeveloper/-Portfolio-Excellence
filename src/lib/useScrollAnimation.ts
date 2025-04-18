@@ -28,12 +28,17 @@ export const useScrollAnimation = ({
   // Define os valores de animação baseados na direção
   const getAnimationProps = () => {
     const distance = 50;
-    
+
     const variants = {
       hidden: {
         opacity: 0,
         y: direction === 'up' ? distance : direction === 'down' ? -distance : 0,
-        x: direction === 'left' ? distance : direction === 'right' ? -distance : 0,
+        x:
+          direction === 'left'
+            ? distance
+            : direction === 'right'
+              ? -distance
+              : 0,
       },
       visible: {
         opacity: 1,
@@ -64,4 +69,4 @@ export const useScrollAnimation = ({
     variants: getAnimationProps(),
     inView,
   };
-}; 
+};

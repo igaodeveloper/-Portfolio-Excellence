@@ -1,11 +1,11 @@
 // [build] library: 'shadcn'
-import { FontItalicIcon, FontBoldIcon } from "@radix-ui/react-icons";
-import { Toggle } from "../components/ui/toggle";
+import { FontItalicIcon, FontBoldIcon } from '@radix-ui/react-icons';
+import { Toggle } from '../components/ui/toggle';
 
 const meta = {
-  title: "ui/Toggle",
+  title: 'ui/Toggle',
   component: Toggle,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -63,6 +63,6 @@ export const Destructive = {
     </Toggle>
   ),
   args: {
-    variant: "destructive",
+    variant: 'destructive',
   },
 };

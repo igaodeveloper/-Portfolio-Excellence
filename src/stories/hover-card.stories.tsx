@@ -1,18 +1,18 @@
 // [build] library: 'shadcn'
-import { CalendarDays } from "lucide-react";
+import { CalendarDays } from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
-import { Button } from "../components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { Button } from '../components/ui/button';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "../components/ui/hover-card";
+} from '../components/ui/hover-card';
 
 const meta = {
-  title: "ui/HoverCard",
+  title: 'ui/HoverCard',
   component: HoverCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -35,7 +35,7 @@ export const Base = {
               The React Framework – created and maintained by @vercel.
             </p>
             <div className="flex items-center pt-2">
-              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{' '}
               <span className="text-xs text-slate-500 dark:text-slate-400">
                 Joined December 2021
               </span>

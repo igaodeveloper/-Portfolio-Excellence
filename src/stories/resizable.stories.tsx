@@ -2,12 +2,12 @@ import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "../components/ui/resizable";
+} from '../components/ui/resizable';
 
-const meta= {
-  title: "ui/ResizablePanelGroup",
+const meta = {
+  title: 'ui/ResizablePanelGroup',
   component: ResizablePanelGroup,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

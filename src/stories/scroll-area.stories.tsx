@@ -1,13 +1,13 @@
 // [build] library: 'shadcn'
-import React from "react";
+import React from 'react';
 
-import { ScrollArea } from "../components/ui/scroll-area";
-import { Separator } from "../components/ui/separator";
+import { ScrollArea } from '../components/ui/scroll-area';
+import { Separator } from '../components/ui/separator';
 
 const meta = {
-  title: "ui/ScrollArea",
+  title: 'ui/ScrollArea',
   component: ScrollArea,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

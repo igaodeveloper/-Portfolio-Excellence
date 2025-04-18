@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { Progress } from "../components/ui/progress";
+import { Progress } from '../components/ui/progress';
 
 const meta = {
-  title: "ui/Progress",
+  title: 'ui/Progress',
   component: Progress,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

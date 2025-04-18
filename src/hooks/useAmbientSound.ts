@@ -40,16 +40,19 @@ export function useAmbientSound() {
     setIsPlaying(!isPlaying);
   }, [audio, isPlaying, volume]);
 
-  const adjustVolume = useCallback((newVolume: number) => {
-    if (!audio) return;
-    audio.volume = newVolume;
-    setVolume(newVolume);
-  }, [audio]);
+  const adjustVolume = useCallback(
+    (newVolume: number) => {
+      if (!audio) return;
+      audio.volume = newVolume;
+      setVolume(newVolume);
+    },
+    [audio],
+  );
 
   return {
     isPlaying,
     toggleSound,
     adjustVolume,
-    volume
+    volume,
   };
-} 
+}

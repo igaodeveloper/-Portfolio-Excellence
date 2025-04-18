@@ -9,13 +9,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
-import { Button } from "../components/ui/button";
+} from '../components/ui/alert-dialog';
+import { Button } from '../components/ui/button';
 
 const meta = {
-  title: "ui/AlertDialog",
+  title: 'ui/AlertDialog',
   component: AlertDialog,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 

@@ -6,10 +6,10 @@ interface ParallaxOptions {
   reverse?: boolean;
 }
 
-export const useParallax = ({ 
-  speed = 0.1, 
+export const useParallax = ({
+  speed = 0.1,
   direction = 'up',
-  reverse = false 
+  reverse = false,
 }: ParallaxOptions = {}) => {
   const [offset, setOffset] = useState(0);
 
@@ -20,7 +20,7 @@ export const useParallax = ({
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -29,9 +29,9 @@ export const useParallax = ({
   const getParallaxProps = () => {
     const multiplier = reverse ? -1 : 1;
     const parallaxValue = offset * speed * multiplier;
-    
+
     let transform;
-    
+
     switch (direction) {
       case 'up':
         transform = { y: -parallaxValue };
@@ -48,12 +48,12 @@ export const useParallax = ({
       default:
         transform = { y: -parallaxValue };
     }
-    
+
     return transform;
   };
 
   return {
     parallaxProps: getParallaxProps(),
-    scrollY: offset
+    scrollY: offset,
   };
-}; 
+};

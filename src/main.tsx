@@ -1,15 +1,15 @@
-import React, { lazy, Suspense } from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import { BrowserRouter } from "react-router-dom";
+import React, { lazy, Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 
 // Lazy load App para melhorar o carregamento inicial
-const App = lazy(() => import("./App.tsx"));
+const App = lazy(() => import('./App.tsx'));
 
 // Lazy load das ferramentas de desenvolvimento apenas em ambiente de desenvolvimento
 const loadDevTools = async () => {
   if (import.meta.env.DEV) {
-    const { TempoDevtools } = await import("tempo-devtools");
+    const { TempoDevtools } = await import('tempo-devtools');
     TempoDevtools.init();
   }
 };
@@ -54,13 +54,13 @@ preloadAssets();
 
 // Função para renderização com atraso de hidratação
 const hydrateWithDelay = () => {
-  const root = ReactDOM.createRoot(document.getElementById("root")!);
-  
+  const root = ReactDOM.createRoot(document.getElementById('root')!);
+
   // Registrar métricas de performance
   if ('performance' in window && 'mark' in performance) {
     performance.mark('react-hydration-start');
   }
-  
+
   root.render(
     <React.StrictMode>
       <BrowserRouter basename={basename}>
@@ -70,12 +70,16 @@ const hydrateWithDelay = () => {
       </BrowserRouter>
     </React.StrictMode>,
   );
-  
+
   // Registrar métricas de performance após renderização
   if ('performance' in window && 'mark' in performance) {
     requestAnimationFrame(() => {
       performance.mark('react-hydration-end');
-      performance.measure('react-hydration', 'react-hydration-start', 'react-hydration-end');
+      performance.measure(
+        'react-hydration',
+        'react-hydration-start',
+        'react-hydration-end',
+      );
     });
   }
 };
@@ -84,7 +88,8 @@ const hydrateWithDelay = () => {
 if (!('fetch' in window)) {
   // Carregar polyfill via CDN
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/isomorphic-fetch@3.0.0/fetch-npm-browserify.js';
+  script.src =
+    'https://cdn.jsdelivr.net/npm/isomorphic-fetch@3.0.0/fetch-npm-browserify.js';
   script.async = true;
   document.head.appendChild(script);
   script.onload = hydrateWithDelay;

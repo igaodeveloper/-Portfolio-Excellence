@@ -7,7 +7,8 @@ html {
   scroll-padding-top: 4rem;
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   aspect-ratio: attr(width) / attr(height);
@@ -18,16 +19,16 @@ img, video {
   .will-change-transform {
     will-change: transform;
   }
-  
+
   .will-change-opacity {
     will-change: opacity;
   }
-  
+
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
   }
-  
+
   /* Otimizações para animações */
   .transform-gpu {
     transform: translate3d(0, 0, 0);
@@ -41,7 +42,9 @@ img, video {
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 
@@ -59,12 +62,13 @@ body.high-contrast {
   --primary-foreground: #000000;
   --muted: #ffffff;
   --muted-foreground: #000000;
-  
+
   /* Aumentar contraste geral */
-  img, video {
+  img,
+  video {
     filter: contrast(1.2);
   }
-  
+
   /* Melhorar visibilidade de links */
   a {
     text-decoration: underline;
@@ -75,8 +79,19 @@ body.high-contrast {
 
 body.larger-text {
   font-size: 125% !important;
-  
-  p, li, h1, h2, h3, h4, h5, h6, button, a, span, div {
+
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button,
+  a,
+  span,
+  div {
     line-height: 1.6 !important;
   }
 }
@@ -88,11 +103,11 @@ body.custom-cursor {
 
 body.custom-cursor a,
 body.custom-cursor button,
-body.custom-cursor [role="button"],
+body.custom-cursor [role='button'],
 body.custom-cursor input,
 body.custom-cursor select,
 body.custom-cursor textarea,
-body.custom-cursor [tabindex]:not([tabindex="-1"]) {
+body.custom-cursor [tabindex]:not([tabindex='-1']) {
   cursor: none !important;
 }
 
@@ -139,7 +154,9 @@ body.custom-cursor [tabindex]:not([tabindex="-1"]) {
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .page-transition-exit {
@@ -150,7 +167,9 @@ body.custom-cursor [tabindex]:not([tabindex="-1"]) {
 .page-transition-exit-active {
   opacity: 0;
   transform: translateY(-10px);
-  transition: opacity 200ms, transform 200ms;
+  transition:
+    opacity 200ms,
+    transform 200ms;
 }
 
 /* Otimizações para o scroll suave */
@@ -165,8 +184,12 @@ body.smooth-scroll-enabled {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Adicionar suporte a print */
@@ -174,17 +197,17 @@ body.smooth-scroll-enabled {
   @page {
     margin: 1.5cm;
   }
-  
+
   body {
     font-size: 12pt;
   }
-  
+
   .no-print {
     display: none !important;
   }
-  
+
   a[href]:after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
     font-size: 0.9em;
   }
 }
@@ -274,11 +297,11 @@ body.smooth-scroll-enabled {
   .container-section {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
   }
-  
+
   .section-title {
     @apply text-3xl md:text-4xl font-bold mb-12 relative inline-block;
   }
-  
+
   .section-title::after {
     content: '';
     @apply absolute bottom-0 left-0 w-1/3 h-1 bg-modern-accent rounded-full;
@@ -326,7 +349,7 @@ body.smooth-scroll-enabled {
   body {
     cursor: auto !important;
   }
-  
+
   .cursor-main,
   .cursor-dot {
     display: none !important;
@@ -334,21 +357,23 @@ body.smooth-scroll-enabled {
 }
 
 /* Interactive elements cursor styles */
-a, 
-button, 
-[role="button"], 
-input, 
-select, 
-textarea, 
-[tabindex]:not([tabindex="-1"]), 
+a,
+button,
+[role='button'],
+input,
+select,
+textarea,
+[tabindex]:not([tabindex='-1']),
 .interactive {
   cursor: none !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-a:hover, 
-button:hover, 
-[role="button"]:hover, 
+a:hover,
+button:hover,
+[role='button']:hover,
 .interactive:hover {
   transform: scale(1.03);
 }

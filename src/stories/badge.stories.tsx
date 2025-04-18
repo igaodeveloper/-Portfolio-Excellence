@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { Badge } from "../components/ui/badge";
+import { Badge } from '../components/ui/badge';
 
 const meta = {
-  title: "ui/Badge",
+  title: 'ui/Badge',
   component: Badge,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -16,18 +16,18 @@ export const Base = {
 export const Secondary = {
   render: (args: any) => <Badge {...args}>Secondary</Badge>,
   args: {
-    variant: "secondary",
+    variant: 'secondary',
   },
 };
 export const Outline = {
   render: (args: any) => <Badge {...args}>Outline</Badge>,
   args: {
-    variant: "outline",
+    variant: 'outline',
   },
 };
 export const Destructive = {
   render: (args: any) => <Badge {...args}>Destructive</Badge>,
   args: {
-    variant: "destructive",
+    variant: 'destructive',
   },
 };

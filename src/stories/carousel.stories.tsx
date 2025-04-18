@@ -1,16 +1,16 @@
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent } from '../components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../components/ui/carousel";
+} from '../components/ui/carousel';
 
 const meta = {
-  title: "ui/Carousel",
+  title: 'ui/Carousel',
   component: Carousel,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

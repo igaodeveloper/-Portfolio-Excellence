@@ -1,12 +1,12 @@
 // [build] library: 'shadcn'
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 
 const meta = {
-  title: "ui/Input",
+  title: 'ui/Input',
   component: Input,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -14,8 +14,8 @@ export default meta;
 export const Default = {
   render: (args: any) => <Input {...args} />,
   args: {
-    type: "email",
-    placeholder: "Email",
+    type: 'email',
+    placeholder: 'Email',
   },
 };
 export const Disabled = {

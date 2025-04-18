@@ -1,12 +1,12 @@
 // [build] library: 'shadcn'
-import { Button } from "../components/ui/button";
-import { Label } from "../components/ui/label";
-import { Textarea } from "../components/ui/textarea";
+import { Button } from '../components/ui/button';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
 
 const meta = {
-  title: "ui/Textarea",
+  title: 'ui/Textarea',
   component: Textarea,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -14,7 +14,7 @@ export default meta;
 export const Default = {
   render: (args: any) => <Textarea {...args} />,
   args: {
-    placeholder: "Type your message here.",
+    placeholder: 'Type your message here.',
   },
 };
 

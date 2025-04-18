@@ -4,12 +4,12 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../components/ui/accordion";
+} from '../components/ui/accordion';
 
 const meta = {
-  title: "ui/Accordion",
+  title: 'ui/Accordion',
   component: Accordion,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 
@@ -40,7 +40,7 @@ export const Base = {
     </Accordion>
   ),
   args: {
-    type: "single",
+    type: 'single',
     collapsible: true,
   },
 };

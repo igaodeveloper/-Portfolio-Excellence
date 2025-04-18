@@ -1,64 +1,64 @@
-import { Author, Category, Tag, BlogPost } from "@/types/blog"
+import { Author, Category, Tag, BlogPost } from '@/types/blog';
 
 export const authors: Author[] = [
   {
-    name: "John Doe",
-    avatar: "/avatars/john-doe.jpg",
-    title: "Senior Front-End Developer",
-    twitter: "johndoe",
-    github: "johndoe",
-    linkedin: "johndoe",
+    name: 'John Doe',
+    avatar: '/avatars/john-doe.jpg',
+    title: 'Senior Front-End Developer',
+    twitter: 'johndoe',
+    github: 'johndoe',
+    linkedin: 'johndoe',
   },
-]
+];
 
 export const categories: Category[] = [
   {
-    label: "JavaScript",
-    value: "javascript",
-    description: "Modern JavaScript features, best practices, and patterns",
+    label: 'JavaScript',
+    value: 'javascript',
+    description: 'Modern JavaScript features, best practices, and patterns',
   },
   {
-    label: "React",
-    value: "react",
-    description: "React ecosystem, hooks, patterns, and performance",
+    label: 'React',
+    value: 'react',
+    description: 'React ecosystem, hooks, patterns, and performance',
   },
   {
-    label: "CSS",
-    value: "css",
-    description: "Modern CSS techniques, layouts, and animations",
+    label: 'CSS',
+    value: 'css',
+    description: 'Modern CSS techniques, layouts, and animations',
   },
   {
-    label: "Performance",
-    value: "performance",
-    description: "Web performance optimization techniques and metrics",
+    label: 'Performance',
+    value: 'performance',
+    description: 'Web performance optimization techniques and metrics',
   },
   {
-    label: "Accessibility",
-    value: "accessibility",
-    description: "Web accessibility guidelines and best practices",
+    label: 'Accessibility',
+    value: 'accessibility',
+    description: 'Web accessibility guidelines and best practices',
   },
-]
+];
 
 export const tags: Tag[] = [
-  { label: "TypeScript", value: "typescript" },
-  { label: "Next.js", value: "nextjs" },
-  { label: "Tailwind CSS", value: "tailwindcss" },
-  { label: "React Hooks", value: "react-hooks" },
-  { label: "State Management", value: "state-management" },
-  { label: "Testing", value: "testing" },
-  { label: "Web APIs", value: "web-apis" },
-  { label: "CSS Grid", value: "css-grid" },
-  { label: "Flexbox", value: "flexbox" },
-  { label: "Animation", value: "animation" },
-]
+  { label: 'TypeScript', value: 'typescript' },
+  { label: 'Next.js', value: 'nextjs' },
+  { label: 'Tailwind CSS', value: 'tailwindcss' },
+  { label: 'React Hooks', value: 'react-hooks' },
+  { label: 'State Management', value: 'state-management' },
+  { label: 'Testing', value: 'testing' },
+  { label: 'Web APIs', value: 'web-apis' },
+  { label: 'CSS Grid', value: 'css-grid' },
+  { label: 'Flexbox', value: 'flexbox' },
+  { label: 'Animation', value: 'animation' },
+];
 
 export const posts: BlogPost[] = [
   {
-    title: "Understanding React Server Components",
-    slug: "understanding-react-server-components",
+    title: 'Understanding React Server Components',
+    slug: 'understanding-react-server-components',
     description:
-      "A deep dive into React Server Components and how they change the way we build React applications",
-    date: "2024-03-20",
+      'A deep dive into React Server Components and how they change the way we build React applications',
+    date: '2024-03-20',
     author: authors[0],
     content: `
 # Understanding React Server Components
@@ -108,8 +108,8 @@ Server Components are a powerful addition to React's toolbox...
     `,
     category: categories[1],
     tags: [tags[0], tags[1]],
-    image: "/blog/server-components.jpg",
-    readingTime: "8 min read",
+    image: '/blog/server-components.jpg',
+    readingTime: '8 min read',
     featured: true,
   },
-] 
+];

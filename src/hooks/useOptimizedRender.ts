@@ -2,7 +2,7 @@ import { useEffect, useRef, DependencyList, useState } from 'react';
 
 /**
  * Hook para otimizar a renderização de componentes usando requestAnimationFrame e throttling
- * 
+ *
  * @param callback A função a ser executada de forma otimizada
  * @param deps Lista de dependências que disparam a execução da callback
  * @param throttleMs Tempo mínimo entre execuções (em ms)
@@ -11,7 +11,7 @@ import { useEffect, useRef, DependencyList, useState } from 'react';
 export function useOptimizedRender<T>(
   callback: () => T,
   deps: DependencyList = [],
-  throttleMs: number = 16 // ~60fps
+  throttleMs: number = 16, // ~60fps
 ) {
   const [result, setResult] = useState<T | null>(null);
   const [isRunning, setIsRunning] = useState(false);
@@ -23,14 +23,14 @@ export function useOptimizedRender<T>(
     // Função que executa a callback dentro de um requestAnimationFrame
     const executeCallback = () => {
       const now = Date.now();
-      
+
       // Verificar se passou tempo suficiente desde a última execução (throttling)
       if (now - lastRun.current >= throttleMs) {
         if (rafIdRef.current) {
           cancelAnimationFrame(rafIdRef.current);
           rafIdRef.current = null;
         }
-        
+
         // Executar a callback dentro de um requestAnimationFrame para sincronizar com o próximo frame
         rafIdRef.current = requestAnimationFrame(() => {
           try {
@@ -76,14 +76,14 @@ export function useOptimizedRender<T>(
 
 /**
  * Hook para limitar a frequência de execução de uma função
- * 
+ *
  * @param callback A função a ser executada com throttling
  * @param delay O delay em ms entre execuções
  * @returns A função com throttling aplicado
  */
 export function useThrottledCallback<T extends (...args: any[]) => any>(
   callback: T,
-  delay: number
+  delay: number,
 ): (...args: Parameters<T>) => void {
   const lastCall = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -123,15 +123,17 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
 /**
  * Hook para detectar quando um elemento está visível na viewport
  * Otimizado com Intersection Observer API
- * 
+ *
  * @param options Opções de configuração para o Intersection Observer
  * @returns Um objeto com ref e um boolean indicando visibilidade
  */
-export function useVisibilityObserver(options: {
-  threshold?: number;
-  rootMargin?: string;
-  triggerOnce?: boolean;
-} = {}) {
+export function useVisibilityObserver(
+  options: {
+    threshold?: number;
+    rootMargin?: string;
+    triggerOnce?: boolean;
+  } = {},
+) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<Element | null>(null);
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = false } = options;
@@ -151,7 +153,7 @@ export function useVisibilityObserver(options: {
           observer.unobserve(currentRef);
         }
       },
-      { threshold, rootMargin }
+      { threshold, rootMargin },
     );
 
     observer.observe(currentRef);
@@ -168,28 +170,31 @@ export function useVisibilityObserver(options: {
 
 /**
  * Hook para medir o desempenho de renderização de um componente
- * 
+ *
  * @param componentName Nome do componente a ser medido
  * @param enabled Ativar/desativar medição
  */
-export function useRenderPerformance(componentName: string, enabled: boolean = true) {
+export function useRenderPerformance(
+  componentName: string,
+  enabled: boolean = true,
+) {
   const renderCount = useRef(0);
   const lastRenderTime = useRef(performance.now());
 
   useEffect(() => {
     if (!enabled) return;
-    
+
     renderCount.current += 1;
     const now = performance.now();
     const timeSinceLastRender = now - lastRenderTime.current;
-    
+
     console.log(
       `%c[${componentName}] Render #${renderCount.current} (+${timeSinceLastRender.toFixed(2)}ms)`,
-      'color: #3498db;'
+      'color: #3498db;',
     );
-    
+
     lastRenderTime.current = now;
   });
 }
 
-export default useOptimizedRender; 
+export default useOptimizedRender;

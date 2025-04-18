@@ -13,12 +13,12 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "../components/ui/context-menu";
+} from '../components/ui/context-menu';
 
 const meta = {
-  title: "ui/ContextMenu",
+  title: 'ui/ContextMenu',
   component: ContextMenu,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

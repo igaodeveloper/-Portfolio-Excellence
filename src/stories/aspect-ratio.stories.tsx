@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { AspectRatio } from "../components/ui/aspect-ratio";
+import { AspectRatio } from '../components/ui/aspect-ratio';
 
 const meta = {
-  title: "ui/AspectRatio",
+  title: 'ui/AspectRatio',
   component: AspectRatio,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 

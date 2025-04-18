@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { Slider } from "../components/ui/slider";
+import { Slider } from '../components/ui/slider';
 
 const meta = {
-  title: "ui/Slider",
+  title: 'ui/Slider',
   component: Slider,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

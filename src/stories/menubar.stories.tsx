@@ -13,12 +13,12 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "../components/ui/menubar";
+} from '../components/ui/menubar';
 
 const meta = {
-  title: "ui/Menubar",
+  title: 'ui/Menubar',
   component: Menubar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -117,5 +117,5 @@ export const Base = {
 };
 
 {
-  (" ");
+  (' ');
 }

@@ -6,12 +6,12 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../components/ui/pagination";
+} from '../components/ui/pagination';
 
 const meta = {
-  title: "ui/Pagination",
+  title: 'ui/Pagination',
   component: Pagination,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

@@ -1,11 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import React from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
+import React from 'react';
 
 // Mock user for development
 const MOCK_USER = {
-  uid: "admin-user-id",
-  email: "admin@example.com",
-  displayName: "Admin User",
+  uid: 'admin-user-id',
+  email: 'admin@example.com',
+  displayName: 'Admin User',
 };
 
 // Create auth context

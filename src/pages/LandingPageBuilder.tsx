@@ -1,7 +1,13 @@
 import { motion } from 'framer-motion';
 import CodeEditor from '../components/CodeEditor';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 
 const LandingPageBuilder = () => {
   return (
@@ -28,7 +34,8 @@ const LandingPageBuilder = () => {
             transition={{ delay: 0.4, duration: 0.7 }}
             className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
           >
-            Build stunning landing pages with our interactive code editor. Edit HTML, CSS, and JavaScript code and see the changes in real-time.
+            Build stunning landing pages with our interactive code editor. Edit
+            HTML, CSS, and JavaScript code and see the changes in real-time.
           </motion.p>
         </div>
 
@@ -55,7 +62,9 @@ const LandingPageBuilder = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-500">
-                  Our editor features a split-view design that allows you to write code on one side and see the results immediately on the other.
+                  Our editor features a split-view design that allows you to
+                  write code on one side and see the results immediately on the
+                  other.
                 </p>
               </CardContent>
             </Card>
@@ -75,7 +84,8 @@ const LandingPageBuilder = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-500">
-                  Our editor includes syntax highlighting, code completion, and other features to make your development experience smoother.
+                  Our editor includes syntax highlighting, code completion, and
+                  other features to make your development experience smoother.
                 </p>
               </CardContent>
             </Card>
@@ -95,7 +105,9 @@ const LandingPageBuilder = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-500">
-                  Our templates include responsive design principles, ensuring your landing pages look perfect on desktops, tablets, and mobile devices.
+                  Our templates include responsive design principles, ensuring
+                  your landing pages look perfect on desktops, tablets, and
+                  mobile devices.
                 </p>
               </CardContent>
             </Card>
@@ -109,9 +121,13 @@ const LandingPageBuilder = () => {
           className="text-center"
         >
           <p className="text-gray-500 mb-6">
-            Ready to start building your own landing pages? Try our code editor now!
+            Ready to start building your own landing pages? Try our code editor
+            now!
           </p>
-          <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white">
+          <Button
+            size="lg"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white"
+          >
             Get Started Free
           </Button>
         </motion.div>
@@ -120,4 +136,4 @@ const LandingPageBuilder = () => {
   );
 };
 
-export default LandingPageBuilder; 
+export default LandingPageBuilder;

@@ -1,28 +1,28 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Calendar, Clock, Filter, Search } from "lucide-react";
-import { format } from "date-fns";
-import { pt } from "date-fns/locale";
-import { blogPosts } from "../data/blog-posts";
-import { categories } from "../data/blog-categories";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Calendar, Clock, Filter, Search } from 'lucide-react';
+import { format } from 'date-fns';
+import { pt } from 'date-fns/locale';
+import { blogPosts } from '../data/blog-posts';
+import { categories } from '../data/blog-categories';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from '../components/ui/dropdown-menu';
 
 const BlogPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") === "dark";
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
     }
     return false;
   });
@@ -30,11 +30,11 @@ const BlogPage = () => {
   useEffect(() => {
     const html = document.documentElement;
     if (isDarkMode) {
-      html.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      html.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      html.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
 
@@ -46,16 +46,21 @@ const BlogPage = () => {
   const regularPosts = blogPosts.slice(3);
 
   const filteredPosts = regularPosts.filter((post) => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory ? post.categories.includes(selectedCategory) : true;
+    const matchesCategory = selectedCategory
+      ? post.categories.includes(selectedCategory)
+      : true;
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? "dark bg-gray-950" : "bg-gray-50"}`}>
+    <div
+      className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
+    >
       <Navbar />
-      
+
       <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="container mx-auto">
           <motion.div
@@ -64,9 +69,12 @@ const BlogPage = () => {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog Dev Frontend</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Blog Dev Frontend
+            </h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Artigos sobre desenvolvimento frontend, performance, acessibilidade e experiência do usuário.
+              Artigos sobre desenvolvimento frontend, performance,
+              acessibilidade e experiência do usuário.
             </p>
           </motion.div>
         </div>
@@ -90,7 +98,7 @@ const BlogPage = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
                   <Filter className="h-4 w-4" />
-                  {selectedCategory ? selectedCategory : "Categorias"}
+                  {selectedCategory ? selectedCategory : 'Categorias'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -98,7 +106,7 @@ const BlogPage = () => {
                   Todas as categorias
                 </DropdownMenuItem>
                 {categories.map((category) => (
-                  <DropdownMenuItem 
+                  <DropdownMenuItem
                     key={category.id}
                     onClick={() => setSelectedCategory(category.name)}
                   >
@@ -118,14 +126,18 @@ const BlogPage = () => {
               ) : (
                 <span className="sr-only">Dark mode</span>
               )}
-              <i className={`text-xl ${isDarkMode ? "ri-sun-line" : "ri-moon-line"}`}></i>
+              <i
+                className={`text-xl ${isDarkMode ? 'ri-sun-line' : 'ri-moon-line'}`}
+              ></i>
             </Button>
           </div>
         </div>
 
         {/* Featured posts */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8 dark:text-white">Posts em Destaque</h2>
+          <h2 className="text-2xl font-bold mb-8 dark:text-white">
+            Posts em Destaque
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredPosts.map((post) => (
               <motion.article
@@ -150,7 +162,9 @@ const BlogPage = () => {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-xl font-bold mb-2 dark:text-white">{post.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 dark:text-white">
+                      {post.title}
+                    </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
@@ -158,7 +172,9 @@ const BlogPage = () => {
                       <div className="flex items-center mr-4">
                         <Calendar className="w-4 h-4 mr-1" />
                         <span>
-                          {format(new Date(post.date), "dd MMM, yyyy", { locale: pt })}
+                          {format(new Date(post.date), 'dd MMM, yyyy', {
+                            locale: pt,
+                          })}
                         </span>
                       </div>
                       <div className="flex items-center">
@@ -175,7 +191,9 @@ const BlogPage = () => {
 
         {/* Regular posts */}
         <section>
-          <h2 className="text-2xl font-bold mb-8 dark:text-white">Todos os Artigos</h2>
+          <h2 className="text-2xl font-bold mb-8 dark:text-white">
+            Todos os Artigos
+          </h2>
           {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
@@ -212,7 +230,9 @@ const BlogPage = () => {
                         <div className="flex items-center mr-4">
                           <Calendar className="w-4 h-4 mr-1" />
                           <span>
-                            {format(new Date(post.date), "dd MMM, yyyy", { locale: pt })}
+                            {format(new Date(post.date), 'dd MMM, yyyy', {
+                              locale: pt,
+                            })}
                           </span>
                         </div>
                         <div className="flex items-center">
@@ -230,10 +250,10 @@ const BlogPage = () => {
               <p className="text-xl text-gray-600 dark:text-gray-400">
                 Nenhum artigo encontrado com os filtros atuais.
               </p>
-              <Button 
+              <Button
                 className="mt-4"
                 onClick={() => {
-                  setSearchTerm("");
+                  setSearchTerm('');
                   setSelectedCategory(null);
                 }}
               >
@@ -248,4 +268,4 @@ const BlogPage = () => {
   );
 };
 
-export default BlogPage; 
+export default BlogPage;

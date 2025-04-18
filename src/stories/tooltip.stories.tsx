@@ -1,18 +1,18 @@
 // [build] library: 'shadcn'
-import { Plus } from "lucide-react";
+import { Plus } from 'lucide-react';
 
-import { Button } from "../components/ui/button";
+import { Button } from '../components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
   TooltipProvider,
-} from "../components/ui/tooltip";
+} from '../components/ui/tooltip';
 
 const meta = {
-  title: "ui/Tooltip",
+  title: 'ui/Tooltip',
   component: Tooltip,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

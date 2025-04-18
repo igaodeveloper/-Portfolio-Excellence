@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { Checkbox } from "../components/ui/checkbox";
+import { Checkbox } from '../components/ui/checkbox';
 
 const meta = {
-  title: "ui/Checkbox",
+  title: 'ui/Checkbox',
   component: Checkbox,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

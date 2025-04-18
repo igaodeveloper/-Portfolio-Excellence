@@ -1,39 +1,43 @@
-import path from "path";
-import { defineConfig, splitVendorChunkPlugin } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { tempo } from "tempo-devtools/dist/vite";
-import { visualizer } from "rollup-plugin-visualizer";
+import path from 'path';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import { tempo } from 'tempo-devtools/dist/vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
-  
+
   return {
-    base: process.env.NODE_ENV === "development" ? "/" : process.env.VITE_BASE_PATH || "/",
+    base:
+      process.env.NODE_ENV === 'development'
+        ? '/'
+        : process.env.VITE_BASE_PATH || '/',
     optimizeDeps: {
-      entries: ["src/main.tsx", "src/tempobook/**/*"],
+      entries: ['src/main.tsx', 'src/tempobook/**/*'],
       esbuildOptions: {
         target: 'esnext',
         // Otimização de treeshaking durante desenvolvimento
         treeShaking: true,
-      }
+      },
     },
     plugins: [
       react(),
       tempo(),
       splitVendorChunkPlugin(),
       // Visualizador de tamanho de bundling apenas em produção
-      isProd && visualizer({
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-        filename: 'dist/stats.html'
-      })
+      isProd &&
+        visualizer({
+          open: false,
+          gzipSize: true,
+          brotliSize: true,
+          filename: 'dist/stats.html',
+        }),
     ],
     resolve: {
       preserveSymlinks: true,
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        '@': path.resolve(__dirname, './src'),
       },
     },
     server: {
@@ -41,19 +45,19 @@ export default defineConfig(({ mode }) => {
       allowedHosts: true,
       // Habilitar compressão durante desenvolvimento
       hmr: {
-        overlay: false
-      }
+        overlay: false,
+      },
     },
     // Otimizações para build de produção
     build: {
       // Ativa o tree-shaking agressivo
-      target: "esnext",
+      target: 'esnext',
       // Desativar source maps em produção para melhor performance
       sourcemap: false,
       // Configurar limites de alerta para tamanhos de chunk
       chunkSizeWarningLimit: 1000,
       // Minificação otimizada
-      minify: "terser",
+      minify: 'terser',
       terserOptions: {
         compress: {
           drop_console: true,
@@ -65,8 +69,8 @@ export default defineConfig(({ mode }) => {
           safari10: true,
         },
         format: {
-          comments: false
-        }
+          comments: false,
+        },
       },
       // Permitir imagens maiores sem inlinear
       assetsInlineLimit: 10240,
@@ -74,14 +78,8 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: [
-              'react',
-              'react-dom',
-              'react-router-dom',
-            ],
-            animations: [
-              'framer-motion'
-            ],
+            vendor: ['react', 'react-dom', 'react-router-dom'],
+            animations: ['framer-motion'],
             ui: [
               '@radix-ui/react-accordion',
               '@radix-ui/react-alert-dialog',
@@ -112,11 +110,7 @@ export default defineConfig(({ mode }) => {
               '@radix-ui/react-tooltip',
             ],
             editor: ['@monaco-editor/react'],
-            forms: [
-              'react-hook-form',
-              '@hookform/resolvers',
-              'zod'
-            ]
+            forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
           },
           // Melhora cacheabilidade dos assets
           entryFileNames: 'assets/[name].[hash].js',
@@ -129,7 +123,7 @@ export default defineConfig(({ mode }) => {
     },
     // Melhora as mensagens de erros durante o desenvolvimento
     esbuild: {
-      logOverride: { 'this-is-undefined-in-esm': 'silent' }
-    }
-  }
+      logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    },
+  };
 });

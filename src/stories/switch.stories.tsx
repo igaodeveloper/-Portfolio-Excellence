@@ -1,11 +1,11 @@
 // [build] library: 'shadcn'
-import { Label } from "../components/ui/label";
-import { Switch } from "../components/ui/switch";
+import { Label } from '../components/ui/label';
+import { Switch } from '../components/ui/switch';
 
 const meta = {
-  title: "ui/Switch",
+  title: 'ui/Switch',
   component: Switch,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

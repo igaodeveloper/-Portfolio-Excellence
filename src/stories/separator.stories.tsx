@@ -1,10 +1,10 @@
 // [build] library: 'shadcn'
-import { Separator } from "../components/ui/separator";
+import { Separator } from '../components/ui/separator';
 
 const meta = {
-  title: "ui/Separator",
+  title: 'ui/Separator',
   component: Separator,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;

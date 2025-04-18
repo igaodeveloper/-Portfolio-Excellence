@@ -19,9 +19,10 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: "5 Funcionalidades Poderosas do CSS Moderno que Você Deve Conhecer",
-    slug: "funcionalidades-css-moderno",
-    excerpt: "Conheça as mais recentes e poderosas funcionalidades do CSS que estão transformando o desenvolvimento web e simplificando a criação de layouts complexos.",
+    title: '5 Funcionalidades Poderosas do CSS Moderno que Você Deve Conhecer',
+    slug: 'funcionalidades-css-moderno',
+    excerpt:
+      'Conheça as mais recentes e poderosas funcionalidades do CSS que estão transformando o desenvolvimento web e simplificando a criação de layouts complexos.',
     content: `
 # O Futuro do CSS: Explorando as Novas Funcionalidades
 
@@ -149,22 +150,25 @@ O CSS moderno está cada vez mais poderoso, permitindo implementações que ante
 
 O futuro do CSS é promissor, e mantendo-se atualizado com estas funcionalidades, você estará preparado para criar interfaces mais eficientes, acessíveis e sofisticadas com menos código.
     `,
-    coverImage: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    date: "2023-09-15",
+    coverImage:
+      'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+    date: '2023-09-15',
     readTime: 8,
     author: {
-      name: "João Silva",
-      avatar: "https://avatars.githubusercontent.com/u/12345678?v=4",
-      bio: "Desenvolvedor Front-end apaixonado por UI/UX e novas tecnologias web."
+      name: 'João Silva',
+      avatar: 'https://avatars.githubusercontent.com/u/12345678?v=4',
+      bio: 'Desenvolvedor Front-end apaixonado por UI/UX e novas tecnologias web.',
     },
-    categories: ["CSS", "Front-end"],
-    tags: ["css", "web design", "desenvolvimento web", "frontend"]
+    categories: ['CSS', 'Front-end'],
+    tags: ['css', 'web design', 'desenvolvimento web', 'frontend'],
   },
   {
     id: 2,
-    title: "Melhores Práticas com React: Padrões para Código Limpo e Performático",
-    slug: "melhores-praticas-com-react",
-    excerpt: "Um guia completo sobre padrões, técnicas e melhores práticas para desenvolver aplicações React modernas, eficientes e fáceis de manter.",
+    title:
+      'Melhores Práticas com React: Padrões para Código Limpo e Performático',
+    slug: 'melhores-praticas-com-react',
+    excerpt:
+      'Um guia completo sobre padrões, técnicas e melhores práticas para desenvolver aplicações React modernas, eficientes e fáceis de manter.',
     content: `
 # Melhores Práticas com React: Padrões para Código Limpo e Performático
 
@@ -389,22 +393,24 @@ Seguir estas melhores práticas ajudará você a construir aplicações React ma
 
 Os princípios fundamentais permanecem os mesmos: componentes pequenos e focados, gerenciamento inteligente de estado, e reutilização de código. Aplicando-os consistentemente, você colherá os benefícios de uma base de código mais sustentável e uma melhor experiência para seus usuários.
     `,
-    coverImage: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    date: "2023-10-10",
+    coverImage:
+      'https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+    date: '2023-10-10',
     readTime: 10,
     author: {
-      name: "Ana Pereira",
-      avatar: "https://avatars.githubusercontent.com/u/23456789?v=4",
-      bio: "Engenheira de Software especializada em React e ecossistema JavaScript."
+      name: 'Ana Pereira',
+      avatar: 'https://avatars.githubusercontent.com/u/23456789?v=4',
+      bio: 'Engenheira de Software especializada em React e ecossistema JavaScript.',
     },
-    categories: ["JavaScript", "React", "Boas práticas"],
-    tags: ["react", "javascript", "frontend", "desenvolvimento", "hooks"]
+    categories: ['JavaScript', 'React', 'Boas práticas'],
+    tags: ['react', 'javascript', 'frontend', 'desenvolvimento', 'hooks'],
   },
   {
     id: 3,
-    title: "Design Responsivo com Tailwind CSS: Além do Básico",
-    slug: "design-responsivo-com-tailwind",
-    excerpt: "Aprenda técnicas avançadas de design responsivo utilizando Tailwind CSS, desde layouts fluidos até componentes adaptáveis para qualquer dispositivo.",
+    title: 'Design Responsivo com Tailwind CSS: Além do Básico',
+    slug: 'design-responsivo-com-tailwind',
+    excerpt:
+      'Aprenda técnicas avançadas de design responsivo utilizando Tailwind CSS, desde layouts fluidos até componentes adaptáveis para qualquer dispositivo.',
     content: `
 # Design Responsivo com Tailwind CSS: Além do Básico
 
@@ -613,22 +619,24 @@ O Tailwind CSS oferece uma abordagem poderosa e flexível para design responsivo
 
 Lembre-se sempre que responsividade não se trata apenas de fazer elementos se encaixarem em telas menores, mas de proporcionar a melhor experiência possível em qualquer dispositivo que seu usuário possa estar utilizando.
     `,
-    coverImage: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-    date: "2023-11-05",
+    coverImage:
+      'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
+    date: '2023-11-05',
     readTime: 7,
     author: {
-      name: "Carlos Mendes",
-      avatar: "https://avatars.githubusercontent.com/u/34567890?v=4",
-      bio: "Designer de interface e desenvolvedor front-end especializado em experiências responsivas e acessíveis."
+      name: 'Carlos Mendes',
+      avatar: 'https://avatars.githubusercontent.com/u/34567890?v=4',
+      bio: 'Designer de interface e desenvolvedor front-end especializado em experiências responsivas e acessíveis.',
     },
-    categories: ["CSS", "Tailwind", "Boas práticas"],
-    tags: ["tailwind", "css", "design responsivo", "frontend", "mobile-first"]
+    categories: ['CSS', 'Tailwind', 'Boas práticas'],
+    tags: ['tailwind', 'css', 'design responsivo', 'frontend', 'mobile-first'],
   },
   {
-    id: 4, 
-    title: "Animações Web Modernas: Performance e Acessibilidade",
-    slug: "animacoes-web-modernas",
-    excerpt: "Como criar animações web que não apenas impressionam visualmente, mas também são performáticas e acessíveis para todos os usuários.",
+    id: 4,
+    title: 'Animações Web Modernas: Performance e Acessibilidade',
+    slug: 'animacoes-web-modernas',
+    excerpt:
+      'Como criar animações web que não apenas impressionam visualmente, mas também são performáticas e acessíveis para todos os usuários.',
     content: `
 # Animações Web Modernas: Performance e Acessibilidade
 
@@ -636,22 +644,24 @@ As animações web podem transformar uma interface estática em uma experiência
 
 ## Conteúdo completo em breve...
     `,
-    coverImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    date: "2023-11-20",
+    coverImage:
+      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    date: '2023-11-20',
     readTime: 6,
     author: {
-      name: "João Silva",
-      avatar: "https://avatars.githubusercontent.com/u/12345678?v=4",
-      bio: "Desenvolvedor Front-end apaixonado por UI/UX e novas tecnologias web."
+      name: 'João Silva',
+      avatar: 'https://avatars.githubusercontent.com/u/12345678?v=4',
+      bio: 'Desenvolvedor Front-end apaixonado por UI/UX e novas tecnologias web.',
     },
-    categories: ["JavaScript", "CSS", "Performance"],
-    tags: ["animações", "css", "javascript", "performance", "acessibilidade"]
+    categories: ['JavaScript', 'CSS', 'Performance'],
+    tags: ['animações', 'css', 'javascript', 'performance', 'acessibilidade'],
   },
   {
     id: 5,
-    title: "Arquitetura Front-end Escalável para Projetos Grandes",
-    slug: "arquitetura-frontend-escalavel",
-    excerpt: "Estratégias e padrões para organizar código front-end em grandes projetos, permitindo escalabilidade e manutenção a longo prazo.",
+    title: 'Arquitetura Front-end Escalável para Projetos Grandes',
+    slug: 'arquitetura-frontend-escalavel',
+    excerpt:
+      'Estratégias e padrões para organizar código front-end em grandes projetos, permitindo escalabilidade e manutenção a longo prazo.',
     content: `
 # Arquitetura Front-end Escalável para Projetos Grandes
 
@@ -659,22 +669,29 @@ As animações web podem transformar uma interface estática em uma experiência
 
 ## Conteúdo completo em breve...
     `,
-    coverImage: "https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    date: "2023-12-05",
+    coverImage:
+      'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    date: '2023-12-05',
     readTime: 9,
     author: {
-      name: "Ana Pereira",
-      avatar: "https://avatars.githubusercontent.com/u/23456789?v=4",
-      bio: "Engenheira de Software especializada em React e ecossistema JavaScript."
+      name: 'Ana Pereira',
+      avatar: 'https://avatars.githubusercontent.com/u/23456789?v=4',
+      bio: 'Engenheira de Software especializada em React e ecossistema JavaScript.',
     },
-    categories: ["JavaScript", "Arquitetura", "Boas práticas"],
-    tags: ["arquitetura", "frontend", "escalabilidade", "organização de código"]
+    categories: ['JavaScript', 'Arquitetura', 'Boas práticas'],
+    tags: [
+      'arquitetura',
+      'frontend',
+      'escalabilidade',
+      'organização de código',
+    ],
   },
   {
     id: 6,
-    title: "Acessibilidade Web: Além das Diretrizes WCAG",
-    slug: "acessibilidade-web-alem-wcag",
-    excerpt: "Explorando práticas de acessibilidade web além das diretrizes WCAG, com foco na experiência real dos usuários com deficiências.",
+    title: 'Acessibilidade Web: Além das Diretrizes WCAG',
+    slug: 'acessibilidade-web-alem-wcag',
+    excerpt:
+      'Explorando práticas de acessibilidade web além das diretrizes WCAG, com foco na experiência real dos usuários com deficiências.',
     content: `
 # Acessibilidade Web: Além das Diretrizes WCAG
 
@@ -682,15 +699,16 @@ A acessibilidade web vai muito além de simplesmente seguir as diretrizes WCAG. 
 
 ## Conteúdo completo em breve...
     `,
-    coverImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80",
-    date: "2023-12-15",
+    coverImage:
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80',
+    date: '2023-12-15',
     readTime: 8,
     author: {
-      name: "Carlos Mendes",
-      avatar: "https://avatars.githubusercontent.com/u/34567890?v=4",
-      bio: "Designer de interface e desenvolvedor front-end especializado em experiências responsivas e acessíveis."
+      name: 'Carlos Mendes',
+      avatar: 'https://avatars.githubusercontent.com/u/34567890?v=4',
+      bio: 'Designer de interface e desenvolvedor front-end especializado em experiências responsivas e acessíveis.',
     },
-    categories: ["Acessibilidade", "Boas práticas", "UX"],
-    tags: ["acessibilidade", "inclusão", "wcag", "ux", "usabilidade"]
-  }
-]; 
+    categories: ['Acessibilidade', 'Boas práticas', 'UX'],
+    tags: ['acessibilidade', 'inclusão', 'wcag', 'ux', 'usabilidade'],
+  },
+];

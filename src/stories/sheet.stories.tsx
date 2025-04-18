@@ -6,12 +6,12 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../components/ui/sheet";
+} from '../components/ui/sheet';
 
 const meta = {
-  title: "ui/Sheet",
+  title: 'ui/Sheet',
   component: Sheet,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -34,7 +34,7 @@ export const Default = {
     );
   },
   args: {
-    side: "right",
+    side: 'right',
   },
 };
 
@@ -56,7 +56,7 @@ export const Left = {
     );
   },
   args: {
-    side: "left",
+    side: 'left',
   },
 };
 
@@ -78,7 +78,7 @@ export const Top = {
     );
   },
   args: {
-    side: "top",
+    side: 'top',
   },
 };
 
@@ -100,6 +100,6 @@ export const Bottom = {
     );
   },
   args: {
-    side: "bottom",
+    side: 'bottom',
   },
 };

@@ -1,7 +1,7 @@
 // [build] library: 'shadcn'
 
-import { BellIcon, CheckIcon } from "@radix-ui/react-icons";
-import { Button } from "../components/ui/button";
+import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
+import { Button } from '../components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,22 +9,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import { Switch } from "../components/ui/switch";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+} from '../components/ui/card';
+import { Switch } from '../components/ui/switch';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../components/ui/select";
+} from '../components/ui/select';
 
 const meta = {
-  title: "ui/Card",
+  title: 'ui/Card',
   component: Card,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -76,7 +76,7 @@ export const Base = {
 export const Notifications = {
   render: () => {
     return (
-      <Card className={"w-[380px]"}>
+      <Card className={'w-[380px]'}>
         <CardHeader>
           <CardTitle>Notifications</CardTitle>
           <CardDescription>You have 3 unread messages.</CardDescription>
@@ -140,7 +140,7 @@ export const Notifications = {
     );
   },
   args: {
-    mode: "single",
-    className: "rounded-md border",
+    mode: 'single',
+    className: 'rounded-md border',
   },
 };

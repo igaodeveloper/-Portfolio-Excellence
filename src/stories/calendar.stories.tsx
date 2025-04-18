@@ -1,12 +1,12 @@
 // [build] library: 'shadcn'
-import { Calendar } from "../components/ui/calendar";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { Calendar } from '../components/ui/calendar';
+import { CalendarIcon } from '@radix-ui/react-icons';
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../components/ui/popover";
+} from '../components/ui/popover';
 
 import {
   Select,
@@ -14,17 +14,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../components/ui/select";
+} from '../components/ui/select';
 
-import { Button } from "../components/ui/button";
-import { useState } from "react";
-import { DateRange } from "react-day-picker";
-import { addDays, format } from "date-fns";
+import { Button } from '../components/ui/button';
+import { useState } from 'react';
+import { DateRange } from 'react-day-picker';
+import { addDays, format } from 'date-fns';
 
 const meta = {
-  title: "ui/Calendar",
+  title: 'ui/Calendar',
   component: Calendar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 export default meta;
@@ -32,8 +32,8 @@ export default meta;
 export const Base = {
   render: (args: any) => <Calendar {...args}>Calendar</Calendar>,
   args: {
-    mode: "single",
-    className: "rounded-md border",
+    mode: 'single',
+    className: 'rounded-md border',
   },
 };
 
@@ -43,8 +43,8 @@ export const DatePicker = {
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            variant={"outline"}
-            className={"w-[240px] justify-start text-left font-normal"}
+            variant={'outline'}
+            className={'w-[240px] justify-start text-left font-normal'}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             <span>Pick a date</span>
@@ -57,7 +57,7 @@ export const DatePicker = {
     );
   },
   args: {
-    date: Date.parse("2023-11-3000"),
+    date: Date.parse('2023-11-3000'),
   },
 };
 
@@ -69,23 +69,23 @@ export const DatePickerRange = {
     });
 
     return (
-      <div className={"grid gap-2"}>
+      <div className={'grid gap-2'}>
         <Popover>
           <PopoverTrigger asChild>
             <Button
               id="date"
-              variant={"outline"}
-              className={"w-[300px] justify-start text-left font-normal"}
+              variant={'outline'}
+              className={'w-[300px] justify-start text-left font-normal'}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {date?.from ? (
                 date.to ? (
                   <>
-                    {format(date.from, "LLL dd, y")} -{" "}
-                    {format(date.to, "LLL dd, y")}
+                    {format(date.from, 'LLL dd, y')} -{' '}
+                    {format(date.to, 'LLL dd, y')}
                   </>
                 ) : (
-                  format(date.from, "LLL dd, y")
+                  format(date.from, 'LLL dd, y')
                 )
               ) : (
                 <span>Pick a date</span>
@@ -117,11 +117,11 @@ export const DatePickerWithPresets = {
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            variant={"outline"}
-            className={"w-[240px] justify-start text-left font-normal"}
+            variant={'outline'}
+            className={'w-[240px] justify-start text-left font-normal'}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? format(date, "LLL dd, y") : <span>Pick a date</span>}
+            {date ? format(date, 'LLL dd, y') : <span>Pick a date</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent

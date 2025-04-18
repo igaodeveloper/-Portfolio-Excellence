@@ -28,8 +28,13 @@ body:has(.custom-cursor) {
 
 /* Blinking cursor animation */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .animate-blink {
@@ -41,9 +46,9 @@ body:has(.custom-cursor) {
   body {
     cursor: auto !important;
   }
-  
+
   .cursor-outer,
   .cursor-inner {
     display: none !important;
   }
-} 
+}
