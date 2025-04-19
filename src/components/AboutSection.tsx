@@ -14,11 +14,11 @@ type TimelineItem = {
 const workItems: TimelineItem[] = [
   {
     id: 1,
-    title: 'Desenvolvedor Front-End Pleno',
+    title: 'Desenvolvedor Fullstack Pleno',
     organization: 'Appezshop',
     period: '2021 - Presente',
     description:
-      'Lidero o desenvolvimento front-end de aplicativos empresariais, mentorei desenvolvedores juniores e implementei padrões modernos de arquitetura React.',
+      'Atuo com arquitetura de sistemas, integração de APIs, desenvolvimento de funcionalidades completas usando React, Next.js, Tailwind, Node.js, Supabase e PostgreSQL. Lidero decisões técnicas e otimizações de performance.',
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const workItems: TimelineItem[] = [
     organization: 'LATAM',
     period: '2024 - 2025',
     description:
-      'Desenvolvi aplicações web responsivas usando React, TypeScript e frameworks modernos de CSS. Colaborei com designers de UX para implementar interfaces com perfeição pixel a pixel.',
+      'Implementei aplicações web interativas com React e TypeScript, aplicando conceitos avançados de design system, acessibilidade, performance e integração com back-end via REST e GraphQL.',
   },
   {
     id: 3,
@@ -34,15 +34,15 @@ const workItems: TimelineItem[] = [
     organization: 'TechSmart Solutions',
     period: '2020 - 2021',
     description:
-      'Atuei no desenvolvimento de interfaces interativas para sistemas de gestão empresarial, utilizando React, Redux e Material UI. Participei de sprints ágeis e implementei melhorias de usabilidade.',
+      'Entreguei interfaces modernas com React, Redux, Material UI e consumo de APIs REST. Participei de code reviews, sprints SCRUM e implementações com foco em usabilidade.',
   },
   {
     id: 4,
-    title: 'Freelancer Front-End',
+    title: 'Freelancer Fullstack',
     organization: 'Projetos Independentes',
     period: '2019 - 2020',
     description:
-      'Desenvolvi websites responsivos para pequenas empresas e startups utilizando HTML5, CSS3 e JavaScript. Implementei layouts modernos com foco em performance e experiência do usuário.',
+      'Criei sistemas completos desde a interface até o back-end com Express, MongoDB e React. Integrei gateways de pagamento, sistemas de autenticação JWT e dashboards administrativos.',
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const workItems: TimelineItem[] = [
     organization: 'Digital Innovation Agency',
     period: '2019 - 2019',
     description:
-      'Auxiliei na implementação de landing pages e sistemas de e-commerce usando WordPress e JavaScript. Participei de reuniões de planejamento e aprendi sobre fluxos de trabalho profissionais.',
+      'Colaborei na criação de landing pages e lojas virtuais. Trabalhei com HTML, CSS, JavaScript e WordPress, otimizando SEO e garantindo responsividade cross-browser.',
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const workItems: TimelineItem[] = [
     organization: 'ONG Educação Para Todos',
     period: '2018 - 2019',
     description:
-      'Colaborei no desenvolvimento de uma plataforma educacional acessível para comunidades carentes, utilizando Vue.js e Bootstrap. Implementei recursos de acessibilidade e otimizei a experiência mobile.',
+      'Desenvolvi interfaces acessíveis com Vue.js, Bootstrap e foco em inclusão digital. Implementei recursos adaptativos para dispositivos de baixo desempenho.',
   },
   {
     id: 7,
@@ -66,7 +66,7 @@ const workItems: TimelineItem[] = [
     organization: 'Agência CreativeDev',
     period: '2018 - 2018',
     description:
-      'Participei da manutenção de sites corporativos e da implementação de novas funcionalidades utilizando jQuery e SASS. Realizei tarefas de otimização de código e integração com APIs de terceiros.',
+      'Mantive sites institucionais e implementei novos componentes com jQuery, PHP e MySQL. Aprimorei fluxos de navegação e fiz integrações básicas com APIs.',
   },
 ];
 
@@ -85,54 +85,58 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-8">
             <div className="space-y-6">
               <p className="text-modern-gray text-lg leading-relaxed">
-                Com mais de{' '}
+                Sou{' '}
                 <span className="text-modern-accent">
-                  4 anos de experiência
+                  Desenvolvedor Fullstack Pleno
                 </span>{' '}
-                em desenvolvimento front-end, dediquei minha carreira a criar
-                experiências web bonitas, funcionais e acessíveis. Minha
-                abordagem combina conhecimento técnico com uma profunda
-                compreensão das necessidades do usuário e dos princípios de
-                design.
+                com mais de{' '}
+                <span className="text-modern-accent">
+                  5 anos de experiência
+                </span>{' '}
+                construindo aplicações robustas e performáticas de ponta a
+                ponta.
               </p>
               <p className="text-modern-gray text-lg leading-relaxed">
-                Sou especializado na criação de aplicações responsivas e
-                performáticas usando frameworks modernos de JavaScript, com foco
-                especial em <span className="text-modern-accent2">React</span> e
-                seu ecossistema. Sou apaixonado por código limpo, arquitetura
-                baseada em componentes e por estar na vanguarda das tecnologias
-                web.
+                No <strong>front-end</strong>, crio interfaces modernas,
+                responsivas e acessíveis com React, Next.js e Tailwind. Utilizo
+                animações com Framer Motion, otimizações de performance e
+                arquitetura de componentes avançada.
+              </p>
+              <p className="text-modern-gray text-lg leading-relaxed">
+                No <strong>back-end</strong>, desenvolvo APIs escaláveis com
+                Node.js, Express e Supabase. Integro bancos de dados SQL/NoSQL,
+                autenticação com JWT, RBAC, filas de jobs e webhooks
+                inteligentes.
               </p>
             </div>
             <div className="space-y-6">
               <p className="text-modern-gray text-lg leading-relaxed">
-                Quando não estou programando, você pode me encontrar explorando
-                novas tendências de design, contribuindo para projetos de código
-                aberto ou compartilhando conhecimento através de escrita técnica
-                e mentoria.
+                Domínio total de ciclo completo de desenvolvimento: análise de
+                requisitos, UI/UX, integração de sistemas, CI/CD, testes
+                automatizados, deploy em cloud e monitoramento. Coloco soluções
+                em produção com qualidade e velocidade. E ainda mentorando quem
+                vem atrás.
               </p>
               <div className="flex flex-wrap gap-3 mt-4">
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  React
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  TypeScript
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  Next.js
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  Tailwind CSS
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  UI/UX Design
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  Figma
-                </Badge>
-                <Badge className="bg-modern-accent/20 hover:bg-modern-accent/30 text-modern-accent border-none px-4 py-2 text-sm">
-                  Node.js
-                </Badge>
+                {/* Front-end */}
+                <Badge className="badge-tech">React</Badge>
+                <Badge className="badge-tech">Next.js</Badge>
+                <Badge className="badge-tech">TypeScript</Badge>
+                <Badge className="badge-tech">Tailwind CSS</Badge>
+                <Badge className="badge-tech">Framer Motion</Badge>
+                <Badge className="badge-tech">Zustand</Badge>
+                <Badge className="badge-tech">React Query</Badge>
+                {/* Back-end */}
+                <Badge className="badge-tech">Node.js</Badge>
+                <Badge className="badge-tech">Express</Badge>
+                <Badge className="badge-tech">Supabase</Badge>
+                <Badge className="badge-tech">PostgreSQL</Badge>
+                <Badge className="badge-tech">MongoDB</Badge>
+                <Badge className="badge-tech">JWT</Badge>
+                <Badge className="badge-tech">REST & GraphQL</Badge>
+                <Badge className="badge-tech">Prisma</Badge>
+                <Badge className="badge-tech">CI/CD</Badge>
+                <Badge className="badge-tech">Vercel</Badge>
               </div>
             </div>
           </div>

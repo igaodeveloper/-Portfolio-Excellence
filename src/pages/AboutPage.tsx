@@ -87,9 +87,10 @@ const AboutPage = () => {
                 Sobre o Autor
               </h1>
               <p className="text-xl opacity-90 leading-relaxed">
-                Desenvolvedor front-end apaixonado por criar interfaces
-                intuitivas, acessíveis e de alta performance que proporcionam
-                experiências excepcionais aos usuários.
+                Desenvolvedor fullstack pleno com 5 anos de experiência,
+                especializado em construir aplicações web modernas,
+                performáticas e acessíveis de ponta a ponta — do front elegante
+                ao back robusto.
               </p>
             </div>
           </motion.div>
@@ -106,16 +107,17 @@ const AboutPage = () => {
                 </h2>
                 <div className="prose prose-lg dark:prose-invert">
                   <p>
-                    Olá! Sou um desenvolvedor front-end brasileiro com mais de 5
-                    anos de experiência, especializado em criar interfaces
-                    modernas e responsivas utilizando as melhores tecnologias do
-                    mercado.
+                    Olá! Sou um desenvolvedor fullstack brasileiro com 5 anos de
+                    experiência profissional, atuando tanto no front-end quanto
+                    no back-end. Domino as tecnologias mais modernas do
+                    ecossistema web para entregar soluções completas, escaláveis
+                    e com alto padrão de qualidade.
                   </p>
                   <p>
                     Minha jornada no desenvolvimento web começou por acaso,
                     quando precisei criar um site para um projeto pessoal. Desde
                     então, me apaixonei pela combinação perfeita de lógica e
-                    criatividade que o desenvolvimento front-end oferece.
+                    criatividade que o desenvolvimento oferece.
                   </p>
                   <p>
                     Sou obcecado por detalhes, performance e acessibilidade.
@@ -203,11 +205,9 @@ const AboutPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Github className="mr-2 h-4 w-4" />
-                        GitHub
+                        <Github className="mr-2 h-4 w-4" /> GitHub
                       </a>
                     </Button>
-
                     <Button
                       variant="outline"
                       className="w-full justify-start"
@@ -218,11 +218,9 @@ const AboutPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Linkedin className="mr-2 h-4 w-4" />
-                        LinkedIn
+                        <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
                       </a>
                     </Button>
-
                     <Button
                       variant="outline"
                       className="w-full justify-start"
@@ -233,22 +231,18 @@ const AboutPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Twitter className="mr-2 h-4 w-4" />
-                        Twitter
+                        <Twitter className="mr-2 h-4 w-4" /> Twitter
                       </a>
                     </Button>
-
                     <Button
                       variant="outline"
                       className="w-full justify-start"
                       asChild
                     >
                       <a href="mailto:contato@example.com">
-                        <Mail className="mr-2 h-4 w-4" />
-                        contato@example.com
+                        <Mail className="mr-2 h-4 w-4" /> contato@example.com
                       </a>
                     </Button>
-
                     <Button
                       variant="outline"
                       className="w-full justify-start"
@@ -259,8 +253,7 @@ const AboutPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Globe className="mr-2 h-4 w-4" />
-                        example.com
+                        <Globe className="mr-2 h-4 w-4" /> example.com
                       </a>
                     </Button>
                   </div>
@@ -270,7 +263,6 @@ const AboutPage = () => {
                   <h3 className="text-lg font-bold mb-4 dark:text-white">
                     Categorias
                   </h3>
-
                   <div className="flex flex-wrap gap-2">
                     <Button
                       variant="outline"
@@ -325,8 +317,7 @@ const AboutPage = () => {
                   </p>
                   <Button variant="secondary" className="w-full" asChild>
                     <Link to="/newsletter">
-                      <Mail className="mr-2 h-4 w-4" />
-                      Inscrever-se
+                      <Mail className="mr-2 h-4 w-4" /> Inscrever-se
                     </Link>
                   </Button>
                 </div>
@@ -337,8 +328,7 @@ const AboutPage = () => {
                   </h3>
                   <Button className="w-full" asChild>
                     <a href="#" download>
-                      <FileText className="mr-2 h-4 w-4" />
-                      Baixar Currículo
+                      <FileText className="mr-2 h-4 w-4" /> Baixar Currículo
                     </a>
                   </Button>
                 </div>
