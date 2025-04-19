@@ -1,3 +1,5 @@
+'use client';
+
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +10,7 @@ import {
 import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { PulsatingIcon } from '@/components/ui/floating-icon';
 import { useParallax } from '@/lib/useParallax';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const socialLinks = [
   {
@@ -35,31 +37,50 @@ const HeroSection = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Efeitos de paralaxe para diferentes elementos
   const textY = useTransform(scrollY, [0, 500], [0, -150]);
   const imageY = useTransform(scrollY, [0, 500], [0, 50]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
-  // Efeito de paralaxe para ícones sociais
   const { parallaxProps: socialParallax } = useParallax({
     speed: 0.2,
     direction: 'left',
   });
 
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -30;
+    setRotate({ x, y });
+  };
+
   return (
     <section
       ref={sectionRef}
       id="home"
-      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-6 py-20 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-4 sm:px-6 md:px-12 py-16 md:py-20 relative overflow-hidden perspective-[1200px]"
     >
-      {/* Fundo com efeito de paralaxe */}
+      {/* Fundo com camadas 3D animadas */}
       <motion.div
         className="absolute inset-0 opacity-10"
         style={{ y: useTransform(scrollY, [0, 500], [0, 150]) }}
       >
-        <div className="absolute top-0 left-0 w-32 h-32 bg-modern-accent rounded-full blur-3xl" />
-        <div className="absolute top-20 right-20 w-40 h-40 bg-modern-accent2 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-1/3 w-52 h-52 bg-modern-accent rounded-full blur-3xl" />
+        <motion.div
+          className="absolute top-0 left-0 w-32 h-32 bg-modern-accent rounded-full blur-3xl"
+          animate={{ rotateZ: [0, 360] }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute top-20 right-20 w-40 h-40 bg-modern-accent2 rounded-full blur-3xl"
+          animate={{ rotateZ: [360, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-1/3 w-52 h-52 bg-modern-accent rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
       </motion.div>
 
       <motion.div
@@ -67,46 +88,61 @@ const HeroSection = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10"
+        className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 gap-y-20 sm:gap-y-24 items-center relative z-10"
         style={{ y: textY, opacity }}
       >
+        {/* Texto com rotação 3D interativa */}
         <motion.div
           variants={fadeIn('right', 0.2)}
           className="flex flex-col space-y-8"
+          initial={{ opacity: 0, rotateX: -30, z: -200 }}
+          whileInView={{ opacity: 1, rotateX: 0, z: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         >
-          <motion.div className="overflow-hidden">
-            <AnimatedCharacters
-              text="Bem-vindo ao meu portfólio"
-              className="text-xl md:text-2xl font-medium text-modern-accent"
-              delayOffset={0.4}
-            />
-          </motion.div>
-
-          <div className="space-y-2">
+          <motion.div
+            className="relative z-10"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => setRotate({ x: 0, y: 0 })}
+            style={{
+              transform: `rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)`,
+              transformStyle: 'preserve-3d',
+              transition: 'transform 0.2s ease-out',
+            }}
+          >
             <motion.div className="overflow-hidden">
               <AnimatedCharacters
-                text="Desenvolvedor"
-                className="text-4xl md:text-6xl lg:text-7xl font-bold text-modern-white tracking-tight"
-                delayOffset={0.5}
+                text="Bem-vindo ao meu portfólio"
+                className="text-xl sm:text-2xl md:text-3xl font-medium text-modern-accent"
+                delayOffset={0.4}
               />
             </motion.div>
 
+            <div className="space-y-2">
+              <motion.div className="overflow-hidden">
+                <AnimatedCharacters
+                  text="Desenvolvedor"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-modern-white tracking-tight"
+                  delayOffset={0.5}
+                />
+              </motion.div>
+
+              <motion.div className="overflow-hidden">
+                <AnimatedCharacters
+                  text="Full-Stack & UI Designer"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+                  charClassName="text-modern-accent"
+                  delayOffset={0.6}
+                />
+              </motion.div>
+            </div>
+
             <motion.div className="overflow-hidden">
-              <AnimatedCharacters
-                text="Full-Stack & UI Designer"
-                className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
-                charClassName="text-modern-accent"
-                delayOffset={0.6}
+              <AnimatedWords
+                text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo."
+                className="text-base sm:text-lg md:text-xl text-modern-gray max-w-xl"
+                delayOffset={0.7}
               />
             </motion.div>
-          </div>
-
-          <motion.div className="overflow-hidden">
-            <AnimatedWords
-              text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo."
-              className="text-lg md:text-xl text-modern-gray max-w-xl"
-              delayOffset={0.7}
-            />
           </motion.div>
 
           <motion.div
@@ -166,9 +202,10 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
+        {/* Imagem com efeito 3D flutuante */}
         <motion.div
           variants={fadeIn('left', 0.5)}
-          className="relative aspect-square max-w-md mx-auto lg:ml-auto hidden lg:block"
+          className="relative aspect-[1/1] w-64 sm:w-72 md:w-80 lg:w-96 mx-auto lg:ml-auto"
           style={{ y: imageY }}
         >
           <motion.div
@@ -197,8 +234,14 @@ const HeroSection = () => {
 
           <motion.div
             className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-modern-light/10 shadow-xl"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+            whileHover={{
+              scale: 1.05,
+              rotateX: 8,
+              rotateY: -8,
+              z: 50,
+              boxShadow: '0 20px 50px rgba(0, 210, 223, 0.35)',
+            }}
+            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
           >
             <img
               src="/perfil.jpg"

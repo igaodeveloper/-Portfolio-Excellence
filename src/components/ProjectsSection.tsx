@@ -486,8 +486,8 @@ const ProjectsSection = () => {
               className="rounded-lg bg-modern-dark hover:bg-modern-accent/10 text-modern-white hover:text-modern-accent border border-modern-accent/20 group transition-all duration-300 px-6 py-2.5"
               asChild
             >
-              <a 
-                href="https://github.com/igaodeveloper?tab=repositories" 
+              <a
+                href="https://github.com/igaodeveloper?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
               >

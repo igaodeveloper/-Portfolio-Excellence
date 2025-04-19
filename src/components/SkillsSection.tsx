@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedTitle } from '@/components/ui/animated-text';
@@ -33,7 +33,7 @@ import {
   SiDotnet,
   SiSlack,
   SiBitbucket,
-} from 'react-icons/si'; 
+} from 'react-icons/si';
 
 type Skill = {
   name: string;
@@ -213,7 +213,7 @@ const skills: Skill[] = [
     category: 'Ferramentas',
   },
   {
-    icon: <SiSharp className="w-8 h-8" />,  // Usando o SiSharp aqui
+    icon: <SiSharp className="w-8 h-8" />, // Usando o SiSharp aqui
     name: 'C#',
     color: 'text-[#68217A]',
     level: 3,

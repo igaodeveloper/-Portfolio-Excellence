@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 import { Calendar, GraduationCap, Award } from 'lucide-react';
 
 type EducationItem = {

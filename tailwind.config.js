@@ -7,7 +7,6 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  prefix: '',
   theme: {
     container: {
       center: true,
@@ -18,6 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Definições de cores principais
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -82,10 +82,21 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        // Adicionando animações mais complexas
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        'scale-up': {
+          '0%': { transform: 'scale(0.95)' },
+          '100%': { transform: 'scale(1)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'scale-up': 'scale-up 0.3s ease-out',
       },
       typography: {
         modern: {
@@ -117,81 +128,70 @@ module.exports = {
               marginTop: '3em',
               marginBottom: '3em',
             },
-            'h1, h2, h3, h4': {
-              color: 'hsl(var(--foreground))',
-              fontWeight: '700',
-            },
             h1: {
               fontSize: '2.25em',
               marginTop: '0',
               marginBottom: '0.8em',
               lineHeight: '1.1111111',
+              fontWeight: '800',
             },
             h2: {
               fontSize: '1.875em',
               marginTop: '2em',
               marginBottom: '1em',
               lineHeight: '1.3333333',
+              fontWeight: '700',
             },
             h3: {
               fontSize: '1.5em',
               marginTop: '1.6em',
               marginBottom: '0.6em',
               lineHeight: '1.6',
-            },
-            h4: {
-              marginTop: '1.5em',
-              marginBottom: '0.5em',
-              lineHeight: '1.5',
+              fontWeight: '600',
             },
             pre: {
               backgroundColor: 'hsl(var(--muted))',
               color: 'hsl(var(--foreground))',
               borderRadius: 'calc(var(--radius) - 2px)',
+              padding: '1em',
             },
             code: {
               color: 'hsl(var(--foreground))',
               backgroundColor: 'hsl(var(--muted))',
-              padding: '0.2em 0.4em',
+              padding: '0.3em 0.5em',
               borderRadius: 'calc(var(--radius) - 4px)',
-              fontWeight: '500',
-            },
-            'code::before': {
-              content: '""',
-            },
-            'code::after': {
-              content: '""',
+              fontWeight: '600',
             },
             a: {
               color: 'hsl(var(--primary))',
               textDecoration: 'underline',
               fontWeight: '500',
+              transition: 'color 0.3s ease',
             },
             'a:hover': {
               color: 'hsl(var(--primary))',
               textDecoration: 'none',
             },
-            strong: {
-              color: 'hsl(var(--foreground))',
-              fontWeight: '600',
-            },
             img: {
               borderRadius: 'calc(var(--radius) - 2px)',
+              transition: 'transform 0.3s ease-in-out',
             },
             blockquote: {
               color: 'hsl(var(--muted-foreground))',
               borderLeftColor: 'hsl(var(--border))',
-            },
-            'ul > li::marker': {
-              color: 'hsl(var(--muted-foreground))',
-            },
-            'ol > li::marker': {
-              color: 'hsl(var(--muted-foreground))',
+              borderLeftWidth: '4px',
+              paddingLeft: '1em',
             },
           },
         },
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    // Plugin para suportar customizações de animações
+    require('@tailwindcss/forms'),
+    require('tailwindcss-gradient'),
+  ],
 };
