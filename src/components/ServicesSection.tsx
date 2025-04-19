@@ -6,6 +6,14 @@ import {
   Lightbulb,
   LineChart,
   Users,
+  Server,
+  Smartphone,
+  ClipboardCheck,
+  GitBranch,
+  Cloud,
+  Package,
+  Repeat,
+  AppWindow,
 } from 'lucide-react';
 import { AnimatedTitle } from '@/components/ui/animated-text';
 import { fadeIn, staggerContainer } from '@/lib/animations';
@@ -46,6 +54,61 @@ const services: Service[] = [
     title: 'Mentoria',
     description:
       'Orientação para desenvolvedores em início de carreira com foco em desenvolvimento front-end.',
+  },
+  // Novos serviços de Front-end e Back-end
+  {
+    icon: <GitBranch className="w-10 h-10" />,
+    title: 'Desenvolvimento de APIs',
+    description:
+      'Criação de APIs RESTful e GraphQL para integrar sistemas e garantir comunicação eficiente entre front-end e back-end.',
+  },
+  {
+    icon: <Server className="w-10 h-10" />,
+    title: 'Desenvolvimento Back-end',
+    description:
+      'Desenvolvimento de soluções escaláveis e seguras, utilizando tecnologias de servidor e banco de dados.',
+  },
+  {
+    icon: <Cloud className="w-10 h-10" />,
+    title: 'Integração de Sistemas',
+    description:
+      'Integração de diferentes plataformas e sistemas para automatizar processos e melhorar a eficiência organizacional.',
+  },
+  {
+    icon: <Package className="w-10 h-10" />,
+    title: 'Microserviços',
+    description:
+      'Arquitetura de microserviços para sistemas mais ágeis, escaláveis e de fácil manutenção.',
+  },
+  {
+    icon: <AppWindow className="w-10 h-10" />,
+    title: 'Desenvolvimento Full-Stack',
+    description:
+      'Desenvolvimento completo de aplicações, tanto front-end quanto back-end, utilizando tecnologias modernas e eficientes.',
+  },
+  {
+    icon: <Repeat className="w-10 h-10" />,
+    title: 'Automação de Processos',
+    description:
+      'Automação de tarefas repetitivas e otimização de fluxos de trabalho utilizando ferramentas e scripts especializados.',
+  },
+  {
+    icon: <Smartphone className="w-10 h-10" />,
+    title: 'Desenvolvimento Mobile',
+    description:
+      'Criação de aplicativos móveis nativos e híbridos, com foco na experiência do usuário e performance.',
+  },
+  {
+    icon: <ClipboardCheck className="w-10 h-10" />,
+    title: 'Gerenciamento de Projetos',
+    description:
+      'Planejamento, organização e execução de projetos, garantindo entregas dentro do prazo e com qualidade.',
+  },
+  {
+    icon: <AppWindow className="w-10 h-10" />,
+    title: 'Desenvolvimento de PWA',
+    description:
+      'Desenvolvimento de Progressive Web Apps (PWA) que oferecem experiência de aplicativo nativo diretamente no navegador.',
   },
 ];
 

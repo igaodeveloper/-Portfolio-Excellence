@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; 
 import { Calendar, GraduationCap, Award } from 'lucide-react';
 
 type EducationItem = {
@@ -13,7 +13,7 @@ type EducationItem = {
 const educationItems: EducationItem[] = [
   {
     id: 1,
-    title: 'Bacharelado em Ciência da Computação',
+    title: 'Bacharelado em Engenharia de Software',
     organization: 'Universidade Anhembi Morumbi',
     period: '2023-2027',
     description:
@@ -31,6 +31,15 @@ const educationItems: EducationItem[] = [
   },
   {
     id: 3,
+    title: 'Prêmio de Destaque em Front-End',
+    organization: 'Conferência Nacional de Desenvolvimento Web',
+    period: '2021',
+    description:
+      'Premiado pelo destaque em projetos front-end e pela implementação de boas práticas de design e performance.',
+    type: 'award',
+  },
+  {
+    id: 4,
     title: 'Curso de Especialização em React',
     organization: 'Digital Innovation One',
     period: '2022',
@@ -39,7 +48,7 @@ const educationItems: EducationItem[] = [
     type: 'education',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Bootcamp Desenvolvimento Full Stack',
     organization: 'Rocketseat',
     period: '2021-2022',
@@ -48,7 +57,16 @@ const educationItems: EducationItem[] = [
     type: 'education',
   },
   {
-    id: 5,
+    id: 6,
+    title: 'Premiação de Melhor Aplicação Web Local',
+    organization: 'Prêmio Web Developers Brasil',
+    period: '2022',
+    description:
+      'Vencedor do prêmio de melhor aplicação web local, destacando-se pela integração de tecnologias modernas e excelente usabilidade.',
+    type: 'award',
+  },
+  {
+    id: 7,
     title: 'Certificação AWS Cloud Practitioner',
     organization: 'Amazon Web Services',
     period: '2023',
@@ -57,7 +75,16 @@ const educationItems: EducationItem[] = [
     type: 'education',
   },
   {
-    id: 6,
+    id: 8,
+    title: 'Prêmio de Melhoria de Performance Web',
+    organization: 'Tech Conference Brasil',
+    period: '2021',
+    description:
+      'Premiado pela otimização e melhoria significativa na performance de aplicações web, com foco em velocidade e responsividade.',
+    type: 'award',
+  },
+  {
+    id: 9,
     title: 'Curso de UX/UI Design',
     organization: 'Origamid',
     period: '2022',
@@ -66,7 +93,7 @@ const educationItems: EducationItem[] = [
     type: 'education',
   },
   {
-    id: 7,
+    id: 10,
     title: 'Formação em Inteligência Artificial',
     organization: 'Alura',
     period: '2023',

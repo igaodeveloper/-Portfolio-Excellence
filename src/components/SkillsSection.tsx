@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { AnimatedTitle } from '@/components/ui/animated-text';
@@ -26,7 +26,14 @@ import {
   SiExpo,
   SiWordpress,
   SiUnity,
-} from 'react-icons/si';
+  SiGithub,
+  SiPhp,
+  SiJira,
+  SiSharp, // Alterado de SiCsharp para SiSharp
+  SiDotnet,
+  SiSlack,
+  SiBitbucket,
+} from 'react-icons/si'; 
 
 type Skill = {
   name: string;
@@ -185,18 +192,53 @@ const skills: Skill[] = [
     category: 'Ferramentas',
   },
   {
-    icon: <SiFigma className="w-8 h-8" />,
-    name: 'Figma',
-    color: 'text-[#F24E1E]',
-    level: 4,
-    category: 'Design',
+    icon: <SiGithub className="w-8 h-8" />,
+    name: 'GitHub',
+    color: 'text-[#181717]',
+    level: 5,
+    category: 'Ferramentas',
   },
   {
-    icon: <SiAdobephotoshop className="w-8 h-8" />,
-    name: 'Photoshop',
-    color: 'text-[#31A8FF]',
+    icon: <SiPhp className="w-8 h-8" />,
+    name: 'PHP',
+    color: 'text-[#777BB3]',
     level: 3,
-    category: 'Design',
+    category: 'Backend',
+  },
+  {
+    icon: <SiJira className="w-8 h-8" />,
+    name: 'Jira',
+    color: 'text-[#0052CC]',
+    level: 4,
+    category: 'Ferramentas',
+  },
+  {
+    icon: <SiSharp className="w-8 h-8" />,  // Usando o SiSharp aqui
+    name: 'C#',
+    color: 'text-[#68217A]',
+    level: 3,
+    category: 'Backend',
+  },
+  {
+    icon: <SiDotnet className="w-8 h-8" />,
+    name: '.NET',
+    color: 'text-[#512BD4]',
+    level: 3,
+    category: 'Backend',
+  },
+  {
+    icon: <SiSlack className="w-8 h-8" />,
+    name: 'Slack',
+    color: 'text-[#4A154B]',
+    level: 5,
+    category: 'Ferramentas',
+  },
+  {
+    icon: <SiBitbucket className="w-8 h-8" />,
+    name: 'Bitbucket',
+    color: 'text-[#0052CC]',
+    level: 4,
+    category: 'Ferramentas',
   },
 ];
 

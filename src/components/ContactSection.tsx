@@ -12,8 +12,8 @@ const contacts = [
   {
     icon: <Mail className="w-6 h-6 text-[#00D2DF]" />,
     title: 'Email',
-    value: 'contato@exemplo.com',
-    link: 'mailto:contato@exemplo.com',
+    value: 'igorhawking@gmail.com',
+    link: 'mailto:igorhawking@gmail.com',
   },
   {
     icon: <MapPin className="w-6 h-6 text-[#00D2DF]" />,

@@ -93,7 +93,7 @@ const HeroSection = () => {
 
             <motion.div className="overflow-hidden">
               <AnimatedCharacters
-                text="Front-end & UI Designer"
+                text="Full-Stack & UI Designer"
                 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
                 charClassName="text-modern-accent"
                 delayOffset={0.6}
@@ -103,7 +103,7 @@ const HeroSection = () => {
 
           <motion.div className="overflow-hidden">
             <AnimatedWords
-              text="Criando experiências digitais modernas e acessíveis com foco em usabilidade e performance."
+              text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo."
               className="text-lg md:text-xl text-modern-gray max-w-xl"
               delayOffset={0.7}
             />

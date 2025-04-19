@@ -484,21 +484,28 @@ const ProjectsSection = () => {
             <Button
               size="lg"
               className="rounded-lg bg-modern-dark hover:bg-modern-accent/10 text-modern-white hover:text-modern-accent border border-modern-accent/20 group transition-all duration-300 px-6 py-2.5"
+              asChild
             >
-              Ver mais projetos
-              <motion.span
-                initial={{ x: 0, opacity: 0.5 }}
-                animate={{ x: [0, 5, 0], opacity: 1 }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                  duration: 2,
-                  ease: 'easeInOut',
-                }}
-                className="inline-block ml-2"
+              <a 
+                href="https://github.com/igaodeveloper?tab=repositories" 
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <ArrowRight size={16} />
-              </motion.span>
+                Ver mais projetos
+                <motion.span
+                  initial={{ x: 0, opacity: 0.5 }}
+                  animate={{ x: [0, 5, 0], opacity: 1 }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatType: 'loop',
+                    duration: 2,
+                    ease: 'easeInOut',
+                  }}
+                  className="inline-block ml-2"
+                >
+                  <ArrowRight size={16} />
+                </motion.span>
+              </a>
             </Button>
           </motion.div>
         )}
