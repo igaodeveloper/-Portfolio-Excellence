@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   BookOpen,
+  FileText,
 } from 'lucide-react';
 import { useAccessibility } from '../contexts/AccessibilityContext';
 
@@ -31,6 +32,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Open CV in a new tab
+  const openCV = () => {
+    window.open('/curriculum.pdf', '_blank');
+  };
 
   // Navigation items with icons
   const navItems = [
@@ -99,6 +105,17 @@ const Navbar = () => {
               </button>
             ),
           )}
+
+          {/* CV Button */}
+          <motion.button
+            onClick={openCV}
+            className="px-3 py-2 rounded-full text-white/80 hover:text-white flex items-center gap-1.5 text-sm font-medium transition-colors hover:bg-white/10"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FileText className="w-4 h-4" />
+            <span>Currículo</span>
+          </motion.button>
 
           {/* Animated Programming Button */}
           <motion.button
@@ -169,6 +186,15 @@ const Navbar = () => {
                 </button>
               ),
             )}
+
+            {/* CV Button for Mobile */}
+            <button
+              onClick={openCV}
+              className="px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10"
+            >
+              <FileText className="w-4 h-4" />
+              <span>Currículo</span>
+            </button>
           </div>
         </motion.div>
       )}
