@@ -45,6 +45,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AnimationDemo = lazy(() => import('./pages/AnimationDemo'));
+const VideoPage = lazy(() => import('./pages/VideoPage'));
 
 // Import our custom ProtectedRoute instead of the simplified version
 const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'));
@@ -114,6 +115,9 @@ function AppRoutes() {
           />
           {/* Animation Demo Page */}
           <Route path="/animation-demo" element={<AnimationDemo />} />
+
+          {/* Video Player Page */}
+          <Route path="/video-player" element={<VideoPage />} />
 
           {/* Blog Routes */}
           <Route path="/blog" element={<BlogPage />} />

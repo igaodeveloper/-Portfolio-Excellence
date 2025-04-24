@@ -11,6 +11,7 @@ import {
   X,
   BookOpen,
   FileText,
+  Play,
 } from 'lucide-react';
 import { useAccessibility } from '../contexts/AccessibilityContext';
 
@@ -55,6 +56,13 @@ const Navbar = () => {
       href: '/blog',
       isExternalLink: true,
     },
+    {
+      name: 'Videos',
+      icon: <Play className="w-4 h-4" />,
+      href: '/video-player',
+      isExternalLink: true,
+      highlighted: true,
+    },
   ];
 
   // Smooth scroll to section
@@ -89,7 +97,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="px-3 py-2 rounded-full text-white/80 hover:text-white flex items-center gap-1.5 text-sm font-medium transition-colors hover:bg-white/10"
+                className={`px-3 py-2 rounded-full text-white/80 hover:text-white flex items-center gap-1.5 text-sm font-medium transition-colors hover:bg-white/10 ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
               >
                 {item.icon}
                 <span>{item.name}</span>
@@ -170,7 +178,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10"
+                  className={`px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10 ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
                 >
                   {item.icon}
                   <span>{item.name}</span>
