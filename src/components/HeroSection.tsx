@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,7 +8,6 @@ import {
   AnimatedWords,
 } from '@/components/ui/animated-text';
 import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
-import { PulsatingIcon } from '@/components/ui/floating-icon';
 import { useParallax } from '@/lib/useParallax';
 import { useRef, useState } from 'react';
 
@@ -32,14 +31,6 @@ const socialLinks = [
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollY } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const textY = useTransform(scrollY, [0, 500], [0, -150]);
-  const imageY = useTransform(scrollY, [0, 500], [0, 50]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   const { parallaxProps: socialParallax } = useParallax({
     speed: 0.2,
@@ -62,10 +53,7 @@ const HeroSection = () => {
       className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-4 sm:px-6 md:px-12 py-16 md:py-20 relative overflow-hidden perspective-[1200px]"
     >
       {/* Fundo com camadas 3D animadas */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        style={{ y: useTransform(scrollY, [0, 500], [0, 150]) }}
-      >
+      <motion.div className="absolute inset-0 opacity-10">
         <motion.div
           className="absolute top-0 left-0 w-32 h-32 bg-modern-accent rounded-full blur-3xl"
           animate={{ rotateZ: [0, 360] }}
@@ -89,7 +77,6 @@ const HeroSection = () => {
         whileInView="show"
         viewport={{ once: true }}
         className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 gap-y-20 sm:gap-y-24 items-center relative z-10"
-        style={{ y: textY, opacity }}
       >
         {/* Texto com rotação 3D interativa */}
         <motion.div
@@ -206,7 +193,6 @@ const HeroSection = () => {
         <motion.div
           variants={fadeIn('left', 0.5)}
           className="relative aspect-[1/1] w-64 sm:w-72 md:w-80 lg:w-96 mx-auto lg:ml-auto"
-          style={{ y: imageY }}
         >
           <motion.div
             className="absolute inset-0 bg-gradient-to-tr from-modern-accent to-modern-accent2 rounded-full opacity-20 blur-3xl"
@@ -250,33 +236,6 @@ const HeroSection = () => {
             />
           </motion.div>
         </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        style={{ opacity: useTransform(scrollY, [0, 150], [1, 0]) }}
-      >
-        <PulsatingIcon
-          icon={
-            <motion.div className="w-8 h-12 border-2 border-modern-gray/30 rounded-full flex justify-center items-start p-1">
-              <motion.div
-                className="w-1 h-3 bg-modern-accent2 rounded-full"
-                animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              />
-            </motion.div>
-          }
-          pulseColor="rgba(0, 210, 223, 0.15)"
-          onClick={() =>
-            document
-              .getElementById('about')
-              ?.scrollIntoView({ behavior: 'smooth' })
-          }
-          className="cursor-pointer"
-        />
       </motion.div>
     </section>
   );

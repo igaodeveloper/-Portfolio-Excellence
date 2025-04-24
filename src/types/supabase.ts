@@ -39,6 +39,45 @@ export interface Database {
         };
         Relationships: [];
       };
+      comments: {
+        Row: {
+          id: number;
+          created_at: string;
+          visitor_name: string;
+          visitor_email: string | null;
+          content: string;
+          rating: number;
+          emotion: string;
+          reply: string | null;
+          replied_at: string | null;
+          is_approved: boolean;
+        };
+        Insert: {
+          id?: number;
+          created_at?: string;
+          visitor_name: string;
+          visitor_email?: string | null;
+          content: string;
+          rating: number;
+          emotion: string;
+          reply?: string | null;
+          replied_at?: string | null;
+          is_approved?: boolean;
+        };
+        Update: {
+          id?: number;
+          created_at?: string;
+          visitor_name?: string;
+          visitor_email?: string | null;
+          content?: string;
+          rating?: number;
+          emotion?: string;
+          reply?: string | null;
+          replied_at?: string | null;
+          is_approved?: boolean;
+        };
+        Relationships: [];
+      };
       projects: {
         Row: {
           id: number;

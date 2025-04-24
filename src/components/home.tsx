@@ -11,6 +11,7 @@ import WhatsAppButton from './WhatsAppButton';
 import AnimatedSection from './AnimatedSection';
 import CodeEditor from './CodeEditor';
 import Navbar from './Navbar';
+import CommentsSection from './CommentsSection';
 
 function Home() {
   return (
@@ -78,6 +79,12 @@ function Home() {
           <AnimatedSection direction="up" delay={0.2}>
             <div className="transform translate-z-[30px]">
               <SkillsSection />
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection direction="up" delay={0.2}>
+            <div className="transform translate-z-[25px]">
+              <CommentsSection />
             </div>
           </AnimatedSection>
 

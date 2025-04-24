@@ -12,9 +12,11 @@ import {
   Menu,
   X,
   User,
+  MessageSquare,
 } from 'lucide-react';
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
+import CommentsManager from './CommentsManager';
 
 // Placeholder components for dashboard sections
 const DashboardOverview = () => (
@@ -493,6 +495,13 @@ const MediaUploadSection = () => (
   </div>
 );
 
+// Componente para a seção de Comentários
+const CommentsSection = () => (
+  <div className="p-6 bg-card rounded-lg shadow-sm">
+    <CommentsManager />
+  </div>
+);
+
 // Placeholder for other sections that might be added later
 const PlaceholderSection = ({ title }: { title: string }) => (
   <div className="p-6 bg-card rounded-lg shadow-sm">
@@ -536,6 +545,11 @@ export const Dashboard = () => {
       path: '/admin/dashboard/media',
       label: 'Media Upload',
       icon: <Upload className="h-5 w-5" />,
+    },
+    {
+      path: '/admin/dashboard/comments',
+      label: 'Comments',
+      icon: <MessageSquare className="h-5 w-5" />,
     },
   ];
 
@@ -634,6 +648,7 @@ export const Dashboard = () => {
             <Route path="/content" element={<ContentEditorSection />} />
             <Route path="/projects" element={<ProjectsSection />} />
             <Route path="/media" element={<MediaUploadSection />} />
+            <Route path="/comments" element={<CommentsSection />} />
           </Routes>
         </div>
       </main>

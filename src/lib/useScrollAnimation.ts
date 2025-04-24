@@ -47,7 +47,8 @@ export const useScrollAnimation = ({
         transition: {
           duration,
           delay,
-          ease: [0.25, 0.1, 0.25, 1.0], // Curva de bezier para efeito suave
+          // Using a standard easing curve instead of cubic-bezier to avoid any issues
+          ease: 'easeOut',
         },
       },
     };

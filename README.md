@@ -155,3 +155,24 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Configuração do Supabase para o sistema de comentários
+
+Para utilizar a funcionalidade de comentários, você precisa configurar o Supabase:
+
+1. Crie uma conta no [Supabase](https://supabase.com/) e um novo projeto
+2. Execute o script SQL localizado em `supabase/comments_table.sql` no editor SQL do Supabase
+3. Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+
+```
+# Supabase
+VITE_SUPABASE_URL=https://seu-projeto.supabase.co
+VITE_SUPABASE_KEY=sua-chave-de-api-publica
+```
+
+4. Substitua `https://seu-projeto.supabase.co` pela URL do seu projeto Supabase
+5. Substitua `sua-chave-de-api-publica` pela chave anon/pública do seu projeto (não use a chave secreta/service_role)
+
+Você pode encontrar essas credenciais no painel do Supabase em "Configurações do Projeto" > "API".
+
+Caso você não configure o Supabase, o sistema ainda funcionará com dados de exemplo para fins de demonstração e desenvolvimento.
