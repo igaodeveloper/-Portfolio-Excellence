@@ -16,6 +16,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../components/ui/dropdown-menu';
+import { BlogCard } from '../components/blog/BlogCard';
+import { Skeleton } from '../components/ui/skeleton';
 
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,6 +28,13 @@ const BlogPage = () => {
     }
     return false;
   });
+
+  // Simular carregamento para exibir skeletons
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800); // 800ms de loading fake
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -135,53 +144,13 @@ const BlogPage = () => {
             Posts em Destaque
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredPosts.map((post) => (
-              <motion.article
-                key={post.id}
-                whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform relative hover:shadow-xl"
-              >
-                <Link to={`/blog/${post.slug}`} className="block">
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full h-56 object-cover"
-                  />
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {post.categories.map((category, index) => (
-                        <span
-                          key={index}
-                          className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100"
-                        >
-                          {category}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <div className="flex items-center mr-4">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        <span>
-                          {format(new Date(post.date), 'dd MMM, yyyy', {
-                            locale: pt,
-                          })}
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        <span>{post.readTime} min de leitura</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.article>
-            ))}
+            {loading
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <Skeleton key={i} className="h-80 w-full" />
+                ))
+              : featuredPosts.map((post) => (
+                  <BlogCard key={post.id} post={post} featured />
+                ))}
           </div>
         </section>
 
@@ -192,54 +161,13 @@ const BlogPage = () => {
           </h2>
           {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform hover:shadow-xl relative"
-                >
-                  <Link to={`/blog/${post.slug}`} className="block">
-                    <img
-                      src={post.coverImage}
-                      alt={post.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-6">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {post.categories.map((category, index) => (
-                          <span
-                            key={index}
-                            className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100"
-                          >
-                            {category}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                        <div className="flex items-center mr-4">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          <span>
-                            {format(new Date(post.date), 'dd MMM, yyyy', {
-                              locale: pt,
-                            })}
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{post.readTime} min de leitura</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.article>
-              ))}
+              {loading
+                ? Array.from({ length: 6 }).map((_, i) => (
+                    <Skeleton key={i} className="h-64 w-full" />
+                  ))
+                : filteredPosts.map((post) => (
+                    <BlogCard key={post.id} post={post} />
+                  ))}
             </div>
           ) : (
             <div className="text-center py-12">

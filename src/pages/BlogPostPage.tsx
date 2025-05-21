@@ -30,6 +30,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../components/ui/tooltip';
+import { useToast } from '../components/ui/use-toast';
+import { Toaster } from '../components/ui/toaster';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -46,6 +48,7 @@ const BlogPostPage = () => {
     }
     return false;
   });
+  const { toast } = useToast();
 
   useEffect(() => {
     const html = document.documentElement;
@@ -202,7 +205,10 @@ const BlogPostPage = () => {
         break;
       default:
         navigator.clipboard.writeText(url);
-        alert('Link copiado para a área de transferência!');
+        toast({
+          title: 'Link copiado!',
+          description: 'O link do artigo foi copiado para a área de transferência.',
+        });
     }
   };
 
@@ -212,8 +218,8 @@ const BlogPostPage = () => {
         className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950 text-white' : 'bg-gray-50'}`}
       >
         <Navbar />
-        <div className="container mx-auto pt-40 pb-20 px-4 flex items-center justify-center">
-          <div className="animate-pulse text-2xl">Carregando...</div>
+        <div className="container flex items-center justify-center px-4 pt-40 pb-20 mx-auto">
+          <div className="text-2xl animate-pulse">Carregando...</div>
         </div>
       </div>
     );
@@ -225,8 +231,8 @@ const BlogPostPage = () => {
         className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950 text-white' : 'bg-gray-50'}`}
       >
         <Navbar />
-        <div className="container mx-auto pt-40 pb-20 px-4 text-center">
-          <h1 className="text-3xl font-bold mb-4">Post não encontrado</h1>
+        <div className="container px-4 pt-40 pb-20 mx-auto text-center">
+          <h1 className="mb-4 text-3xl font-bold">Post não encontrado</h1>
           <p className="mb-8">
             O artigo que você está procurando não existe ou foi removido.
           </p>
@@ -239,315 +245,318 @@ const BlogPostPage = () => {
   }
 
   return (
-    <div
-      className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
-    >
-      <Navbar />
-
-      <header
-        className="pt-32 pb-20 px-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${post.coverImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
+    <>
+      <Toaster />
+      <div
+        className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
       >
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto"
-          >
-            <Link
-              to="/blog"
-              className="inline-flex items-center text-blue-300 hover:text-white mb-6 transition-colors"
+        <Navbar />
+
+        <header
+          className="px-4 pt-32 pb-20 text-white bg-gradient-to-r from-blue-600 to-indigo-700"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${post.coverImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="container mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-3xl mx-auto"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              <span>Voltar para o blog</span>
-            </Link>
+              <Link
+                to="/blog"
+                className="inline-flex items-center mb-6 text-blue-300 transition-colors hover:text-white"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                <span>Voltar para o blog</span>
+              </Link>
 
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.categories.map((category: string, index: number) => (
-                <Link
-                  key={index}
-                  to={`/blog/categoria/${category.toLowerCase()}`}
-                  className="text-xs font-medium px-3 py-1 rounded-full bg-blue-500/20 text-blue-100 hover:bg-blue-500/30 transition-colors"
-                >
-                  {category}
-                </Link>
-              ))}
-            </div>
-
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              {post.title}
-            </h1>
-
-            <div className="flex items-center text-sm text-blue-100 mb-4">
-              <div className="flex items-center mr-6">
-                <Calendar className="w-4 h-4 mr-1" />
-                <span>
-                  {format(new Date(post.date), "dd 'de' MMMM 'de' yyyy", {
-                    locale: pt,
-                  })}
-                </span>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {post.categories.map((category: string, index: number) => (
+                  <Link
+                    key={index}
+                    to={`/blog/categoria/${category.toLowerCase()}`}
+                    className="px-3 py-1 text-xs font-medium text-blue-100 transition-colors rounded-full bg-blue-500/20 hover:bg-blue-500/30"
+                  >
+                    {category}
+                  </Link>
+                ))}
               </div>
-              <div className="flex items-center">
-                <Clock className="w-4 h-4 mr-1" />
-                <span>{post.readTime} min de leitura</span>
+
+              <h1 className="mb-6 text-4xl font-bold md:text-5xl">
+                {post.title}
+              </h1>
+
+              <div className="flex items-center mb-4 text-sm text-blue-100">
+                <div className="flex items-center mr-6">
+                  <Calendar className="w-4 h-4 mr-1" />
+                  <span>
+                    {format(new Date(post.date), "dd 'de' MMMM 'de' yyyy", {
+                      locale: pt,
+                    })}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="w-4 h-4 mr-1" />
+                  <span>{post.readTime} min de leitura</span>
+                </div>
               </div>
-            </div>
 
-            <p className="text-xl opacity-90 leading-relaxed">{post.excerpt}</p>
-          </motion.div>
-        </div>
-      </header>
+              <p className="text-xl leading-relaxed opacity-90">{post.excerpt}</p>
+            </motion.div>
+          </div>
+        </header>
 
-      <main className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto">
-          {/* Table of Contents - Desktop */}
-          <aside className="hidden lg:block lg:col-span-3 relative">
-            <div className="sticky top-32">
-              <div className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
-                <h2 className="text-lg font-bold mb-4 dark:text-white">
-                  Índice
-                </h2>
-                <TableOfContents toc={tableOfContents} />
+        <main className="container px-4 py-12 mx-auto">
+          <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-12 max-w-7xl">
+            {/* Table of Contents - Desktop */}
+            <aside className="relative hidden lg:block lg:col-span-3">
+              <div className="sticky top-32">
+                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
+                  <h2 className="mb-4 text-lg font-bold dark:text-white">
+                    Índice
+                  </h2>
+                  <TableOfContents toc={tableOfContents} />
 
-                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
-                  <h3 className="text-sm font-semibold mb-4 dark:text-gray-300">
-                    Compartilhar
+                  <div className="pt-6 mt-8 border-t border-gray-200 dark:border-gray-800">
+                    <h3 className="mb-4 text-sm font-semibold dark:text-gray-300">
+                      Compartilhar
+                    </h3>
+                    <div className="flex space-x-2">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => sharePost('twitter')}
+                              className="rounded-full"
+                            >
+                              <Twitter className="w-4 h-4" />
+                              <span className="sr-only">
+                                Compartilhar no Twitter
+                              </span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Compartilhar no Twitter</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => sharePost('facebook')}
+                              className="rounded-full"
+                            >
+                              <Facebook className="w-4 h-4" />
+                              <span className="sr-only">
+                                Compartilhar no Facebook
+                              </span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Compartilhar no Facebook</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => sharePost('linkedin')}
+                              className="rounded-full"
+                            >
+                              <Linkedin className="w-4 h-4" />
+                              <span className="sr-only">
+                                Compartilhar no LinkedIn
+                              </span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Compartilhar no LinkedIn</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => sharePost('copy')}
+                              className="rounded-full"
+                            >
+                              <Share2 className="w-4 h-4" />
+                              <span className="sr-only">Copiar link</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Copiar link</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+                  </div>
+
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={toggleTheme}
+                    className="justify-start w-full mt-6"
+                  >
+                    {isDarkMode
+                      ? 'Mudar para modo claro'
+                      : 'Mudar para modo escuro'}
+                  </Button>
+                </div>
+              </div>
+            </aside>
+
+            {/* Article Content */}
+            <article className="lg:col-span-9">
+              <div className="p-8 prose prose-lg bg-white rounded-lg shadow-md dark:prose-invert max-w-none dark:bg-gray-900">
+                <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+              </div>
+
+              {/* Share buttons - Mobile */}
+              <div className="p-6 mt-8 bg-white rounded-lg shadow-md dark:bg-gray-900 lg:hidden">
+                <h3 className="mb-4 text-lg font-bold dark:text-white">
+                  Compartilhar este artigo
+                </h3>
+                <div className="flex space-x-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => sharePost('twitter')}
+                    className="flex-1"
+                  >
+                    <Twitter className="w-4 h-4 mr-2" />
+                    Twitter
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => sharePost('facebook')}
+                    className="flex-1"
+                  >
+                    <Facebook className="w-4 h-4 mr-2" />
+                    Facebook
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => sharePost('linkedin')}
+                    className="flex-1"
+                  >
+                    <Linkedin className="w-4 h-4 mr-2" />
+                    LinkedIn
+                  </Button>
+                </div>
+              </div>
+
+              {/* Author Card */}
+              <div className="flex flex-col items-center gap-6 p-6 mt-8 bg-white rounded-lg shadow-md dark:bg-gray-900 md:flex-row">
+                <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-full">
+                  <img
+                    src="https://avatars.githubusercontent.com/u/12345678?v=4"
+                    alt="Avatar do autor"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div>
+                  <h3 className="mb-2 text-xl font-bold dark:text-white">
+                    Sobre o Autor
                   </h3>
+                  <p className="mb-4 text-gray-600 dark:text-gray-400">
+                    Desenvolvedor Front-end apaixonado por UI/UX, performance e
+                    acessibilidade. Especialista em React, TypeScript e
+                    estratégias modernas de CSS.
+                  </p>
                   <div className="flex space-x-2">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => sharePost('twitter')}
-                            className="rounded-full"
-                          >
-                            <Twitter className="h-4 w-4" />
-                            <span className="sr-only">
-                              Compartilhar no Twitter
-                            </span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Compartilhar no Twitter</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => sharePost('facebook')}
-                            className="rounded-full"
-                          >
-                            <Facebook className="h-4 w-4" />
-                            <span className="sr-only">
-                              Compartilhar no Facebook
-                            </span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Compartilhar no Facebook</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => sharePost('linkedin')}
-                            className="rounded-full"
-                          >
-                            <Linkedin className="h-4 w-4" />
-                            <span className="sr-only">
-                              Compartilhar no LinkedIn
-                            </span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Compartilhar no LinkedIn</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => sharePost('copy')}
-                            className="rounded-full"
-                          >
-                            <Share2 className="h-4 w-4" />
-                            <span className="sr-only">Copiar link</span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Copiar link</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href="https://github.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        GitHub
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href="https://twitter.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Twitter className="w-4 h-4 mr-2" />
+                        Twitter
+                      </a>
+                    </Button>
                   </div>
                 </div>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleTheme}
-                  className="mt-6 w-full justify-start"
-                >
-                  {isDarkMode
-                    ? 'Mudar para modo claro'
-                    : 'Mudar para modo escuro'}
-                </Button>
               </div>
-            </div>
-          </aside>
 
-          {/* Article Content */}
-          <article className="lg:col-span-9">
-            <div className="prose prose-lg dark:prose-invert max-w-none bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md">
-              <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            </div>
-
-            {/* Share buttons - Mobile */}
-            <div className="mt-8 p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md lg:hidden">
-              <h3 className="text-lg font-bold mb-4 dark:text-white">
-                Compartilhar este artigo
-              </h3>
-              <div className="flex space-x-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => sharePost('twitter')}
-                  className="flex-1"
-                >
-                  <Twitter className="h-4 w-4 mr-2" />
-                  Twitter
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => sharePost('facebook')}
-                  className="flex-1"
-                >
-                  <Facebook className="h-4 w-4 mr-2" />
-                  Facebook
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => sharePost('linkedin')}
-                  className="flex-1"
-                >
-                  <Linkedin className="h-4 w-4 mr-2" />
-                  LinkedIn
-                </Button>
-              </div>
-            </div>
-
-            {/* Author Card */}
-            <div className="mt-8 p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
-                <img
-                  src="https://avatars.githubusercontent.com/u/12345678?v=4"
-                  alt="Avatar do autor"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2 dark:text-white">
-                  Sobre o Autor
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Desenvolvedor Front-end apaixonado por UI/UX, performance e
-                  acessibilidade. Especialista em React, TypeScript e
-                  estratégias modernas de CSS.
-                </p>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" asChild>
-                    <a
-                      href="https://github.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="h-4 w-4 mr-2" />
-                      GitHub
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a
-                      href="https://twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Twitter className="h-4 w-4 mr-2" />
-                      Twitter
-                    </a>
-                  </Button>
+              {/* Related Posts */}
+              <div className="mt-12">
+                <h2 className="mb-6 text-2xl font-bold dark:text-white">
+                  Artigos Relacionados
+                </h2>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {blogPosts
+                    .filter(
+                      (p) =>
+                        p.id !== post.id &&
+                        p.categories.some((c) => post.categories.includes(c)),
+                    )
+                    .slice(0, 2)
+                    .map((relatedPost) => (
+                      <Link
+                        key={relatedPost.id}
+                        to={`/blog/${relatedPost.slug}`}
+                        className="block group"
+                      >
+                        <div className="overflow-hidden transition-transform rounded-lg shadow-md bg-dark dark:bg-gray-900 group-hover:shadow-lg">
+                          <div className="relative h-48 overflow-hidden">
+                            <img
+                              src={relatedPost.coverImage}
+                              alt={relatedPost.title}
+                              className="object-cover w-full h-full transition-transform group-hover:scale-105"
+                            />
+                          </div>
+                          <div className="p-6">
+                            <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                              {relatedPost.title}
+                            </h3>
+                            <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {relatedPost.excerpt}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                 </div>
               </div>
-            </div>
+            </article>
+          </div>
+        </main>
 
-            {/* Related Posts */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Artigos Relacionados
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {blogPosts
-                  .filter(
-                    (p) =>
-                      p.id !== post.id &&
-                      p.categories.some((c) => post.categories.includes(c)),
-                  )
-                  .slice(0, 2)
-                  .map((relatedPost) => (
-                    <Link
-                      key={relatedPost.id}
-                      to={`/blog/${relatedPost.slug}`}
-                      className="block group"
-                    >
-                      <div className="bg-dark dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform group-hover:shadow-lg">
-                        <div className="relative h-48 overflow-hidden">
-                          <img
-                            src={relatedPost.coverImage}
-                            alt={relatedPost.title}
-                            className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <h3 className="text-lg font-bold mb-2 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 transition-colors">
-                            {relatedPost.title}
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
-                            {relatedPost.excerpt}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-              </div>
-            </div>
-          </article>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

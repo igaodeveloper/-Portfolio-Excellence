@@ -41,25 +41,29 @@ const CategoryFilter = ({
       <div className="flex flex-wrap gap-2">
         <Badge
           variant={selectedCategory === null ? 'default' : 'outline'}
-          className="cursor-pointer"
+          className="transition-all duration-200 shadow-sm cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105"
+          tabIndex={0}
+          aria-label="Todas as categorias"
           onClick={() => onChange(null)}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(null); }}
         >
           Todos
-          {selectedCategory === null && <Check className="ml-1 h-3 w-3" />}
+          {selectedCategory === null && <Check className="w-3 h-3 ml-1" />}
         </Badge>
         {categories.map((category) => (
           <Badge
             key={category.id}
             variant={selectedCategory === category.name ? 'default' : 'outline'}
-            className="cursor-pointer"
+            className="transition-all duration-200 shadow-sm cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105"
+            tabIndex={0}
+            aria-label={`Categoria ${category.name}`}
             onClick={() => onChange(category.name)}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(category.name); }}
           >
             {category.name}
-            {showCounts &&
-              category.count !== undefined &&
-              ` (${category.count})`}
+            {showCounts && category.count !== undefined && ` (${category.count})`}
             {selectedCategory === category.name && (
-              <Check className="ml-1 h-3 w-3" />
+              <Check className="w-3 h-3 ml-1" />
             )}
           </Badge>
         ))}
@@ -73,8 +77,11 @@ const CategoryFilter = ({
         <Button
           variant={selectedCategory === null ? 'default' : 'outline'}
           size="sm"
-          className="rounded-full"
+          className="transition-all duration-200 rounded-full shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105"
+          tabIndex={0}
+          aria-label="Todas as categorias"
           onClick={() => onChange(null)}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(null); }}
         >
           Todos
         </Button>
@@ -83,13 +90,14 @@ const CategoryFilter = ({
             key={category.id}
             variant={selectedCategory === category.name ? 'default' : 'outline'}
             size="sm"
-            className="rounded-full"
+            className="transition-all duration-200 rounded-full shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105"
+            tabIndex={0}
+            aria-label={`Categoria ${category.name}`}
             onClick={() => onChange(category.name)}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(category.name); }}
           >
             {category.name}
-            {showCounts &&
-              category.count !== undefined &&
-              ` (${category.count})`}
+            {showCounts && category.count !== undefined && ` (${category.count})`}
           </Button>
         ))}
       </div>
@@ -100,11 +108,11 @@ const CategoryFilter = ({
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button variant="outline" className="flex items-center gap-2 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105">
           <span>
             {selectedCategory ? selectedCategory : 'Todas as categorias'}
           </span>
-          <ChevronDown className="h-4 w-4 opacity-50" />
+          <ChevronDown className="w-4 h-4 opacity-50" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56">
@@ -112,6 +120,8 @@ const CategoryFilter = ({
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={selectedCategory === null}
+          aria-checked={selectedCategory === null}
+          aria-label="Todas as categorias"
           onSelect={() => {
             onChange(null);
             setIsOpen(false);
@@ -123,6 +133,8 @@ const CategoryFilter = ({
           <DropdownMenuCheckboxItem
             key={category.id}
             checked={selectedCategory === category.name}
+            aria-checked={selectedCategory === category.name}
+            aria-label={`Categoria ${category.name}`}
             onSelect={() => {
               onChange(category.name);
               setIsOpen(false);
@@ -131,7 +143,7 @@ const CategoryFilter = ({
             <div className="flex justify-between w-full">
               <span>{category.name}</span>
               {showCounts && category.count !== undefined && (
-                <span className="text-gray-500 dark:text-gray-400 text-xs">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
                   {category.count}
                 </span>
               )}

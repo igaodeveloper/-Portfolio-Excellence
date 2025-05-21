@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+import styles from './TableOfContents.module.css';
 
 type TocItem = {
   id: string;
@@ -53,14 +54,12 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
   }
 
   return (
-    <nav className="table-of-contents text-sm">
-      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+    <nav className={styles.tocContainer}>
+      <ul className={styles.tocList}>
         {toc.map((item) => (
           <li
             key={item.id}
-            className={`${
-              item.level === 2 ? 'pl-0' : item.level === 3 ? 'pl-4' : 'pl-6'
-            }`}
+            className={`${styles.tocItem} ${item.level === 2 ? styles.tocItemLevel2 : item.level === 3 ? styles.tocItemLevel3 : styles.tocItemLevel4}`}
           >
             <Link
               to={item.id}
@@ -68,11 +67,7 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
               smooth={true}
               offset={-100}
               duration={500}
-              className={`block py-1 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors ${
-                activeId === item.id
-                  ? 'text-blue-600 dark:text-blue-400 font-medium'
-                  : ''
-              }`}
+              className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ''}`}
             >
               {item.title}
             </Link>
