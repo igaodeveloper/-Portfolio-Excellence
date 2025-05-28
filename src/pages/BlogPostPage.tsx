@@ -207,7 +207,8 @@ const BlogPostPage = () => {
         navigator.clipboard.writeText(url);
         toast({
           title: 'Link copiado!',
-          description: 'O link do artigo foi copiado para a área de transferência.',
+          description:
+            'O link do artigo foi copiado para a área de transferência.',
         });
     }
   };
@@ -306,7 +307,9 @@ const BlogPostPage = () => {
                 </div>
               </div>
 
-              <p className="text-xl leading-relaxed opacity-90">{post.excerpt}</p>
+              <p className="text-xl leading-relaxed opacity-90">
+                {post.excerpt}
+              </p>
             </motion.div>
           </div>
         </header>

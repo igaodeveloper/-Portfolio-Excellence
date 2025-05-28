@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaHeart, FaRegHeart, FaShareAlt } from 'react-icons/fa';
 
-export const FavoriteShareButtons = ({ id, type }: { id: string | number; type: 'project' | 'post' }) => {
-  const [fav, setFav] = useState(() => !!localStorage.getItem(`${type}-fav-${id}`));
+export const FavoriteShareButtons = ({
+  id,
+  type,
+}: {
+  id: string | number;
+  type: 'project' | 'post';
+}) => {
+  const [fav, setFav] = useState(
+    () => !!localStorage.getItem(`${type}-fav-${id}`),
+  );
   const [showShare, setShowShare] = useState(false);
 
   const handleFav = () => {
@@ -51,4 +59,4 @@ export const FavoriteShareButtons = ({ id, type }: { id: string | number; type: 
       )}
     </div>
   );
-}; 
+};

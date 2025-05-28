@@ -24,4 +24,4 @@ export const Badges = () => (
       </motion.div>
     ))}
   </div>
-); 
+);

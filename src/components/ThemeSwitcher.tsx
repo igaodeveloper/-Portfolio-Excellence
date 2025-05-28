@@ -8,7 +8,9 @@ const themes = [
 ];
 
 export const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'theme-modern');
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem('theme') || 'theme-modern',
+  );
 
   useEffect(() => {
     document.body.classList.remove(...themes.map((t) => t.class));
@@ -32,4 +34,4 @@ export const ThemeSwitcher = () => {
       ))}
     </div>
   );
-}; 
+};

@@ -11,7 +11,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "formart": "npm run format"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
@@ -54,6 +55,7 @@
     "emailjs-com": "^3.2.0",
     "embla-carousel-react": "^8.1.5",
     "framer-motion": "^11.18.2",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.394.0",
     "marked": "^12.0.0",
     "monaco-editor": "^0.52.2",

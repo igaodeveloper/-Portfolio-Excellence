@@ -27,12 +27,19 @@ export const AccessibilityAdvanced = () => {
       }
     `;
     document.head.appendChild(style);
-    return () => { document.head.removeChild(style); };
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   return (
-    <a href="#main-content" className="skip-link" tabIndex={0} aria-label="Pular para o conteúdo principal">
+    <a
+      href="#main-content"
+      className="skip-link"
+      tabIndex={0}
+      aria-label="Pular para o conteúdo principal"
+    >
       Pular para o conteúdo principal
     </a>
   );
-}; 
+};

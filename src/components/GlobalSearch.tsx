@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSearch, FiX } from 'react-icons/fi';
-import { projects } from '../data/projects';
+import { projects } from './ProjectsSection';
 import { blogPosts } from '../data/blog-posts';
-import workItems from './AboutSection';
+import { workItems } from './AboutSection';
 
 interface Result {
   type: 'project' | 'post' | 'experience';
@@ -16,14 +16,43 @@ interface Result {
 const getAllResults = (query: string): Result[] => {
   const q = query.toLowerCase();
   const projectResults = projects
-    .filter((p) => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
-    .map((p) => ({ type: 'project', id: p.id, title: p.title, description: p.description, url: p.liveUrl }));
+    .filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q),
+    )
+    .map((p) => ({
+      type: 'project' as const,
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      url: p.liveUrl,
+    }));
   const postResults = blogPosts
-    .filter((p) => p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q))
-    .map((p) => ({ type: 'post', id: p.id, title: p.title, description: p.excerpt, url: `/blog/${p.slug}` }));
+    .filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q),
+    )
+    .map((p) => ({
+      type: 'post' as const,
+      id: p.id,
+      title: p.title,
+      description: p.excerpt,
+      url: `/blog/${p.slug}`,
+    }));
   const expResults = workItems
-    .filter((w) => w.title.toLowerCase().includes(q) || w.organization.toLowerCase().includes(q))
-    .map((w) => ({ type: 'experience', id: w.id, title: w.title, description: w.organization }));
+    .filter(
+      (w) =>
+        w.title.toLowerCase().includes(q) ||
+        w.organization.toLowerCase().includes(q),
+    )
+    .map((w) => ({
+      type: 'experience' as const,
+      id: w.id,
+      title: w.title,
+      description: w.organization,
+    }));
   return [...projectResults, ...postResults, ...expResults];
 };
 
@@ -94,7 +123,9 @@ export const GlobalSearch = () => {
               />
               <div className="overflow-y-auto max-h-64">
                 {results.length === 0 && query.length > 1 && (
-                  <div className="py-8 text-center text-gray-400">Nenhum resultado encontrado.</div>
+                  <div className="py-8 text-center text-gray-400">
+                    Nenhum resultado encontrado.
+                  </div>
                 )}
                 {results.map((r) => (
                   <div
@@ -102,9 +133,16 @@ export const GlobalSearch = () => {
                     className="p-3 mb-2 transition rounded cursor-pointer hover:bg-modern-accent/10"
                   >
                     <div className="font-semibold">
-                      {r.title} <span className="ml-2 text-xs text-gray-400">[{r.type}]</span>
+                      {r.title}{' '}
+                      <span className="ml-2 text-xs text-gray-400">
+                        [{r.type}]
+                      </span>
                     </div>
-                    {r.description && <div className="text-sm text-gray-500">{r.description}</div>}
+                    {r.description && (
+                      <div className="text-sm text-gray-500">
+                        {r.description}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -114,4 +152,4 @@ export const GlobalSearch = () => {
       </AnimatePresence>
     </>
   );
-}; 
+};

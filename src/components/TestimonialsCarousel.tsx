@@ -23,13 +23,18 @@ export const TestimonialsCarousel = () => {
   const [index, setIndex] = useState(0);
 
   const next = () => setIndex((i) => (i + 1) % testimonials.length);
-  const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+  const prev = () =>
+    setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
     <div className="w-full max-w-xl mx-auto py-12">
       <div className="flex justify-between mb-4">
-        <button onClick={prev} className="text-modern-accent">Anterior</button>
-        <button onClick={next} className="text-modern-accent">Próximo</button>
+        <button onClick={prev} className="text-modern-accent">
+          Anterior
+        </button>
+        <button onClick={next} className="text-modern-accent">
+          Próximo
+        </button>
       </div>
       <AnimatePresence mode="wait">
         <motion.div
@@ -40,11 +45,17 @@ export const TestimonialsCarousel = () => {
           transition={{ duration: 0.5 }}
           className="bg-white dark:bg-gray-900 rounded-lg shadow p-6 text-center"
         >
-          <div className="text-lg font-semibold mb-2">{testimonials[index].name}</div>
-          <div className="text-gray-500 mb-2">{testimonials[index].company}</div>
-          <div className="text-modern-accent text-xl">“{testimonials[index].text}”</div>
+          <div className="text-lg font-semibold mb-2">
+            {testimonials[index].name}
+          </div>
+          <div className="text-gray-500 mb-2">
+            {testimonials[index].company}
+          </div>
+          <div className="text-modern-accent text-xl">
+            “{testimonials[index].text}”
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
   );
-}; 
+};

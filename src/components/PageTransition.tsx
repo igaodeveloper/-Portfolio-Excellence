@@ -38,10 +38,7 @@ const variants = {
   },
 };
 
-const PageTransition = ({
-  children,
-  type = 'fade',
-}: PageTransitionProps) => {
+const PageTransition = ({ children, type = 'fade' }: PageTransitionProps) => {
   const location = useLocation();
   const { reducedMotion } = useAccessibility?.() || { reducedMotion: false };
 
@@ -57,7 +54,11 @@ const PageTransition = ({
         initial={variants[type].initial}
         animate={variants[type].animate}
         exit={variants[type].exit}
-        transition={variants[type].transition || { duration: 0.6, ease: 'easeInOut' }}
+        transition={
+          type === 'glitch'
+            ? variants.glitch.transition
+            : { duration: 0.6, ease: 'easeInOut' }
+        }
         style={{ minHeight: '100vh' }}
       >
         {children}

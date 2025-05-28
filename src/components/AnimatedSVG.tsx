@@ -42,4 +42,4 @@ export const AnimatedSVG = () => (
       }}
     />
   </motion.svg>
-); 
+);

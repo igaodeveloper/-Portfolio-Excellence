@@ -9,7 +9,9 @@ export const IAEditorHelper = ({ code }: { code: string }) => {
   const handleAskIA = () => {
     setLoading(true);
     setTimeout(() => {
-      setSuggestion('Sugestão IA: Considere adicionar comentários explicativos e otimizar loops para melhor performance.');
+      setSuggestion(
+        'Sugestão IA: Considere adicionar comentários explicativos e otimizar loops para melhor performance.',
+      );
       setLoading(false);
     }, 1800);
   };
@@ -35,4 +37,4 @@ export const IAEditorHelper = ({ code }: { code: string }) => {
       )}
     </div>
   );
-}; 
+};

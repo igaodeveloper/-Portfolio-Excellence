@@ -109,10 +109,14 @@ const AboutSection = () => {
                 <span className="text-modern-accent">
                   5 anos de experiência
                 </span>{' '}
-                criando interfaces modernas, acessíveis e performáticas para web.
+                criando interfaces modernas, acessíveis e performáticas para
+                web.
               </p>
               <p className="text-modern-gray text-lg leading-relaxed">
-                Especialista em <strong>front-end</strong>, crio experiências digitais com React, Next.js, TypeScript e Tailwind. Foco em acessibilidade, performance, animações e arquitetura de componentes avançada.
+                Especialista em <strong>front-end</strong>, crio experiências
+                digitais com React, Next.js, TypeScript e Tailwind. Foco em
+                acessibilidade, performance, animações e arquitetura de
+                componentes avançada.
               </p>
             </div>
             <div className="space-y-6">
@@ -197,3 +201,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+export { workItems };

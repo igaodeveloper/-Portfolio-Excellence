@@ -45,7 +45,9 @@ const CategoryFilter = ({
           tabIndex={0}
           aria-label="Todas as categorias"
           onClick={() => onChange(null)}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(null); }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') onChange(null);
+          }}
         >
           Todos
           {selectedCategory === null && <Check className="w-3 h-3 ml-1" />}
@@ -58,10 +60,14 @@ const CategoryFilter = ({
             tabIndex={0}
             aria-label={`Categoria ${category.name}`}
             onClick={() => onChange(category.name)}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(category.name); }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') onChange(category.name);
+            }}
           >
             {category.name}
-            {showCounts && category.count !== undefined && ` (${category.count})`}
+            {showCounts &&
+              category.count !== undefined &&
+              ` (${category.count})`}
             {selectedCategory === category.name && (
               <Check className="w-3 h-3 ml-1" />
             )}
@@ -81,7 +87,9 @@ const CategoryFilter = ({
           tabIndex={0}
           aria-label="Todas as categorias"
           onClick={() => onChange(null)}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(null); }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') onChange(null);
+          }}
         >
           Todos
         </Button>
@@ -94,10 +102,14 @@ const CategoryFilter = ({
             tabIndex={0}
             aria-label={`Categoria ${category.name}`}
             onClick={() => onChange(category.name)}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onChange(category.name); }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') onChange(category.name);
+            }}
           >
             {category.name}
-            {showCounts && category.count !== undefined && ` (${category.count})`}
+            {showCounts &&
+              category.count !== undefined &&
+              ` (${category.count})`}
           </Button>
         ))}
       </div>
@@ -108,7 +120,10 @@ const CategoryFilter = ({
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105">
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none hover:scale-105"
+        >
           <span>
             {selectedCategory ? selectedCategory : 'Todas as categorias'}
           </span>

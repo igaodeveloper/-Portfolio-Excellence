@@ -33,7 +33,9 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         <img
           src={post.coverImage}
           alt={post.title}
-          className={featured ? 'w-full h-56 object-cover' : 'w-full h-48 object-cover'}
+          className={
+            featured ? 'w-full h-56 object-cover' : 'w-full h-48 object-cover'
+          }
         />
         <div className="p-6">
           <div className="flex flex-wrap gap-2 mb-3">
@@ -65,4 +67,4 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
       </Link>
     </motion.article>
   );
-} 
+}
