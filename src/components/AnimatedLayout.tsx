@@ -60,17 +60,15 @@ const AnimatedLayout = ({
         transitionVariant === 'stagger' ||
         transitionVariant === 'wave' ||
         transitionVariant === 'portal' ||
-        transitionVariant === 'glitch'
+        transitionVariant === 'glitch' ||
+        transitionVariant === 'scale' ||
+        transitionVariant === 'flip' ||
+        transitionVariant === 'reveal'
           ? 'fade'
-          : (transitionVariant as
-              | 'fade'
-              | 'slide'
-              | 'scale'
-              | 'flip'
-              | 'reveal');
+          : (transitionVariant as 'fade' | 'slide' | 'morph' | 'portal' | 'glitch');
 
       return (
-        <PageTransition transitionType={simpleVariant}>
+        <PageTransition type={simpleVariant}>
           {children}
         </PageTransition>
       );
