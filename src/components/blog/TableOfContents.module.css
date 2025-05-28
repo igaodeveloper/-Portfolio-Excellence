@@ -2,7 +2,7 @@
   padding: 1rem;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   margin-bottom: 1.5rem;
 }
 
@@ -48,4 +48,4 @@
   font-weight: bold;
   border-left: 3px solid #0070f3;
   padding-left: 0.5em;
-} 
+}
