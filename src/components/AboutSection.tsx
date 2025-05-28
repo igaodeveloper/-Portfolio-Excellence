@@ -14,7 +14,7 @@ type TimelineItem = {
 const workItems: TimelineItem[] = [
   {
     id: 1,
-    title: 'Desenvolvedor Fullstack Pleno',
+    title: 'Desenvolvedor Front End Sênior',
     organization: 'Appezshop',
     period: '2021 - Presente',
     description:
@@ -22,7 +22,7 @@ const workItems: TimelineItem[] = [
   },
   {
     id: 2,
-    title: 'Desenvolvedor Front-End',
+    title: 'Desenvolvedor Front End Sênior',
     organization: 'LATAM',
     period: '2024 - 2025',
     description:
@@ -30,39 +30,55 @@ const workItems: TimelineItem[] = [
   },
   {
     id: 3,
-    title: 'Desenvolvedor Front-End Júnior',
+    title: 'Desenvolvedor Front End Sênior',
+    organization: 'RH SYSTEM',
+    period: '2024 - 2025',
+    description:
+      'Desenvolvimento e manutenção de sistemas de gestão de recursos humanos. Implementação de recursos para otimização de processos de recrutamento e seleção. Criação de relatórios dinâmicos e painéis administrativos.',
+  },
+  {
+    id: 4,
+    title: 'Estagiário de Front End',
+    organization: 'Santander',
+    period: '2020',
+    description:
+      'Atuação em projetos de internet banking, auxiliando no desenvolvimento de interfaces com React e TypeScript. Suporte à equipe de front end em demandas de acessibilidade e performance.',
+  },
+  {
+    id: 5,
+    title: 'Desenvolvedor Front End Júnior',
     organization: 'TechSmart Solutions',
     period: '2020 - 2021',
     description:
       'Entreguei interfaces modernas com React, Redux, Material UI e consumo de APIs REST. Participei de code reviews, sprints SCRUM e implementações com foco em usabilidade.',
   },
   {
-    id: 4,
-    title: 'Freelancer Fullstack',
+    id: 6,
+    title: 'Desenvolvedor Front End Júnior',
     organization: 'Projetos Independentes',
     period: '2019 - 2020',
     description:
       'Criei sistemas completos desde a interface até o back-end com Express, MongoDB e React. Integrei gateways de pagamento, sistemas de autenticação JWT e dashboards administrativos.',
   },
   {
-    id: 5,
-    title: 'Estagiário de Desenvolvimento Web',
+    id: 7,
+    title: 'Desenvolvedor Front End Júnior',
     organization: 'Digital Innovation Agency',
     period: '2019 - 2019',
     description:
       'Colaborei na criação de landing pages e lojas virtuais. Trabalhei com HTML, CSS, JavaScript e WordPress, otimizando SEO e garantindo responsividade cross-browser.',
   },
   {
-    id: 6,
-    title: 'Desenvolvedor Front-End Voluntário',
+    id: 8,
+    title: 'Desenvolvedor Front End Júnior',
     organization: 'ONG Educação Para Todos',
     period: '2018 - 2019',
     description:
       'Desenvolvi interfaces acessíveis com Vue.js, Bootstrap e foco em inclusão digital. Implementei recursos adaptativos para dispositivos de baixo desempenho.',
   },
   {
-    id: 7,
-    title: 'Auxiliar de Desenvolvimento Web',
+    id: 9,
+    title: 'Desenvolvedor Front End Júnior',
     organization: 'Agência CreativeDev',
     period: '2018 - 2018',
     description:
@@ -87,26 +103,16 @@ const AboutSection = () => {
               <p className="text-modern-gray text-lg leading-relaxed">
                 Sou{' '}
                 <span className="text-modern-accent">
-                  Desenvolvedor Fullstack Pleno
+                  Desenvolvedor Front End Sênior
                 </span>{' '}
                 com mais de{' '}
                 <span className="text-modern-accent">
                   5 anos de experiência
                 </span>{' '}
-                construindo aplicações robustas e performáticas de ponta a
-                ponta.
+                criando interfaces modernas, acessíveis e performáticas para web.
               </p>
               <p className="text-modern-gray text-lg leading-relaxed">
-                No <strong>front-end</strong>, crio interfaces modernas,
-                responsivas e acessíveis com React, Next.js e Tailwind. Utilizo
-                animações com Framer Motion, otimizações de performance e
-                arquitetura de componentes avançada.
-              </p>
-              <p className="text-modern-gray text-lg leading-relaxed">
-                No <strong>back-end</strong>, desenvolvo APIs escaláveis com
-                Node.js, Express e Supabase. Integro bancos de dados SQL/NoSQL,
-                autenticação com JWT, RBAC, filas de jobs e webhooks
-                inteligentes.
+                Especialista em <strong>front-end</strong>, crio experiências digitais com React, Next.js, TypeScript e Tailwind. Foco em acessibilidade, performance, animações e arquitetura de componentes avançada.
               </p>
             </div>
             <div className="space-y-6">

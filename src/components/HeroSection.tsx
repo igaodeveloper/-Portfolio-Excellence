@@ -55,17 +55,17 @@ const HeroSection = () => {
       {/* Fundo com camadas 3D animadas */}
       <motion.div className="absolute inset-0 opacity-10">
         <motion.div
-          className="absolute top-0 left-0 w-32 h-32 bg-modern-accent rounded-full blur-3xl"
+          className="absolute top-0 left-0 w-32 h-32 rounded-full bg-modern-accent blur-3xl"
           animate={{ rotateZ: [0, 360] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute top-20 right-20 w-40 h-40 bg-modern-accent2 rounded-full blur-3xl"
+          className="absolute w-40 h-40 rounded-full top-20 right-20 bg-modern-accent2 blur-3xl"
           animate={{ rotateZ: [360, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute bottom-20 left-1/3 w-52 h-52 bg-modern-accent rounded-full blur-3xl"
+          className="absolute rounded-full bottom-20 left-1/3 w-52 h-52 bg-modern-accent blur-3xl"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -76,7 +76,7 @@ const HeroSection = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 gap-y-20 sm:gap-y-24 items-center relative z-10"
+        className="relative z-10 grid items-center w-full grid-cols-1 gap-12 mx-auto max-w-7xl lg:grid-cols-2 gap-y-20 sm:gap-y-24"
       >
         {/* Texto com rotação 3D interativa */}
         <motion.div
@@ -99,7 +99,7 @@ const HeroSection = () => {
             <motion.div className="overflow-hidden">
               <AnimatedCharacters
                 text="Bem-vindo ao meu portfólio"
-                className="text-xl sm:text-2xl md:text-3xl font-medium text-modern-accent"
+                className="text-xl font-medium sm:text-2xl md:text-3xl text-modern-accent"
                 delayOffset={0.4}
               />
             </motion.div>
@@ -107,26 +107,17 @@ const HeroSection = () => {
             <div className="space-y-2">
               <motion.div className="overflow-hidden">
                 <AnimatedCharacters
-                  text="Desenvolvedor"
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-modern-white tracking-tight"
+                  text="Desenvolvedor Front End Sênior"
+                  className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-modern-white"
                   delayOffset={0.5}
-                />
-              </motion.div>
-
-              <motion.div className="overflow-hidden">
-                <AnimatedCharacters
-                  text="Full-Stack & UI Designer"
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
-                  charClassName="text-modern-accent"
-                  delayOffset={0.6}
                 />
               </motion.div>
             </div>
 
             <motion.div className="overflow-hidden">
               <AnimatedWords
-                text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo."
-                className="text-base sm:text-lg md:text-xl text-modern-gray max-w-xl"
+                text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo. Foco em interfaces de alta qualidade, acessibilidade e experiência do usuário."
+                className="max-w-xl text-base sm:text-lg md:text-xl text-modern-gray"
                 delayOffset={0.7}
               />
             </motion.div>
@@ -138,7 +129,7 @@ const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white font-medium group flex items-center gap-2 transition-all duration-300"
+              className="flex items-center gap-2 font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
               onClick={() => {
                 document
                   .getElementById('projects')
@@ -174,7 +165,7 @@ const HeroSection = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-modern-gray hover:text-modern-accent transition-colors duration-300"
+                  className="transition-colors duration-300 text-modern-gray hover:text-modern-accent"
                   aria-label={link.label}
                   whileHover={{
                     y: -5,
@@ -195,7 +186,7 @@ const HeroSection = () => {
           className="relative aspect-[1/1] w-64 sm:w-72 md:w-80 lg:w-96 mx-auto lg:ml-auto"
         >
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-modern-accent to-modern-accent2 rounded-full opacity-20 blur-3xl"
+            className="absolute inset-0 rounded-full bg-gradient-to-tr from-modern-accent to-modern-accent2 opacity-20 blur-3xl"
             variants={pulseVariants}
             initial="initial"
             animate="animate"
@@ -219,7 +210,7 @@ const HeroSection = () => {
           />
 
           <motion.div
-            className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-modern-light/10 shadow-xl"
+            className="relative z-10 w-full h-full overflow-hidden border-4 rounded-full shadow-xl border-modern-light/10"
             whileHover={{
               scale: 1.05,
               rotateX: 8,
@@ -232,7 +223,7 @@ const HeroSection = () => {
             <img
               src="/perfil.jpg"
               alt="Developer Portrait"
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </motion.div>
         </motion.div>
