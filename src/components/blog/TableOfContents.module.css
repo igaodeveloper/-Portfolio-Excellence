@@ -1,0 +1,51 @@
+.tocContainer {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 1.5rem;
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tocItem {
+  margin-bottom: 0.5rem;
+}
+
+.tocItemLevel2 {
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.tocItemLevel3 {
+  margin-left: 1.5rem;
+  font-weight: 400;
+  font-size: 0.97em;
+}
+
+.tocItemLevel4 {
+  margin-left: 2.5rem;
+  font-weight: 300;
+  font-size: 0.95em;
+}
+
+.tocLink {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tocLink:hover {
+  color: #0070f3;
+}
+
+.tocLinkActive {
+  color: #0070f3;
+  font-weight: bold;
+  border-left: 3px solid #0070f3;
+  padding-left: 0.5em;
+} 
