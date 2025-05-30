@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { LogoutButton } from './Auth';
 import { Button } from '../ui/button';
@@ -17,6 +17,7 @@ import {
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
 import CommentsManager from './CommentsManager';
+import { ExperienceAPI } from '@/services/api';
 
 // Placeholder components for dashboard sections
 const DashboardOverview = () => (
@@ -502,6 +503,222 @@ const CommentsSection = () => (
   </div>
 );
 
+// Experience Management Section
+const ExperienceSection = () => {
+  const [experiences, setExperiences] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editing, setEditing] = useState(null);
+  const [form, setForm] = useState({
+    company: '',
+    role: '',
+    period: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+    current: false,
+  });
+
+  const fetchExperiences = () => {
+    setLoading(true);
+    ExperienceAPI.getAll()
+      .then((data) => {
+        setExperiences(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError('Erro ao carregar experiências.');
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchExperiences();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleEdit = (exp) => {
+    setEditing(exp.id);
+    setForm({
+      company: exp.company || '',
+      role: exp.role || exp.title || '',
+      period: exp.period || '',
+      description: exp.description || '',
+      startDate: exp.startDate || '',
+      endDate: exp.endDate || '',
+      current: exp.current || false,
+    });
+  };
+
+  const handleCancel = () => {
+    setEditing(null);
+    setForm({
+      company: '',
+      role: '',
+      period: '',
+      description: '',
+      startDate: '',
+      endDate: '',
+      current: false,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editing) {
+        await ExperienceAPI.update(editing, form);
+      } else {
+        await ExperienceAPI.create(form);
+      }
+      fetchExperiences();
+      handleCancel();
+    } catch {
+      setError('Erro ao salvar experiência.');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Tem certeza que deseja excluir esta experiência?')) {
+      await ExperienceAPI.delete(id);
+      fetchExperiences();
+    }
+  };
+
+  return (
+    <div className="p-6 bg-card rounded-lg shadow-sm">
+      <h2 className="text-2xl font-bold mb-4">Gerenciar Experiências</h2>
+      {loading ? (
+        <div>Carregando...</div>
+      ) : error ? (
+        <div className="text-red-500">{error}</div>
+      ) : (
+        <>
+          <form onSubmit={handleSubmit} className="mb-8 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+                placeholder="Empresa"
+                className="border p-2 rounded"
+                required
+              />
+              <input
+                name="role"
+                value={form.role}
+                onChange={handleChange}
+                placeholder="Cargo"
+                className="border p-2 rounded"
+                required
+              />
+              <input
+                name="period"
+                value={form.period}
+                onChange={handleChange}
+                placeholder="Período (ex: 2022-2023)"
+                className="border p-2 rounded"
+              />
+              <input
+                name="startDate"
+                value={form.startDate}
+                onChange={handleChange}
+                placeholder="Data início (YYYY-MM-DD)"
+                className="border p-2 rounded"
+              />
+              <input
+                name="endDate"
+                value={form.endDate}
+                onChange={handleChange}
+                placeholder="Data fim (YYYY-MM-DD)"
+                className="border p-2 rounded"
+              />
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  name="current"
+                  checked={form.current}
+                  onChange={handleChange}
+                />
+                <span>Atual</span>
+              </label>
+            </div>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              placeholder="Descrição"
+              className="border p-2 rounded w-full"
+              required
+            />
+            <div className="flex space-x-2">
+              <button
+                type="submit"
+                className="bg-primary text-white px-4 py-2 rounded"
+              >
+                {editing ? 'Salvar Alterações' : 'Adicionar Experiência'}
+              </button>
+              {editing && (
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="bg-gray-300 px-4 py-2 rounded"
+                >
+                  Cancelar
+                </button>
+              )}
+            </div>
+          </form>
+          <div className="overflow-x-auto">
+            <table className="w-full border">
+              <thead>
+                <tr className="bg-muted/50">
+                  <th className="px-4 py-2">Empresa</th>
+                  <th className="px-4 py-2">Cargo</th>
+                  <th className="px-4 py-2">Período</th>
+                  <th className="px-4 py-2">Descrição</th>
+                  <th className="px-4 py-2">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {experiences.map((exp) => (
+                  <tr key={exp.id} className="border-t">
+                    <td className="px-4 py-2">{exp.company}</td>
+                    <td className="px-4 py-2">{exp.role || exp.title}</td>
+                    <td className="px-4 py-2">{exp.period || exp.startDate}</td>
+                    <td className="px-4 py-2">{exp.description}</td>
+                    <td className="px-4 py-2 space-x-2">
+                      <button
+                        onClick={() => handleEdit(exp)}
+                        className="bg-yellow-400 px-2 py-1 rounded"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => handleDelete(exp.id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded"
+                      >
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 // Placeholder for other sections that might be added later
 const PlaceholderSection = ({ title }: { title: string }) => (
   <div className="p-6 bg-card rounded-lg shadow-sm">
@@ -550,6 +767,11 @@ export const Dashboard = () => {
       path: '/admin/dashboard/comments',
       label: 'Comments',
       icon: <MessageSquare className="h-5 w-5" />,
+    },
+    {
+      path: '/admin/dashboard/experiences',
+      label: 'Experiências',
+      icon: <User className="h-5 w-5" />,
     },
   ];
 
@@ -649,6 +871,7 @@ export const Dashboard = () => {
             <Route path="/projects" element={<ProjectsSection />} />
             <Route path="/media" element={<MediaUploadSection />} />
             <Route path="/comments" element={<CommentsSection />} />
+            <Route path="/experiences" element={<ExperienceSection />} />
           </Routes>
         </div>
       </main>
