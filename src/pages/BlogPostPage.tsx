@@ -36,6 +36,7 @@ import { useToast } from '../components/ui/use-toast';
 import { Toaster } from '../components/ui/toaster';
 import { Helmet } from 'react-helmet';
 import { Parallax } from 'react-scroll-parallax';
+import { AdsenseBanner } from '@/components/AdsenseBanner';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -600,11 +601,12 @@ const BlogPostPage = () => {
                 </Link>
               </div>
 
-              {/* AdSense Placeholder */}
+              {/* AdSense Banner */}
               <div className="flex justify-center my-6">
-                <div className="w-full max-w-2xl h-28 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-500 text-lg rounded-lg">
-                  Espaço para anúncio AdSense
-                </div>
+                <AdsenseBanner
+                  dataAdClient={import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-xxxxxxxxxxxxxxxx'}
+                  dataAdSlot={import.meta.env.VITE_ADSENSE_SLOT_POST || '1234567890'}
+                />
               </div>
 
               {/* Related Posts */}

@@ -20,6 +20,7 @@ import { BlogCard } from '../components/blog/BlogCard';
 import { Skeleton } from '../components/ui/skeleton';
 import CategoryFilter from '../components/blog/CategoryFilter';
 import { Parallax } from 'react-scroll-parallax';
+import { AdsenseBanner } from '@/components/AdsenseBanner';
 
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -112,11 +113,12 @@ const BlogPage = () => {
         </Link>
       </div>
 
-      {/* AdSense Placeholder */}
+      {/* AdSense Banner */}
       <div className="flex justify-center my-6">
-        <div className="w-full max-w-2xl h-28 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-500 text-lg rounded-lg">
-          Espaço para anúncio AdSense
-        </div>
+        <AdsenseBanner
+          dataAdClient={import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-xxxxxxxxxxxxxxxx'}
+          dataAdSlot={import.meta.env.VITE_ADSENSE_SLOT_BLOG || '1234567890'}
+        />
       </div>
 
       <main className="container px-4 py-12 mx-auto">
