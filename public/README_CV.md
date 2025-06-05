@@ -20,3 +20,12 @@ O arquivo `curriculum.pdf` na pasta `public/` é um placeholder que você deve s
 ### Testando:
 
 Após substituir o arquivo, acesse o site e clique no botão "Currículo" na barra de navegação para verificar se está funcionando corretamente.
+
+---
+
+ATENÇÃO: Para o efeito parallax avançado funcionar, adicione imagens de camadas em public com os nomes:
+- parallax-bg1.png (camada de fundo)
+- parallax-bg2.png (camada intermediária)
+- parallax-particles.png (camada de partículas decorativas)
+
+Você pode usar imagens PNG/SVG transparentes ou gerar no Figma/Photoshop para um visual profissional.

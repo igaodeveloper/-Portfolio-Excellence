@@ -35,6 +35,7 @@ import {
 import { useToast } from '../components/ui/use-toast';
 import { Toaster } from '../components/ui/toaster';
 import { Helmet } from 'react-helmet';
+import { Parallax } from 'react-scroll-parallax';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -316,14 +317,18 @@ const BlogPostPage = () => {
       >
         <Navbar />
 
-        <header
-          className="relative px-4 pt-32 pb-20 overflow-hidden text-white bg-gradient-to-r from-blue-600 to-indigo-700"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${post.coverImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
+        <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900 text-white relative overflow-hidden">
+          {/* Parallax visual para o post */}
+          <Parallax speed={-18} className="absolute inset-0 z-0 pointer-events-none">
+            <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
+          </Parallax>
+          <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+            <img src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-40" />
+          </Parallax>
+          <Parallax speed={5} className="absolute inset-0 z-0 pointer-events-none">
+            <img src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-30" />
+          </Parallax>
+          {/* Fim do parallax visual */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

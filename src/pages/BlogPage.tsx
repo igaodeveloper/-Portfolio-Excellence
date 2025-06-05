@@ -19,6 +19,7 @@ import {
 import { BlogCard } from '../components/blog/BlogCard';
 import { Skeleton } from '../components/ui/skeleton';
 import CategoryFilter from '../components/blog/CategoryFilter';
+import { Parallax } from 'react-scroll-parallax';
 
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -71,17 +72,28 @@ const BlogPage = () => {
     >
       <Navbar />
 
-      <header className="pt-32 pb-20 px-4 md:px-8 bg-gradient-to-r from-teal-500 to-blue-600 text-white shadow-md">
+      <header className="relative px-4 pt-32 pb-20 overflow-hidden text-white shadow-md md:px-8 bg-gradient-to-r from-teal-500 to-blue-600">
+        {/* Parallax visual para o blog */}
+        <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
+        </Parallax>
+        <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-40" />
+        </Parallax>
+        <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-30" />
+        </Parallax>
+        {/* Fim do parallax visual */}
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-5xl font-extrabold mb-4 leading-tight tracking-tight">
+            <h1 className="mb-4 text-5xl font-extrabold leading-tight tracking-tight">
               Blog Dev Frontend
             </h1>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+            <p className="max-w-2xl mx-auto text-xl opacity-90">
               Aprofunde-se em tópicos de frontend, performance, acessibilidade e
               design de interfaces.
             </p>
@@ -89,20 +101,20 @@ const BlogPage = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container px-4 py-12 mx-auto">
         {/* Search and filter */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 mb-12 md:flex-row">
           <div className="relative w-full md:w-96">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            <Search className="absolute text-gray-500 transform -translate-y-1/2 left-4 top-1/2" />
             <Input
               type="text"
               placeholder="Pesquise artigos..."
-              className="pl-10 w-full text-gray-700 dark:text-white"
+              className="w-full pl-10 text-gray-700 dark:text-white"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <CategoryFilter
               categories={categories}
               selectedCategory={selectedCategory}
@@ -127,13 +139,13 @@ const BlogPage = () => {
 
         {/* Featured posts */}
         <section className="mb-20">
-          <h2 className="text-3xl font-semibold mb-8 text-gray-800 dark:text-white">
+          <h2 className="mb-8 text-3xl font-semibold text-gray-800 dark:text-white">
             Posts em Destaque
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {loading
               ? Array.from({ length: 3 }).map((_, i) => (
-                  <Skeleton key={i} className="h-80 w-full" />
+                  <Skeleton key={i} className="w-full h-80" />
                 ))
               : featuredPosts.map((post) => (
                   <BlogCard key={post.id} post={post} featured />
@@ -143,12 +155,12 @@ const BlogPage = () => {
 
         {/* Regular posts */}
         <section>
-          <h2 className="text-3xl font-semibold mb-8 text-gray-800 dark:text-white">
+          <h2 className="mb-8 text-3xl font-semibold text-gray-800 dark:text-white">
             Todos os Artigos
           </h2>
           {filteredPosts.length > 0 ? (
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
               initial="hidden"
               animate="visible"
               variants={{
@@ -162,7 +174,7 @@ const BlogPage = () => {
             >
               {loading
                 ? Array.from({ length: 6 }).map((_, i) => (
-                    <Skeleton key={i} className="h-64 w-full" />
+                    <Skeleton key={i} className="w-full h-64" />
                   ))
                 : filteredPosts.map((post) => (
                     <motion.div
@@ -177,7 +189,7 @@ const BlogPage = () => {
                   ))}
             </motion.div>
           ) : (
-            <div className="text-center py-12">
+            <div className="py-12 text-center">
               <p className="text-xl text-gray-600 dark:text-gray-400">
                 Nenhum artigo encontrado com os filtros atuais.
               </p>

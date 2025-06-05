@@ -10,6 +10,8 @@ import {
 import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { useParallax } from '@/lib/useParallax';
 import { useRef, useState, useEffect } from 'react';
+import { Parallax } from 'react-scroll-parallax';
+import AnimatedParticles from './AnimatedParticles';
 
 const socialLinks = [
   {
@@ -75,35 +77,47 @@ const HeroSection = () => {
       className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-4 sm:px-6 md:px-12 py-16 md:py-20 relative overflow-hidden perspective-[1200px]"
       onMouseMove={handleMouseMove}
     >
-      {/* Partículas interativas */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-modern-accent/30"
-            initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
-            animate={{
-              x: [
-                Math.random() * window.innerWidth,
-                mousePosition.x + (Math.random() - 0.5) * 100,
-                Math.random() * window.innerWidth
-              ],
-              y: [
-                Math.random() * window.innerHeight,
-                mousePosition.y + (Math.random() - 0.5) * 100,
-                Math.random() * window.innerHeight
-              ],
-              scale: [0.5, 1, 0.5],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+      {/* Parallax avançado: camadas de fundo e efeitos */}
+      <Parallax speed={-40} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-bg1.svg" alt="Montanhas Parallax" className="w-full h-full object-cover opacity-70" />
+      </Parallax>
+      <Parallax speed={-25} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-bg2.svg" alt="Árvores Parallax" className="w-full h-full object-cover opacity-80" />
+      </Parallax>
+      <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-bg3.svg" alt="Nuvens Parallax" className="w-full h-full object-cover opacity-60" />
+      </Parallax>
+      <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-particles.svg" alt="Partículas Parallax" className="w-full h-full object-cover opacity-80" />
+      </Parallax>
+      <Parallax speed={-50} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-fog.svg" alt="Neblina Parallax" className="w-full h-full object-cover opacity-70" />
+      </Parallax>
+      <Parallax speed={-35} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-lights.svg" alt="Luzes Parallax" className="w-full h-full object-cover opacity-60" />
+      </Parallax>
+      <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-50" />
+      </Parallax>
+      <Parallax speed={-5} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-planet.svg" alt="Planeta Parallax" className="w-full h-full object-cover opacity-80" />
+      </Parallax>
+      <Parallax speed={-60} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
+      </Parallax>
+      <Parallax speed={-45} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-70" />
+      </Parallax>
+      <Parallax speed={-30} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-80" />
+      </Parallax>
+      <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
+        <img src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-90" />
+      </Parallax>
+      {/* Fim das camadas parallax */}
+
+      {/* Partículas animadas interativas */}
+      <AnimatedParticles />
 
       {/* Fundo com camadas 3D animadas */}
       <motion.div className="absolute inset-0 opacity-10">

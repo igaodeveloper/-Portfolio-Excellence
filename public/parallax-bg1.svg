@@ -1,0 +1,9 @@
+<svg width="1920" height="600" viewBox="0 0 1920 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="bg1grad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#232946"/>
+    <stop offset="100%" stop-color="#2D3748"/>
+  </linearGradient>
+  <path d="M0 600L200 500L400 550L600 400L800 500L1000 350L1200 500L1400 400L1600 450L1800 350L1920 600V0H0V600Z" fill="url(#bg1grad)"/>
+  <ellipse cx="300" cy="580" rx="80" ry="20" fill="#232946" opacity="0.5"/>
+  <ellipse cx="1600" cy="590" rx="120" ry="25" fill="#232946" opacity="0.4"/>
+</svg> 
