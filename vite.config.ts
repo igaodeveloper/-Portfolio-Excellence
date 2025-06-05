@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import { tempo } from 'tempo-devtools/dist/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -37,8 +38,12 @@ export default defineConfig(({ mode }) => {
           brotliSize: true,
           filename: 'dist/stats.html',
         }),
+      ViteImageOptimizer(),
       VitePWA({
         registerType: 'autoUpdate',
+        devOptions: {
+          enabled: true,
+        },
         manifest: {
           name: 'Portfolio Excellence',
           short_name: 'Portfolio',
