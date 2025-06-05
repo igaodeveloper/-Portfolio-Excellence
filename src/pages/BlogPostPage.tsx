@@ -16,6 +16,8 @@ import {
   Twitter,
   Linkedin,
   Facebook,
+  Mail,
+  Send,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
@@ -32,6 +34,7 @@ import {
 } from '../components/ui/tooltip';
 import { useToast } from '../components/ui/use-toast';
 import { Toaster } from '../components/ui/toaster';
+import { Helmet } from 'react-helmet';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -145,36 +148,49 @@ const BlogPostPage = () => {
           block.getAttribute('data-style') === 'vscDarkPlus' ? vscDarkPlus : vs;
         const code = block.textContent || '';
 
-        // Create React element in the DOM
+        // Cria o pre e code normalmente
         const pre = document.createElement('pre');
-        pre.className = `language-${language}`;
+        pre.className = `language-${language} group relative`;
         pre.style.margin = '0';
         pre.style.borderRadius = '0.5rem';
         pre.style.fontSize = '0.9rem';
-
-        // Apply the style
         Object.entries(style['pre[class*="language-"]'] || {}).forEach(
           ([key, value]) => {
             // @ts-ignore
             pre.style[key] = value;
           },
         );
-
         const codeEl = document.createElement('code');
         codeEl.className = `language-${language}`;
         codeEl.textContent = code;
-
-        // Apply the style to the code element
         Object.entries(style['code[class*="language-"]'] || {}).forEach(
           ([key, value]) => {
             // @ts-ignore
             codeEl.style[key] = value;
           },
         );
-
         pre.appendChild(codeEl);
         block.innerHTML = '';
         block.appendChild(pre);
+
+        // Adiciona o botão de copiar
+        const copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.ariaLabel = 'Copiar código';
+        copyBtn.className = 'absolute z-10 px-2 py-1 text-xs font-semibold text-white transition-all bg-blue-500 rounded shadow-md top-2 right-2 opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-400';
+        copyBtn.innerText = 'Copiar';
+        copyBtn.tabIndex = 0;
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(code).then(() => {
+            copyBtn.innerText = 'Copiado!';
+            copyBtn.classList.add('bg-green-500');
+            setTimeout(() => {
+              copyBtn.innerText = 'Copiar';
+              copyBtn.classList.remove('bg-green-500');
+            }, 1200);
+          });
+        };
+        pre.appendChild(copyBtn);
       });
     }
   }, [htmlContent, isLoading]);
@@ -202,6 +218,15 @@ const BlogPostPage = () => {
           `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`,
           '_blank',
         );
+        break;
+      case 'whatsapp':
+        window.open(`https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`, '_blank');
+        break;
+      case 'telegram':
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
+        break;
+      case 'email':
+        window.open(`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`);
         break;
       default:
         navigator.clipboard.writeText(url);
@@ -247,6 +272,44 @@ const BlogPostPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{post?.title ? `${post.title} | Blog Dev Frontend` : 'Blog Dev Frontend'}</title>
+        <meta name="description" content={post?.excerpt || post?.description || ''} />
+        <meta property="og:title" content={post?.title || ''} />
+        <meta property="og:description" content={post?.excerpt || post?.description || ''} />
+        <meta property="og:image" content={post?.coverImage || post?.image || ''} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post?.title || ''} />
+        <meta name="twitter:description" content={post?.excerpt || post?.description || ''} />
+        <meta name="twitter:image" content={post?.coverImage || post?.image || ''} />
+        {/* JSON-LD Article Schema */}
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: post?.title,
+          description: post?.excerpt || post?.description,
+          image: post?.coverImage || post?.image,
+          author: {
+            '@type': 'Person',
+            name: post?.author?.name,
+          },
+          datePublished: post?.date,
+          publisher: {
+            '@type': 'Organization',
+            name: 'Blog Dev Frontend',
+            logo: {
+              '@type': 'ImageObject',
+              url: '/vite.svg',
+            },
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': typeof window !== 'undefined' ? window.location.href : '',
+          },
+        })}</script>
+      </Helmet>
       <Toaster />
       <div
         className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
@@ -254,64 +317,62 @@ const BlogPostPage = () => {
         <Navbar />
 
         <header
-          className="px-4 pt-32 pb-20 text-white bg-gradient-to-r from-blue-600 to-indigo-700"
+          className="relative px-4 pt-32 pb-20 overflow-hidden text-white bg-gradient-to-r from-blue-600 to-indigo-700"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${post.coverImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
-          <div className="container mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="container max-w-3xl mx-auto"
+          >
+            <Link
+              to="/blog"
+              className="inline-flex items-center mb-6 text-blue-300 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
-              <Link
-                to="/blog"
-                className="inline-flex items-center mb-6 text-blue-300 transition-colors hover:text-white"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                <span>Voltar para o blog</span>
-              </Link>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              <span>Voltar para o blog</span>
+            </Link>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {post.categories.map((category: string, index: number) => (
-                  <Link
-                    key={index}
-                    to={`/blog/categoria/${category.toLowerCase()}`}
-                    className="px-3 py-1 text-xs font-medium text-blue-100 transition-colors rounded-full bg-blue-500/20 hover:bg-blue-500/30"
-                  >
-                    {category}
-                  </Link>
-                ))}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {post.categories.map((category: string, index: number) => (
+                <Link
+                  key={index}
+                  to={`/blog/categoria/${category.toLowerCase()}`}
+                  className="px-3 py-1 text-xs font-medium text-blue-100 transition-colors rounded-full bg-blue-500/20 hover:bg-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                  {category}
+                </Link>
+              ))}
+            </div>
+
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl drop-shadow-lg">
+              {post.title}
+            </h1>
+
+            <div className="flex items-center gap-6 mb-4 text-sm text-blue-100">
+              <div className="flex items-center">
+                <Calendar className="w-4 h-4 mr-1" />
+                <span>
+                  {format(new Date(post.date), "dd 'de' MMMM 'de' yyyy", {
+                    locale: pt,
+                  })}
+                </span>
               </div>
-
-              <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-                {post.title}
-              </h1>
-
-              <div className="flex items-center mb-4 text-sm text-blue-100">
-                <div className="flex items-center mr-6">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  <span>
-                    {format(new Date(post.date), "dd 'de' MMMM 'de' yyyy", {
-                      locale: pt,
-                    })}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-1" />
-                  <span>{post.readTime} min de leitura</span>
-                </div>
+              <div className="flex items-center">
+                <Clock className="w-4 h-4 mr-1" />
+                <span>{post.readTime} min de leitura</span>
               </div>
+            </div>
 
-              <p className="text-xl leading-relaxed opacity-90">
-                {post.excerpt}
-              </p>
-            </motion.div>
-          </div>
+            <p className="text-xl leading-relaxed opacity-90">
+              {post.excerpt}
+            </p>
+          </motion.div>
         </header>
 
         <main className="container px-4 py-12 mx-auto">
@@ -319,7 +380,7 @@ const BlogPostPage = () => {
             {/* Table of Contents - Desktop */}
             <aside className="relative hidden lg:block lg:col-span-3">
               <div className="sticky top-32">
-                <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
+                <div className="p-6 border border-gray-200 shadow-lg bg-white/80 dark:bg-gray-900/80 rounded-xl backdrop-blur dark:border-gray-800">
                   <h2 className="mb-4 text-lg font-bold dark:text-white">
                     Índice
                   </h2>
@@ -430,12 +491,17 @@ const BlogPostPage = () => {
 
             {/* Article Content */}
             <article className="lg:col-span-9">
-              <div className="p-8 prose prose-lg bg-white rounded-lg shadow-md dark:prose-invert max-w-none dark:bg-gray-900">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="p-8 prose prose-lg border border-gray-200 shadow-lg bg-white/80 rounded-xl dark:prose-invert max-w-none dark:bg-gray-900/80 backdrop-blur dark:border-gray-800"
+              >
                 <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-              </div>
+              </motion.div>
 
               {/* Share buttons - Mobile */}
-              <div className="p-6 mt-8 bg-white rounded-lg shadow-md dark:bg-gray-900 lg:hidden">
+              <div className="p-6 mt-8 border border-gray-200 shadow-lg bg-white/80 rounded-xl dark:bg-gray-900/80 lg:hidden backdrop-blur dark:border-gray-800">
                 <h3 className="mb-4 text-lg font-bold dark:text-white">
                   Compartilhar este artigo
                 </h3>
@@ -471,11 +537,11 @@ const BlogPostPage = () => {
               </div>
 
               {/* Author Card */}
-              <div className="flex flex-col items-center gap-6 p-6 mt-8 bg-white rounded-lg shadow-md dark:bg-gray-900 md:flex-row">
-                <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-full">
+              <div className="flex flex-col items-center gap-6 p-6 mt-8 border border-gray-200 shadow-lg bg-white/80 rounded-xl dark:bg-gray-900/80 md:flex-row backdrop-blur dark:border-gray-800">
+                <div className="flex-shrink-0 w-24 h-24 overflow-hidden border-4 border-blue-400 rounded-full shadow-md">
                   <img
-                    src="https://avatars.githubusercontent.com/u/12345678?v=4"
-                    alt="Avatar do autor"
+                    src={post.author?.avatar || 'https://avatars.githubusercontent.com/u/12345678?v=4'}
+                    alt={`Avatar de ${post.author?.name || 'Autor'}`}
                     className="object-cover w-full h-full"
                   />
                 </div>
@@ -484,31 +550,33 @@ const BlogPostPage = () => {
                     Sobre o Autor
                   </h3>
                   <p className="mb-4 text-gray-600 dark:text-gray-400">
-                    Desenvolvedor Front-end apaixonado por UI/UX, performance e
-                    acessibilidade. Especialista em React, TypeScript e
-                    estratégias modernas de CSS.
+                    {post.author?.bio || 'Desenvolvedor Front-end apaixonado por UI/UX, performance e acessibilidade. Especialista em React, TypeScript e estratégias modernas de CSS.'}
                   </p>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm" asChild>
-                      <a
-                        href="https://github.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="w-4 h-4 mr-2" />
-                        GitHub
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a
-                        href="https://twitter.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Twitter className="w-4 h-4 mr-2" />
-                        Twitter
-                      </a>
-                    </Button>
+                    {post.author?.github && (
+                      <Button variant="outline" size="sm" asChild>
+                        <a
+                          href={post.author.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Github className="w-4 h-4 mr-2" />
+                          GitHub
+                        </a>
+                      </Button>
+                    )}
+                    {post.author?.twitter && (
+                      <Button variant="outline" size="sm" asChild>
+                        <a
+                          href={post.author.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Twitter className="w-4 h-4 mr-2" />
+                          Twitter
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -518,7 +586,19 @@ const BlogPostPage = () => {
                 <h2 className="mb-6 text-2xl font-bold dark:text-white">
                   Artigos Relacionados
                 </h2>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <motion.div
+                  className="grid grid-cols-1 gap-6 md:grid-cols-2"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.12,
+                      },
+                    },
+                  }}
+                >
                   {blogPosts
                     .filter(
                       (p) =>
@@ -527,31 +607,38 @@ const BlogPostPage = () => {
                     )
                     .slice(0, 2)
                     .map((relatedPost) => (
-                      <Link
+                      <motion.div
                         key={relatedPost.id}
-                        to={`/blog/${relatedPost.slug}`}
-                        className="block group"
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: { opacity: 1, y: 0 },
+                        }}
                       >
-                        <div className="overflow-hidden transition-transform rounded-lg shadow-md bg-dark dark:bg-gray-900 group-hover:shadow-lg">
-                          <div className="relative h-48 overflow-hidden">
-                            <img
-                              src={relatedPost.coverImage}
-                              alt={relatedPost.title}
-                              className="object-cover w-full h-full transition-transform group-hover:scale-105"
-                            />
+                        <Link
+                          to={`/blog/${relatedPost.slug}`}
+                          className="block group focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        >
+                          <div className="overflow-hidden transition-transform rounded-lg shadow-md bg-dark dark:bg-gray-900 group-hover:shadow-lg">
+                            <div className="relative h-48 overflow-hidden">
+                              <img
+                                src={relatedPost.coverImage}
+                                alt={relatedPost.title}
+                                className="object-cover w-full h-full transition-transform group-hover:scale-105"
+                              />
+                            </div>
+                            <div className="p-6">
+                              <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                                {relatedPost.title}
+                              </h3>
+                              <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
+                                {relatedPost.excerpt}
+                              </p>
+                            </div>
                           </div>
-                          <div className="p-6">
-                            <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
-                              {relatedPost.title}
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400 line-clamp-2">
-                              {relatedPost.excerpt}
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
+                        </Link>
+                      </motion.div>
                     ))}
-                </div>
+                </motion.div>
               </div>
             </article>
           </div>

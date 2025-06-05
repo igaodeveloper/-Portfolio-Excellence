@@ -9,6 +9,7 @@ import { categories } from '../data/blog-categories';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
+import LazyImage from '../components/LazyImage';
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -115,10 +116,11 @@ const CategoryPage = () => {
                 className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg"
               >
                 <Link to={`/blog/${post.slug}`} className="block">
-                  <img
+                  <LazyImage
                     src={post.coverImage}
                     alt={post.title}
                     className="w-full h-48 object-cover"
+                    loading="lazy"
                   />
                   <div className="p-6">
                     <div className="flex flex-wrap gap-2 mb-3">

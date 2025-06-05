@@ -18,6 +18,7 @@ import {
 } from '../components/ui/dropdown-menu';
 import { BlogCard } from '../components/blog/BlogCard';
 import { Skeleton } from '../components/ui/skeleton';
+import CategoryFilter from '../components/blog/CategoryFilter';
 
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -101,28 +102,14 @@ const BlogPage = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Filter className="h-5 w-5 text-gray-500" />
-                  {selectedCategory || 'Categorias'}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setSelectedCategory(null)}>
-                  Todas as categorias
-                </DropdownMenuItem>
-                {categories.map((category) => (
-                  <DropdownMenuItem
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.name)}
-                  >
-                    {category.name}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="flex gap-2 items-center">
+            <CategoryFilter
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onChange={setSelectedCategory}
+              variant="pills"
+              showCounts
+            />
             <Button
               variant="ghost"
               size="icon"
@@ -160,15 +147,35 @@ const BlogPage = () => {
             Todos os Artigos
           </h2>
           {filteredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.08,
+                  },
+                },
+              }}
+            >
               {loading
                 ? Array.from({ length: 6 }).map((_, i) => (
                     <Skeleton key={i} className="h-64 w-full" />
                   ))
                 : filteredPosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
+                    <motion.div
+                      key={post.id}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                    >
+                      <BlogCard post={post} />
+                    </motion.div>
                   ))}
-            </div>
+            </motion.div>
           ) : (
             <div className="text-center py-12">
               <p className="text-xl text-gray-600 dark:text-gray-400">
