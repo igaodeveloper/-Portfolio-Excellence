@@ -141,6 +141,17 @@ const Footer = () => {
               <div className="text-gray-400">São Paulo, Brasil</div>
             </div>
           </div>
+
+          {/* Newsletter Link */}
+          <div className="animate__animated animate__fadeIn animate__delay-0.5s mt-8">
+            <Link
+              to="/newsletter"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-colors font-semibold"
+              aria-label="Assine a Newsletter"
+            >
+              <Mail className="mr-2 h-5 w-5" /> Assine a Newsletter
+            </Link>
+          </div>
         </div>
 
         {/* Footer Bottom */}

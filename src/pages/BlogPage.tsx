@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, Filter, Search } from 'lucide-react';
+import { Calendar, Clock, Filter, Search, Mail } from 'lucide-react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { blogPosts } from '../data/blog-posts';
@@ -100,6 +100,17 @@ const BlogPage = () => {
           </motion.div>
         </div>
       </header>
+
+      {/* Banner Newsletter */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md">
+        <span className="font-semibold text-lg mr-2">Receba dicas exclusivas no seu e-mail!</span>
+        <Link
+          to="/newsletter"
+          className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+        >
+          <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
+        </Link>
+      </div>
 
       <main className="container px-4 py-12 mx-auto">
         {/* Search and filter */}

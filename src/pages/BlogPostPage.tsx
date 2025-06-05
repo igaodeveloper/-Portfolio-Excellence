@@ -589,6 +589,17 @@ const BlogPostPage = () => {
                 </div>
               </div>
 
+              {/* Banner Newsletter */}
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg mb-10">
+                <span className="font-semibold text-lg mr-2">Curtiu o conteúdo? Receba mais dicas no seu e-mail!</span>
+                <Link
+                  to="/newsletter"
+                  className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+                >
+                  <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
+                </Link>
+              </div>
+
               {/* Related Posts */}
               <div className="mt-12">
                 <h2 className="mb-6 text-2xl font-bold dark:text-white">

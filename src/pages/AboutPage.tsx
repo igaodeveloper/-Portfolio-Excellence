@@ -312,8 +312,7 @@ const AboutPage = () => {
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg shadow-md p-6 text-white">
                   <h3 className="text-lg font-bold mb-4">Newsletter</h3>
                   <p className="mb-4 text-sm">
-                    Receba as novidades sobre desenvolvimento web, dicas e
-                    tutoriais diretamente no seu email.
+                    Receba as novidades sobre desenvolvimento web, dicas e tutoriais diretamente no seu email.
                   </p>
                   <Button variant="secondary" className="w-full" asChild>
                     <Link to="/newsletter">

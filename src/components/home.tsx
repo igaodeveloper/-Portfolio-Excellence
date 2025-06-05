@@ -12,6 +12,7 @@ import AnimatedSection from './AnimatedSection';
 import React, { Suspense } from 'react';
 import Navbar from './Navbar';
 import CommentsSection from './CommentsSection';
+import { Mail } from 'lucide-react';
 
 const CodeEditor = React.lazy(() => import('./CodeEditor'));
 
@@ -27,6 +28,17 @@ function Home() {
           <section className="transform rotateX-[5deg] rotateY-[-3deg] scale-[0.98] transition-all duration-500 hover:scale-[1] hover:rotateX-0 hover:rotateY-0">
             <HeroSection />
           </section>
+
+          {/* Banner Newsletter */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg my-8">
+            <span className="font-semibold text-lg mr-2">Receba novidades e conteúdos exclusivos!</span>
+            <a
+              href="/newsletter"
+              className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+            >
+              <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
+            </a>
+          </div>
 
           <AnimatedSection direction="up" delay={0.2}>
             <div className="transform translate-z-[50px]">

@@ -8,6 +8,7 @@ import HiddenAdminButton from './components/HiddenAdminButton';
 import AnimationDemoButton from './components/AnimationDemoButton';
 import { AccessibilityProvider } from './contexts/AccessibilityContext';
 import SmoothScroll from './components/SmoothScroll';
+import NewsletterPopup from './components/NewsletterPopup';
 
 // Transition variants
 type TransitionVariant =
@@ -46,6 +47,7 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AnimationDemo = lazy(() => import('./pages/AnimationDemo'));
 const VideoPage = lazy(() => import('./pages/VideoPage'));
+const NewsletterPage = lazy(() => import('./pages/NewsletterPage'));
 
 // Import our custom ProtectedRoute instead of the simplified version
 const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'));
@@ -127,6 +129,9 @@ function AppRoutes() {
           <Route path="/blog/projetos" element={<ProjectsPage />} />
           <Route path="/blog/contato" element={<ContactPage />} />
 
+          {/* Newsletter Page */}
+          <Route path="/newsletter" element={<NewsletterPage />} />
+
           {/* Admin Routes */}
           <Route
             path="/admin"
@@ -145,6 +150,7 @@ function AppRoutes() {
         </Routes>
         {tempoRoutes}
       </AnimatedLayout>
+      <NewsletterPopup />
     </Suspense>
   );
 }
