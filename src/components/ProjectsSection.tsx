@@ -221,14 +221,14 @@ const ProjectsSection = () => {
   return (
     <section
       id="projects"
-      className="relative py-24 px-6 bg-modern-darker overflow-hidden"
+      className="relative px-6 py-24 overflow-hidden bg-modern-darker"
       ref={containerRef}
     >
       {/* Background decoration elements */}
-      <div className="absolute -top-20 -right-20 w-60 h-60 bg-modern-accent/5 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-10 -left-20 w-80 h-80 bg-modern-accent2/5 rounded-full blur-3xl opacity-30" />
+      <div className="absolute rounded-full -top-20 -right-20 w-60 h-60 bg-modern-accent/5 blur-3xl opacity-40" />
+      <div className="absolute rounded-full bottom-10 -left-20 w-80 h-80 bg-modern-accent2/5 blur-3xl opacity-30" />
 
-      <div className="container-section relative z-10">
+      <div className="relative z-10 container-section">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -236,11 +236,11 @@ const ProjectsSection = () => {
         >
           <AnimatedTitle
             text="Projetos reais"
-            className="section-title text-modern-white mb-4"
+            className="mb-4 section-title text-modern-white"
           />
 
           <motion.p
-            className="text-modern-gray text-center max-w-xl mx-auto mb-12"
+            className="max-w-xl mx-auto mb-12 text-center text-modern-gray"
             variants={fadeIn('up', 0.2)}
             initial="hidden"
             animate={isInView ? 'show' : 'hidden'}
@@ -255,16 +255,16 @@ const ProjectsSection = () => {
           variants={fadeIn('up', 0.3)}
           initial="hidden"
           animate={isInView ? 'show' : 'hidden'}
-          className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4"
+          className="flex flex-col items-center justify-between gap-4 mb-10 md:flex-row"
         >
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-modern-gray/60 h-4 w-4" />
+            <Search className="absolute w-4 h-4 transform -translate-y-1/2 left-3 top-1/2 text-modern-gray/60" />
             <Input
               type="text"
               placeholder="Buscar projetos..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-modern-dark/80 border-modern-accent/20 text-modern-gray focus:border-modern-accent focus:ring-1 focus:ring-modern-accent/20 rounded-lg"
+              className="pl-10 rounded-lg bg-modern-dark/80 border-modern-accent/20 text-modern-gray focus:border-modern-accent focus:ring-1 focus:ring-modern-accent/20"
             />
           </div>
 
@@ -317,7 +317,7 @@ const ProjectsSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8"
           >
             {displayedProjects.map((project, index) => (
               <motion.div
@@ -330,7 +330,7 @@ const ProjectsSection = () => {
                 transition={{ type: 'spring', stiffness: 300 }}
               >
                 <TiltCard
-                  className="h-full card-hover bg-modern-dark/90 rounded-xl overflow-hidden border border-modern-accent/10 shadow-lg shadow-modern-darker/50"
+                  className="h-full overflow-hidden border shadow-lg card-hover bg-modern-dark/90 rounded-xl border-modern-accent/10 shadow-modern-darker/50"
                   glareEnabled={true}
                   glareMaxOpacity={0.1}
                   scale={1.02}
@@ -345,7 +345,7 @@ const ProjectsSection = () => {
                     <motion.img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform"
+                      className="object-cover w-full h-full transition-transform"
                       initial={{ scale: 1 }}
                       animate={{
                         scale: hoveredProject === project.id ? 1.05 : 1,
@@ -354,8 +354,8 @@ const ProjectsSection = () => {
                     />
 
                     {project.featured && (
-                      <div className="absolute top-4 left-4 z-10">
-                        <Badge className="bg-modern-accent2 hover:bg-modern-accent2/90 border-none text-modern-white font-medium px-3 py-1">
+                      <div className="absolute z-10 top-4 left-4">
+                        <Badge className="px-3 py-1 font-medium border-none bg-modern-accent2 hover:bg-modern-accent2/90 text-modern-white">
                           Destaque
                         </Badge>
                       </div>
@@ -383,7 +383,7 @@ const ProjectsSection = () => {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-modern-dark/80 p-3 rounded-full text-modern-white hover:text-modern-accent hover:bg-modern-dark/90 transition-all"
+                          className="p-3 transition-all rounded-full bg-modern-dark/80 text-modern-white hover:text-modern-accent hover:bg-modern-dark/90"
                           aria-label={`Repositório GitHub de ${project.title}`}
                           whileHover={{ y: -3, scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
@@ -396,7 +396,7 @@ const ProjectsSection = () => {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-modern-dark/80 p-3 rounded-full text-modern-white hover:text-modern-accent hover:bg-modern-dark/90 transition-all"
+                          className="p-3 transition-all rounded-full bg-modern-dark/80 text-modern-white hover:text-modern-accent hover:bg-modern-dark/90"
                           aria-label={`Demo online de ${project.title}`}
                           whileHover={{ y: -3, scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
@@ -408,10 +408,10 @@ const ProjectsSection = () => {
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-modern-white mb-2 group-hover:text-modern-accent transition-colors">
+                    <h3 className="mb-2 text-xl font-bold transition-colors text-modern-white group-hover:text-modern-accent">
                       {project.title}
                     </h3>
-                    <p className="text-modern-gray mb-4 line-clamp-2">
+                    <p className="mb-4 text-modern-gray line-clamp-2">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -424,12 +424,12 @@ const ProjectsSection = () => {
                         </Badge>
                       ))}
                     </div>
-                    <div className="flex justify-end items-center">
+                    <div className="flex items-center justify-end">
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleViewDetails(project.id)}
-                        className="group text-modern-gray hover:text-modern-accent hover:bg-modern-accent/5 transition-all duration-300"
+                        className="transition-all duration-300 group text-modern-gray hover:text-modern-accent hover:bg-modern-accent/5"
                       >
                         Ver Detalhes
                         <motion.span
@@ -451,12 +451,12 @@ const ProjectsSection = () => {
 
         {displayedProjects.length === 0 && (
           <motion.div
-            className="text-center py-16 bg-modern-dark/20 rounded-xl border border-modern-accent/10"
+            className="py-16 text-center border bg-modern-dark/20 rounded-xl border-modern-accent/10"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-modern-gray text-lg">
+            <p className="text-lg text-modern-gray">
               Nenhum projeto encontrado com os filtros atuais.
             </p>
             <Button
@@ -479,7 +479,7 @@ const ProjectsSection = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="text-center mt-16"
+            className="mt-16 text-center"
           >
             <Button
               size="lg"

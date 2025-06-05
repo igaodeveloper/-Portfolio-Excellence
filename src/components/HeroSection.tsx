@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   AnimatedCharacters,
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/animated-text';
 import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { useParallax } from '@/lib/useParallax';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const socialLinks = [
   {
@@ -31,6 +31,8 @@ const socialLinks = [
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorVariant, setCursorVariant] = useState("default");
 
   const { parallaxProps: socialParallax } = useParallax({
     speed: 0.2,
@@ -38,12 +40,32 @@ const HeroSection = () => {
   });
 
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [scrolled, setScrolled] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * -30;
     setRotate({ x, y });
+    
+    // Update mouse position for particle effects
+    setMousePosition({ x: e.clientX, y: e.clientY });
+  };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToNext = () => {
+    const nextSection = document.getElementById('about');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -51,7 +73,38 @@ const HeroSection = () => {
       ref={sectionRef}
       id="home"
       className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-4 sm:px-6 md:px-12 py-16 md:py-20 relative overflow-hidden perspective-[1200px]"
+      onMouseMove={handleMouseMove}
     >
+      {/* Partículas interativas */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-modern-accent/30"
+            initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
+            animate={{
+              x: [
+                Math.random() * window.innerWidth,
+                mousePosition.x + (Math.random() - 0.5) * 100,
+                Math.random() * window.innerWidth
+              ],
+              y: [
+                Math.random() * window.innerHeight,
+                mousePosition.y + (Math.random() - 0.5) * 100,
+                Math.random() * window.innerHeight
+              ],
+              scale: [0.5, 1, 0.5],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
       {/* Fundo com camadas 3D animadas */}
       <motion.div className="absolute inset-0 opacity-10">
         <motion.div
@@ -88,8 +141,6 @@ const HeroSection = () => {
         >
           <motion.div
             className="relative z-10"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={() => setRotate({ x: 0, y: 0 })}
             style={{
               transform: `rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)`,
               transformStyle: 'preserve-3d',
@@ -129,15 +180,16 @@ const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="flex items-center gap-2 font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
+              className="relative flex items-center gap-2 overflow-hidden font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
               onClick={() => {
                 document
                   .getElementById('projects')
                   ?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              <motion.span>Ver projetos</motion.span>
+              <motion.span className="relative z-10">Ver projetos</motion.span>
               <motion.div
+                className="relative z-10"
                 initial={{ x: 0 }}
                 animate={{ x: [0, 5, 0] }}
                 transition={{
@@ -149,6 +201,12 @@ const HeroSection = () => {
               >
                 <ArrowRight size={18} />
               </motion.div>
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-modern-accent to-modern-accent2"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.4 }}
+              />
             </Button>
 
             <motion.div
@@ -165,7 +223,7 @@ const HeroSection = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors duration-300 text-modern-gray hover:text-modern-accent"
+                  className="relative transition-all duration-300 text-modern-gray hover:text-modern-accent group"
                   aria-label={link.label}
                   whileHover={{
                     y: -5,
@@ -174,6 +232,9 @@ const HeroSection = () => {
                   whileTap={{ scale: 0.9 }}
                 >
                   {link.icon}
+                  <span className="absolute text-xs transition-opacity duration-300 transform -translate-x-1/2 opacity-0 -bottom-8 left-1/2 text-modern-accent group-hover:opacity-100">
+                    {link.label}
+                  </span>
                 </motion.a>
               ))}
             </motion.div>
@@ -225,8 +286,28 @@ const HeroSection = () => {
               alt="Developer Portrait"
               className="object-cover w-full h-full"
             />
+            
+            {/* Efeito de brilho na imagem */}
+            <motion.div 
+              className="absolute inset-0 opacity-0 bg-gradient-to-tr from-transparent via-white to-transparent hover:opacity-20"
+              initial={{ rotate: 0, scale: 1.5 }}
+              animate={{ rotate: 360, scale: 1.5 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            />
           </motion.div>
         </motion.div>
+      </motion.div>
+      
+      {/* Indicador de rolagem */}
+      <motion.div 
+        className="absolute transform -translate-x-1/2 cursor-pointer bottom-10 left-1/2"
+        initial={{ y: 0, opacity: 0.5 }}
+        animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        onClick={scrollToNext}
+      >
+        <ChevronDown size={32} className="text-modern-accent" />
+        <span className="block mt-2 text-xs text-center text-modern-gray">Rolar para baixo</span>
       </motion.div>
     </section>
   );
