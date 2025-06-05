@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
 
   return {
-    base: process.env.VITE_BASE_PATH || '/',
+    base: '/',
     optimizeDeps: {
       entries: ['src/main.tsx', 'src/tempobook/**/*'],
       esbuildOptions: {
