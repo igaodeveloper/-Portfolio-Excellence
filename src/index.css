@@ -96,21 +96,6 @@ body.larger-text {
   }
 }
 
-/* Otimizações de cursor personalizado */
-body.custom-cursor {
-  cursor: none !important;
-}
-
-body.custom-cursor a,
-body.custom-cursor button,
-body.custom-cursor [role='button'],
-body.custom-cursor input,
-body.custom-cursor select,
-body.custom-cursor textarea,
-body.custom-cursor [tabindex]:not([tabindex='-1']) {
-  cursor: none !important;
-}
-
 /* Otimizações para o carregamento de imagens */
 .image-loading {
   opacity: 0;

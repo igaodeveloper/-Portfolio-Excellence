@@ -9,10 +9,6 @@
 }
 
 /* Cursor styles */
-body:has(.custom-cursor) {
-  cursor: none;
-}
-
 .cursor-outer {
   pointer-events: none;
   will-change: transform;

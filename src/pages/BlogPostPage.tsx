@@ -600,6 +600,13 @@ const BlogPostPage = () => {
                 </Link>
               </div>
 
+              {/* AdSense Placeholder */}
+              <div className="flex justify-center my-6">
+                <div className="w-full max-w-2xl h-28 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-500 text-lg rounded-lg">
+                  Espaço para anúncio AdSense
+                </div>
+              </div>
+
               {/* Related Posts */}
               <div className="mt-12">
                 <h2 className="mb-6 text-2xl font-bold dark:text-white">

@@ -3,12 +3,14 @@ import { Mail, X, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'framer-motion';
+import { subscribeToMailchimp } from '@/services/mailchimp';
 
 const NewsletterPopup = () => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '' });
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setOpen(true), 6000); // Exibe após 6s
@@ -32,14 +34,18 @@ const NewsletterPopup = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError(null);
+    const result = await subscribeToMailchimp(form.name, form.email);
+    setLoading(false);
+    if (result.success) {
       setSuccess(true);
-      setLoading(false);
       setForm({ name: '', email: '' });
-    }, 1200);
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -120,6 +126,9 @@ const NewsletterPopup = () => {
                     </span>
                   )}
                 </Button>
+                {error && (
+                  <div className="text-red-600 text-sm text-center mb-2">{error}</div>
+                )}
               </form>
             )}
           </motion.div>

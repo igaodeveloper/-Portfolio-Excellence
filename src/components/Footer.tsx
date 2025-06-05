@@ -152,6 +152,35 @@ const Footer = () => {
               <Mail className="mr-2 h-5 w-5" /> Assine a Newsletter
             </Link>
           </div>
+
+          {/* Doação Pix */}
+          <div className="animate__animated animate__fadeIn animate__delay-0.5s mt-4">
+            <button
+              className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors font-semibold"
+              onClick={() => navigator.clipboard.writeText('11982928508')}
+              title="Copiar chave Pix para doar"
+            >
+              <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Doar via Pix: <span className="ml-2 font-mono">11982928508</span>
+            </button>
+            <span className="block text-xs text-gray-400 mt-1">Clique para copiar a chave Pix</span>
+          </div>
+
+          {/* Afiliados/Recursos Gratuitos */}
+          <div className="animate__animated animate__fadeIn animate__delay-0.5s mt-4">
+            <div className="flex flex-col gap-2 items-center">
+              <a href="https://www.cursoemvideo.com/course/javascript/" target="_blank" rel="noopener noreferrer" className="w-full max-w-xs inline-flex items-center px-4 py-2 bg-yellow-100 text-yellow-900 rounded-lg shadow hover:bg-yellow-200 transition-colors font-semibold justify-center">
+                🚀 Curso de JavaScript Gratuito (Curso em Vídeo)
+              </a>
+              <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer" className="w-full max-w-xs inline-flex items-center px-4 py-2 bg-green-100 text-green-900 rounded-lg shadow hover:bg-green-200 transition-colors font-semibold justify-center">
+                📘 Certificações Grátis em Programação (freeCodeCamp)
+              </a>
+              <a href="https://www.rocketseat.com.br/discover" target="_blank" rel="noopener noreferrer" className="w-full max-w-xs inline-flex items-center px-4 py-2 bg-blue-100 text-blue-900 rounded-lg shadow hover:bg-blue-200 transition-colors font-semibold justify-center">
+                💻 Trilha Discover Gratuita (Rocketseat)
+              </a>
+            </div>
+            <span className="block text-xs text-gray-400 mt-1">Recomendações gratuitas para aprender programação!</span>
+          </div>
         </div>
 
         {/* Footer Bottom */}

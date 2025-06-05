@@ -6,24 +6,30 @@ import { AnimatedTitle } from '@/components/ui/animated-text';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { subscribeToMailchimp } from '@/services/mailchimp';
 
 const NewsletterPage = () => {
   const [form, setForm] = useState({ name: '', email: '' });
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError(null);
+    const result = await subscribeToMailchimp(form.name, form.email);
+    setLoading(false);
+    if (result.success) {
       setSuccess(true);
-      setLoading(false);
       setForm({ name: '', email: '' });
-    }, 1200);
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -75,6 +81,9 @@ const NewsletterPage = () => {
                   disabled={loading}
                 />
               </div>
+              {error && (
+                <div className="mb-4 text-sm text-center text-red-600">{error}</div>
+              )}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? 'Enviando...' : (
                   <span className="flex items-center justify-center gap-2">

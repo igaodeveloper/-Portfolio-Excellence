@@ -13,6 +13,8 @@ import React, { Suspense } from 'react';
 import Navbar from './Navbar';
 import CommentsSection from './CommentsSection';
 import { Mail } from 'lucide-react';
+import { subscribeToMailchimp } from '@/services/mailchimp';
+import { useState } from 'react';
 
 const CodeEditor = React.lazy(() => import('./CodeEditor'));
 
@@ -30,15 +32,7 @@ function Home() {
           </section>
 
           {/* Banner Newsletter */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg my-8">
-            <span className="font-semibold text-lg mr-2">Receba novidades e conteúdos exclusivos!</span>
-            <a
-              href="/newsletter"
-              className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
-            >
-              <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
-            </a>
-          </div>
+          <NewsletterBannerInline />
 
           <AnimatedSection direction="up" delay={0.2}>
             <div className="transform translate-z-[50px]">
@@ -119,6 +113,71 @@ function Home() {
       </div>
 
       <WhatsAppButton />
+    </div>
+  );
+}
+
+function NewsletterBannerInline() {
+  const [form, setForm] = useState({ name: '', email: '' });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    const result = await subscribeToMailchimp(form.name, form.email);
+    setLoading(false);
+    if (result.success) {
+      setSuccess(true);
+      setForm({ name: '', email: '' });
+    } else {
+      setError(result.message);
+    }
+  };
+
+  return (
+    <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg my-8">
+      <span className="font-semibold text-lg mr-2 block mb-2">Receba novidades e conteúdos exclusivos!</span>
+      {success ? (
+        <div className="text-green-200 font-semibold">Inscrição realizada com sucesso!</div>
+      ) : (
+        <form className="flex flex-col md:flex-row gap-2 items-center justify-center" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Seu nome"
+            value={form.name}
+            onChange={handleChange}
+            required
+            className="rounded px-3 py-2 text-gray-900 w-full md:w-48"
+            disabled={loading}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="seu@email.com"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="rounded px-3 py-2 text-gray-900 w-full md:w-64"
+            disabled={loading}
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+            disabled={loading}
+          >
+            {loading ? 'Enviando...' : 'Assinar Newsletter'}
+          </button>
+        </form>
+      )}
+      {error && <div className="text-red-200 mt-2">{error}</div>}
     </div>
   );
 }

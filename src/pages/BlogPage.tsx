@@ -112,6 +112,13 @@ const BlogPage = () => {
         </Link>
       </div>
 
+      {/* AdSense Placeholder */}
+      <div className="flex justify-center my-6">
+        <div className="w-full max-w-2xl h-28 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-500 text-lg rounded-lg">
+          Espaço para anúncio AdSense
+        </div>
+      </div>
+
       <main className="container px-4 py-12 mx-auto">
         {/* Search and filter */}
         <div className="flex flex-col items-center justify-between gap-4 mb-12 md:flex-row">

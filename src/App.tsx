@@ -9,6 +9,7 @@ import AnimationDemoButton from './components/AnimationDemoButton';
 import { AccessibilityProvider } from './contexts/AccessibilityContext';
 import SmoothScroll from './components/SmoothScroll';
 import NewsletterPopup from './components/NewsletterPopup';
+import PixDonationPopup from './components/PixDonationPopup';
 
 // Transition variants
 type TransitionVariant =
@@ -151,6 +152,7 @@ function AppRoutes() {
         {tempoRoutes}
       </AnimatedLayout>
       <NewsletterPopup />
+      <PixDonationPopup />
     </Suspense>
   );
 }
