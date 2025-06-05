@@ -79,40 +79,40 @@ const HeroSection = () => {
     >
       {/* Parallax avançado: camadas de fundo e efeitos */}
       <Parallax speed={-40} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-bg1.svg" alt="Montanhas Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg1.svg" alt="Montanhas Parallax" className="w-full h-full object-cover opacity-70" />
       </Parallax>
       <Parallax speed={-25} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-bg2.svg" alt="Árvores Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg2.svg" alt="Árvores Parallax" className="w-full h-full object-cover opacity-80" />
       </Parallax>
       <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-bg3.svg" alt="Nuvens Parallax" className="w-full h-full object-cover opacity-60" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg3.svg" alt="Nuvens Parallax" className="w-full h-full object-cover opacity-60" />
       </Parallax>
       <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-particles.svg" alt="Partículas Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="w-full h-full object-cover opacity-80" />
       </Parallax>
       <Parallax speed={-50} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-fog.svg" alt="Neblina Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-fog.svg" alt="Neblina Parallax" className="w-full h-full object-cover opacity-70" />
       </Parallax>
       <Parallax speed={-35} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-lights.svg" alt="Luzes Parallax" className="w-full h-full object-cover opacity-60" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-lights.svg" alt="Luzes Parallax" className="w-full h-full object-cover opacity-60" />
       </Parallax>
       <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-50" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-50" />
       </Parallax>
       <Parallax speed={-5} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-planet.svg" alt="Planeta Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-planet.svg" alt="Planeta Parallax" className="w-full h-full object-cover opacity-80" />
       </Parallax>
       <Parallax speed={-60} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
       </Parallax>
       <Parallax speed={-45} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-70" />
       </Parallax>
       <Parallax speed={-30} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-80" />
       </Parallax>
       <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-90" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-90" />
       </Parallax>
       {/* Fim das camadas parallax */}
 
@@ -296,6 +296,9 @@ const HeroSection = () => {
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
           >
             <img
+              loading="lazy"
+              width="1920"
+              height="1080"
               src="/perfil.jpg"
               alt="Developer Portrait"
               className="object-cover w-full h-full"

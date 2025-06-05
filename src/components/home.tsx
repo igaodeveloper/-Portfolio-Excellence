@@ -9,9 +9,11 @@ import EducationSection from './EducationSection';
 import ServicesSection from './ServicesSection';
 import WhatsAppButton from './WhatsAppButton';
 import AnimatedSection from './AnimatedSection';
-import CodeEditor from './CodeEditor';
+import React, { Suspense } from 'react';
 import Navbar from './Navbar';
 import CommentsSection from './CommentsSection';
+
+const CodeEditor = React.lazy(() => import('./CodeEditor'));
 
 function Home() {
   return (
@@ -65,7 +67,9 @@ function Home() {
                   HTML, CSS e JavaScript. Desenvolva suas landing pages com
                   preview em tempo real.
                 </p>
-                <CodeEditor className="shadow-2xl shadow-blue-500/10" />
+                <Suspense fallback={<div>Carregando editor...</div>}>
+                  <CodeEditor className="shadow-2xl shadow-blue-500/10" />
+                </Suspense>
               </div>
             </div>
           </AnimatedSection>

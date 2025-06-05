@@ -75,13 +75,13 @@ const BlogPage = () => {
       <header className="relative px-4 pt-32 pb-20 overflow-hidden text-white shadow-md md:px-8 bg-gradient-to-r from-teal-500 to-blue-600">
         {/* Parallax visual para o blog */}
         <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
+          <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
         </Parallax>
         <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-40" />
+          <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-40" />
         </Parallax>
         <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-30" />
+          <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-30" />
         </Parallax>
         {/* Fim do parallax visual */}
         <div className="container mx-auto text-center">

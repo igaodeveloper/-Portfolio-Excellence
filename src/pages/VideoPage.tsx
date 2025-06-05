@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import VideoPlayer from '../components/VideoPlayer';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import {
   FaSearch,
@@ -11,6 +10,8 @@ import {
   FaFilm,
 } from 'react-icons/fa';
 import { Parallax } from 'react-scroll-parallax';
+
+const VideoPlayer = lazy(() => import('../components/VideoPlayer'));
 
 // Função para extrair ID de vídeos do YouTube
 const extractVideoId = (url: string): string | null => {
@@ -30,12 +31,42 @@ interface YouTubeVideo {
   published?: string;
 }
 
+const mockResults: YouTubeVideo[] = [
+  {
+    id: Date.now(),
+    url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
+    title: `Resultado 1`,
+    thumbnail: `https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`,
+    channel: 'Canal Popular',
+    views: '1.2M visualizações',
+    published: 'há 2 dias',
+  },
+  {
+    id: Date.now() + 1,
+    url: `https://www.youtube.com/watch?v=9bZkp7q19f0`,
+    title: `Resultado 2`,
+    thumbnail: `https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg`,
+    channel: 'Outro Canal',
+    views: '3.4M visualizações',
+    published: 'há 1 semana',
+  },
+  {
+    id: Date.now() + 2,
+    url: `https://www.youtube.com/watch?v=kJQP7kiw5Fk`,
+    title: `Resultado 3`,
+    thumbnail: `https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg`,
+    channel: 'Novo Canal',
+    views: '5.6M visualizações',
+    published: 'há 3 dias',
+  },
+];
+
 // Simula a API do YouTube para busca
 const searchYouTubeAPI = async (query: string): Promise<YouTubeVideo[]> => {
-  // Em uma implementação real, você usaria algo como:
-  // const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&key=YOUR_API_KEY`);
-  // const data = await response.json();
-
+  if (process.env.NODE_ENV === 'production') {
+    // Em produção, não simular delay
+    return mockResults;
+  }
   // Para fins de demonstração, vamos simular uma resposta
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -57,36 +88,8 @@ const searchYouTubeAPI = async (query: string): Promise<YouTubeVideo[]> => {
         ]);
       } else {
         // Simula resultados baseados na consulta
-        const mockResults = [
-          {
-            id: Date.now(),
-            url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
-            title: `${query} - Resultado 1`,
-            thumbnail: `https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`,
-            channel: 'Canal Popular',
-            views: '1.2M visualizações',
-            published: 'há 2 dias',
-          },
-          {
-            id: Date.now() + 1,
-            url: `https://www.youtube.com/watch?v=9bZkp7q19f0`,
-            title: `${query} - Resultado 2`,
-            thumbnail: `https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg`,
-            channel: 'Outro Canal',
-            views: '3.4M visualizações',
-            published: 'há 1 semana',
-          },
-          {
-            id: Date.now() + 2,
-            url: `https://www.youtube.com/watch?v=kJQP7kiw5Fk`,
-            title: `${query} - Resultado 3`,
-            thumbnail: `https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg`,
-            channel: 'Novo Canal',
-            views: '5.6M visualizações',
-            published: 'há 3 dias',
-          },
-        ];
-        resolve(mockResults);
+        const results = mockResults;
+        resolve(results);
       }
     }, 1500); // Simula o tempo de resposta da API
   });
@@ -315,6 +318,9 @@ const VideoPage: React.FC = () => {
                         src={video.thumbnail}
                         alt={video.title}
                         className="w-full h-full object-cover rounded"
+                        loading="lazy"
+                        width="1920"
+                        height="1080"
                       />
                     </div>
                     <div className="overflow-hidden">
@@ -402,13 +408,15 @@ const VideoPage: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
-                  <VideoPlayer
-                    url={videos[activeVideoIndex].url}
-                    title={videos[activeVideoIndex].title}
-                    poster={videos[activeVideoIndex].thumbnail}
-                    videos={videos}
-                    onVideoChange={(index) => setActiveVideoIndex(index)}
-                  />
+                  <Suspense fallback={<div>Carregando vídeo...</div>}>
+                    <VideoPlayer
+                      url={videos[activeVideoIndex].url}
+                      title={videos[activeVideoIndex].title}
+                      poster={videos[activeVideoIndex].thumbnail}
+                      videos={videos}
+                      onVideoChange={(index) => setActiveVideoIndex(index)}
+                    />
+                  </Suspense>
 
                   {/* Informações do vídeo atual */}
                   <div className="p-4 border-t border-gray-800">
@@ -456,6 +464,8 @@ const VideoPage: React.FC = () => {
                             alt={video.title}
                             className="w-full h-full object-cover rounded-md"
                             loading="lazy"
+                            width="1920"
+                            height="1080"
                           />
                           {activeVideoIndex === index && (
                             <div className="absolute bottom-1 right-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-md">

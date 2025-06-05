@@ -320,13 +320,13 @@ const BlogPostPage = () => {
         <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900 text-white relative overflow-hidden">
           {/* Parallax visual para o post */}
           <Parallax speed={-18} className="absolute inset-0 z-0 pointer-events-none">
-            <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
+            <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
           </Parallax>
           <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-            <img src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-40" />
+            <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-40" />
           </Parallax>
           <Parallax speed={5} className="absolute inset-0 z-0 pointer-events-none">
-            <img src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-30" />
+            <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-30" />
           </Parallax>
           {/* Fim do parallax visual */}
           <motion.div
@@ -545,6 +545,9 @@ const BlogPostPage = () => {
               <div className="flex flex-col items-center gap-6 p-6 mt-8 border border-gray-200 shadow-lg bg-white/80 rounded-xl dark:bg-gray-900/80 md:flex-row backdrop-blur dark:border-gray-800">
                 <div className="flex-shrink-0 w-24 h-24 overflow-hidden border-4 border-blue-400 rounded-full shadow-md">
                   <img
+                    loading="lazy"
+                    width="1920"
+                    height="1080"
                     src={post.author?.avatar || 'https://avatars.githubusercontent.com/u/12345678?v=4'}
                     alt={`Avatar de ${post.author?.name || 'Autor'}`}
                     className="object-cover w-full h-full"
@@ -626,6 +629,9 @@ const BlogPostPage = () => {
                           <div className="overflow-hidden transition-transform rounded-lg shadow-md bg-dark dark:bg-gray-900 group-hover:shadow-lg">
                             <div className="relative h-48 overflow-hidden">
                               <img
+                                loading="lazy"
+                                width="1920"
+                                height="1080"
                                 src={relatedPost.coverImage}
                                 alt={relatedPost.title}
                                 className="object-cover w-full h-full transition-transform group-hover:scale-105"

@@ -133,3 +133,13 @@ if (!('fetch' in window)) {
   // Se fetch já estiver disponível, renderizar normalmente
   hydrateWithDelay();
 }
+
+if (import.meta.env.PROD) {
+  import('web-vitals').then(({ getCLS, getFID, getLCP, getFCP, getTTFB }) => {
+    getCLS(console.log);
+    getFID(console.log);
+    getLCP(console.log);
+    getFCP(console.log);
+    getTTFB(console.log);
+  });
+}

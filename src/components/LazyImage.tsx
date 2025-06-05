@@ -91,6 +91,10 @@ const LazyImage = ({
     };
   }
 
+  // Adicionar srcSet para WebP/AVIF se src terminar com .jpg, .jpeg ou .png
+  const webpSrc = src.replace(/\.(jpg|jpeg|png)$/, '.webp');
+  const avifSrc = src.replace(/\.(jpg|jpeg|png)$/, '.avif');
+
   return (
     <img
       ref={setRefs}
@@ -103,6 +107,7 @@ const LazyImage = ({
         ...blurStyle,
       }}
       className={imageClasses}
+      srcSet={`${webpSrc} 1x, ${avifSrc} 1x`}
       {...rest}
     />
   );
