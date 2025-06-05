@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "alias": ["portfolio-excellence.vercel.app"],
+  "scope": "portfolio-excellence",
+  "github": {
+    "silent": true,
+    "autoAlias": true
+  },
+  "public": false
+} 

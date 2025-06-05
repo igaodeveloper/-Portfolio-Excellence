@@ -7,9 +7,15 @@ import { visualizer } from 'rollup-plugin-visualizer';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
+  const vercelUrl = process.env.VERCEL_URL || 'portfolio-excellence.vercel.app';
 
   return {
     base: '/',
+    define: {
+      'process.env.VITE_API_URL': isProd
+        ? JSON.stringify(`https://${vercelUrl}/api`)
+        : JSON.stringify('http://localhost:5000/api'),
+    },
     optimizeDeps: {
       entries: ['src/main.tsx', 'src/tempobook/**/*'],
       esbuildOptions: {

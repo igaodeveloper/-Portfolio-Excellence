@@ -6,14 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "vercel-build": "tsc && vite build",
-    "build-netlify": "tsc && vite build",
-    "build-no-errors": "tsc && vite build",
+    "vercel-build": "echo 'No build step needed'",
+    "start": "node server/dist/index.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts",
     "format": "prettier --write .",
-    "formart": "npm run format"
+    "formart": "npm run format",
+    "deploy": "node deploy.js",
+    "setup-domain": "vercel domains add portfolio-excellence.vercel.app --scope portfolio-excellence"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
