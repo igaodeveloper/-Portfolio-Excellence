@@ -63,6 +63,20 @@ O projeto está configurado para deploy automático no Netlify:
 
 O arquivo `netlify.toml` já está configurado com as melhores práticas para otimização de performance.
 
+## 🌐 Deploy na Vercel
+
+Para garantir que o deploy funcione perfeitamente na Vercel, configure as seguintes variáveis de ambiente no painel do projeto na Vercel (Settings > Environment Variables):
+
+- `VITE_BASE_PATH` = `/`
+- `VITE_TEMPO` = `false` (ou `true` se usar rotas temporárias)
+- `SUPABASE_PROJECT_ID` (se usar Supabase)
+- `VITE_SUPABASE_URL` (se usar Supabase)
+- `VITE_SUPABASE_KEY` (se usar Supabase)
+
+**Importante:** Todas as variáveis do Vite devem começar com `VITE_`.
+
+Depois de configurar, basta fazer o deploy normalmente.
+
 ## 🧩 Estrutura do Projeto
 
 ```

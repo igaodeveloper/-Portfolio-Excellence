@@ -52,6 +52,37 @@ const preloadAssets = () => {
 // Inicia pré-carregamento de recursos
 preloadAssets();
 
+// ErrorBoundary global
+class GlobalErrorBoundary extends React.Component<React.PropsWithChildren<{}>, { hasError: boolean; error?: Error }> {
+  constructor(props: React.PropsWithChildren<{}>) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error: Error, errorInfo: any) {
+    // Aqui você pode logar o erro em um serviço externo
+    // Exemplo: Sentry, LogRocket, etc.
+    // console.error(error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="fixed inset-0 flex flex-col items-center justify-center bg-background text-center p-8">
+          <h1 className="text-3xl font-bold mb-4 text-red-600">Ocorreu um erro inesperado</h1>
+          <p className="mb-2 text-gray-500">Tente recarregar a página ou entre em contato com o suporte.</p>
+          <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded" onClick={() => window.location.reload()}>Recarregar</button>
+          <details className="mt-4 text-left max-w-xl mx-auto text-xs text-gray-400 whitespace-pre-wrap">
+            {this.state.error?.toString()}
+          </details>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Função para renderização com atraso de hidratação
 const hydrateWithDelay = () => {
   const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -63,11 +94,13 @@ const hydrateWithDelay = () => {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter basename={basename}>
-        <Suspense fallback={<LoadingFallback />}>
-          <App />
-        </Suspense>
-      </BrowserRouter>
+      <GlobalErrorBoundary>
+        <BrowserRouter basename={basename}>
+          <Suspense fallback={<LoadingFallback />}>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </GlobalErrorBoundary>
     </React.StrictMode>,
   );
 
