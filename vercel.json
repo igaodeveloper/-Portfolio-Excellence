@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "public": true,
-  "outputDirectory": "dist",
-  "buildCommand": "npm run build",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" }
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" }
   ]
 }
