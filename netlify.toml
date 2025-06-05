@@ -5,7 +5,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_FLAGS = "--no-audit --production"
+  NPM_FLAGS = "--no-audit"
 
 # Configurações de otimização de cache
 [[headers]]
