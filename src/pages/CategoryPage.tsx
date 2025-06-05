@@ -120,7 +120,6 @@ const CategoryPage = () => {
                     src={post.coverImage}
                     alt={post.title}
                     className="w-full h-48 object-cover"
-                    loading="lazy"
                   />
                   <div className="p-6">
                     <div className="flex flex-wrap gap-2 mb-3">
