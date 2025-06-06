@@ -11,6 +11,7 @@ import SmoothScroll from './components/SmoothScroll';
 import NewsletterPopup from './components/NewsletterPopup';
 import PixDonationPopup from './components/PixDonationPopup';
 import WhatsAppButton from './components/WhatsAppButton';
+import MusicPlayer from './components/MusicPlayer';
 
 // Transition variants
 type TransitionVariant =
@@ -166,6 +167,7 @@ function App() {
         <CustomCursor />
         <HiddenAdminButton />
         <WhatsAppButton />
+        <MusicPlayer />
       </SmoothScroll>
     </AccessibilityProvider>
   );
