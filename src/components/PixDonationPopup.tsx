@@ -108,8 +108,15 @@ const PixDonationPopup = () => {
               <span className="text-lg font-bold text-green-700 dark:text-white">Apoie este projeto!</span>
             </div>
             <h3 className="mb-2 text-xl font-bold text-green-700 dark:text-white">Faça uma doação via Pix</h3>
-            <p className="mb-6 text-sm text-gray-700 dark:text-gray-300">
-              Se este conteúdo te ajudou, considere apoiar com qualquer valor via Pix. Sua contribuição faz a diferença!
+            <p className="mb-4 text-base font-semibold text-center text-green-800 dark:text-green-300">
+              Sua contribuição faz toda a diferença! 🙏<br/>
+              <span className="font-normal text-gray-700 dark:text-gray-200">
+                <span className="font-bold text-green-600 dark:text-green-400">Doe agora</span> e faça parte de uma comunidade que acredita no poder do conhecimento livre.<br/>
+                Sua doação não é só um apoio — é um voto de confiança para que o projeto evolua, ganhe <span className="font-bold">novas funcionalidades</span>, expanda o <span className="font-bold">blog</span> e produza <span className="font-bold">novos vídeos</span> para impactar ainda mais pessoas.<br/>
+                <span className="italic">Quando você contribui, você inspira outros a fazerem o mesmo (prova social) e garante que juntos vamos mais longe (pertencimento).</span><br/>
+                <span className="font-semibold text-green-700 dark:text-green-300">Aproveite essa oportunidade de retribuir e transformar o futuro do projeto!</span><br/>
+                <span className="italic">A generosidade de hoje é o sucesso de amanhã — juntos, transformamos vidas!</span>
+              </span>
             </p>
             <div className="flex flex-col items-center mb-4">
               {/* QR Code Pix */}
