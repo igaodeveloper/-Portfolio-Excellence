@@ -14,7 +14,7 @@ const badges = [
 ];
 
 export const Badges = () => (
-  <div className="flex flex-wrap gap-4 py-4">
+  <div className="flex flex-wrap gap-4 py-4 overflow-x-auto max-w-full">
     {badges.map((b, i) => (
       <Tooltip key={b.label}>
         <TooltipTrigger asChild>

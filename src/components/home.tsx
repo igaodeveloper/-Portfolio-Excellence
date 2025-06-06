@@ -20,7 +20,7 @@ const CodeEditor = React.lazy(() => import('./CodeEditor'));
 function Home() {
   return (
     <div
-      className="w-full min-h-screen bg-[#121214] perspective-[1500px] overflow-x-hidden"
+      className="w-full bg-[#121214] perspective-[1500px] overflow-x-hidden"
       style={{ perspective: '1500px' }}
     >
       <div className="relative z-10 transform-style-3d">

@@ -82,16 +82,16 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md py-3 shadow-md' : 'bg-transparent py-5'}`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="container flex items-center justify-between px-4 mx-auto">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold transition-colors text-white">
+        <Link to="/" className="text-xl font-bold text-white transition-colors">
           <span className="text-blue-500">igao</span>
           <span className="text-white">devs_</span>
           <span className="text-red-500">404</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-1">
+        <div className="items-center hidden space-x-1 md:flex">
           {navItems.map((item) =>
             item.isExternalLink ? (
               <Link
@@ -128,13 +128,13 @@ const Navbar = () => {
           {/* Animated Programming Button */}
           <motion.button
             onClick={toggleHighContrast}
-            className="ml-2 p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 ml-2 transition-colors rounded-full text-white/80 hover:text-white hover:bg-white/10"
             aria-label="Programming Mode"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
           >
-            <span className="text-xl font-mono">{`{}`}</span>
+            <span className="font-mono text-xl">{`{}`}</span>
           </motion.button>
         </div>
 
@@ -142,17 +142,17 @@ const Navbar = () => {
         <div className="flex items-center md:hidden">
           <motion.button
             onClick={toggleHighContrast}
-            className="mr-2 p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+            className="mr-2 p-2 min-w-[44px] min-h-[44px] rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-modern-accent"
             aria-label="Programming Mode"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
           >
-            <span className="text-xl font-mono">{`{}`}</span>
+            <span className="font-mono text-xl">{`{}`}</span>
           </motion.button>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            className="p-2 min-w-[44px] min-h-[44px] rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-modern-accent"
             aria-label="Open menu"
           >
             {isOpen ? (
@@ -170,7 +170,7 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md shadow-lg py-4 px-4 md:hidden"
+          className="absolute left-0 right-0 z-50 w-full max-w-full px-2 py-4 shadow-lg top-full bg-black/90 backdrop-blur-md md:hidden"
         >
           <div className="flex flex-col space-y-3">
             {navItems.map((item) =>
@@ -178,7 +178,8 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10 ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
+                  className={`px-4 py-3 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10 w-full text-base ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
+                  style={{ minHeight: 48 }}
                 >
                   {item.icon}
                   <span>{item.name}</span>
@@ -187,18 +188,19 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10"
+                  className="flex items-center w-full gap-2 px-4 py-3 text-base transition-colors rounded-lg text-white/80 hover:text-white hover:bg-white/10"
+                  style={{ minHeight: 48 }}
                 >
                   {item.icon}
                   <span>{item.name}</span>
                 </button>
               ),
             )}
-
             {/* CV Button for Mobile */}
             <button
               onClick={openCV}
-              className="px-4 py-2 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10"
+              className="flex items-center w-full gap-2 px-4 py-3 text-base transition-colors rounded-lg text-white/80 hover:text-white hover:bg-white/10"
+              style={{ minHeight: 48 }}
             >
               <FileText className="w-4 h-4" />
               <span>Currículo</span>

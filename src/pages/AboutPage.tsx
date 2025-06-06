@@ -13,6 +13,9 @@ import {
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
+import CareerTimeline from '../components/CareerTimeline';
+import SkillsMap from '../components/SkillsMap';
+import CertificatesSection from '../components/CertificatesSection';
 
 const AboutPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -336,6 +339,10 @@ const AboutPage = () => {
           </div>
         </div>
       </main>
+
+      <CareerTimeline />
+      <SkillsMap />
+      <CertificatesSection />
 
       <Footer />
     </div>

@@ -19,7 +19,7 @@ export function AdsenseBanner({ dataAdClient, dataAdSlot, style, format = 'auto'
 
   return (
     <ins
-      className="adsbygoogle"
+      className="adsbygoogle max-w-full w-full h-auto block"
       style={style || { display: 'block' }}
       data-ad-client={dataAdClient}
       data-ad-slot={dataAdSlot}

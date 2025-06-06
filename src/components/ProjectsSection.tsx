@@ -228,7 +228,7 @@ const ProjectsSection = () => {
       <div className="absolute rounded-full -top-20 -right-20 w-60 h-60 bg-modern-accent/5 blur-3xl opacity-40" />
       <div className="absolute rounded-full bottom-10 -left-20 w-80 h-80 bg-modern-accent2/5 blur-3xl opacity-30" />
 
-      <div className="relative z-10 container-section">
+      <div className="relative z-10 container-section px-2 sm:px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -317,7 +317,7 @@ const ProjectsSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8"
           >
             {displayedProjects.map((project, index) => (
               <motion.div

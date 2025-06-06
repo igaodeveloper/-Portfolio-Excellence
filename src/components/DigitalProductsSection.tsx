@@ -31,15 +31,15 @@ const products = [
 ];
 
 const DigitalProductsSection = () => (
-  <section className="py-20 px-6 bg-modern-dark relative overflow-hidden">
+  <section className="py-16 px-2 sm:px-4 md:px-8 bg-modern-dark relative overflow-hidden">
     <div className="container-section relative z-10">
-      <AnimatedTitle text="Produtos Digitais" className="section-title text-modern-white mb-12" />
+      <AnimatedTitle text="Produtos Digitais" className="section-title text-modern-white mb-8 sm:mb-12" />
       <motion.div
         variants={staggerContainer(0.1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {products.map((product, index) => (
           <motion.div

@@ -3,14 +3,17 @@
 @tailwind utilities;
 
 /* Otimizações para reduzir o CLS (Cumulative Layout Shift) */
-html {
+html, body {
   scroll-padding-top: 4rem;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 img,
 video {
-  max-width: 100%;
+  max-width: 100vw;
   height: auto;
+  display: block;
   aspect-ratio: attr(width) / attr(height);
 }
 
@@ -369,4 +372,11 @@ button:hover,
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+@media (max-width: 640px) {
+  .container-section {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }

@@ -74,45 +74,45 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-4 sm:px-6 md:px-12 py-16 md:py-20 relative overflow-hidden perspective-[1200px]"
+      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-12 py-12 md:py-20 relative overflow-x-hidden perspective-[1200px]"
       onMouseMove={handleMouseMove}
     >
       {/* Parallax avançado: camadas de fundo e efeitos */}
       <Parallax speed={-40} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg1.svg" alt="Montanhas Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg1.svg" alt="Montanhas Parallax" className="object-cover w-full h-full opacity-70" />
       </Parallax>
       <Parallax speed={-25} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg2.svg" alt="Árvores Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg2.svg" alt="Árvores Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg3.svg" alt="Nuvens Parallax" className="w-full h-full object-cover opacity-60" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-bg3.svg" alt="Nuvens Parallax" className="object-cover w-full h-full opacity-60" />
       </Parallax>
       <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-50} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-fog.svg" alt="Neblina Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-fog.svg" alt="Neblina Parallax" className="object-cover w-full h-full opacity-70" />
       </Parallax>
       <Parallax speed={-35} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-lights.svg" alt="Luzes Parallax" className="w-full h-full object-cover opacity-60" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-lights.svg" alt="Luzes Parallax" className="object-cover w-full h-full opacity-60" />
       </Parallax>
       <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-50" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-50" />
       </Parallax>
       <Parallax speed={-5} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-planet.svg" alt="Planeta Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-planet.svg" alt="Planeta Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-60} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-45} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-70" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-70" />
       </Parallax>
       <Parallax speed={-30} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-80" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-90" />
+        <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="object-cover w-full h-full opacity-90" />
       </Parallax>
       {/* Fim das camadas parallax */}
 
@@ -143,7 +143,7 @@ const HeroSection = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="relative z-10 grid items-center w-full grid-cols-1 gap-12 mx-auto max-w-7xl lg:grid-cols-2 gap-y-20 sm:gap-y-24"
+        className="relative z-10 grid items-center w-full max-w-2xl grid-cols-1 gap-8 mx-auto sm:max-w-4xl md:max-w-7xl lg:grid-cols-2 gap-y-12 sm:gap-y-16"
       >
         {/* Texto com rotação 3D interativa */}
         <motion.div
@@ -164,7 +164,7 @@ const HeroSection = () => {
             <motion.div className="overflow-hidden">
               <AnimatedCharacters
                 text="Bem-vindo ao meu portfólio"
-                className="text-xl font-medium sm:text-2xl md:text-3xl text-modern-accent"
+                className="text-lg font-medium sm:text-2xl md:text-3xl text-modern-accent"
                 delayOffset={0.4}
               />
             </motion.div>
@@ -173,7 +173,7 @@ const HeroSection = () => {
               <motion.div className="overflow-hidden">
                 <AnimatedCharacters
                   text="Desenvolvedor Front End Sênior"
-                  className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-modern-white"
+                  className="text-2xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-modern-white"
                   delayOffset={0.5}
                 />
               </motion.div>
@@ -182,7 +182,7 @@ const HeroSection = () => {
             <motion.div className="overflow-hidden">
               <AnimatedWords
                 text="Arquitetando experiências digitais modernas, escaláveis e acessíveis — com obsessão por usabilidade, performance e código limpo. Foco em interfaces de alta qualidade, acessibilidade e experiência do usuário."
-                className="max-w-xl text-base sm:text-lg md:text-xl text-modern-gray"
+                className="max-w-xs text-base sm:max-w-md md:max-w-xl sm:text-lg md:text-xl text-modern-gray"
                 delayOffset={0.7}
               />
             </motion.div>
