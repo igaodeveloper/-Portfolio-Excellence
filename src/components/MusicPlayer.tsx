@@ -160,9 +160,19 @@ const MusicPlayer: React.FC = () => {
                 transition={{ repeat: playing ? Infinity : 0, duration: 1.2, ease: 'easeInOut', repeatType: 'loop' }}
                 style={{ borderRadius: '50%' }}
               >
-                <span style={{ display: 'flex', alignItems: 'center' }}>
-                  <Equalizer playing={playing} />
-                </span>
+                <AnimatePresence>
+                  {playing && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ display: 'flex', alignItems: 'center' }}
+                    >
+                      <Equalizer playing={playing} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.div>
             </motion.div>
             <FaChevronUp
@@ -196,9 +206,19 @@ const MusicPlayer: React.FC = () => {
                 transition={{ repeat: playing ? Infinity : 0, duration: 1.2, ease: 'easeInOut', repeatType: 'loop' }}
                 style={{ borderRadius: '50%' }}
               >
-                <span style={{ display: 'flex', alignItems: 'center' }}>
-                  <Equalizer playing={playing} />
-                </span>
+                <AnimatePresence>
+                  {playing && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ display: 'flex', alignItems: 'center' }}
+                    >
+                      <Equalizer playing={playing} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.div>
             </motion.div>
             <div style={{ flex: 1, minWidth: 0 }}>
