@@ -4,7 +4,6 @@ import ProjectsSection from './ProjectsSection';
 import SkillsSection from './SkillsSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
-import ExperienceSection from './ExperienceSection';
 import EducationSection from './EducationSection';
 import ServicesSection from './ServicesSection';
 import WhatsAppButton from './WhatsAppButton';
@@ -40,12 +39,6 @@ function Home() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection direction="right" delay={0.2}>
-            <div className="transform translate-z-[40px]">
-              <ExperienceSection />
-            </div>
-          </AnimatedSection>
-
           <AnimatedSection direction="left" delay={0.2}>
             <div className="transform translate-z-[30px]">
               <EducationSection />
@@ -63,12 +56,12 @@ function Home() {
               id="code-editor"
               className="py-20 px-4 md:px-6 lg:px-12 transform translate-z-[60px]"
             >
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-4xl font-bold text-white mb-6 text-center">
+              <div className="mx-auto max-w-7xl">
+                <h2 className="mb-6 text-4xl font-bold text-center text-white">
                   Editor de Código{' '}
                   <span className="text-blue-500">VS Code</span>
                 </h2>
-                <p className="text-gray-300 text-center max-w-3xl mx-auto mb-12">
+                <p className="max-w-3xl mx-auto mb-12 text-center text-gray-300">
                   Experimente nosso editor de código integrado, com suporte para
                   HTML, CSS e JavaScript. Desenvolva suas landing pages com
                   preview em tempo real.
@@ -142,12 +135,12 @@ function NewsletterBannerInline() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg my-8">
-      <span className="font-semibold text-lg mr-2 block mb-2">Receba novidades e conteúdos exclusivos!</span>
+    <div className="px-4 py-6 my-8 text-center text-white rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-700">
+      <span className="block mb-2 mr-2 text-lg font-semibold">Receba novidades e conteúdos exclusivos!</span>
       {success ? (
-        <div className="text-green-200 font-semibold">Inscrição realizada com sucesso!</div>
+        <div className="font-semibold text-green-200">Inscrição realizada com sucesso!</div>
       ) : (
-        <form className="flex flex-col md:flex-row gap-2 items-center justify-center" onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center justify-center gap-2 md:flex-row" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
@@ -155,7 +148,7 @@ function NewsletterBannerInline() {
             value={form.name}
             onChange={handleChange}
             required
-            className="rounded px-3 py-2 text-gray-900 w-full md:w-48"
+            className="w-full px-3 py-2 text-gray-900 rounded md:w-48"
             disabled={loading}
           />
           <input
@@ -165,19 +158,19 @@ function NewsletterBannerInline() {
             value={form.email}
             onChange={handleChange}
             required
-            className="rounded px-3 py-2 text-gray-900 w-full md:w-64"
+            className="w-full px-3 py-2 text-gray-900 rounded md:w-64"
             disabled={loading}
           />
           <button
             type="submit"
-            className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+            className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100"
             disabled={loading}
           >
             {loading ? 'Enviando...' : 'Assinar Newsletter'}
           </button>
         </form>
       )}
-      {error && <div className="text-red-200 mt-2">{error}</div>}
+      {error && <div className="mt-2 text-red-200">{error}</div>}
     </div>
   );
 }

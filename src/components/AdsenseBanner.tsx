@@ -27,4 +27,12 @@ export function AdsenseBanner({ dataAdClient, dataAdSlot, style, format = 'auto'
       data-full-width-responsive="true"
     ></ins>
   );
+}
+
+export function CustomPartnerBanner({ imageUrl, link, alt }: { imageUrl: string; link: string; alt?: string }) {
+  return (
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      <img src={imageUrl} alt={alt || 'Parceiro'} style={{ minWidth: 320, minHeight: 100, borderRadius: 8 }} />
+    </a>
+  );
 } 

@@ -59,7 +59,14 @@
     <meta http-equiv="Cache-Control" content="max-age=31536000" />
 
     <title>igaodevs_404 | Desenvolvedor Front-end</title>
-    <script data-ad-client="%VITE_ADSENSE_CLIENT_ID%" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="module">
+      const clientId = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'ca-pub-7421489749371940';
+      const script = document.createElement('script');
+      script.setAttribute('data-ad-client', clientId);
+      script.async = true;
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+      document.head.appendChild(script);
+    </script>
   </head>
   <body>
     <!-- Elemento principal de montagem -->
@@ -97,6 +104,30 @@
         }
       </style>
     </div>
+
+    <!-- Google AdSense Vitrine Turbo -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7421489749371940" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7421489749371940"
+         data-ad-slot="7413953520"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <!-- Google AdSense In-Article -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7421489749371940" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-7421489749371940"
+         data-ad-slot="4183867523"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
     <!-- Scripts principais -->
     <script type="module" src="/src/main.tsx"></script>

@@ -10,6 +10,7 @@ import { AccessibilityProvider } from './contexts/AccessibilityContext';
 import SmoothScroll from './components/SmoothScroll';
 import NewsletterPopup from './components/NewsletterPopup';
 import PixDonationPopup from './components/PixDonationPopup';
+import WhatsAppButton from './components/WhatsAppButton';
 
 // Transition variants
 type TransitionVariant =
@@ -164,7 +165,7 @@ function App() {
         <AppRoutes />
         <CustomCursor />
         <HiddenAdminButton />
-        <AnimationDemoButton />
+        <WhatsAppButton />
       </SmoothScroll>
     </AccessibilityProvider>
   );

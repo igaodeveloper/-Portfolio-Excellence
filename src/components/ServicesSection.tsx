@@ -22,9 +22,24 @@ interface Service {
   icon: React.ReactNode;
   title: string;
   description: string;
+  cta?: { label: string; link: string };
 }
 
 const services: Service[] = [
+  {
+    icon: <Code className="w-10 h-10" />,
+    title: 'Freelance: Desenvolvimento & Design',
+    description:
+      'Ofereço serviços de desenvolvimento web, design de interfaces e consultoria personalizada para seu projeto.',
+    cta: { label: 'Contrate', link: '/contato' },
+  },
+  {
+    icon: <Users className="w-10 h-10" />,
+    title: 'Mentoria para Iniciantes',
+    description:
+      'Sessões de mentoria para quem está começando na área de tecnologia e deseja acelerar o aprendizado.',
+    cta: { label: 'Agende Mentoria', link: '/contato' },
+  },
   {
     icon: <Code className="w-10 h-10" />,
     title: 'Desenvolvimento Front-end',
@@ -203,25 +218,18 @@ export default function ServicesSection() {
                 </motion.div>
               </div>
 
-              <motion.h3
-                className="text-xl font-bold text-modern-white mb-2"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index + 0.2 }}
-                viewport={{ once: true }}
-              >
-                {service.title}
-              </motion.h3>
-
-              <motion.p
-                className="text-modern-gray relative z-10"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index + 0.3 }}
-                viewport={{ once: true }}
-              >
-                {service.description}
-              </motion.p>
+              <div className="mt-4">
+                <h3 className="text-xl font-bold text-modern-white mb-2">{service.title}</h3>
+                <p className="text-modern-gray mb-4">{service.description}</p>
+                {service.cta && (
+                  <a
+                    href={service.cta.link}
+                    className="inline-block px-4 py-2 bg-modern-accent text-white rounded hover:bg-modern-accent2 transition"
+                  >
+                    {service.cta.label}
+                  </a>
+                )}
+              </div>
 
               {/* Card hover effect */}
               <motion.div

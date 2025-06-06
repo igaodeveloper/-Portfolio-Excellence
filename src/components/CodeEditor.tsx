@@ -350,11 +350,33 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
     javascript: [],
   });
   const [isSnippetsDialogOpen, setIsSnippetsDialogOpen] = useState(false);
+  // Estado para modo zen/tela cheia
+  const [isZenMode, setIsZenMode] = useState(false);
+
+  // Estado para múltiplos arquivos
+  const [files, setFiles] = useState([
+    { id: '1', name: 'index.html', language: 'html', content: defaultHTMLCode },
+    { id: '2', name: 'style.css', language: 'css', content: defaultCSSCode },
+    { id: '3', name: 'script.js', language: 'javascript', content: defaultJSCode },
+  ]);
+  const [activeFileId, setActiveFileId] = useState('1');
 
   // Referências
   const fileInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<Monaco | null>(null);
+
+  // Atalho de teclado para alternar modo zen (F11)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'F11') {
+        e.preventDefault();
+        setIsZenMode((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Função para configurar os temas do Monaco Editor
   useEffect(() => {
@@ -1604,196 +1626,251 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
     }
   }, []);
 
+  // Funções para manipular arquivos
+  const handleAddFile = () => {
+    const newId = Date.now().toString();
+    const newFile = {
+      id: newId,
+      name: `novo-arquivo-${files.length + 1}.js`,
+      language: 'javascript',
+      content: '',
+    };
+    setFiles((prev) => [...prev, newFile]);
+    setActiveFileId(newId);
+  };
+  const handleCloseFile = (id: string) => {
+    if (files.length === 1) return;
+    const idx = files.findIndex((f) => f.id === id);
+    const newFiles = files.filter((f) => f.id !== id);
+    setFiles(newFiles);
+    if (activeFileId === id) {
+      const nextIdx = idx === 0 ? 0 : idx - 1;
+      setActiveFileId(newFiles[nextIdx].id);
+    }
+  };
+  const handleRenameFile = (id: string, newName: string) => {
+    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, name: newName } : f)));
+  };
+  const handleChangeFileContent = (id: string, newContent: string) => {
+    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, content: newContent } : f)));
+  };
+  const activeFile = files.find((f) => f.id === activeFileId);
+
   return (
     <div
-      className={`w-full h-[800px] bg-[#282a36] rounded-lg shadow-lg overflow-hidden ${className}`}
+      className={`w-full h-[800px] bg-[#282a36] rounded-lg shadow-lg overflow-hidden ${className} ${isZenMode ? 'fixed inset-0 z-[100] h-screen w-screen rounded-none bg-[#181920] transition-all duration-500' : ''}`}
+      style={isZenMode ? { animation: 'zenFadeIn 0.5s' } : {}}
     >
+      {/* Botão modo zen/tela cheia */}
+      <div className={`absolute top-4 right-4 z-50 ${isZenMode ? 'opacity-100' : 'opacity-80'} transition-opacity`}> 
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 w-8 text-[#f8f8f2] hover:text-white hover:bg-[#44475a] border border-[#44475a] shadow-lg"
+          onClick={() => setIsZenMode((prev) => !prev)}
+          aria-label={isZenMode ? 'Sair do Modo Zen' : 'Entrar no Modo Zen'}
+        >
+          {isZenMode ? <X size={18} /> : <Maximize size={18} />}
+        </Button>
+      </div>
+      {/* Fundo imersivo animado no modo zen */}
+      {isZenMode && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.15 }}
+          exit={{ opacity: 0 }}
+          className="absolute inset-0 bg-gradient-to-br from-[#181920] via-[#282a36] to-[#1a1b26] pointer-events-none z-0"
+        />
+      )}
+      {/* Conteúdo do editor, menus e toolbars */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="h-full flex flex-col"
+        className={`h-full flex flex-col relative z-10 ${isZenMode ? 'pt-8' : ''}`}
       >
-        {/* Barra superior */}
-        <div className="flex items-center justify-between px-4 py-2 bg-[#343746] border-b border-[#44475a]">
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              value={fileName}
-              onChange={(e) => setFileName(e.target.value)}
-              className="bg-[#44475a] text-[#f8f8f2] px-3 py-1 rounded text-sm outline-none border border-[#44475a] focus:border-[#bd93f9]"
-              placeholder="Nome do projeto"
-            />
+        {/* Barra superior e menus só aparecem fora do modo zen */}
+        {!isZenMode && (
+          <div className="flex items-center justify-between px-4 py-2 bg-[#343746] border-b border-[#44475a]">
+            <div className="flex items-center space-x-4">
+              <input
+                type="text"
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+                className="bg-[#44475a] text-[#f8f8f2] px-3 py-1 rounded text-sm outline-none border border-[#44475a] focus:border-[#bd93f9]"
+                placeholder="Nome do projeto"
+              />
 
-            {/* Menu de opções */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
-                >
-                  Opções
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={handleSave}
-                >
-                  <Save size={14} className="mr-2" /> Salvar Projeto
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={handleExportHTML}
-                >
-                  <Download size={14} className="mr-2" /> Exportar HTML
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={handleImport}
-                >
-                  <Upload size={14} className="mr-2" /> Importar Projeto
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={handleCopyCode}
-                >
-                  <Copy size={14} className="mr-2" /> Copiar Código
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={handleReset}
-                >
-                  <RotateCcw size={14} className="mr-2" /> Restaurar Padrão
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-[#44475a]" />
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={() => setIsSettingsOpen(true)}
-                >
-                  <Settings size={14} className="mr-2" /> Configurações
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                  onClick={() => setIsSearchOpen(true)}
-                >
-                  <Search size={14} className="mr-2" /> Buscar e Substituir
-                </DropdownMenuItem>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer">
-                    <Code2 size={14} className="mr-2" /> Tema do Editor
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">
-                      <DropdownMenuRadioGroup
-                        value={theme}
-                        onValueChange={(value) =>
-                          setTheme(value as EditorTheme)
-                        }
-                      >
-                        <DropdownMenuRadioItem
-                          value="dracula"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Dracula
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="vs-dark"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Visual Studio Dark
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="vs-light"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Visual Studio Light
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="github"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          GitHub
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="monokai"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Monokai
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="nord"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Nord
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="solarized-dark"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Solarized Dark
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem
-                          value="solarized-light"
-                          className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
-                        >
-                          Solarized Light
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
+              {/* Menu de opções */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className={`h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a] ${showConsole ? 'bg-[#44475a]' : ''}`}
-                    onClick={() => setShowConsole(!showConsole)}
+                    className="h-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
                   >
-                    <Terminal size={14} />
+                    Opções
                   </Button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="bottom"
-                  className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
-                >
-                  Console
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={handleSave}
+                  >
+                    <Save size={14} className="mr-2" /> Salvar Projeto
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={handleExportHTML}
+                  >
+                    <Download size={14} className="mr-2" /> Exportar HTML
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={handleImport}
+                  >
+                    <Upload size={14} className="mr-2" /> Importar Projeto
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={handleCopyCode}
+                  >
+                    <Copy size={14} className="mr-2" /> Copiar Código
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={handleReset}
+                  >
+                    <RotateCcw size={14} className="mr-2" /> Restaurar Padrão
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-[#44475a]" />
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={() => setIsSettingsOpen(true)}
+                  >
+                    <Settings size={14} className="mr-2" /> Configurações
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                    onClick={() => setIsSearchOpen(true)}
+                  >
+                    <Search size={14} className="mr-2" /> Buscar e Substituir
+                  </DropdownMenuItem>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer">
+                      <Code2 size={14} className="mr-2" /> Tema do Editor
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="bg-[#343746] text-[#f8f8f2] border-[#44475a]">
+                        <DropdownMenuRadioGroup
+                          value={theme}
+                          onValueChange={(value) =>
+                            setTheme(value as EditorTheme)
+                          }
+                        >
+                          <DropdownMenuRadioItem
+                            value="dracula"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Dracula
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="vs-dark"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Visual Studio Dark
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="vs-light"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Visual Studio Light
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="github"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            GitHub
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="monokai"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Monokai
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="nord"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Nord
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="solarized-dark"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Solarized Dark
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem
+                            value="solarized-light"
+                            className="hover:bg-[#44475a] focus:bg-[#44475a] cursor-pointer"
+                          >
+                            Solarized Light
+                          </DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
-            {!autoRefresh && (
+            <div className="flex items-center space-x-2">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
-                      onClick={updatePreview}
+                      className={`h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a] ${showConsole ? 'bg-[#44475a]' : ''}`}
+                      onClick={() => setShowConsole(!showConsole)}
                     >
-                      <Play size={14} />
+                      <Terminal size={14} />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent
                     side="bottom"
                     className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
                   >
-                    Executar
+                    Console
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            )}
+
+              {!autoRefresh && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 w-7 text-[#f8f8f2] hover:text-white hover:bg-[#44475a]"
+                        onClick={updatePreview}
+                      >
+                        <Play size={14} />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent
+                      side="bottom"
+                      className="bg-[#343746] text-[#f8f8f2] border-[#44475a]"
+                    >
+                      Executar
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Diálogo de Busca e Substituição */}
         {isSearchOpen && (
@@ -1805,7 +1882,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-6 w-6 p-0"
+                className="w-6 h-6 p-0"
                 onClick={() => setIsSearchOpen(false)}
               >
                 <X size={14} className="text-[#f8f8f2]" />
@@ -1842,7 +1919,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                   className="h-8 bg-[#282a36] text-[#f8f8f2] border-[#44475a] focus:border-[#bd93f9] focus:ring-[#bd93f9]"
                 />
               </div>
-              <div className="flex space-x-2 pt-1">
+              <div className="flex pt-1 space-x-2">
                 <Button
                   size="sm"
                   className="bg-[#bd93f9] hover:bg-[#8be9fd] text-[#282a36] h-7"
@@ -1906,13 +1983,13 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
             </DialogHeader>
 
             <ScrollArea className="max-h-[60vh]">
-              <div className="space-y-4 px-1 py-2">
+              <div className="px-1 py-2 space-y-4">
                 <div className="space-y-3">
                   <h3 className="text-sm font-medium text-[#8be9fd]">
                     Aparência
                   </h3>
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <Label htmlFor="fontSize" className="text-sm">
                         Tamanho da Fonte
                       </Label>
@@ -2104,7 +2181,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                     </div>
 
                     <div className="flex items-center space-x-2">
-                      <Label htmlFor="tabSize" className="text-sm mr-2">
+                      <Label htmlFor="tabSize" className="mr-2 text-sm">
                         Tamanho da Tabulação:
                       </Label>
                       <Select
@@ -2360,7 +2437,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                         } cursor-pointer transition-colors`}
                         onClick={() => restoreVersion(index)}
                       >
-                        <div className="flex justify-between items-center">
+                        <div className="flex items-center justify-between">
                           <span className="font-medium">
                             {version.description}
                             {index === currentVersion && (
@@ -2690,7 +2767,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
               className={viewMode === 'preview' ? 'hidden' : ''}
             >
               <Card className="h-full border-0 rounded-none bg-[#282a36]">
-                <CardContent className="p-0 h-full">
+                <CardContent className="h-full p-0">
                   <Tabs
                     defaultValue="html"
                     value={activeTab}
@@ -2865,7 +2942,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
               className={viewMode === 'editor' ? 'hidden' : ''}
             >
               <Card className="h-full border-0 rounded-none bg-[#282a36]">
-                <CardContent className="p-0 h-full flex flex-col">
+                <CardContent className="flex flex-col h-full p-0">
                   <div className="p-2 border-b border-[#343746] bg-[#343746] flex justify-between items-center">
                     <div className="flex items-center space-x-2">
                       <Play size={14} className="text-[#bd93f9]" />
@@ -3091,7 +3168,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                 <h3 className="text-sm font-medium text-[#8be9fd] mb-2">
                   Recursos Disponíveis
                 </h3>
-                <ul className="space-y-1 text-sm list-disc pl-5">
+                <ul className="pl-5 space-y-1 text-sm list-disc">
                   <li>Edição em tempo real de HTML, CSS e JavaScript</li>
                   <li>Console integrado para depuração</li>
                   <li>Formatação automática de código</li>
@@ -3109,7 +3186,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                 <h3 className="text-sm font-medium text-[#8be9fd] mb-2">
                   Dicas
                 </h3>
-                <ul className="space-y-1 text-sm list-disc pl-5">
+                <ul className="pl-5 space-y-1 text-sm list-disc">
                   <li>Experimente diferentes temas no menu Opções</li>
                   <li>
                     Use a Formatação de Código para melhorar a legibilidade
@@ -3165,7 +3242,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                         key={snippet.id}
                         className="p-3 rounded border border-[#44475a] bg-[#282a36]"
                       >
-                        <div className="flex justify-between items-center mb-2">
+                        <div className="flex items-center justify-between mb-2">
                           <div>
                             <h4 className="font-medium text-[#8be9fd]">
                               {snippet.name}
@@ -3253,7 +3330,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                             </Button>
                           </div>
                         </div>
-                        <div className="mt-2 relative">
+                        <div className="relative mt-2">
                           <pre className="p-2 text-xs bg-[#21222c] rounded overflow-x-auto whitespace-pre-wrap break-all">
                             {snippet.code.length > 100
                               ? snippet.code.substring(0, 100) + '...'
@@ -3267,7 +3344,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                   <div className="text-center py-8 text-[#6272a4]">
                     <FileText size={32} className="mx-auto mb-2" />
                     <p>Você ainda não tem snippets salvos</p>
-                    <p className="text-sm mt-1">
+                    <p className="mt-1 text-sm">
                       Crie seu primeiro snippet na aba "Criar Novo"
                     </p>
                   </div>
@@ -3340,7 +3417,7 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
                 </div>
               </div>
 
-              <div className="pt-3 flex justify-end space-x-2">
+              <div className="flex justify-end pt-3 space-x-2">
                 <Button
                   variant="outline"
                   onClick={() => setIsSnippetsDialogOpen(false)}
@@ -3386,6 +3463,78 @@ const CodeEditor = ({ className }: CodeEditorProps) => {
           </Tabs>
         </DialogContent>
       </Dialog>
+
+      {/* Abas de arquivos multi-arquivo */}
+      <div className="flex items-center bg-[#343746] border-b border-[#44475a] px-2 h-9">
+        {files.map((file) => (
+          <div
+            key={file.id}
+            className={`flex items-center px-3 py-1 mr-1 rounded-t cursor-pointer transition-colors text-sm font-mono select-none ${
+              file.id === activeFileId
+                ? 'bg-[#282a36] text-[#bd93f9] border-t-2 border-[#bd93f9]'
+                : 'bg-[#343746] text-[#f8f8f2] hover:bg-[#44475a]'
+            }`}
+            onClick={() => setActiveFileId(file.id)}
+            onDoubleClick={() => {
+              const newName = prompt('Renomear arquivo:', file.name);
+              if (newName) handleRenameFile(file.id, newName);
+            }}
+          >
+            <span className="truncate max-w-[120px]">{file.name}</span>
+            {files.length > 1 && (
+              <button
+                className="ml-2 text-[#ff5555] hover:text-red-400"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCloseFile(file.id);
+                }}
+                title="Fechar arquivo"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+        ))}
+        <button
+          className="ml-2 px-2 py-1 rounded bg-[#44475a] text-[#8be9fd] hover:bg-[#282a36] transition-colors"
+          onClick={handleAddFile}
+          title="Novo arquivo"
+        >
+          +
+        </button>
+      </div>
+      {/* Editor do arquivo ativo */}
+      <Editor
+        height="100%"
+        defaultLanguage={activeFile?.language || 'javascript'}
+        language={activeFile?.language || 'javascript'}
+        theme={theme}
+        value={activeFile?.content || ''}
+        onChange={(value) => handleChangeFileContent(activeFileId, value || '')}
+        options={{
+          fontSize,
+          minimap: { enabled: editorSettings.minimap },
+          scrollBeyondLastLine: false,
+          wordWrap: editorSettings.wordWrap ? 'on' : 'off',
+          automaticLayout: true,
+          fontFamily: 'Fira Code',
+          fontLigatures: true,
+          lineNumbers: editorSettings.lineNumbers ? 'on' : 'off',
+          tabSize: editorSettings.tabSize,
+          formatOnPaste: editorSettings.formatOnPaste,
+          formatOnType: editorSettings.formatOnType,
+          autoClosingBrackets: editorSettings.autoClosingBrackets ? 'always' : 'never',
+          autoClosingQuotes: editorSettings.autoClosingQuotes ? 'always' : 'never',
+          folding: editorSettings.folding,
+          bracketPairColorization: { enabled: true },
+          guides: { bracketPairs: editorSettings.bracketPairs },
+          renderWhitespace: 'none',
+          quickSuggestions: editorSettings.quickSuggestions,
+          suggestOnTriggerCharacters: editorSettings.suggestOnTriggerCharacters,
+        }}
+        beforeMount={handleEditorBeforeMount}
+        onMount={handleEditorMount}
+      />
     </div>
   );
 };

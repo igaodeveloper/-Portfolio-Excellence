@@ -65,7 +65,7 @@ const PixDonationPopup = () => {
               Se este conteúdo te ajudou, considere apoiar com qualquer valor via Pix. Sua contribuição faz a diferença!
             </p>
             <div className="flex flex-col items-center mb-4">
-              <span className="font-mono text-lg bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg select-all mb-2">{PIX_KEY}</span>
+              <span className="font-mono text-lg bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg select-all mb-2 text-blue-600">{PIX_KEY}</span>
               <Button
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold"
                 onClick={handleCopy}
