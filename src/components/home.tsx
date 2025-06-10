@@ -135,12 +135,12 @@ function NewsletterBannerInline() {
   };
 
   return (
-    <div className="px-4 py-6 my-8 text-center text-white rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-700">
-      <span className="block mb-2 mr-2 text-lg font-semibold">Receba novidades e conteúdos exclusivos!</span>
+    <div className="px-2 py-4 my-6 text-center text-white rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-700 sm:px-4 sm:py-6 sm:my-8">
+      <span className="block mb-2 mr-2 text-base sm:text-lg font-semibold">Receba novidades e conteúdos exclusivos!</span>
       {success ? (
         <div className="font-semibold text-green-200">Inscrição realizada com sucesso!</div>
       ) : (
-        <form className="flex flex-col items-center justify-center gap-2 md:flex-row" onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center justify-center gap-2 sm:flex-row" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
@@ -148,7 +148,7 @@ function NewsletterBannerInline() {
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 text-gray-900 rounded md:w-48"
+            className="w-full px-3 py-2 text-gray-900 rounded sm:w-48"
             disabled={loading}
           />
           <input
@@ -158,12 +158,12 @@ function NewsletterBannerInline() {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 text-gray-900 rounded md:w-64"
+            className="w-full px-3 py-2 text-gray-900 rounded sm:w-64"
             disabled={loading}
           />
           <button
             type="submit"
-            className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100"
+            className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100 mt-2 sm:mt-0"
             disabled={loading}
           >
             {loading ? 'Enviando...' : 'Assinar Newsletter'}

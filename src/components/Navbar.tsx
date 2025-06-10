@@ -89,9 +89,9 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md py-3 shadow-md' : 'bg-transparent py-5'}`}
     >
-      <div className="container flex items-center justify-between px-4 mx-auto">
+      <div className="container flex items-center justify-between px-2 mx-auto sm:px-4">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-white transition-colors">
+        <Link to="/" className="text-lg font-bold text-white transition-colors sm:text-xl">
           <span className="text-blue-500">igao</span>
           <span className="text-white">devs_</span>
           <span className="text-red-500">404</span>
@@ -179,14 +179,14 @@ const Navbar = () => {
           exit={{ opacity: 0, y: -20 }}
           className="absolute left-0 right-0 z-50 w-full max-w-full px-2 py-4 shadow-lg top-full bg-black/90 backdrop-blur-md md:hidden"
         >
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-2 sm:space-y-3">
             {navItems.map((item) =>
               item.isExternalLink ? (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-4 py-3 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10 w-full text-base ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
-                  style={{ minHeight: 48 }}
+                  className={`px-3 py-3 sm:px-4 rounded-lg text-white/80 hover:text-white flex items-center gap-2 transition-colors hover:bg-white/10 w-full text-base ${item.highlighted ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}`}
+                  style={{ minHeight: 44 }}
                 >
                   {item.icon}
                   <span>{item.name}</span>
@@ -195,19 +195,19 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="flex items-center w-full gap-2 px-4 py-3 text-base transition-colors rounded-lg text-white/80 hover:text-white hover:bg-white/10"
-                  style={{ minHeight: 48 }}
+                  className="flex items-center w-full gap-2 px-3 py-3 text-base transition-colors rounded-lg sm:px-4 text-white/80 hover:text-white hover:bg-white/10"
+                  style={{ minHeight: 44 }}
                 >
                   {item.icon}
                   <span>{item.name}</span>
                 </button>
               ),
             )}
-            {/* CV Button for Mobile */}
+            {/* CV Button Mobile */}
             <button
               onClick={openCV}
-              className="flex items-center w-full gap-2 px-4 py-3 text-base transition-colors rounded-lg text-white/80 hover:text-white hover:bg-white/10"
-              style={{ minHeight: 48 }}
+              className="flex items-center w-full gap-2 px-3 py-3 text-base transition-colors rounded-lg sm:px-4 text-white/80 hover:text-white hover:bg-white/10"
+              style={{ minHeight: 44 }}
             >
               <FileText className="w-4 h-4" />
               <span>Currículo</span>

@@ -48,3 +48,10 @@
     display: none !important;
   }
 }
+
+/* Imagens fluidas e responsivas */
+img, video, svg, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

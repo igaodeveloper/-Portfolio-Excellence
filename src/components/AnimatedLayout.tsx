@@ -76,7 +76,18 @@ const AnimatedLayout = ({
     }
   };
 
-  return getTransitionComponent();
+  return (
+    <>
+      {/* Mobile: container responsivo */}
+      <div className="block sm:hidden container mx-auto px-4 w-full min-h-screen flex flex-col">
+        {getTransitionComponent()}
+      </div>
+      {/* Desktop: layout original */}
+      <div className="hidden sm:block w-full min-h-screen flex flex-col">
+        {getTransitionComponent()}
+      </div>
+    </>
+  );
 };
 
 export default AnimatedLayout;

@@ -75,7 +75,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-12 py-12 md:py-20 relative overflow-x-hidden perspective-[1200px]"
+      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-8 py-8 md:py-20 relative overflow-x-hidden perspective-[1200px]"
       onMouseMove={handleMouseMove}
     >
       {/* Parallax minimalista: gradiente + aurora */}
@@ -114,7 +114,7 @@ const HeroSection = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="relative z-10 grid items-center w-full max-w-2xl grid-cols-1 gap-8 mx-auto sm:max-w-4xl md:max-w-7xl lg:grid-cols-2 gap-y-12 sm:gap-y-16"
+        className="relative z-10 grid items-center w-full max-w-2xl grid-cols-1 gap-8 mx-auto sm:max-w-4xl md:max-w-7xl lg:grid-cols-2 gap-y-8 sm:gap-y-12"
       >
         {/* Texto com rotação 3D interativa */}
         <motion.div
