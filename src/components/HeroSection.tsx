@@ -12,6 +12,7 @@ import { useParallax } from '@/lib/useParallax';
 import { useRef, useState, useEffect } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import AnimatedParticles from './AnimatedParticles';
+import LazyImage from './LazyImage';
 
 const socialLinks = [
   {
@@ -79,7 +80,7 @@ const HeroSection = () => {
     >
       {/* Parallax minimalista: gradiente + aurora */}
       <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
+        <LazyImage width={1920} height={1080} src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
         <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />

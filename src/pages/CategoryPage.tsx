@@ -77,7 +77,7 @@ const CategoryPage = () => {
       <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white relative overflow-hidden">
         {/* Parallax visual para a categoria */}
         <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-fog.svg" alt="Fog Parallax" className="w-full h-full object-cover opacity-50" />
+          <LazyImage width={1920} height={1080} src="/parallax-fog.svg" alt="Fog Parallax" className="w-full h-full object-cover opacity-50" />
         </Parallax>
         <Parallax speed={-8} className="absolute inset-0 z-0 pointer-events-none">
           <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-30" />

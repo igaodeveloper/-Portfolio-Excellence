@@ -163,7 +163,6 @@ body.larger-text {
 /* Otimizações para o scroll suave */
 body.smooth-scroll-enabled {
   scroll-behavior: smooth;
-  overscroll-behavior-y: none; /* Evita bounce no iOS e Chrome */
 }
 
 /* Otimizações para carregamento */
@@ -323,16 +322,16 @@ body.smooth-scroll-enabled {
 }
 
 ::-webkit-scrollbar-track {
-  background: theme('colors.modern.dark');
+  background: theme('colors.gray.900');
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme('colors.modern.accent');
+  background: theme('colors.blue.500');
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.modern.accent2');
+  background: theme('colors.blue.400');
 }
 
 /* Custom cursor styles */

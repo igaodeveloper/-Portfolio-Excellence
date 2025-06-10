@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedTitle } from '@/components/ui/animated-text';
 import { fadeIn, staggerContainer } from '@/lib/animations';
+import LazyImage from './LazyImage';
 
 const products = [
   {
@@ -47,7 +48,7 @@ const DigitalProductsSection = () => (
             variants={fadeIn('up', index * 0.1)}
             className="card-hover bg-modern-darker rounded-lg p-6 border border-modern-accent/10 group relative overflow-hidden"
           >
-            <img src={product.image} alt={product.title} className="w-full h-40 object-cover rounded mb-4" />
+            <LazyImage src={product.image} alt={product.title} className="w-full h-40 object-cover rounded mb-4" />
             <h3 className="text-xl font-bold text-modern-white mb-2">{product.title}</h3>
             <p className="text-modern-gray mb-4">{product.description}</p>
             <span className="inline-block mb-2 px-3 py-1 bg-modern-accent text-white rounded-full text-xs">{product.type}</span>

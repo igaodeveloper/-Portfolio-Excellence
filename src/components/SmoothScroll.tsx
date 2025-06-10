@@ -6,11 +6,13 @@ interface SmoothScrollProps {
   children: ReactNode;
 }
 
+const isMobile = typeof window !== 'undefined' && /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 const SmoothScroll = ({ children }: SmoothScrollProps) => {
   const { reducedMotion } = useAccessibility?.() || { reducedMotion: false };
 
-  // Se o usuário preferir movimento reduzido, apenas renderizamos as crianças sem efeitos
-  if (reducedMotion) {
+  // Se o usuário preferir movimento reduzido ou for mobile, apenas renderizamos as crianças sem efeitos
+  if (reducedMotion || isMobile) {
     return <>{children}</>;
   }
 

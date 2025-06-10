@@ -20,6 +20,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '../components/ui/tabs';
+import LazyImage from '../components/LazyImage';
 
 // Sample projects data
 const projects = [
@@ -141,7 +142,7 @@ const ProjectsPage = () => {
     >
       <Navbar />
 
-      <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+      <header className="px-4 pt-32 pb-16 text-white md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -150,16 +151,16 @@ const ProjectsPage = () => {
           >
             <Link
               to="/blog"
-              className="inline-flex items-center text-blue-300 hover:text-white mb-6 transition-colors"
+              className="inline-flex items-center mb-6 text-blue-300 transition-colors hover:text-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               <span>Voltar para o blog</span>
             </Link>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="mb-4 text-4xl font-bold md:text-5xl">
               Meus Projetos
             </h1>
-            <p className="text-xl opacity-90 max-w-2xl">
+            <p className="max-w-2xl text-xl opacity-90">
               Uma seleção dos meus projetos mais recentes e relevantes no campo
               do desenvolvimento front-end.
             </p>
@@ -167,14 +168,14 @@ const ProjectsPage = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container px-4 py-12 mx-auto">
         {/* Featured Projects */}
         {featuredProjects.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-bold mb-8 dark:text-white">
+            <h2 className="mb-8 text-2xl font-bold dark:text-white">
               Projetos em Destaque
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {featuredProjects.map((project) => (
                 <motion.div
                   key={project.id}
@@ -183,22 +184,21 @@ const ProjectsPage = () => {
                   transition={{ duration: 0.5 }}
                   className="group"
                 >
-                  <Card className="h-full overflow-hidden hover:shadow-xl transition-shadow">
+                  <Card className="h-full overflow-hidden transition-shadow hover:shadow-xl">
                     <div className="relative h-64 overflow-hidden">
-                      <img
+                      <LazyImage
                         src={project.image}
                         alt={project.title}
-                        loading="lazy"
-                        width="1920"
-                        height="1080"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        width={1920}
+                        height={1080}
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div className="p-6 w-full">
-                          <div className="flex justify-between items-center">
+                      <div className="absolute inset-0 flex items-end transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/70 to-transparent group-hover:opacity-100">
+                        <div className="w-full p-6">
+                          <div className="flex items-center justify-between">
                             <Badge
                               variant="secondary"
-                              className="bg-blue-600 text-white"
+                              className="text-white bg-blue-600"
                             >
                               Destaque
                             </Badge>
@@ -208,7 +208,7 @@ const ProjectsPage = () => {
                                   variant="outline"
                                   size="icon"
                                   asChild
-                                  className="bg-white/20 border-0 hover:bg-white/30"
+                                  className="border-0 bg-white/20 hover:bg-white/30"
                                 >
                                   <a
                                     href={project.githubUrl}
@@ -216,7 +216,7 @@ const ProjectsPage = () => {
                                     rel="noopener noreferrer"
                                     aria-label="GitHub repository"
                                   >
-                                    <Github className="h-4 w-4 text-white" />
+                                    <Github className="w-4 h-4 text-white" />
                                   </a>
                                 </Button>
                               )}
@@ -225,7 +225,7 @@ const ProjectsPage = () => {
                                   variant="outline"
                                   size="icon"
                                   asChild
-                                  className="bg-white/20 border-0 hover:bg-white/30"
+                                  className="border-0 bg-white/20 hover:bg-white/30"
                                 >
                                   <a
                                     href={project.liveUrl}
@@ -233,7 +233,7 @@ const ProjectsPage = () => {
                                     rel="noopener noreferrer"
                                     aria-label="Live demo"
                                   >
-                                    <ExternalLink className="h-4 w-4 text-white" />
+                                    <ExternalLink className="w-4 h-4 text-white" />
                                   </a>
                                 </Button>
                               )}
@@ -243,7 +243,7 @@ const ProjectsPage = () => {
                       </div>
                     </div>
                     <CardHeader>
-                      <CardTitle className="text-2xl group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      <CardTitle className="text-2xl transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-base dark:text-gray-400">
@@ -272,7 +272,7 @@ const ProjectsPage = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <Github className="h-4 w-4 mr-2" />
+                              <Github className="w-4 h-4 mr-2" />
                               Código
                             </a>
                           </Button>
@@ -284,7 +284,7 @@ const ProjectsPage = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <Globe className="h-4 w-4 mr-2" />
+                              <Globe className="w-4 h-4 mr-2" />
                               Ver projeto
                             </a>
                           </Button>
@@ -300,7 +300,7 @@ const ProjectsPage = () => {
 
         {/* All Projects */}
         <section>
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold dark:text-white">
               Todos os Projetos
             </h2>
@@ -315,7 +315,7 @@ const ProjectsPage = () => {
             </Tabs>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
@@ -326,19 +326,18 @@ const ProjectsPage = () => {
                   delay: 0.1 * (filteredProjects.indexOf(project) % 6),
                 }}
               >
-                <Card className="h-full hover:shadow-md transition-shadow">
+                <Card className="h-full transition-shadow hover:shadow-md">
                   <div className="h-48 overflow-hidden">
-                    <img
+                    <LazyImage
                       src={project.image}
                       alt={project.title}
-                      loading="lazy"
-                      width="1920"
-                      height="1080"
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      width={1920}
+                      height={1080}
+                      className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                   <CardHeader>
-                    <CardTitle className="text-xl hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <CardTitle className="text-xl transition-colors hover:text-blue-600 dark:hover:text-blue-400">
                       {project.title}
                     </CardTitle>
                     <CardDescription className="line-clamp-2 dark:text-gray-400">
@@ -402,12 +401,12 @@ const ProjectsPage = () => {
           </div>
 
           {filteredProjects.length === 0 && (
-            <div className="text-center py-16">
-              <Code className="h-16 w-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
-              <h3 className="text-xl font-bold mb-2 dark:text-white">
+            <div className="py-16 text-center">
+              <Code className="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Nenhum projeto nesta categoria
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="mb-6 text-gray-600 dark:text-gray-400">
                 Não existem projetos na categoria selecionada.
               </p>
               <Button onClick={() => setActiveTab('all')}>
@@ -418,23 +417,23 @@ const ProjectsPage = () => {
         </section>
 
         {/* Call to action */}
-        <section className="mt-20 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg p-8 text-white">
+        <section className="p-8 mt-20 text-white rounded-lg bg-gradient-to-r from-blue-600 to-indigo-700">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl">
               Interessado em trabalhar juntos?
             </h2>
-            <p className="text-lg opacity-90 mb-8">
+            <p className="mb-8 text-lg opacity-90">
               Estou sempre aberto a novas oportunidades e parcerias. Entre em
               contato para discutirmos seu projeto!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button variant="secondary" size="lg" asChild>
                 <Link to="/blog/contato">Entre em contato</Link>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="text-white border-white hover:bg-white/10"
                 asChild
               >
                 <Link to="/blog/sobre">Conheça mais sobre mim</Link>

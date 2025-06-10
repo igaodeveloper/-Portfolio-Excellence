@@ -10,6 +10,7 @@ import {
   FaFilm,
 } from 'react-icons/fa';
 import { Parallax } from 'react-scroll-parallax';
+import LazyImage from '../components/LazyImage';
 
 const VideoPlayer = lazy(() => import('../components/VideoPlayer'));
 
@@ -357,7 +358,7 @@ const VideoPage: React.FC = () => {
       <div className="relative min-h-screen bg-modern-dark overflow-hidden">
         {/* Parallax visual minimalista para vídeos */}
         <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
+          <LazyImage src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
         </Parallax>
         <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
           <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
