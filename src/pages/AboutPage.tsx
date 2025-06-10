@@ -135,6 +135,26 @@ const AboutPage = () => {
                 </div>
               </section>
 
+              {/* Seção de Idiomas */}
+              <section className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-8 mb-8">
+                <h2 className="text-2xl font-bold mb-6 dark:text-white">Idiomas</h2>
+                <div className="flex flex-wrap gap-4">
+                  <span className="inline-block bg-blue-100 text-blue-800 text-base px-4 py-1 rounded-full">Português (Nativo)</span>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-base px-4 py-1 rounded-full">Inglês (Técnico Básico)</span>
+                  <span className="inline-block bg-blue-100 text-blue-800 text-base px-4 py-1 rounded-full">Espanhol (Fluente)</span>
+                </div>
+              </section>
+
+              {/* Seção de Hobbies */}
+              <section className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-8 mb-8">
+                <h2 className="text-2xl font-bold mb-6 dark:text-white">Hobbies</h2>
+                <div className="prose prose-lg dark:prose-invert">
+                  <p>
+                    Sou gamer, gosto de gravar lives, criar conteúdos para TikTok e Instagram, e também faço mentoria para novos desenvolvedores que desejam ingressar na área de tecnologia.
+                  </p>
+                </div>
+              </section>
+
               <section className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-8 mb-8">
                 <h2 className="text-2xl font-bold mb-6 dark:text-white">
                   Minha Stack

@@ -87,6 +87,48 @@ const careerEvents: CareerEvent[] = [
       icon: <Trophy className="w-4 h-4 text-white" />,
     },
   },
+  {
+    id: 6,
+    type: 'job',
+    title: 'Co-fundador e CTO',
+    organization: 'InovaStart',
+    period: '2017 - 2018',
+    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas.'
+  },
+  {
+    id: 7,
+    type: 'job',
+    title: 'Desenvolvedor Full Stack',
+    organization: 'HealthTech Startup',
+    period: '2018 - 2019',
+    description: 'Desenvolvimento de soluções digitais para o setor de saúde, incluindo integrações com APIs de clínicas e sistemas de agendamento online.'
+  },
+  {
+    id: 8,
+    type: 'achievement',
+    title: 'Prêmio Startup Revelação',
+    organization: 'Startup Summit',
+    period: '2018',
+    description: 'Reconhecimento pelo desenvolvimento inovador de plataforma SaaS para pequenas empresas.',
+    badge: {
+      label: 'Startup Revelação',
+      color: 'bg-purple-600',
+      icon: <Award className="w-4 h-4 text-white" />,
+    },
+  },
+  {
+    id: 9,
+    type: 'achievement',
+    title: 'Prêmio HealthTech Inovação',
+    organization: 'HealthTech Awards',
+    period: '2019',
+    description: 'Premiação por soluções digitais inovadoras no setor de saúde.',
+    badge: {
+      label: 'HealthTech Inovação',
+      color: 'bg-green-700',
+      icon: <Award className="w-4 h-4 text-white" />,
+    },
+  },
 ];
 
 export const CareerTimeline: React.FC = () => (

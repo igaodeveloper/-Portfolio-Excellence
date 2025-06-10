@@ -101,6 +101,22 @@ const educationItems: EducationItem[] = [
       'Estudo aprofundado sobre machine learning, processamento de linguagem natural e visão computacional com Python e TensorFlow.',
     type: 'education',
   },
+  {
+    id: 11,
+    title: 'Prêmio Startup Revelação',
+    organization: 'Startup Summit',
+    period: '2018',
+    description: 'Reconhecimento pelo desenvolvimento inovador de plataforma SaaS para pequenas empresas.',
+    type: 'award',
+  },
+  {
+    id: 12,
+    title: 'Prêmio HealthTech Inovação',
+    organization: 'HealthTech Awards',
+    period: '2019',
+    description: 'Premiação por soluções digitais inovadoras no setor de saúde.',
+    type: 'award',
+  },
 ];
 
 export default function EducationSection() {
