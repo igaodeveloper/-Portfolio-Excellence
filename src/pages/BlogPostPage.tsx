@@ -33,7 +33,7 @@ import {
   TooltipTrigger,
 } from '../components/ui/tooltip';
 import { useToast } from '../components/ui/use-toast';
-import { Toaster } from '../components/ui/toaster';
+import Toaster from "../components/ui/toaster";
 import { Helmet } from 'react-helmet';
 import { Parallax } from 'react-scroll-parallax';
 import { AdsenseBanner } from '@/components/AdsenseBanner';
@@ -327,7 +327,7 @@ const BlogPostPage = () => {
         </Parallax>
         {/* Fim do fundo parallax minimalista */}
 
-        <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900 text-white relative overflow-hidden">
+        <header className="relative px-4 pt-32 pb-16 overflow-hidden text-white md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900">
           {/* Parallax visual para o post (minimalista) */}
           <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
             <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
@@ -597,13 +597,13 @@ const BlogPostPage = () => {
               </div>
 
               {/* Banner Newsletter */}
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md rounded-lg mb-10">
-                <span className="font-semibold text-lg mr-2">Curtiu o conteúdo? Receba mais dicas no seu e-mail!</span>
+              <div className="px-4 py-6 mb-10 text-center text-white rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-700">
+                <span className="mr-2 text-lg font-semibold">Curtiu o conteúdo? Receba mais dicas no seu e-mail!</span>
                 <Link
                   to="/newsletter"
-                  className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+                  className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100"
                 >
-                  <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
+                  <Mail className="w-5 h-5 mr-2" /> Assinar Newsletter
                 </Link>
               </div>
 
