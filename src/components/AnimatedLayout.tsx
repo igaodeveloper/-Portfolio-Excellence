@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import PageTransition from './PageTransition';
 import AdvancedPageTransition from './AdvancedPageTransition';
 import { useAccessibility } from '../contexts/AccessibilityContext';
@@ -26,6 +26,12 @@ const AnimatedLayout = ({
   transitionVariant = 'fade',
 }: AnimatedLayoutProps) => {
   const { reducedMotion } = useAccessibility?.() || { reducedMotion: false };
+
+  const isMobile = useMemo(() => typeof window !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768), []);
+  // Se for mobile, não usar transições
+  if (isMobile) {
+    return <>{children}</>;
+  }
 
   // Determine which transition component to use
   const getTransitionComponent = () => {

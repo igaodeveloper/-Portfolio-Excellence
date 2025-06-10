@@ -1,0 +1,83 @@
+.minigame-hero-bg {
+  background: linear-gradient(120deg, #18181b 60%, #1e293b 100%);
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.memory-game-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  background: rgba(24, 24, 27, 0.98);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  text-align: center;
+  color: #fff;
+}
+.memory-game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+}
+.memory-card {
+  width: 70px;
+  height: 90px;
+  perspective: 600px;
+  cursor: pointer;
+}
+.memory-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  background: #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.card-front {
+  background: #d1d5db;
+}
+.card-back {
+  transform: rotateY(180deg);
+  background: #fbbf24;
+}
+.restart-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.restart-btn:hover {
+  background: #1d4ed8;
+}
+.win-message {
+  margin-top: 18px;
+  color: #16a34a;
+  font-weight: bold;
+  font-size: 1.1rem;
+} 

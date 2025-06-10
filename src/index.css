@@ -395,4 +395,10 @@ button:hover,
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+  :root {
+    --vh: 1vh;
+  }
+  .min-h-screen {
+    min-height: calc(var(--vh, 1vh) * 100) !important;
+  }
 }

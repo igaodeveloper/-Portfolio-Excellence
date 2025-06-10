@@ -25,7 +25,7 @@ function Home() {
     >
       <div className="relative z-10 transform-style-3d">
         <Navbar />
-        <main className="transform-style-3d">
+        <main className="transform-style-3d pt-16 md:pt-0">
           <section className="transform rotateX-[5deg] rotateY-[-3deg] scale-[0.98] transition-all duration-500 hover:scale-[1] hover:rotateX-0 hover:rotateY-0">
             <HeroSection />
           </section>

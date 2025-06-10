@@ -3,6 +3,8 @@ import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 
 import { cn } from '@/lib/utils';
 
+const isMobile = typeof window !== 'undefined' && /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
@@ -12,7 +14,7 @@ const ScrollArea = React.forwardRef<
     className={cn('relative overflow-hidden', className)}
     {...props}
   >
-    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
+    <ScrollAreaPrimitive.Viewport className={isMobile ? "h-full w-full rounded-[inherit] overflow-auto" : "h-full w-full rounded-[inherit]"}>
       {children}
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar />

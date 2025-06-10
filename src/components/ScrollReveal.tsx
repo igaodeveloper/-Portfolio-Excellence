@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef, useMemo } from 'react';
 import { motion, useInView, useAnimation, Variants } from 'framer-motion';
 import { useAccessibility } from '../contexts/AccessibilityContext';
 
@@ -27,6 +27,7 @@ const ScrollReveal = ({
   const ref = useRef(null);
   const inView = useInView(ref, { amount: threshold, once });
   const { reducedMotion } = useAccessibility?.() || { reducedMotion: false };
+  const isMobile = useMemo(() => typeof window !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768), []);
 
   useEffect(() => {
     if (inView) {
@@ -37,7 +38,7 @@ const ScrollReveal = ({
   }, [controls, inView, once]);
 
   // If reduced motion is preferred, render without animations
-  if (reducedMotion) {
+  if (reducedMotion || isMobile) {
     return <div className={className}>{children}</div>;
   }
 

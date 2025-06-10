@@ -143,6 +143,22 @@ export function Footer() {
                   Services
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/minigame"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Mini Game
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/super-minigame"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Super Minigame
+                </Link>
+              </li>
             </ul>
           </motion.div>
 

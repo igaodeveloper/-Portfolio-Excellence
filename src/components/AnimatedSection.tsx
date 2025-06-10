@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../lib/useScrollAnimation';
+import { useMemo } from 'react';
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -28,6 +29,11 @@ const AnimatedSection = ({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const isMobile = useMemo(() => typeof window !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768), []);
+  if (isMobile) {
+    return <div className={className}>{children}</div>;
+  }
 
   if (staggerChildren) {
     return (

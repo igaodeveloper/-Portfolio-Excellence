@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 type FloatingIconProps = {
   icon: ReactNode;
@@ -23,6 +23,11 @@ export function FloatingIcon({
   hoverable = true,
   onClick,
 }: FloatingIconProps) {
+  const isMobile = useMemo(() => typeof window !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768), []);
+  if (isMobile) {
+    return <div className={cn('relative flex items-center justify-center', hoverable ? 'cursor-pointer' : '', className)}>{icon}</div>;
+  }
+
   return (
     <motion.div
       className={cn(

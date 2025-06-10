@@ -65,6 +65,18 @@ const Navbar = () => {
       isExternalLink: true,
       highlighted: true,
     },
+    {
+      name: 'Mini Game',
+      icon: <Play className="w-4 h-4 text-yellow-400" />,
+      href: '/minigame',
+      isExternalLink: true,
+    },
+    {
+      name: 'Super Minigame',
+      icon: <Play className="w-4 h-4 text-green-500" />,
+      href: '/super-minigame',
+      isExternalLink: true,
+    },
   ];
 
   // Smooth scroll or navigate to section

@@ -1,14 +1,18 @@
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 const particles = Array.from({ length: 18 });
 
 export default function AnimatedParticles() {
+  const isMobile = useMemo(() => typeof window !== 'undefined' && (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768), []);
+  if (isMobile) return null;
+
   return (
-    <div className="pointer-events-none absolute inset-0 z-10">
+    <div className="absolute inset-0 z-10 pointer-events-none">
       {particles.map((_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-white/70 shadow-lg"
+          className="absolute rounded-full shadow-lg bg-white/70"
           style={{
             width: 8 + Math.random() * 16,
             height: 8 + Math.random() * 16,

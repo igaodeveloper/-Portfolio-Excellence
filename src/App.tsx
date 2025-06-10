@@ -53,6 +53,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AnimationDemo = lazy(() => import('./pages/AnimationDemo'));
 const VideoPage = lazy(() => import('./pages/VideoPage'));
 const NewsletterPage = lazy(() => import('./pages/NewsletterPage'));
+const MiniGame = lazy(() => import('./pages/MiniGame'));
+const SuperMinigame = lazy(() => import('./pages/SuperMinigame'));
 
 // Import our custom ProtectedRoute instead of the simplified version
 const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'));
@@ -123,6 +125,9 @@ function AppRoutes() {
           {/* Animation Demo Page */}
           <Route path="/animation-demo" element={<AnimationDemo />} />
 
+          {/* Mini Game Page */}
+          <Route path="/minigame" element={<MiniGame />} />
+
           {/* Video Player Page */}
           <Route path="/video-player" element={<VideoPage />} />
 
@@ -136,6 +141,9 @@ function AppRoutes() {
 
           {/* Newsletter Page */}
           <Route path="/newsletter" element={<NewsletterPage />} />
+
+          {/* Super Minigame Page */}
+          <Route path="/super-minigame" element={<SuperMinigame />} />
 
           {/* Admin Routes */}
           <Route
@@ -162,6 +170,15 @@ function AppRoutes() {
 }
 
 function App() {
+  useEffect(() => {
+    function setVh() {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    }
+    window.addEventListener('resize', setVh);
+    setVh();
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
   return (
     <ThemeProvider>
       <AccessibilityProvider>
