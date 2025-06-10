@@ -209,35 +209,52 @@ body.smooth-scroll-enabled {
 
 @layer base {
   :root {
+    /* Cores principais */
     --background: 240 3% 7%; /* #121214 */
     --foreground: 210 20% 98%; /* #F8FAFC */
-
     --card: 240 3% 7%;
     --card-foreground: 210 20% 98%;
-
     --popover: 240 3% 7%;
     --popover-foreground: 210 20% 98%;
-
     --primary: 217 96% 58%; /* #3B82F6 */
     --primary-foreground: 210 20% 98%;
-
     --secondary: 210 10% 92%; /* #F5F5F5 */
     --secondary-foreground: 240 3% 7%;
-
     --muted: 240 3% 15%; /* #23232b */
     --muted-foreground: 220 6% 60%; /* #8F8F8F */
-
     --accent: 184 100% 44%; /* #00D2DF */
     --accent-foreground: 210 20% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 240 3% 15%;
     --input: 240 3% 15%;
     --ring: 217 96% 58%;
-
+    /* Radius padronizado */
+    --radius-xs: 0.125rem;
+    --radius-sm: 0.25rem;
     --radius: 0.5rem;
+    --radius-lg: 1rem;
+    /* Espaçamentos padronizados */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+    /* Tipografia padronizada */
+    --font-sans: 'Inter', sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.3;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.7;
   }
 
   .light {

@@ -12,6 +12,8 @@ import NewsletterPopup from './components/NewsletterPopup';
 import PixDonationPopup from './components/PixDonationPopup';
 import WhatsAppButton from './components/WhatsAppButton';
 import MusicPlayer from './components/MusicPlayer';
+import { ThemeProvider } from './contexts/ThemeContext';
+import AppToaster from './components/ui/toaster';
 
 // Transition variants
 type TransitionVariant =
@@ -161,15 +163,18 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AccessibilityProvider>
-      <SmoothScroll>
-        <AppRoutes />
-        <CustomCursor />
-        <HiddenAdminButton />
-        <WhatsAppButton />
-        <MusicPlayer />
-      </SmoothScroll>
-    </AccessibilityProvider>
+    <ThemeProvider>
+      <AccessibilityProvider>
+        <SmoothScroll>
+          <AppRoutes />
+          <CustomCursor />
+          <HiddenAdminButton />
+          <WhatsAppButton />
+          <MusicPlayer />
+          <AppToaster />
+        </SmoothScroll>
+      </AccessibilityProvider>
+    </ThemeProvider>
   );
 }
 

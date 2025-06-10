@@ -314,20 +314,26 @@ const BlogPostPage = () => {
       </Helmet>
       <Toaster />
       <div
-        className={`min-h-screen ${isDarkMode ? 'dark bg-gray-950' : 'bg-gray-50'}`}
+        className={`min-h-screen relative bg-modern-dark overflow-x-hidden ${isDarkMode ? 'dark' : ''}`}
       >
         <Navbar />
 
+        {/* Fundo Parallax minimalista e elegante */}
+        <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+          <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
+        </Parallax>
+        <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+          <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />
+        </Parallax>
+        {/* Fim do fundo parallax minimalista */}
+
         <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900 text-white relative overflow-hidden">
-          {/* Parallax visual para o post */}
-          <Parallax speed={-18} className="absolute inset-0 z-0 pointer-events-none">
-            <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
+          {/* Parallax visual para o post (minimalista) */}
+          <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+            <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
           </Parallax>
           <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-            <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-40" />
-          </Parallax>
-          <Parallax speed={5} className="absolute inset-0 z-0 pointer-events-none">
-            <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="w-full h-full object-cover opacity-30" />
+            <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-40" />
           </Parallax>
           {/* Fim do parallax visual */}
           <motion.div

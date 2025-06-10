@@ -68,30 +68,34 @@ const BlogPage = () => {
   });
 
   return (
-    <div
-      className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-white'}`}
-    >
+    <div className="relative min-h-screen overflow-x-hidden bg-modern-dark">
       <Navbar />
 
-      <header className="relative px-4 pt-32 pb-20 overflow-hidden text-white shadow-md md:px-8 bg-gradient-to-r from-teal-500 to-blue-600">
-        {/* Parallax visual para o blog */}
+      {/* Fundo Parallax minimalista e elegante */}
+      <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+        <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
+      </Parallax>
+      <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />
+      </Parallax>
+      {/* Fim do fundo parallax minimalista */}
+
+      <header className="relative px-4 pt-32 pb-20 overflow-hidden text-white shadow-md md:px-8 bg-gradient-to-r from-teal-500 to-blue-600/90 backdrop-blur-md">
+        {/* Parallax visual para o blog (mantido para reforçar o header) */}
         <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
           <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
         </Parallax>
         <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-40" />
-        </Parallax>
-        <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-30" />
+          <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-40" />
         </Parallax>
         {/* Fim do parallax visual */}
-        <div className="container mx-auto text-center">
+        <div className="container relative z-10 mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="mb-4 text-5xl font-extrabold leading-tight tracking-tight">
+            <h1 className="mb-4 text-5xl font-extrabold leading-tight tracking-tight drop-shadow-lg">
               Blog Dev Frontend
             </h1>
             <p className="max-w-2xl mx-auto text-xl opacity-90">
@@ -103,13 +107,13 @@ const BlogPage = () => {
       </header>
 
       {/* Banner Newsletter */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-4 text-center shadow-md">
-        <span className="font-semibold text-lg mr-2">Receba dicas exclusivas no seu e-mail!</span>
+      <div className="px-4 py-6 text-center text-white shadow-md bg-gradient-to-r from-blue-600 to-indigo-700">
+        <span className="mr-2 text-lg font-semibold">Receba dicas exclusivas no seu e-mail!</span>
         <Link
           to="/newsletter"
-          className="inline-flex items-center px-4 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-gray-100 transition-colors font-semibold"
+          className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100"
         >
-          <Mail className="mr-2 h-5 w-5" /> Assinar Newsletter
+          <Mail className="w-5 h-5 mr-2" /> Assinar Newsletter
         </Link>
       </div>
 

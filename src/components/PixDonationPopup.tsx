@@ -94,7 +94,8 @@ const PixDonationPopup = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-            className="relative w-full max-w-md p-8 mx-4 bg-white shadow-2xl dark:bg-gray-900 rounded-xl"
+            className="relative w-full max-w-xs max-w-md p-3 p-8 mx-4 bg-white shadow-2xl dark:bg-gray-900 rounded-xl sm:max-w-md sm:p-8"
+            style={{ maxWidth: '95vw' }}
           >
             <button
               className="absolute text-gray-400 top-3 right-3 hover:text-gray-700 dark:hover:text-white"
@@ -108,16 +109,18 @@ const PixDonationPopup = () => {
               <span className="text-lg font-bold text-green-700 dark:text-white">Apoie este projeto!</span>
             </div>
             <h3 className="mb-2 text-xl font-bold text-green-700 dark:text-white">Faça uma doação via Pix</h3>
-            <p className="mb-4 text-base font-semibold text-center text-green-800 dark:text-green-300">
-              Sua contribuição faz toda a diferença! 🙏<br/>
-              <span className="font-normal text-gray-700 dark:text-gray-200">
-                <span className="font-bold text-green-600 dark:text-green-400">Doe agora</span> e faça parte de uma comunidade que acredita no poder do conhecimento livre.<br/>
-                Sua doação não é só um apoio — é um voto de confiança para que o projeto evolua, ganhe <span className="font-bold">novas funcionalidades</span>, expanda o <span className="font-bold">blog</span> e produza <span className="font-bold">novos vídeos</span> para impactar ainda mais pessoas.<br/>
-                <span className="italic">Quando você contribui, você inspira outros a fazerem o mesmo (prova social) e garante que juntos vamos mais longe (pertencimento).</span><br/>
-                <span className="font-semibold text-green-700 dark:text-green-300">Aproveite essa oportunidade de retribuir e transformar o futuro do projeto!</span><br/>
-                <span className="italic">A generosidade de hoje é o sucesso de amanhã — juntos, transformamos vidas!</span>
-              </span>
-            </p>
+            <div className="pr-2 mb-4 overflow-y-auto text-base font-semibold text-center text-green-800 max-h-40 dark:text-green-300 sm:max-h-none sm:overflow-visible">
+              <p>
+                Sua contribuição faz toda a diferença! 🙏<br/>
+                <span className="font-normal text-gray-700 dark:text-gray-200">
+                  <span className="font-bold text-green-600 dark:text-green-400">Doe agora</span> e faça parte de uma comunidade que acredita no poder do conhecimento livre.<br/>
+                  Sua doação não é só um apoio — é um voto de confiança para que o projeto evolua, ganhe <span className="font-bold">novas funcionalidades</span>, expanda o <span className="font-bold">blog</span> e produza <span className="font-bold">novos vídeos</span> para impactar ainda mais pessoas.<br/>
+                  <span className="italic">Quando você contribui, você inspira outros a fazerem o mesmo (prova social) e garante que juntos vamos mais longe (pertencimento).</span><br/>
+                  <span className="font-semibold text-green-700 dark:text-green-300">Aproveite essa oportunidade de retribuir e transformar o futuro do projeto!</span><br/>
+                  <span className="italic">A generosidade de hoje é o sucesso de amanhã — juntos, transformamos vidas!</span>
+                </span>
+              </p>
+            </div>
             <div className="flex flex-col items-center mb-4">
               {/* QR Code Pix */}
               <div className="p-2 mb-3 bg-white rounded-lg shadow dark:bg-gray-800">

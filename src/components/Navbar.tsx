@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Home,
@@ -19,6 +19,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { highContrast, toggleHighContrast } = useAccessibility();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Handle scroll effect
   useEffect(() => {
@@ -65,10 +67,15 @@ const Navbar = () => {
     },
   ];
 
-  // Smooth scroll to section
+  // Smooth scroll or navigate to section
   const scrollToSection = (sectionId: string, isExternalLink = false) => {
     setIsOpen(false);
     if (isExternalLink) return; // Skip scrolling for external links
+    if (location.pathname !== '/') {
+      // Se não está na home, navega para home com hash
+      navigate(`/${sectionId}`);
+      return;
+    }
     const element = document.querySelector(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

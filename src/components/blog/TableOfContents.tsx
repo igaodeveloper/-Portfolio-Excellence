@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
-import styles from './TableOfContents.module.css';
+import { Card, CardContent } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type TocItem = {
   id: string;
@@ -54,27 +54,56 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
   }
 
   return (
-    <nav className={styles.tocContainer}>
-      <ul className={styles.tocList}>
-        {toc.map((item) => (
-          <li
-            key={item.id}
-            className={`${styles.tocItem} ${item.level === 2 ? styles.tocItemLevel2 : item.level === 3 ? styles.tocItemLevel3 : styles.tocItemLevel4}`}
-          >
-            <Link
-              to={item.id}
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-              className={`${styles.tocLink} ${activeId === item.id ? styles.tocLinkActive : ''}`}
-            >
-              {item.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <Card className="mb-6 p-0 bg-white/80 dark:bg-gray-900/80 shadow-lg border border-gray-200 dark:border-gray-800 backdrop-blur rounded-xl">
+      <CardContent className="p-4">
+        <ScrollArea className="max-h-72 pr-2">
+          <ul className="space-y-1">
+            {toc.map((item) => (
+              <li
+                key={item.id}
+                className={[
+                  'transition-colors rounded',
+                  item.level === 2 ? 'ml-2 font-semibold text-base' : '',
+                  item.level === 3 ? 'ml-6 font-medium text-sm' : '',
+                  item.level === 4 ? 'ml-10 font-normal text-xs' : '',
+                ].join(' ')}
+              >
+                <a
+                  href={`#${item.id}`}
+                  role="button"
+                  tabIndex={0}
+                  className={[
+                    'block px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-400',
+                    'transition-colors',
+                    activeId === item.id
+                      ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-100/60 dark:bg-blue-900/40 border-l-4 border-blue-500 pl-3'
+                      : 'text-gray-800 dark:text-gray-200 hover:bg-blue-100/40 dark:hover:bg-blue-900/30',
+                  ].join(' ')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(item.id);
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      const el = document.getElementById(item.id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }
+                  }}
+                  aria-current={activeId === item.id ? 'location' : undefined}
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
+      </CardContent>
+    </Card>
   );
 };
 

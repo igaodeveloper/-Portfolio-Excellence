@@ -77,46 +77,16 @@ const HeroSection = () => {
       className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-12 py-12 md:py-20 relative overflow-x-hidden perspective-[1200px]"
       onMouseMove={handleMouseMove}
     >
-      {/* Parallax avançado: camadas de fundo e efeitos */}
-      <Parallax speed={-40} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg1.svg" alt="Montanhas Parallax" className="object-cover w-full h-full opacity-70" />
-      </Parallax>
-      <Parallax speed={-25} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg2.svg" alt="Árvores Parallax" className="object-cover w-full h-full opacity-80" />
-      </Parallax>
-      <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-bg3.svg" alt="Nuvens Parallax" className="object-cover w-full h-full opacity-60" />
-      </Parallax>
-      <Parallax speed={8} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-particles.svg" alt="Partículas Parallax" className="object-cover w-full h-full opacity-80" />
-      </Parallax>
-      <Parallax speed={-50} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-fog.svg" alt="Neblina Parallax" className="object-cover w-full h-full opacity-70" />
-      </Parallax>
-      <Parallax speed={-35} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-lights.svg" alt="Luzes Parallax" className="object-cover w-full h-full opacity-60" />
-      </Parallax>
+      {/* Parallax minimalista: gradiente + aurora */}
       <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="object-cover w-full h-full opacity-50" />
-      </Parallax>
-      <Parallax speed={-5} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-planet.svg" alt="Planeta Parallax" className="object-cover w-full h-full opacity-80" />
-      </Parallax>
-      <Parallax speed={-60} className="absolute inset-0 z-0 pointer-events-none">
         <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
-      <Parallax speed={-45} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-70" />
+      <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+        <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />
       </Parallax>
-      <Parallax speed={-30} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-meteor.svg" alt="Meteoros Parallax" className="object-cover w-full h-full opacity-80" />
-      </Parallax>
-      <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
-        <img loading="lazy" width="1920" height="1080" src="/parallax-satellite.svg" alt="Satélite Parallax" className="object-cover w-full h-full opacity-90" />
-      </Parallax>
-      {/* Fim das camadas parallax */}
+      {/* Fim do parallax minimalista */}
 
-      {/* Partículas animadas interativas */}
+      {/* Partículas animadas interativas (opcional, pode remover se quiser mais minimalista) */}
       <AnimatedParticles />
 
       {/* Fundo com camadas 3D animadas */}

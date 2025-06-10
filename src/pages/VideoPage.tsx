@@ -354,24 +354,15 @@ const VideoPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-950 overflow-hidden">
-        {/* Parallax visual para vídeos */}
-        <Parallax speed={-25} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-60" />
+      <div className="relative min-h-screen bg-modern-dark overflow-hidden">
+        {/* Parallax visual minimalista para vídeos */}
+        <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-80" />
         </Parallax>
-        <Parallax speed={-18} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-40" />
+        <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/parallax-aurora.svg" alt="Aurora Parallax" className="w-full h-full object-cover opacity-60" />
         </Parallax>
-        <Parallax speed={-12} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-planet.svg" alt="Planeta Parallax" className="w-full h-full object-cover opacity-30" />
-        </Parallax>
-        <Parallax speed={-8} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-meteor.svg" alt="Meteoros Parallax" className="w-full h-full object-cover opacity-30" />
-        </Parallax>
-        <Parallax speed={5} className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/parallax-particles.svg" alt="Partículas Parallax" className="w-full h-full object-cover opacity-20" />
-        </Parallax>
-        {/* Fim do parallax visual */}
+        {/* Fim do parallax minimalista */}
 
         <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white pt-20">
           <div className="container mx-auto px-4">
