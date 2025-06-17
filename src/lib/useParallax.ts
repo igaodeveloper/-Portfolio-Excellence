@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useScrollContext } from '../components/SmoothScroll';
 
 interface ParallaxOptions {
   speed?: number;
@@ -11,27 +11,13 @@ export const useParallax = ({
   direction = 'up',
   reverse = false,
 }: ParallaxOptions = {}) => {
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setOffset(scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const { scrollY } = useScrollContext();
 
   const getParallaxProps = () => {
     const multiplier = reverse ? -1 : 1;
-    const parallaxValue = offset * speed * multiplier;
+    const parallaxValue = scrollY * speed * multiplier;
 
     let transform;
-
     switch (direction) {
       case 'up':
         transform = { y: -parallaxValue };
@@ -48,12 +34,11 @@ export const useParallax = ({
       default:
         transform = { y: -parallaxValue };
     }
-
     return transform;
   };
 
   return {
     parallaxProps: getParallaxProps(),
-    scrollY: offset,
+    scrollY,
   };
 };

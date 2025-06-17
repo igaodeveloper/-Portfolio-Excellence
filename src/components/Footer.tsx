@@ -152,18 +152,8 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Doação Pix */}
-          <div className="animate__animated animate__fadeIn animate__delay-0.5s mt-3 sm:mt-4">
-            <button
-              className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors font-semibold"
-              onClick={() => navigator.clipboard.writeText('11982928508')}
-              title="Copiar chave Pix para doar"
-            >
-              <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              Doar via Pix: <span className="ml-2 font-mono text-blue-600 bg-white px-2 rounded">11982928508</span>
-            </button>
-            <span className="block text-xs text-gray-400 mt-1">Clique para copiar a chave Pix</span>
-          </div>
+          
+          
 
           {/* Afiliados/Recursos Gratuitos */}
           <div className="animate__animated animate__fadeIn animate__delay-0.5s mt-3 sm:mt-4">

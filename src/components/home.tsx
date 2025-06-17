@@ -14,6 +14,7 @@ import CommentsSection from './CommentsSection';
 import { Mail } from 'lucide-react';
 import { subscribeToMailchimp } from '@/services/mailchimp';
 import { useState } from 'react';
+import ProjectAIWizard from './ProjectAIWizard';
 
 const CodeEditor = React.lazy(() => import('./CodeEditor'));
 
@@ -70,6 +71,12 @@ function Home() {
                   <CodeEditor className="shadow-2xl shadow-blue-500/10" />
                 </Suspense>
               </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection direction="up" delay={0.2}>
+            <div className="transform translate-z-[40px]">
+              <ProjectAIWizard />
             </div>
           </AnimatedSection>
 

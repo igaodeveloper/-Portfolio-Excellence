@@ -9,7 +9,8 @@ import {
 } from '@/components/ui/animated-text';
 import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { useParallax } from '@/lib/useParallax';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
+import { useScrollContext } from './SmoothScroll';
 import { Parallax } from 'react-scroll-parallax';
 import AnimatedParticles from './AnimatedParticles';
 import LazyImage from './LazyImage';
@@ -43,7 +44,8 @@ const HeroSection = () => {
   });
 
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScrollContext();
+  const scrolled = scrollY > 50;
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -55,14 +57,6 @@ const HeroSection = () => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
   
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToNext = () => {
     const nextSection = document.getElementById('about');

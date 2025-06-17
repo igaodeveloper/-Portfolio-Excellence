@@ -9,7 +9,7 @@ import AnimationDemoButton from './components/AnimationDemoButton';
 import { AccessibilityProvider } from './contexts/AccessibilityContext';
 import SmoothScroll from './components/SmoothScroll';
 import NewsletterPopup from './components/NewsletterPopup';
-import PixDonationPopup from './components/PixDonationPopup';
+
 import WhatsAppButton from './components/WhatsAppButton';
 import MusicPlayer from './components/MusicPlayer';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -164,10 +164,12 @@ function AppRoutes() {
         {tempoRoutes}
       </AnimatedLayout>
       <NewsletterPopup />
-      <PixDonationPopup />
+      
     </Suspense>
   );
 }
+
+import ParallaxScrollShowcase from './components/ParallaxScrollShowcase';
 
 function App() {
   useEffect(() => {
@@ -182,13 +184,20 @@ function App() {
   return (
     <ThemeProvider>
       <AccessibilityProvider>
+        {/* Universe background global, atrás de tudo */}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
+          <ParallaxScrollShowcase />
+        </div>
+        {/* Conteúdo principal acima do universo */}
         <SmoothScroll>
-          <AppRoutes />
-          <CustomCursor />
-          <HiddenAdminButton />
-          <WhatsAppButton />
-          <MusicPlayer />
-          <AppToaster />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <AppRoutes />
+            <CustomCursor />
+            <HiddenAdminButton />
+            <WhatsAppButton />
+            <MusicPlayer />
+            <AppToaster />
+          </div>
         </SmoothScroll>
       </AccessibilityProvider>
     </ThemeProvider>
