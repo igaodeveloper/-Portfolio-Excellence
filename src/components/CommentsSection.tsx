@@ -37,7 +37,10 @@ import { useToast } from './ui/use-toast';
 import { Alert, AlertDescription } from './ui/alert';
 import { Progress } from './ui/progress';
 
-// Schema para validação do formulário de comentários
+/**
+ * Esquema Zod para validação do formulário de comentários.
+ * Garante que nome, email, conteúdo, nota e emoção estejam corretos.
+ */
 const commentFormSchema = z.object({
   visitor_name: z.string().min(2, {
     message: 'O nome deve ter pelo menos 2 caracteres.',
@@ -54,8 +57,17 @@ const commentFormSchema = z.object({
   emotion: z.string(),
 });
 
+/**
+ * Tipos dos valores do formulário de comentário.
+ * Derivado automaticamente do schema Zod.
+ */
 type CommentFormValues = z.infer<typeof commentFormSchema>;
 
+/**
+ * Componente para seleção de emoção do comentário.
+ * @param value Emoção selecionada
+ * @param onChange Função para atualizar emoção
+ */
 const EmotionSelector = ({
   value,
   onChange,
@@ -105,6 +117,12 @@ const EmotionSelector = ({
   );
 };
 
+/**
+ * Componente de avaliação por estrelas.
+ * @param value Valor atual da nota
+ * @param onChange Função para atualizar nota
+ * @param max Número máximo de estrelas (default: 5)
+ */
 const StarRating = ({
   value,
   onChange,
