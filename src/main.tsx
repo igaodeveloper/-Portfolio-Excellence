@@ -96,7 +96,7 @@ const hydrateWithDelay = () => {
   root.render(
     <React.StrictMode>
       <GlobalErrorBoundary>
-        <BrowserRouter basename={basename}>
+        <BrowserRouter basename={basename} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Suspense fallback={<LoadingFallback />}>
             <ParallaxProvider>
               <App />

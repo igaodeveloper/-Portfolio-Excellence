@@ -9,6 +9,11 @@ interface AdsenseBannerProps {
 }
 
 export function AdsenseBanner({ dataAdClient, dataAdSlot, style, format = 'auto' }: AdsenseBannerProps) {
+  // Validação dos props obrigatórios
+  if (!dataAdClient || !dataAdSlot) {
+    console.error('AdsenseBanner: dataAdClient e dataAdSlot são obrigatórios. Banner não será renderizado.');
+    return null;
+  }
   useEffect(() => {
     if (window) {
       try {

@@ -3,7 +3,7 @@ import { Comment, CreateCommentDto, CommentReplyDto } from '../types/comments';
 
 // Inicializa o cliente Supabase com tratamento de erro
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_KEY;
 
 // Verificar se as variáveis de ambiente estão definidas
 let supabase;
