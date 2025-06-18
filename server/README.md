@@ -1,5 +1,33 @@
 # Portfolio Excellence Backend API
 
+## Deploy & Troubleshooting Rápido
+
+### Backend (Node.js/Express)
+- Comando correto para rodar localmente ou em produção:
+  ```bash
+  node src/index.js
+  ```
+- Se for usar Render, Vercel, Heroku, etc., configure o comando de start do backend para:
+  ```bash
+  node server/src/index.js
+  ```
+  ou, se o serviço exigir:
+  ```bash
+  cd server && node src/index.js
+  ```
+- **Não use** `node server/dist/index.js` (esse arquivo não existe e não é gerado por build).
+
+### Frontend (caso use Vite ou similar)
+- Rode o build normalmente (ex: `npm run build` na pasta do frontend).
+- O deploy do frontend deve apontar para a pasta `dist` gerada pelo build.
+
+### Problema comum: Cannot find module '/opt/render/project/src/server/dist/index.js'
+- Isso ocorre quando o comando de start do backend está errado.
+- Corrija para `node server/src/index.js` no painel do serviço de deploy.
+
+---
+
+
 ## Overview
 
 Backend API for the Portfolio Excellence project. This API provides endpoints for managing portfolio content, including projects, skills, experience, services, and analytics.
