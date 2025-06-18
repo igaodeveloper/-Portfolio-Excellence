@@ -85,7 +85,22 @@ app.use((req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API is available at http://localhost:${PORT}/api`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Porta ${PORT} já está em uso. Tentando porta alternativa...`);
+    // Tenta porta alternativa
+    const altPort = Number(PORT) + 1;
+    app.listen(altPort, () => {
+      console.log(`Servidor rodando na porta alternativa ${altPort}`);
+      console.log(`API disponível em http://localhost:${altPort}/api`);
+    });
+  } else {
+    console.error('Erro ao iniciar o servidor:', err);
+    process.exit(1);
+  }
 });
