@@ -100,6 +100,32 @@ Email: admin@example.com
 Password: password123
 ```
 
+## Deploy em Produção
+
+Se for utilizar serviços como Render, Vercel, Heroku, etc., certifique-se de configurar o comando de inicialização corretamente no painel do serviço. O comando correto para rodar o backend é:
+
+```bash
+node src/index.js
+```
+
+> **Importante:**
+> Não utilize `node dist/index.js` pois este projeto não possui etapa de build nem pasta `dist`.
+
+## Solução de Problemas
+
+### Erro: Cannot find module '/opt/render/project/src/server/dist/index.js'
+
+Esse erro ocorre quando o serviço de deploy está tentando rodar um arquivo que não existe. Para corrigir:
+
+1. No painel do serviço de deploy, altere o comando de start para:
+   ```bash
+   node src/index.js
+   ```
+2. Certifique-se de que não há referências a `dist/index.js` em configurações do projeto.
+3. Se futuramente migrar para TypeScript, aí sim será necessário configurar um build para gerar a pasta `dist`.
+
+---
+
 ## License
 
 MIT
