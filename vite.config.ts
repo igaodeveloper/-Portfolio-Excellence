@@ -1,7 +1,9 @@
-import path from 'path';
+import * as path from 'path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import { tempo } from 'tempo-devtools/dist/vite';
+// Removido tempo-devtools caso não esteja instalado ou não seja necessário
+// Se necessário, remova este comentário e garanta que o pacote está instalado
+// import { tempo } from 'tempo-devtools/dist/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
@@ -28,7 +30,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      tempo(),
+      // tempo(), // Descomente se tempo-devtools estiver instalado
       splitVendorChunkPlugin(),
       // Visualizador de tamanho de bundling apenas em produção
       isProd &&
@@ -38,7 +40,25 @@ export default defineConfig(({ mode }) => {
           brotliSize: true,
           filename: 'dist/stats.html',
         }),
-      ViteImageOptimizer(),
+      ViteImageOptimizer({
+        png: {
+          quality: 80, // Exemplo de configuração válida para Sharp.js
+        },
+        jpeg: {
+          quality: 70,
+          progressive: true,
+        },
+        webp: {
+          quality: 75,
+        },
+        avif: {
+          quality: 50, // valor padrão, ajuste conforme necessário
+          effort: 4,   // valor padrão, ajuste conforme necessário
+        },
+        svg: {
+          multipass: true,
+        },
+      }),
       VitePWA({
         registerType: 'autoUpdate',
         devOptions: {
@@ -77,8 +97,8 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      // @ts-ignore
-      allowedHosts: true,
+      // allowedHosts não é suportado diretamente pelo Vite, removido
+      // allowedHosts: true,
       // Habilitar compressão durante desenvolvimento
       hmr: {
         overlay: false,
