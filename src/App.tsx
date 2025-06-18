@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { useRoutes, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/home';
-import routes from 'tempo-routes';
+// import routes from 'tempo-routes'; // Removido: módulo inexistente
 import CustomCursor from './components/CustomCursor';
 import AnimatedLayout from './components/AnimatedLayout';
 import HiddenAdminButton from './components/HiddenAdminButton';
@@ -60,8 +60,9 @@ const SuperMinigame = lazy(() => import('./pages/SuperMinigame'));
 const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'));
 
 function AppRoutes() {
-  const tempoRoutes =
-    import.meta.env.VITE_TEMPO === 'true' ? useRoutes(routes) : null;
+  // const tempoRoutes =
+  //   import.meta.env.VITE_TEMPO === 'true' ? useRoutes(routes) : null;
+  // Removido: 'routes' não existe, ajuste para usar apenas <Routes> abaixo.
 
   // Get the user's preferred transition
   const [transitionType, setTransitionType] = useState<'simple' | 'advanced'>(
@@ -161,7 +162,7 @@ function AppRoutes() {
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        {tempoRoutes}
+        {/* tempoRoutes removido pois dependia de 'routes' inexistente */}
       </AnimatedLayout>
       <NewsletterPopup />
       
