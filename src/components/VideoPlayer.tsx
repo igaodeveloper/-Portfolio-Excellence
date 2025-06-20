@@ -54,6 +54,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   // Efeito para controles de teclado
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Não capturar teclas se o foco está em input, textarea ou contenteditable
+      const active = document.activeElement;
+      if (
+        active &&
+        (active.tagName === 'INPUT' ||
+          active.tagName === 'TEXTAREA' ||
+          (active as HTMLElement).isContentEditable)
+      ) {
+        return;
+      }
       if (e.code === 'Space') {
         e.preventDefault();
         setPlaying(!playing);
@@ -66,11 +76,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       } else if (e.code === 'KeyF') {
         toggleFullscreen();
       } else if (e.code === 'ArrowUp') {
-        // Aumenta o volume
         setVolume((prev) => Math.min(prev + 0.1, 1));
         setMuted(false);
       } else if (e.code === 'ArrowDown') {
-        // Diminui o volume
         setVolume((prev) => Math.max(prev - 0.1, 0));
       }
     };
