@@ -119,7 +119,7 @@ const HeroSection = () => {
               <div className="space-y-2">
                 <motion.div className="overflow-hidden">
                   <AnimatedCharacters
-                    text="Desenvolvedor Front End Sênior"
+                    text="desenvolvedor fullstack senior"
                     className="text-2xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-modern-white"
                     delayOffset={0.5}
                   />

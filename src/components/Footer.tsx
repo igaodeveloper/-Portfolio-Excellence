@@ -29,7 +29,7 @@ const Footer = () => {
               <span>devs_404</span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
-              Desenvolvedor Front End Sênior apaixonado por criar experiências digitais intuitivas e impactantes.
+              desenvolvedor fullstack senior apaixonado por criar experiências digitais intuitivas e impactantes.
             </p>
             <div className="flex space-x-4 sm:space-x-6">
               <a

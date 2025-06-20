@@ -61,38 +61,30 @@ const mockResults: YouTubeVideo[] = [
   },
 ];
 
-// Simula a API do YouTube para busca
-const searchYouTubeAPI = async (query: string): Promise<YouTubeVideo[]> => {
-  if (process.env.NODE_ENV === 'production') {
-    // Em produção, não simular delay
-    return mockResults;
-  }
-  // Para fins de demonstração, vamos simular uma resposta
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // Verifica se é um ID do YouTube ou uma URL
-      const videoId = extractVideoId(query);
+// Substitua 'SUA_CHAVE_YOUTUBE_API' por process.env.VITE_YOUTUBE_API_KEY ou variável de ambiente adequada
+const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || 'SUA_CHAVE_YOUTUBE_API';
 
-      if (videoId) {
-        // Se for um ID ou URL válido do YouTube
-        resolve([
-          {
-            id: Date.now(),
-            url: `https://www.youtube.com/watch?v=${videoId}`,
-            title: `Vídeo: ${query}`,
-            thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-            channel: 'Canal encontrado',
-            views: 'Nova busca',
-            published: 'Agora',
-          },
-        ]);
-      } else {
-        // Simula resultados baseados na consulta
-        const results = mockResults;
-        resolve(results);
-      }
-    }, 1500); // Simula o tempo de resposta da API
-  });
+// Busca real na YouTube Data API v3
+const searchYouTubeAPI = async (query: string): Promise<YouTubeVideo[]> => {
+  if (!YOUTUBE_API_KEY) {
+    alert('Chave da API do YouTube não configurada.');
+    return [];
+  }
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(
+    query,
+  )}&key=${YOUTUBE_API_KEY}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!data.items) return [];
+  return data.items.map((item: any) => ({
+    id: item.id.videoId,
+    url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+    title: item.snippet.title,
+    thumbnail: item.snippet.thumbnails.high.url,
+    channel: item.snippet.channelTitle,
+    views: '', // Pode ser preenchido com outra chamada se quiser
+    published: new Date(item.snippet.publishedAt).toLocaleDateString('pt-BR'),
+  }));
 };
 
 const VideoPage: React.FC = () => {
