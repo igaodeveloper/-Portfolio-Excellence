@@ -10,7 +10,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
 import LazyImage from '../components/LazyImage';
-import { Parallax } from 'react-scroll-parallax';
 
 const CategoryPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -75,17 +74,6 @@ const CategoryPage = () => {
       <Navbar />
 
       <header className="pt-32 pb-16 px-4 md:px-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white relative overflow-hidden">
-        {/* Parallax visual para a categoria */}
-        <Parallax speed={-15} className="absolute inset-0 z-0 pointer-events-none">
-          <LazyImage width={1920} height={1080} src="/parallax-fog.svg" alt="Fog Parallax" className="w-full h-full object-cover opacity-50" />
-        </Parallax>
-        <Parallax speed={-8} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-shapes.svg" alt="Shapes Parallax" className="w-full h-full object-cover opacity-30" />
-        </Parallax>
-        <Parallax speed={5} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="w-full h-full object-cover opacity-20" />
-        </Parallax>
-        {/* Fim do parallax visual */}
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

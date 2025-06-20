@@ -1,6 +1,6 @@
 .minigame-hero-bg {
   background: linear-gradient(120deg, #18181b 60%, #1e293b 100%);
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
   position: relative;
   overflow: hidden;
@@ -77,4 +77,4 @@
   .quiz-container {
     padding: 16px 4px;
   }
-} 
+}

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import AnimationShowcase from '../components/AnimationShowcase';
 import ScrollReveal from '../components/ScrollReveal';
-import { useMouseParallax } from '../hooks/useParallax';
 
 const AnimationDemo = () => {
   const [transitionType, setTransitionType] = useState<'simple' | 'advanced'>(
@@ -11,7 +10,6 @@ const AnimationDemo = () => {
   );
   const [transitionVariant, setTransitionVariant] = useState('morph');
   const navigate = useNavigate();
-  const mouseParallax = useMouseParallax(0.02, false);
 
   const handleTransitionChange = (
     type: 'simple' | 'advanced',
@@ -30,23 +28,6 @@ const AnimationDemo = () => {
       <header className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40"></div>
-          {Array.from({ length: 20 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute bg-white/5 rounded-full"
-              style={{
-                width: Math.random() * 200 + 50,
-                height: Math.random() * 200 + 50,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                x: mouseParallax.x * (i % 3 === 0 ? 2 : i % 3 === 1 ? -1 : 0.5),
-                y: mouseParallax.y * (i % 3 === 0 ? -1 : i % 3 === 1 ? 2 : 0.5),
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }}
-              transition={{ duration: 1, delay: i * 0.1 }}
-            />
-          ))}
         </div>
 
         <motion.div
@@ -57,10 +38,6 @@ const AnimationDemo = () => {
         >
           <motion.h1
             className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6"
-            style={{
-              x: mouseParallax.x * 0.5,
-              y: mouseParallax.y * 0.5,
-            }}
           >
             Animações de{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-indigo-400 to-purple-500">
@@ -69,10 +46,6 @@ const AnimationDemo = () => {
           </motion.h1>
           <motion.p
             className="text-xl sm:text-2xl mb-8 max-w-2xl mx-auto"
-            style={{
-              x: mouseParallax.x * -0.5,
-              y: mouseParallax.y * -0.5,
-            }}
           >
             Explore transições modernas, elegantes e impressionantes entre
             páginas e componentes

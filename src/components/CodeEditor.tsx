@@ -158,7 +158,7 @@ body {
   color: var(--fg);
   background-color: var(--bg);
   padding: 2rem;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .container {

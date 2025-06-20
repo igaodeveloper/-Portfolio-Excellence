@@ -20,34 +20,33 @@ loadDevTools();
 
 const basename = import.meta.env.BASE_URL;
 
-// Elemento de fallback simples durante o carregamento
+// Elemento de fallback moderno durante o carregamento
 const LoadingFallback = () => (
-  <div className="fixed inset-0 flex items-center justify-center bg-background">
-    <div className="w-16 h-16 border-t-4 border-modern-accent rounded-full animate-spin"></div>
+  <div className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-background via-modern-dark to-modern-darker animate-fade-in z-50">
+    <img
+      src="/assets/Imagem do WhatsApp de 2025-05-27 à(s) 01.24.39_1530d1ec.png"
+      alt="Logo"
+      className="w-20 h-20 mb-6 rounded-full shadow-lg animate-bounce"
+      style={{ filter: 'drop-shadow(0 0 16px #3498db)' }}
+      loading="eager"
+      width={80}
+      height={80}
+    />
+    <span className="text-2xl font-extrabold text-primary drop-shadow-lg tracking-tight mb-2 animate-pulse">
+      Carregando portfólio...
+    </span>
+    <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+    <span className="text-xs text-muted-foreground opacity-80">by igaodevs_404</span>
   </div>
 );
 
 // Adiciona um recurso de pré-carregamento de recursos críticos
-// Pode ser expandido com mais recursos críticos conforme necessário
+// O preload de fontes locais foi removido pois a fonte principal já é carregada via Google Fonts em index.html
 const preloadAssets = () => {
-  // Pré-carregar fontes críticas
-  if ('requestIdleCallback' in window) {
-    // Usar requestIdleCallback se disponível para não bloquear a renderização
-    window.requestIdleCallback(() => {
-      const preloadLink = document.createElement('link');
-      preloadLink.rel = 'preload';
-      preloadLink.as = 'font';
-      preloadLink.href = '/fonts/main-font.woff2'; // Substitua pelo caminho real da sua fonte
-      preloadLink.type = 'font/woff2';
-      preloadLink.crossOrigin = 'anonymous';
-      document.head.appendChild(preloadLink);
-    });
-  } else {
-    // Fallback para setTimeout se requestIdleCallback não estiver disponível
-    setTimeout(() => {
-      // Mesmo código de pré-carregamento
-    }, 100);
-  }
+  // Se quiser pré-carregar outras imagens críticas, adicione aqui
+  // Exemplo:
+  // const img = new window.Image();
+  // img.src = '/assets/hero-bg.jpg';
 };
 
 // Inicia pré-carregamento de recursos
@@ -120,6 +119,14 @@ const hydrateWithDelay = () => {
   }
 };
 
+// Script para corrigir 100vh em mobile
+function setVhVar() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setVhVar();
+window.addEventListener('resize', setVhVar);
+
 // Usar isomorphic-fetch para polyfill fetch em navegadores mais antigos
 if (!('fetch' in window)) {
   // Carregar polyfill via CDN
@@ -143,3 +150,9 @@ if (import.meta.env.PROD) {
     getTTFB(console.log);
   });
 }
+
+// INSTRUÇÃO: Para máxima performance, converta a imagem 'public/perfil.jpg' para os formatos WebP e AVIF.
+// Salve como 'public/perfil.webp' e 'public/perfil.avif'.
+// Você pode usar um conversor online ou o comando:
+// cwebp perfil.jpg -o perfil.webp
+// avifenc perfil.jpg perfil.avif

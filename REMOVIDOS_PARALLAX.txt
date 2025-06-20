@@ -1,0 +1,7 @@
+Os seguintes arquivos e hooks relacionados a parallax foram removidos do projeto:
+- src/components/ParallaxScrollShowcase.tsx
+- src/components/AnimatedParticles.tsx
+- src/hooks/useParallax.tsx
+- src/lib/useParallax.ts
+
+Além disso, referências e importações desses arquivos foram removidas dos componentes e páginas principais.

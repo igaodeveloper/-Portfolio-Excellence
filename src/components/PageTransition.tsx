@@ -59,7 +59,7 @@ const PageTransition = ({ children, type = 'fade' }: PageTransitionProps) => {
             ? variants.glitch.transition
             : { duration: 0.6, ease: 'easeInOut' }
         }
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
       >
         {children}
       </motion.div>

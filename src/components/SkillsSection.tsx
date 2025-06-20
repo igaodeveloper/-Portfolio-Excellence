@@ -34,6 +34,7 @@ import {
   SiSlack,
   SiBitbucket,
 } from 'react-icons/si';
+import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 type Skill = {
   name: string;
@@ -251,8 +252,21 @@ const SkillsSection = () => {
       : skills.filter((skill) => skill.category === activeCategory);
 
   return (
-    <section id="skills" className="py-20 px-6 bg-modern-dark">
-      <div className="container-section">
+    <section className="relative min-h-screen py-16 px-4 md:px-8 flex flex-col items-center justify-center">
+      {/* Parallax global de fundo */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      >
+        <ParallaxScrollShowcase />
+      </div>
+      {/* Conteúdo principal acima do parallax */}
+      <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <AnimatedTitle
           text="Conhecimentos"
           className="section-title text-modern-white mb-12"

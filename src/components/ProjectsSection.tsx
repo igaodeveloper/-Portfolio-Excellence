@@ -8,6 +8,7 @@ import { TiltCard } from '@/components/ui/tilt-card';
 import { fadeIn, staggerContainer } from '@/lib/animations';
 import { AnimatedItem } from './AnimatedSection';
 import { Input } from '@/components/ui/input';
+import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 type Project = {
   id: number;
@@ -219,16 +220,22 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section
-      id="projects"
-      className="relative px-6 py-24 overflow-hidden bg-modern-darker"
-      ref={containerRef}
-    >
-      {/* Background decoration elements */}
-      <div className="absolute rounded-full -top-20 -right-20 w-60 h-60 bg-modern-accent/5 blur-3xl opacity-40" />
-      <div className="absolute rounded-full bottom-10 -left-20 w-80 h-80 bg-modern-accent2/5 blur-3xl opacity-30" />
+    <section className="relative min-h-screen py-16 px-4 md:px-8 flex flex-col items-center justify-center">
+      {/* Parallax global de fundo */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      >
+        <ParallaxScrollShowcase />
+      </div>
 
-      <div className="relative z-10 container-section px-2 sm:px-4 md:px-8">
+      {/* Conteúdo principal acima do parallax */}
+      <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -283,7 +290,9 @@ const ProjectsSection = () => {
               variants={staggerContainer(0.02)}
               initial="hidden"
               animate="show"
-              className={`gap-2 flex-wrap md:flex ${isFilterOpen ? 'flex' : 'hidden'} md:flex-row justify-end`}
+              className={`gap-2 flex-wrap md:flex ${
+                isFilterOpen ? 'flex' : 'hidden'
+              } md:flex-row justify-end`}
             >
               {categories.map((category, index) => (
                 <AnimatedItem

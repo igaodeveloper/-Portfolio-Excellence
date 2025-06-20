@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { useMouseParallax } from '../hooks/useParallax';
-import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 interface AnimationShowcaseProps {
   onTransitionChange?: (type: 'simple' | 'advanced', variant: string) => void;
@@ -10,7 +8,6 @@ interface AnimationShowcaseProps {
 
 const AnimationShowcase = ({ onTransitionChange }: AnimationShowcaseProps) => {
   const [activeTab, setActiveTab] = useState<'page' | 'scroll'>('page');
-  const mouseParallax = useMouseParallax(0.05);
 
   const simpleTransitions = ['fade', 'slide', 'scale', 'flip', 'reveal'];
   const advancedTransitions = ['morph', 'stagger', 'wave', 'portal', 'glitch'];
@@ -57,30 +54,6 @@ const AnimationShowcase = ({ onTransitionChange }: AnimationShowcaseProps) => {
             Animações de Scroll
           </button>
         </div>
-      </div>
-
-      {/* Parallax title */}
-      <motion.div
-        className="mb-12 text-center"
-        style={{
-          x: mouseParallax.x,
-          y: mouseParallax.y,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 75,
-          damping: 30,
-        }}
-      >
-        <span className="text-sm tracking-wider text-gray-500 uppercase">
-          Mova o mouse para ver o efeito parallax
-        </span>
-      </motion.div>
-
-      {/* Parallax Scroll Showcase */}
-      <div className="mb-16">
-        <h3 className="mb-4 text-xl font-bold text-center text-modern-accent">Parallax Scroll Avançado</h3>
-        <ParallaxScrollShowcase />
       </div>
 
       {activeTab === 'page' ? (
