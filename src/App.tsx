@@ -170,8 +170,6 @@ function AppRoutes() {
   );
 }
 
-import ParallaxScrollShowcase from './components/ParallaxScrollShowcase';
-
 function App() {
   useEffect(() => {
     function setVh() {
@@ -186,9 +184,9 @@ function App() {
     <ThemeProvider>
       <AccessibilityProvider>
         {/* Universe background global, atrás de tudo */}
-        <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
+        {/* Removido: <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
           <ParallaxScrollShowcase />
-        </div>
+        </div> */}
         {/* Conteúdo principal acima do universo */}
         <SmoothScroll>
           <div style={{ position: 'relative', zIndex: 1 }}>

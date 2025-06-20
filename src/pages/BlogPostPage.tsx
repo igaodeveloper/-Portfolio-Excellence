@@ -247,7 +247,7 @@ const BlogPostPage = () => {
       >
         <Navbar />
         <div className="container flex items-center justify-center px-4 pt-40 pb-20 mx-auto">
-          <div className="text-2xl animate-pulse">Carregando...</div>
+          <div className="text-2xl">Carregando...</div>
         </div>
       </div>
     );

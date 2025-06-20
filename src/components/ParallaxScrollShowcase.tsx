@@ -122,16 +122,9 @@ const OrbitingPlanets: React.FC = () => {
   );
 };
 
-const ParallaxScrollShowcase: React.FC = () => {
-  const { scrollYProgress } = useViewportScroll();
-  const codeY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const terminalY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const gearY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const planetY = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const shineY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-
+export default function Home() {
   return (
-    <div className="relative h-[420px] w-full overflow-hidden rounded-xl shadow-2xl border border-cyan-400/20 bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900">
+    <div className="relative h-screen overflow-hidden bg-gray-900">
       {/* Brilho de fundo dinâmico */}
       <motion.div
         style={{
@@ -144,7 +137,6 @@ const ParallaxScrollShowcase: React.FC = () => {
           background: 'radial-gradient(circle at 60% 40%, #00d2df88 0%, #23272e00 100%)',
           filter: 'blur(40px)',
           zIndex: 0,
-          y: shineY,
         }}
         animate={{ opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 6, repeat: Infinity, repeatType: 'reverse' }}
@@ -153,7 +145,7 @@ const ParallaxScrollShowcase: React.FC = () => {
       {/* Partículas digitais com física */}
       <DigitalParticles />
 
-      {/* Planeta digital central com parallax */}
+      {/* Planeta digital central */}
       <motion.div
         style={{
           position: 'absolute',
@@ -165,30 +157,27 @@ const ParallaxScrollShowcase: React.FC = () => {
           background: 'radial-gradient(circle at 60% 40%, #00d2df 0%, #23272e 80%, #181c22 100%)',
           filter: 'blur(2px)',
           zIndex: 2,
-          y: planetY,
           opacity: 0.7,
           boxShadow: '0 0 60px 10px #00d2df44',
         }}
-        initial={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 40, damping: 20 }}
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.05 }}
+        transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
       />
 
       {/* Planetas orbitando com blend e SVG */}
       <OrbitingPlanets />
 
-      {/* Ícones de dev em camadas parallax (profundidade extra) */}
-      <motion.div style={{ position: 'absolute', left: '12%', top: '32%', y: codeY, zIndex: 3, mixBlendMode: 'lighten' }}>
+      {/* Ícones de dev em camadas (profundidade extra) */}
+      <motion.div style={{ position: 'absolute', left: '12%', top: '32%', zIndex: 3, mixBlendMode: 'lighten' }}>
         <CodeIcon />
       </motion.div>
-      <motion.div style={{ position: 'absolute', left: '72%', top: '18%', y: terminalY, zIndex: 3, mixBlendMode: 'lighten' }}>
+      <motion.div style={{ position: 'absolute', left: '72%', top: '18%', zIndex: 3, mixBlendMode: 'lighten' }}>
         <TerminalIcon />
       </motion.div>
-      <motion.div style={{ position: 'absolute', left: '38%', top: '74%', y: gearY, zIndex: 3, mixBlendMode: 'lighten' }}>
+      <motion.div style={{ position: 'absolute', left: '38%', top: '74%', zIndex: 3, mixBlendMode: 'lighten' }}>
         <GearIcon />
       </motion.div>
-      {/* Removido título central, parágrafo e linhas de código animadas */}
     </div>
   );
-};
-
-export default ParallaxScrollShowcase;
+}

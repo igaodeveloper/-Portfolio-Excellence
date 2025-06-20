@@ -25,13 +25,13 @@ const LoadingFallback = () => (
     <img
       src="/assets/Imagem do WhatsApp de 2025-05-27 à(s) 01.24.39_1530d1ec.png"
       alt="Logo"
-      className="w-20 h-20 mb-6 rounded-full shadow-lg animate-bounce"
+      className="w-20 h-20 mb-6 rounded-full shadow-lg"
       style={{ filter: 'drop-shadow(0 0 16px #3498db)' }}
       loading="eager"
       width={80}
       height={80}
     />
-    <span className="text-2xl font-extrabold text-primary drop-shadow-lg tracking-tight mb-2 animate-pulse">
+    <span className="text-2xl font-extrabold text-primary drop-shadow-lg tracking-tight mb-2">
       Carregando portfólio...
     </span>
     <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>

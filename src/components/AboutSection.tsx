@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Briefcase } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 type TimelineItem = {
   id: number;
@@ -72,10 +71,10 @@ const workItems: TimelineItem[] = [
 const AboutSection = () => {
   return (
     <section className="relative min-h-screen py-16 px-4 md:px-8 flex flex-col items-center justify-center">
-      {/* Parallax global de fundo */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
+      {/* Parallax global de fundo removido */}
+      {/* <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
         <ParallaxScrollShowcase />
-      </div>
+      </div> */}
       {/* Conteúdo principal acima do parallax */}
       <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <motion.div

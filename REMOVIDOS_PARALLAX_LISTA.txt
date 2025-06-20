@@ -1,0 +1,16 @@
+Lista de arquivos de animação parallax removidos:
+parallax-aurora.svg
+parallax-bg1.png
+parallax-bg1.svg
+parallax-bg2.png
+parallax-bg2.svg
+parallax-bg3.svg
+parallax-fog.svg
+parallax-gradient.svg
+parallax-lights.svg
+parallax-meteor.svg
+parallax-particles.png
+parallax-particles.svg
+parallax-planet.svg
+parallax-satellite.svg
+parallax-shapes.svg

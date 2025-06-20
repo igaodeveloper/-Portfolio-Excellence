@@ -8,7 +8,6 @@ import { TiltCard } from '@/components/ui/tilt-card';
 import { fadeIn, staggerContainer } from '@/lib/animations';
 import { AnimatedItem } from './AnimatedSection';
 import { Input } from '@/components/ui/input';
-import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 type Project = {
   id: number;
@@ -221,19 +220,6 @@ const ProjectsSection = () => {
 
   return (
     <section className="relative min-h-screen py-16 px-4 md:px-8 flex flex-col items-center justify-center">
-      {/* Parallax global de fundo */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-        aria-hidden="true"
-      >
-        <ParallaxScrollShowcase />
-      </div>
-
       {/* Conteúdo principal acima do parallax */}
       <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <motion.div
