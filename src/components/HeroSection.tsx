@@ -11,7 +11,6 @@ import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { useRef, useState } from 'react';
 import { useScrollContext } from './SmoothScroll';
 import LazyImage from './LazyImage';
-import ParallaxScrollShowcase from './ParallaxScrollShowcase';
 
 const socialLinks = [
   {
@@ -65,11 +64,6 @@ const HeroSection = () => {
       className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-8 py-8 md:py-20 relative overflow-x-hidden perspective-[1200px]"
       onMouseMove={handleMouseMove}
     >
-      {/* Parallax global de fundo */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true">
-        <ParallaxScrollShowcase />
-      </div>
-
       {/* Conteúdo principal acima do parallax */}
       <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         {/* Fundo com camadas 3D animadas */}

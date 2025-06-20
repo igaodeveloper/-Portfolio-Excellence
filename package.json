@@ -83,7 +83,6 @@
     "react-router": "^6.23.1",
     "react-router-dom": "^6.23.1",
     "react-scroll": "^1.9.3",
-    "react-scroll-parallax": "^3.4.5",
     "react-syntax-highlighter": "^15.6.1",
     "regjsgen": "^0.8.0",
     "shadcn-ui": "^0.9.5",

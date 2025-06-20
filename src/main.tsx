@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import { ParallaxProvider } from 'react-scroll-parallax';
 
 // Lazy load App para melhorar o carregamento inicial
 const App = lazy(() => import('./App.tsx'));
@@ -95,11 +94,9 @@ const hydrateWithDelay = () => {
   root.render(
     <React.StrictMode>
       <GlobalErrorBoundary>
-        <BrowserRouter basename={basename} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <BrowserRouter basename={basename}>
           <Suspense fallback={<LoadingFallback />}>
-            <ParallaxProvider>
-              <App />
-            </ParallaxProvider>
+            <App />
           </Suspense>
         </BrowserRouter>
       </GlobalErrorBoundary>

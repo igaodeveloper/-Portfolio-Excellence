@@ -35,7 +35,6 @@ import {
 import { useToast } from '../components/ui/use-toast';
 import Toaster from "../components/ui/toaster";
 import { Helmet } from 'react-helmet';
-import { Parallax } from 'react-scroll-parallax';
 import { AdsenseBanner } from '@/components/AdsenseBanner';
 import LazyImage from '../components/LazyImage';
 
@@ -319,24 +318,7 @@ const BlogPostPage = () => {
       >
         <Navbar />
 
-        {/* Fundo Parallax minimalista e elegante */}
-        <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-          <LazyImage width={1920} height={1080} src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
-        </Parallax>
-        <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-          <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />
-        </Parallax>
-        {/* Fim do fundo parallax minimalista */}
-
         <header className="relative px-4 pt-32 pb-16 overflow-hidden text-white md:px-8 bg-gradient-to-r from-indigo-700 to-blue-900">
-          {/* Parallax visual para o post (minimalista) */}
-          <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
-            <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
-          </Parallax>
-          <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
-            <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-40" />
-          </Parallax>
-          {/* Fim do parallax visual */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
