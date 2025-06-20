@@ -15,89 +15,57 @@ type TimelineItem = {
 const workItems: TimelineItem[] = [
   {
     id: 1,
-    title: 'Desenvolvedor Front End Sênior',
+    title: 'Desenvolvedor Fullstack Sênior',
     organization: 'Appezshop',
     period: '2021 - Presente',
     description:
-      'Atuo com arquitetura de sistemas, integração de APIs, desenvolvimento de funcionalidades completas usando React, Next.js, Tailwind, Node.js, Supabase e PostgreSQL. Lidero decisões técnicas e otimizações de performance.',
+      'Responsável por liderar squads multidisciplinares, arquitetar soluções escaláveis e implementar sistemas completos do front ao back-end. Atuação com React, Next.js, Node.js, PostgreSQL, MongoDB, integrações REST/GraphQL, automação de deploy (CI/CD) e cloud (Vercel, AWS). Mentoria de times, code review e definição de padrões de arquitetura.',
   },
   {
     id: 2,
-    title: 'Desenvolvedor Front End Sênior',
+    title: 'Desenvolvedor Fullstack Sênior',
     organization: 'LATAM',
     period: '2024 - 2025',
     description:
-      'Implementei aplicações web interativas com React e TypeScript, aplicando conceitos avançados de design system, acessibilidade, performance e integração com back-end via REST e GraphQL.',
+      'Desenvolvimento de aplicações web robustas, APIs escaláveis e microsserviços. Implementação de autenticação, autorização, testes automatizados, pipelines CI/CD e monitoramento. Liderança técnica em projetos críticos, integração de sistemas legados e cloud migration.',
   },
   {
     id: 3,
-    title: 'Desenvolvedor Front End Sênior',
+    title: 'Desenvolvedor Fullstack Sênior',
     organization: 'RH SYSTEM',
     period: '2024 - 2025',
     description:
-      'Desenvolvimento e manutenção de sistemas de gestão de recursos humanos. Implementação de recursos para otimização de processos de recrutamento e seleção. Criação de relatórios dinâmicos e painéis administrativos.',
+      'Projetos de automação de processos de RH, criação de dashboards analíticos, integrações com ERPs e desenvolvimento de APIs RESTful. Atuação em arquitetura de software, performance e segurança.',
   },
   {
     id: 4,
-    title: 'Estagiário de Front End',
-    organization: 'Santander',
-    period: '2020',
-    description:
-      'Atuação em projetos de internet banking, auxiliando no desenvolvimento de interfaces com React e TypeScript. Suporte à equipe de front end em demandas de acessibilidade e performance.',
-  },
-  {
-    id: 5,
-    title: 'Desenvolvedor Front End Júnior',
+    title: 'Desenvolvedor Fullstack Pleno',
     organization: 'TechSmart Solutions',
     period: '2020 - 2021',
     description:
-      'Entreguei interfaces modernas com React, Redux, Material UI e consumo de APIs REST. Participei de code reviews, sprints SCRUM e implementações com foco em usabilidade.',
+      'Desenvolvimento de sistemas completos (React, Node, Express, MongoDB). Implementação de gateways de pagamento, autenticação JWT, relatórios dinâmicos e painéis administrativos. Participação em sprints ágeis e code reviews.',
   },
   {
-    id: 6,
-    title: 'Desenvolvedor Front End Júnior',
+    id: 5,
+    title: 'Desenvolvedor Fullstack Júnior',
     organization: 'Projetos Independentes',
     period: '2019 - 2020',
     description:
-      'Criei sistemas completos desde a interface até o back-end com Express, MongoDB e React. Integrei gateways de pagamento, sistemas de autenticação JWT e dashboards administrativos.',
+      'Criação de MVPs, landing pages, APIs e integrações de sistemas para startups e clientes diversos. Stack: React, Node.js, PostgreSQL, WordPress, Vue.js.',
   },
   {
-    id: 7,
-    title: 'Desenvolvedor Front End Júnior',
-    organization: 'Digital Innovation Agency',
-    period: '2019 - 2019',
-    description:
-      'Colaborei na criação de landing pages e lojas virtuais. Trabalhei com HTML, CSS, JavaScript e WordPress, otimizando SEO e garantindo responsividade cross-browser.',
-  },
-  {
-    id: 8,
-    title: 'Desenvolvedor Front End Júnior',
-    organization: 'ONG Educação Para Todos',
-    period: '2018 - 2019',
-    description:
-      'Desenvolvi interfaces acessíveis com Vue.js, Bootstrap e foco em inclusão digital. Implementei recursos adaptativos para dispositivos de baixo desempenho.',
-  },
-  {
-    id: 9,
-    title: 'Desenvolvedor Front End Júnior',
-    organization: 'Agência CreativeDev',
-    period: '2018 - 2018',
-    description:
-      'Mantive sites institucionais e implementei novos componentes com jQuery, PHP e MySQL. Aprimorei fluxos de navegação e fiz integrações básicas com APIs.',
-  },
-  {
-    id: 10,
+    id: 6,
     title: 'Co-fundador e CTO',
     organization: 'InovaStart',
     period: '2017 - 2018',
-    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas. Responsável por montar o time de tecnologia e validar o produto com clientes reais.'
+    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas. Responsável por montar o time de tecnologia, validar o produto com clientes reais e estruturar a arquitetura fullstack.'
   },
   {
-    id: 11,
+    id: 7,
     title: 'Desenvolvedor Full Stack',
     organization: 'HealthTech Startup',
     period: '2018 - 2019',
-    description: 'Desenvolvimento de soluções digitais para o setor de saúde, incluindo integrações com APIs de clínicas e sistemas de agendamento online. Atuação em ambiente ágil e colaborativo.'
+    description: 'Desenvolvimento de soluções digitais para o setor de saúde, incluindo integrações com APIs de clínicas, sistemas de agendamento online, arquitetura de banco de dados e automação de processos.'
   },
 ];
 
@@ -121,52 +89,37 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 gap-12 mt-8 lg:grid-cols-2">
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-modern-gray">
-                Sou{' '}
-                <span className="text-modern-accent">
-                  Desenvolvedor Front End Sênior
-                </span>{' '}
-                com mais de{' '}
-                <span className="text-modern-accent">
-                  5 anos de experiência
-                </span>{' '}
-                criando interfaces modernas, acessíveis e performáticas para
-                web.
+                Sou <span className="text-modern-accent">Desenvolvedor Fullstack Sênior</span> com mais de <span className="text-modern-accent">6 anos de experiência</span> entregando soluções completas, escaláveis e de alto impacto para web e cloud.
               </p>
               <p className="text-lg leading-relaxed text-modern-gray">
-                Especialista em <strong>front-end</strong>, crio experiências
-                digitais com React, Next.js, TypeScript e Tailwind. Foco em
-                acessibilidade, performance, animações e arquitetura de
-                componentes avançada.
+                Atuo em todo o ciclo de desenvolvimento: arquitetura, UI/UX, APIs, bancos de dados, integrações, automação, testes, cloud e DevOps. Especialista em React, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB, AWS, CI/CD e microsserviços. Lidero times, defino padrões e garanto entregas de alta qualidade.
               </p>
             </div>
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-modern-gray">
-                Domínio total de ciclo completo de desenvolvimento: análise de
-                requisitos, UI/UX, integração de sistemas, CI/CD, testes
-                automatizados, deploy em cloud e monitoramento. Coloco soluções
-                em produção com qualidade e velocidade. E ainda mentorando quem
-                vem atrás.
+                Experiência em projetos nacionais e internacionais, com foco em performance, segurança, escalabilidade e experiência do usuário. Mentor de desenvolvedores, apaixonado por tecnologia, inovação e resolução de problemas complexos.
               </p>
               <div className="flex flex-wrap gap-3 mt-4">
-                {/* Front-end */}
+                {/* Fullstack */}
                 <Badge className="badge-tech">React</Badge>
                 <Badge className="badge-tech">Next.js</Badge>
                 <Badge className="badge-tech">TypeScript</Badge>
-                <Badge className="badge-tech">Tailwind CSS</Badge>
-                <Badge className="badge-tech">Framer Motion</Badge>
-                <Badge className="badge-tech">Zustand</Badge>
-                <Badge className="badge-tech">React Query</Badge>
-                {/* Back-end */}
                 <Badge className="badge-tech">Node.js</Badge>
                 <Badge className="badge-tech">Express</Badge>
-                <Badge className="badge-tech">Supabase</Badge>
+                <Badge className="badge-tech">NestJS</Badge>
                 <Badge className="badge-tech">PostgreSQL</Badge>
                 <Badge className="badge-tech">MongoDB</Badge>
-                <Badge className="badge-tech">JWT</Badge>
-                <Badge className="badge-tech">REST & GraphQL</Badge>
+                <Badge className="badge-tech">GraphQL</Badge>
+                <Badge className="badge-tech">REST</Badge>
                 <Badge className="badge-tech">Prisma</Badge>
-                <Badge className="badge-tech">CI/CD</Badge>
+                <Badge className="badge-tech">Docker</Badge>
+                <Badge className="badge-tech">AWS</Badge>
                 <Badge className="badge-tech">Vercel</Badge>
+                <Badge className="badge-tech">CI/CD</Badge>
+                <Badge className="badge-tech">Jest</Badge>
+                <Badge className="badge-tech">Cypress</Badge>
+                <Badge className="badge-tech">Microservices</Badge>
+                <Badge className="badge-tech">Mentoria</Badge>
               </div>
             </div>
           </div>

@@ -31,11 +31,11 @@ const careerEvents: CareerEvent[] = [
   {
     id: 1,
     type: 'job',
-    title: 'Desenvolvedor Front End Sênior',
+    title: 'Desenvolvedor Fullstack Sênior',
     organization: 'Appezshop',
     period: '2021 - Presente',
     description:
-      'Atuo com arquitetura de sistemas, integração de APIs, desenvolvimento de funcionalidades completas usando React, Next.js, Tailwind, Node.js, Supabase e PostgreSQL. Lidero decisões técnicas e otimizações de performance.',
+      'Liderança de squads, arquitetura de sistemas escaláveis, implementação de soluções fullstack (React, Next.js, Node.js, PostgreSQL, MongoDB, AWS). Mentoria, code review, automação de deploy e integração de sistemas.',
     badge: {
       label: 'Líder Técnico',
       color: 'bg-blue-600',
@@ -44,47 +44,58 @@ const careerEvents: CareerEvent[] = [
   },
   {
     id: 2,
-    type: 'achievement',
-    title: 'Certificação React Avançado',
-    organization: 'Rocketseat',
-    period: '2023',
-    description: 'Conquista de certificação em React avançado, com foco em hooks, performance e arquitetura.',
+    type: 'job',
+    title: 'Desenvolvedor Fullstack Sênior',
+    organization: 'LATAM',
+    period: '2024 - 2025',
+    description:
+      'Desenvolvimento de aplicações web e APIs, arquitetura de microsserviços, integração de sistemas legados, automação CI/CD, liderança técnica e cloud migration.',
     badge: {
-      label: 'Certificado',
+      label: 'Fullstack',
       color: 'bg-green-600',
       icon: <Award className="w-4 h-4 text-white" />,
     },
   },
   {
     id: 3,
-    type: 'project',
-    title: 'Dashboard Analítico',
-    organization: 'LATAM',
-    period: '2024',
-    description: 'Desenvolvimento de dashboard interativo para visualização de dados em tempo real.',
+    type: 'job',
+    title: 'Desenvolvedor Fullstack Sênior',
+    organization: 'RH SYSTEM',
+    period: '2024 - 2025',
+    description:
+      'Projetos de automação de RH, criação de dashboards, integrações com ERPs, APIs RESTful, arquitetura de software e segurança.',
+    badge: {
+      label: 'Backoffice',
+      color: 'bg-purple-600',
+      icon: <Trophy className="w-4 h-4 text-white" />,
+    },
   },
   {
     id: 4,
-    type: 'course',
-    title: 'Especialização em UX/UI',
-    organization: 'Alura',
-    period: '2022',
-    description: 'Curso de especialização em design de experiência do usuário e interfaces modernas.',
+    type: 'job',
+    title: 'Desenvolvedor Fullstack Pleno',
+    organization: 'TechSmart Solutions',
+    period: '2020 - 2021',
+    description:
+      'Desenvolvimento de sistemas completos, gateways de pagamento, autenticação JWT, relatórios dinâmicos e painéis administrativos. Stack: React, Node, Express, MongoDB.',
     badge: {
-      label: 'UX/UI',
-      color: 'bg-pink-500',
+      label: 'Pleno',
+      color: 'bg-yellow-500',
+      icon: <Award className="w-4 h-4 text-white" />,
     },
   },
   {
     id: 5,
-    type: 'badge',
-    title: '100+ Projetos Entregues',
-    period: '2023',
-    description: 'Reconhecimento por entregar mais de 100 projetos de alta qualidade.',
+    type: 'job',
+    title: 'Desenvolvedor Fullstack Júnior',
+    organization: 'Projetos Independentes',
+    period: '2019 - 2020',
+    description:
+      'Criação de MVPs, landing pages, APIs e integrações de sistemas para startups e clientes diversos. Stack: React, Node.js, PostgreSQL, WordPress, Vue.js.',
     badge: {
-      label: '100+ Projetos',
-      color: 'bg-yellow-500',
-      icon: <Trophy className="w-4 h-4 text-white" />,
+      label: 'Júnior',
+      color: 'bg-gray-500',
+      icon: <Award className="w-4 h-4 text-white" />,
     },
   },
   {
@@ -93,7 +104,7 @@ const careerEvents: CareerEvent[] = [
     title: 'Co-fundador e CTO',
     organization: 'InovaStart',
     period: '2017 - 2018',
-    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas.'
+    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas. Time, arquitetura e validação do produto.'
   },
   {
     id: 7,
@@ -101,7 +112,7 @@ const careerEvents: CareerEvent[] = [
     title: 'Desenvolvedor Full Stack',
     organization: 'HealthTech Startup',
     period: '2018 - 2019',
-    description: 'Desenvolvimento de soluções digitais para o setor de saúde, incluindo integrações com APIs de clínicas e sistemas de agendamento online.'
+    description: 'Desenvolvimento de soluções digitais para o setor de saúde, integrações com APIs, sistemas de agendamento online, arquitetura de banco de dados e automação de processos.'
   },
   {
     id: 8,
@@ -164,4 +175,4 @@ export const CareerTimeline: React.FC = () => (
   </section>
 );
 
-export default CareerTimeline; 
+export default CareerTimeline;

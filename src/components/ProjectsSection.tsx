@@ -24,38 +24,38 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'Portfolio 3D Interativo',
+    title: 'Plataforma SaaS de Gestão Empresarial',
     description:
-      'Um portfólio imersivo com modelos 3D e animações interativas criado com Three.js e React. Inclui uma ilha 3D animada na página inicial e um modelo 3D de raposa na seção de contato.',
+      'Desenvolvimento fullstack de uma plataforma SaaS para gestão de pequenas e médias empresas. Responsável por arquitetura, APIs, autenticação, painéis administrativos, integrações financeiras e deploy cloud.',
     image:
       'https://images.unsplash.com/photo-1618346136472-090de27fe8b4?w=800&q=80',
-    tags: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
-    liveUrl: 'https://3d-portfolio-neon-eta.vercel.app/',
-    githubUrl: 'https://github.com/YTyndyk/3D-Portfolio',
+    tags: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS', 'CI/CD'],
+    liveUrl: 'https://gestao-saas.vercel.app/',
+    githubUrl: 'https://github.com/seuusuario/gestao-saas',
     featured: true,
   },
   {
     id: 2,
-    title: 'Sistema de Gestão de Tarefas',
+    title: 'Sistema de RH Inteligente',
     description:
-      'Aplicação full-stack para gerenciamento de projetos e tarefas com funcionalidades avançadas como arrastar e soltar, filtros de tarefas, notificações e relatórios em tempo real.',
+      'Aplicação fullstack para automação de processos de RH, integração com ERPs, dashboards analíticos e relatórios dinâmicos. Stack: React, Node.js, MongoDB, Docker, AWS.',
     image:
       'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80',
-    tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
-    liveUrl: 'https://task-master-pro.vercel.app/',
-    githubUrl: 'https://github.com/CodeWithSadee/taskmate',
+    tags: ['React', 'Node.js', 'MongoDB', 'Docker', 'AWS'],
+    liveUrl: 'https://rh-inteligente.vercel.app/',
+    githubUrl: 'https://github.com/seuusuario/rh-inteligente',
     featured: true,
   },
   {
     id: 3,
-    title: 'Dashboard Analítico',
+    title: 'Dashboard Analítico e BI',
     description:
-      'Dashboard interativo e responsivo para visualização de dados com gráficos personalizáveis, temas escuro/claro, e painel de administração para gerenciamento de usuários.',
+      'Dashboard interativo para visualização de dados em tempo real, gráficos customizados, autenticação JWT, multi-tenant e deploy serverless.',
     image:
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    tags: ['React', 'TypeScript', 'Chart.js', 'Material UI', 'Firebase'],
-    liveUrl: 'https://react-admin-dashboard-sigma.vercel.app/',
-    githubUrl: 'https://github.com/adrianhajdin/project_syncfusion_dashboard',
+    tags: ['React', 'TypeScript', 'Node.js', 'Prisma', 'Vercel'],
+    liveUrl: 'https://dashboard-bi.vercel.app/',
+    githubUrl: 'https://github.com/seuusuario/dashboard-bi',
     featured: true,
   },
   {
