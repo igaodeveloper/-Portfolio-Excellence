@@ -7,6 +7,15 @@ import {
   FaCompress,
   FaVolumeUp,
   FaVolumeMute,
+  FaStepForward,
+  FaStepBackward,
+  FaDownload,
+  FaRegClosedCaptioning,
+  FaRegClone,
+  FaRegShareSquare,
+  FaRegLightbulb,
+  FaRegClock,
+  FaCog,
 } from 'react-icons/fa';
 import { IoMdSkipForward, IoMdSkipBackward } from 'react-icons/io';
 import { motion, useDragControls, PanInfo } from 'framer-motion';
@@ -44,6 +53,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [seeking, setSeeking] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [buffering, setBuffering] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [cinemaMode, setCinemaMode] = useState(false);
+  const [pip, setPip] = useState(false);
+  const [showTooltip, setShowTooltip] = useState('');
+  const [showQualityMenu, setShowQualityMenu] = useState(false);
+  const [showCaptionsMenu, setShowCaptionsMenu] = useState(false);
+  const [progressPreview, setProgressPreview] = useState<number | null>(null);
 
   const playerRef = useRef<ReactPlayer>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,6 +96,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         setMuted(false);
       } else if (e.code === 'ArrowDown') {
         setVolume((prev) => Math.max(prev - 0.1, 0));
+      } else if (e.code === 'KeyP') {
+        setPip((prev) => !prev);
+      } else if (e.code === 'KeyC') {
+        setCinemaMode((prev) => !prev);
+      } else if (e.code === 'KeyS') {
+        navigator.clipboard.writeText(url || '');
+        setShowTooltip('Link copiado para a área de transferência!');
+        setTimeout(() => setShowTooltip(''), 2000);
+      } else if (e.code === 'KeyV') {
+        setPlaybackRate((prev) => {
+          const newRate = prev >= 2 ? 0.5 : prev + 0.25;
+          return newRate;
+        });
       }
     };
 
@@ -88,7 +117,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [playing, played, muted]);
+  }, [playing, played, muted, url]);
 
   // Mostrar controles quando o mouse se move
   useEffect(() => {
@@ -271,6 +300,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           playing={playing}
           volume={volume}
           muted={muted}
+          playbackRate={playbackRate}
+          pip={pip}
+          onEnablePIP={() => setPip(true)}
+          onDisablePIP={() => setPip(false)}
           onProgress={handleProgress}
           onDuration={handleDuration}
           onBuffer={() => handleBuffer(true)}
@@ -337,6 +370,93 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           )}
         </motion.button>
 
+        {/* Controles extras avançados */}
+        <motion.div
+          className="absolute top-4 right-4 flex flex-col gap-2 z-30"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: showControls || hovering ? 1 : 0, x: showControls || hovering ? 0 : 20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <button
+            onClick={() => setShowQualityMenu((v) => !v)}
+            className="bg-black/70 hover:bg-cyan-600 text-white p-2 rounded-full shadow-lg"
+            title="Qualidade do Vídeo"
+          >
+            <FaCog size={18} />
+          </button>
+          {showQualityMenu && (
+            <div className="absolute right-14 top-0 bg-gray-900 text-white rounded shadow-lg p-3 w-48 z-50 animate-fade-in">
+              <div className="font-bold mb-2">Qualidade do YouTube</div>
+              <div className="text-xs text-gray-300 mb-2">A troca de qualidade é automática pelo YouTube. Para forçar, use as configurações do player nativo do YouTube.</div>
+              <button className="w-full text-left py-1 px-2 rounded hover:bg-gray-700" onClick={() => setShowQualityMenu(false)}>OK</button>
+            </div>
+          )}
+          <button
+            onClick={() => setShowCaptionsMenu((v) => !v)}
+            className="bg-black/70 hover:bg-yellow-600 text-white p-2 rounded-full shadow-lg"
+            title="Legendas"
+          >
+            <FaRegClosedCaptioning size={18} />
+          </button>
+          {showCaptionsMenu && (
+            <div className="absolute right-14 top-12 bg-gray-900 text-white rounded shadow-lg p-3 w-48 z-50 animate-fade-in">
+              <div className="font-bold mb-2">Legendas</div>
+              <div className="text-xs text-gray-300 mb-2">Se o vídeo possuir legendas, ative pelo menu do player nativo do YouTube (ícone de engrenagem no vídeo).</div>
+              <button className="w-full text-left py-1 px-2 rounded hover:bg-gray-700" onClick={() => setShowCaptionsMenu(false)}>OK</button>
+            </div>
+          )}
+          <a
+            href={url || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-black/70 hover:bg-green-600 text-white p-2 rounded-full shadow-lg"
+            title="Download (abrir no YouTube)"
+            download
+          >
+            <FaDownload size={18} />
+          </a>
+          <button
+            onClick={() => setPip((v) => !v)}
+            className="bg-black/70 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg"
+            title="Picture-in-Picture (P)"
+          >
+            <FaRegClone size={18} />
+          </button>
+          <button
+            onClick={() => setCinemaMode((v) => !v)}
+            className={`bg-black/70 hover:bg-purple-600 text-white p-2 rounded-full shadow-lg ${cinemaMode ? 'ring-2 ring-purple-400' : ''}`}
+            title="Modo Cinema (C)"
+          >
+            <FaRegLightbulb size={18} />
+          </button>
+          <button
+            onClick={() => navigator.clipboard.writeText(url || '')}
+            className="bg-black/70 hover:bg-green-600 text-white p-2 rounded-full shadow-lg"
+            title="Compartilhar Link (S)"
+          >
+            <FaRegShareSquare size={18} />
+          </button>
+          <button
+            onClick={() => setPlaybackRate((r) => (r >= 2 ? 0.5 : r + 0.25))}
+            className="bg-black/70 hover:bg-yellow-500 text-white p-2 rounded-full shadow-lg"
+            title={`Velocidade: ${playbackRate}x (V)`}
+          >
+            <FaStepForward size={18} />
+          </button>
+        </motion.div>
+
+        {/* Modo cinema: escurece o fundo */}
+        {cinemaMode && (
+          <div className="fixed inset-0 bg-black/90 z-40 transition-all duration-500" onClick={() => setCinemaMode(false)} />
+        )}
+
+        {/* Tooltip de atalhos */}
+        {showTooltip && (
+          <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-4 py-2 rounded shadow-lg z-50 animate-fade-in">
+            {showTooltip}
+          </div>
+        )}
+
         {/* Controles inferiores - estilo YouTube */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent pt-16 pb-2 px-3 z-20"
@@ -349,15 +469,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         >
           {/* Barra de progresso - estilo YouTube */}
           <div className="group relative mb-2">
-            <div className="h-1 bg-gray-600/50 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gray-400/40 rounded-full"
-                style={{ width: `${loaded * 100}%` }}
-              ></div>
-              <div
-                className="absolute top-0 left-0 h-full bg-red-600 rounded-full"
-                style={{ width: `${played * 100}%` }}
-              ></div>
+            {/* Barra de progresso com preview */}
+            <div
+              className="h-1 bg-gray-600/50 rounded-full overflow-hidden relative"
+              onMouseMove={(e) => {
+                const rect = (e.target as HTMLElement).getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                setProgressPreview(Math.max(0, Math.min(1, percent)));
+              }}
+              onMouseLeave={() => setProgressPreview(null)}
+            >
+              <div className="h-full bg-gray-400/40 rounded-full" style={{ width: `${loaded * 100}%` }}></div>
+              <div className="absolute top-0 left-0 h-full bg-red-600 rounded-full" style={{ width: `${played * 100}%` }}></div>
+              {progressPreview !== null && (
+                <div className="absolute top-0 left-0 h-full bg-blue-400/60 rounded-full pointer-events-none" style={{ width: `${progressPreview * 100}%` }}></div>
+              )}
             </div>
             <input
               type="range"
@@ -374,6 +500,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               className="absolute h-3 w-3 bg-red-600 rounded-full transform -translate-y-1/2 top-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ left: `calc(${played * 100}% - 6px)` }}
             ></div>
+            {progressPreview !== null && (
+              <div
+                className="absolute -top-8 left-0 px-2 py-1 bg-black/90 text-white text-xs rounded shadow-lg pointer-events-none animate-fade-in"
+                style={{ left: `calc(${progressPreview * 100}% - 24px)` }}
+              >
+                {formatTime((progressPreview ?? 0) * duration)}
+              </div>
+            )}
           </div>
 
           {/* Controles e tempo - estilo YouTube */}

@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaChevronDown, FaChevronUp, FaStepForward, FaStepBackward } from 'react-icons/fa';
+import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward, FaSpotify, FaSearch, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { searchSpotifyTracks } from '../services/spotifyService';
 
 const PLAYLIST = [
   {
@@ -26,38 +27,6 @@ const PLAYLIST = [
   },
 ];
 
-// Equalizer bar component
-const Equalizer: React.FC<{ playing: boolean }> = ({ playing }) => {
-  // 5 barras, cada uma com animação diferente
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginLeft: 8 }}>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <motion.div
-          key={i}
-          initial={{ scaleY: 0.5 }}
-          animate={playing ? { scaleY: [0.5, 1.4 - i * 0.1, 0.7 + i * 0.1, 1.2, 0.5] } : { scaleY: 0.5 }}
-          transition={{
-            repeat: playing ? Infinity : 0,
-            duration: 0.7 + i * 0.13,
-            ease: 'easeInOut',
-            repeatType: 'loop',
-            delay: i * 0.07,
-          }}
-          style={{
-            width: 4,
-            height: 22,
-            borderRadius: 3,
-            background: 'linear-gradient(180deg, #00d2df 60%, #6ee7ef 100%)',
-            opacity: 0.85,
-            boxShadow: '0 0 4px #00d2df44',
-            marginLeft: i === 0 ? 0 : 2,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const MusicPlayer: React.FC = () => {
   const playerRef = useRef<ReactPlayer>(null);
   const [playing, setPlaying] = useState(false);
@@ -68,16 +37,15 @@ const MusicPlayer: React.FC = () => {
   const [hover, setHover] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [current, setCurrent] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [spotifyResults, setSpotifyResults] = useState<any[]>([]);
+  const [searching, setSearching] = useState(false);
 
   const currentTrack = PLAYLIST[current];
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, '0');
-    const s = Math.floor(seconds % 60)
-      .toString()
-      .padStart(2, '0');
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
@@ -93,6 +61,21 @@ const MusicPlayer: React.FC = () => {
     setPlaying(true);
   };
 
+  const handleSpotifySearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    setSearching(true);
+    setSpotifyResults([]);
+    try {
+      const results = await searchSpotifyTracks(searchTerm);
+      setSpotifyResults(results);
+    } catch (err) {
+      alert('Erro ao buscar no Spotify');
+    } finally {
+      setSearching(false);
+    }
+  };
+
   return (
     <motion.div
       className="fixed bottom-6 left-6 z-[100] shadow-2xl"
@@ -103,27 +86,112 @@ const MusicPlayer: React.FC = () => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        backdropFilter: 'blur(16px)',
-        background:
-          'linear-gradient(120deg, rgba(255,255,255,0.18) 60%, rgba(0,210,223,0.12) 100%)',
-        borderRadius: minimized ? '50%' : '1.5rem',
-        border: hover && !minimized ? '2.5px solid #00d2df' : '1.5px solid rgba(255,255,255,0.25)',
+        backdropFilter: 'blur(20px)',
+        background: 'linear-gradient(120deg, #18181b 60%, #1db95422 100%)',
+        borderRadius: minimized ? '50%' : '2rem',
+        border: hover && !minimized ? '2.5px solid #1db954' : '1.5px solid #232323',
         boxShadow: hover && !minimized
-          ? '0 12px 40px 0 rgba(0,210,223,0.25), 0 2px 8px 0 rgba(0,210,223,0.10)'
-          : '0 8px 32px 0 rgba(31,38,135,0.18)',
-        minWidth: minimized ? 64 : 280,
-        maxWidth: minimized ? 64 : 340,
+          ? '0 12px 40px 0 #1db95444, 0 2px 8px 0 #1db95422'
+          : '0 8px 32px 0 #23232333',
+        minWidth: minimized ? 64 : 340,
+        maxWidth: minimized ? 64 : 420,
         width: minimized ? 64 : undefined,
         height: minimized ? 64 : undefined,
-        padding: minimized ? 0 : 18,
+        padding: minimized ? 0 : 22,
         display: 'flex',
         alignItems: 'center',
-        gap: minimized ? 0 : 16,
+        gap: minimized ? 0 : 18,
         justifyContent: minimized ? 'center' : 'flex-start',
         transition: 'all 0.35s cubic-bezier(.4,2,.6,1)',
         overflow: 'hidden',
+        cursor: 'default', // Permite o ponteiro ser visto normalmente
+        pointerEvents: 'auto', // Garante que o mouse interaja normalmente
       }}
     >
+      {/* Busca Spotify */}
+      <form onSubmit={handleSpotifySearch} style={{ display: minimized ? 'none' : 'flex', alignItems: 'center', gap: 8, marginBottom: 12, width: '100%' }}>
+        <input
+          type="text"
+          placeholder="Buscar música no Spotify..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          style={{
+            borderRadius: 8,
+            border: '1px solid #1db954',
+            padding: '6px 12px',
+            outline: 'none',
+            minWidth: 180,
+            fontSize: 15,
+            background: '#232323',
+            color: '#fff',
+          }}
+        />
+        <button type="submit" style={{ background: '#1db954', border: 'none', borderRadius: 8, padding: 8, cursor: 'pointer' }}>
+          <FaSpotify color="#fff" size={18} />
+        </button>
+        {searching && <span style={{ color: '#1db954', fontSize: 12 }}>Buscando...</span>}
+      </form>
+      {/* Resultados Spotify */}
+      {spotifyResults.length > 0 && !minimized && (
+        <div style={{
+          background: '#18181b',
+          borderRadius: 12,
+          padding: 12,
+          marginBottom: 16,
+          maxHeight: 220,
+          overflowY: 'auto',
+          width: '100%',
+        }}>
+          <div style={{ fontWeight: 600, color: '#1db954', marginBottom: 6 }}>Resultados do Spotify</div>
+          {spotifyResults.map(track => (
+            <div key={track.id} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+              {track.image && <img src={track.image} alt={track.title} style={{ width: 38, height: 38, borderRadius: 8, objectFit: 'cover' }} />}
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 500, color: '#fff', fontSize: 15 }}>{track.title}</div>
+                <div style={{ color: '#6ee7ef', fontSize: 13 }}>{track.artist} <span style={{ color: '#aaa', fontSize: 12 }}>({track.album})</span></div>
+              </div>
+              {track.preview && (
+                <audio controls src={track.preview} style={{ height: 24 }}>
+                  Seu navegador não suporta áudio.
+                </audio>
+              )}
+              <a href={track.url} target="_blank" rel="noopener noreferrer" style={{ color: '#1db954', marginLeft: 8 }} title="Ouvir no Spotify">
+                <FaSpotify size={18} />
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
+      <AnimatePresence>
+        {minimized && (
+          <motion.button
+            key="minimized"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={() => setMinimized(false)}
+            aria-label="Restaurar player"
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #1db95422 60%, #232323 100%)',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 8px 0 #1db95422',
+              cursor: 'pointer', // Ponteiro visível no modo minimizado
+              position: 'relative',
+            }}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.08, boxShadow: '0 0 0 4px #1db95444' }}
+          >
+            <FaChevronUp size={16} color="#1db954" style={{ position: 'absolute', bottom: 8, right: 8, opacity: 0.7 }} />
+            <FaSpotify size={28} color="#1db954" />
+          </motion.button>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {minimized ? (
           <motion.button
@@ -137,49 +205,20 @@ const MusicPlayer: React.FC = () => {
               width: 64,
               height: 64,
               borderRadius: '50%',
-              background:
-                'linear-gradient(135deg, rgba(0,210,223,0.18) 60%, rgba(255,255,255,0.10) 100%)',
+              background: 'linear-gradient(135deg, #1db95422 60%, #232323 100%)',
               border: 'none',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 2px 8px 0 rgba(0,210,223,0.10)',
+              boxShadow: '0 2px 8px 0 #1db95422',
               cursor: 'pointer',
               position: 'relative',
             }}
             whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.08, boxShadow: '0 0 0 4px #00d2df44' }}
+            whileHover={{ scale: 1.08, boxShadow: '0 0 0 4px #1db95444' }}
           >
-            <motion.div
-              animate={playing ? { rotate: 360, scale: [1, 1.12, 1] } : { rotate: 0, scale: 1 }}
-              transition={{ repeat: playing ? Infinity : 0, duration: 2, ease: 'linear', repeatType: 'loop' }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              <motion.div
-                animate={playing ? { scale: [1, 1.18, 1], boxShadow: ['0 0 0 0 #00d2df44', '0 0 0 12px #00d2df22', '0 0 0 0 #00d2df44'] } : { scale: 1, boxShadow: '0 0 0 0 #00d2df44' }}
-                transition={{ repeat: playing ? Infinity : 0, duration: 1.2, ease: 'easeInOut', repeatType: 'loop' }}
-                style={{ borderRadius: '50%' }}
-              >
-                <AnimatePresence>
-                  {playing && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      style={{ display: 'flex', alignItems: 'center' }}
-                    >
-                      <Equalizer playing={playing} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </motion.div>
-            <FaChevronUp
-              size={16}
-              color="#00d2df"
-              style={{ position: 'absolute', bottom: 8, right: 8, opacity: 0.7 }}
-            />
+            <FaChevronUp size={16} color="#1db954" style={{ position: 'absolute', bottom: 8, right: 8, opacity: 0.7 }} />
+            <FaSpotify size={28} color="#1db954" />
           </motion.button>
         ) : (
           <>
@@ -191,40 +230,21 @@ const MusicPlayer: React.FC = () => {
                 width: 54,
                 height: 54,
                 borderRadius: '1rem',
-                background:
-                  'linear-gradient(135deg, rgba(0,210,223,0.18) 60%, rgba(255,255,255,0.10) 100%)',
+                background: 'linear-gradient(135deg, #1db95422 60%, #232323 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 2px 8px 0 rgba(0,210,223,0.10)',
+                boxShadow: '0 2px 8px 0 #1db95422',
                 position: 'relative',
                 overflow: 'visible',
               }}
             >
-              <motion.div
-                animate={playing ? { scale: [1, 1.18, 1], boxShadow: ['0 0 0 0 #00d2df44', '0 0 0 12px #00d2df22', '0 0 0 0 #00d2df44'] } : { scale: 1, boxShadow: '0 0 0 0 #00d2df44' }}
-                transition={{ repeat: playing ? Infinity : 0, duration: 1.2, ease: 'easeInOut', repeatType: 'loop' }}
-                style={{ borderRadius: '50%' }}
-              >
-                <AnimatePresence>
-                  {playing && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      style={{ display: 'flex', alignItems: 'center' }}
-                    >
-                      <Equalizer playing={playing} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+              <FaSpotify size={32} color="#1db954" />
             </motion.div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <motion.div
-                className="text-base font-semibold truncate text-modern-accent2"
-                style={{ color: '#00d2df' }}
+                className="text-base font-semibold truncate"
+                style={{ color: '#fff' }}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
@@ -232,8 +252,8 @@ const MusicPlayer: React.FC = () => {
                 {currentTrack.title}
               </motion.div>
               <motion.div
-                className="mb-1 text-xs truncate text-modern-gray"
-                style={{ color: '#6ee7ef' }}
+                className="mb-1 text-xs truncate"
+                style={{ color: '#1db954' }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
@@ -246,7 +266,7 @@ const MusicPlayer: React.FC = () => {
                   onClick={handlePrev}
                   className="focus:outline-none"
                   style={{
-                    background: 'rgba(255,255,255,0.18)',
+                    background: '#232323',
                     border: 'none',
                     borderRadius: '50%',
                     width: 28,
@@ -256,16 +276,16 @@ const MusicPlayer: React.FC = () => {
                     justifyContent: 'center',
                   }}
                   whileTap={{ scale: 0.85 }}
-                  whileHover={{ scale: 1.13, backgroundColor: '#00d2df22' }}
+                  whileHover={{ scale: 1.13, backgroundColor: '#1db95422' }}
                 >
-                  <FaStepBackward size={14} color="#00d2df" />
+                  <FaStepBackward size={14} color="#1db954" />
                 </motion.button>
                 <motion.button
                   aria-label={playing ? 'Pausar' : 'Tocar'}
                   onClick={() => setPlaying((p) => !p)}
                   className="focus:outline-none"
                   style={{
-                    background: 'rgba(255,255,255,0.18)',
+                    background: '#1db954',
                     border: 'none',
                     borderRadius: '50%',
                     width: 32,
@@ -273,20 +293,20 @@ const MusicPlayer: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: playing ? '0 0 0 2px #00d2df' : undefined,
+                    boxShadow: playing ? '0 0 0 2px #1db954' : undefined,
                     transition: 'box-shadow 0.2s',
                   }}
                   whileTap={{ scale: 0.85 }}
-                  whileHover={{ scale: 1.13, backgroundColor: '#00d2df22' }}
+                  whileHover={{ scale: 1.13, backgroundColor: '#232323' }}
                 >
-                  {playing ? <FaPause size={18} color="#00d2df" /> : <FaPlay size={18} color="#00d2df" />}
+                  {playing ? <FaPause size={18} color="#fff" /> : <FaPlay size={18} color="#fff" />}
                 </motion.button>
                 <motion.button
                   aria-label="Próxima"
                   onClick={handleNext}
                   className="focus:outline-none"
                   style={{
-                    background: 'rgba(255,255,255,0.18)',
+                    background: '#232323',
                     border: 'none',
                     borderRadius: '50%',
                     width: 28,
@@ -296,9 +316,9 @@ const MusicPlayer: React.FC = () => {
                     justifyContent: 'center',
                   }}
                   whileTap={{ scale: 0.85 }}
-                  whileHover={{ scale: 1.13, backgroundColor: '#00d2df22' }}
+                  whileHover={{ scale: 1.13, backgroundColor: '#1db95422' }}
                 >
-                  <FaStepForward size={14} color="#00d2df" />
+                  <FaStepForward size={14} color="#1db954" />
                 </motion.button>
                 <motion.div
                   style={{ flex: 1, position: 'relative', height: 8, display: 'flex', alignItems: 'center' }}
@@ -317,7 +337,7 @@ const MusicPlayer: React.FC = () => {
                       setPlayed(val);
                       playerRef.current?.seekTo(val);
                     }}
-                    style={{ flex: 1, accentColor: '#00d2df', height: 4, background: 'transparent', zIndex: 2 }}
+                    style={{ flex: 1, accentColor: '#1db954', height: 4, background: 'transparent', zIndex: 2 }}
                     aria-label="Progresso da música"
                     whileFocus={{ scale: 1.05 }}
                   />
@@ -328,7 +348,7 @@ const MusicPlayer: React.FC = () => {
                       top: '50%',
                       width: `${played * 100}%`,
                       height: 4,
-                      background: 'linear-gradient(90deg, #00d2df 60%, #6ee7ef 100%)',
+                      background: 'linear-gradient(90deg, #1db954 60%, #232323 100%)',
                       borderRadius: 4,
                       transform: 'translateY(-50%)',
                       zIndex: 1,
@@ -341,7 +361,7 @@ const MusicPlayer: React.FC = () => {
                 </motion.div>
                 <motion.div
                   className="text-xs"
-                  style={{ color: '#00d2df', minWidth: 38, textAlign: 'right' }}
+                  style={{ color: '#fff', minWidth: 38, textAlign: 'right' }}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.18 }}
@@ -356,12 +376,12 @@ const MusicPlayer: React.FC = () => {
                   className="focus:outline-none"
                   style={{ background: 'none', border: 'none', padding: 0 }}
                   whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.13, backgroundColor: '#00d2df22' }}
+                  whileHover={{ scale: 1.13, backgroundColor: '#1db95422' }}
                 >
                   {muted || volume === 0 ? (
-                    <FaVolumeMute size={16} color="#00d2df" />
+                    <FaVolumeMute size={16} color="#1db954" />
                   ) : (
-                    <FaVolumeUp size={16} color="#00d2df" />
+                    <FaVolumeUp size={16} color="#1db954" />
                   )}
                 </motion.button>
                 <motion.input
@@ -375,7 +395,7 @@ const MusicPlayer: React.FC = () => {
                     setVolume(v);
                     setMuted(v === 0);
                   }}
-                  style={{ width: 60, accentColor: '#00d2df', height: 4 }}
+                  style={{ width: 60, accentColor: '#1db954', height: 4 }}
                   aria-label="Volume"
                   whileFocus={{ scale: 1.05 }}
                 />
@@ -391,11 +411,12 @@ const MusicPlayer: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    cursor: 'pointer', // Garante ponteiro visível no botão
                   }}
                   whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.13, backgroundColor: '#00d2df22' }}
+                  whileHover={{ scale: 1.13, backgroundColor: '#1db95422' }}
                 >
-                  <FaChevronDown size={16} color="#00d2df" />
+                  <FaChevronDown size={16} color="#1db954" />
                 </motion.button>
               </div>
             </div>
@@ -419,4 +440,4 @@ const MusicPlayer: React.FC = () => {
   );
 };
 
-export default MusicPlayer; 
+export default MusicPlayer;
