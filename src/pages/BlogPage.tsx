@@ -19,7 +19,6 @@ import {
 import { BlogCard } from '../components/blog/BlogCard';
 import { Skeleton } from '../components/ui/skeleton';
 import CategoryFilter from '../components/blog/CategoryFilter';
-import { Parallax } from 'react-scroll-parallax';
 import { AdsenseBanner } from '@/components/AdsenseBanner';
 import LazyImage from '../components/LazyImage';
 
@@ -73,22 +72,22 @@ const BlogPage = () => {
       <Navbar />
 
       {/* Fundo Parallax minimalista e elegante */}
-      <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+      {/* <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
         <LazyImage width={1920} height={1080} src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-80" />
       </Parallax>
       <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
         <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-60" />
-      </Parallax>
+      </Parallax> */}
       {/* Fim do fundo parallax minimalista */}
 
       <header className="relative px-4 pt-32 pb-20 overflow-hidden text-white shadow-md md:px-8 bg-gradient-to-r from-teal-500 to-blue-600/90 backdrop-blur-md">
         {/* Parallax visual para o blog (mantido para reforçar o header) */}
-        <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
+        {/* <Parallax speed={-20} className="absolute inset-0 z-0 pointer-events-none">
           <img loading="lazy" width="1920" height="1080" src="/parallax-gradient.svg" alt="Gradiente Parallax" className="object-cover w-full h-full opacity-60" />
         </Parallax>
         <Parallax speed={-10} className="absolute inset-0 z-0 pointer-events-none">
           <img loading="lazy" width="1920" height="1080" src="/parallax-aurora.svg" alt="Aurora Parallax" className="object-cover w-full h-full opacity-40" />
-        </Parallax>
+        </Parallax> */}
         {/* Fim do parallax visual */}
         <div className="container relative z-10 mx-auto text-center">
           <motion.div
