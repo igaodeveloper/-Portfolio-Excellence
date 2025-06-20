@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AnimatedParticles from '../AnimatedParticles';
+// import AnimatedParticles from '../AnimatedParticles';
 import './MemoryGame.css';
 
 const cardImages = [
@@ -65,7 +65,7 @@ const MemoryGame: React.FC = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen overflow-hidden minigame-hero-bg">
-      <AnimatedParticles />
+      {/* <AnimatedParticles /> */}
       <div className="z-10 memory-game-container">
         <h2>Jogo da Memória</h2>
         <button onClick={handleRestart} className="restart-btn">Reiniciar</button>
@@ -91,4 +91,4 @@ const MemoryGame: React.FC = () => {
   );
 };
 
-export default MemoryGame; 
+export default MemoryGame;

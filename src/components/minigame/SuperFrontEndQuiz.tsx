@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AnimatedParticles from '../AnimatedParticles';
+// import AnimatedParticles from '../AnimatedParticles';
 import './SuperFrontEndQuiz.css';
 
 const questions = [
@@ -91,7 +91,7 @@ const SuperFrontEndQuiz: React.FC = () => {
 
   return (
     <div className="minigame-hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
-      <AnimatedParticles />
+      {/* <AnimatedParticles /> */}
       <div className="quiz-container z-10">
         <h2>Super Quiz Front-End 🚀</h2>
         {showResult ? (
@@ -130,4 +130,4 @@ const SuperFrontEndQuiz: React.FC = () => {
   );
 };
 
-export default SuperFrontEndQuiz; 
+export default SuperFrontEndQuiz;
