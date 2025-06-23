@@ -11,7 +11,6 @@ import SmoothScroll from './components/SmoothScroll';
 import NewsletterPopup from './components/NewsletterPopup';
 
 import WhatsAppButton from './components/WhatsAppButton';
-import MusicPlayer from './components/MusicPlayer';
 import { ThemeProvider } from './contexts/ThemeContext';
 import AppToaster from './components/ui/toaster';
 
@@ -194,7 +193,6 @@ function App() {
             <CustomCursor />
             <HiddenAdminButton />
             <WhatsAppButton />
-            <MusicPlayer />
             <AppToaster />
           </div>
         </SmoothScroll>
