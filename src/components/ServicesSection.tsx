@@ -22,7 +22,12 @@ interface Service {
   icon: React.ReactNode;
   title: string;
   description: string;
-  cta?: { label: string; link: string };
+  cta?: { 
+    label: string; 
+    link: string; 
+    whatsapp?: boolean; 
+    message?: string;
+  };
 }
 
 const services: Service[] = [
@@ -31,14 +36,22 @@ const services: Service[] = [
     title: 'Freelance: Desenvolvimento & Design',
     description:
       'Ofereço serviços de desenvolvimento web, design de interfaces e consultoria personalizada para seu projeto.',
-    cta: { label: 'Contrate', link: '/contato' },
+    cta: { 
+      label: 'Saiba mais',
+      link: '/mentoria'
+    },
   },
   {
     icon: <Users className="w-10 h-10" />,
     title: 'Mentoria para Iniciantes',
     description:
       'Sessões de mentoria para quem está começando na área de tecnologia e deseja acelerar o aprendizado.',
-    cta: { label: 'Agende Mentoria', link: '/contato' },
+    cta: { 
+      label: 'Contrate', 
+      link: 'https://wa.me/5511982928508',
+      whatsapp: true,
+      message: 'Olá! Gostaria de contratar seus serviços.'
+    },
   },
   {
     icon: <Code className="w-10 h-10" />,
@@ -221,14 +234,27 @@ export default function ServicesSection() {
               <div className="mt-4">
                 <h3 className="text-xl font-bold text-modern-white mb-2">{service.title}</h3>
                 <p className="text-modern-gray mb-4">{service.description}</p>
-                {service.cta && (
-                  <a
-                    href={service.cta.link}
-                    className="inline-block px-4 py-2 bg-modern-accent text-white rounded hover:bg-modern-accent2 transition"
-                  >
-                    {service.cta.label}
-                  </a>
-                )}
+                {service.cta ? (
+                  service.cta.whatsapp ? (
+                    <button
+                      onClick={() => {
+                        const phoneNumber = '5511982928508';
+                        const encodedMessage = encodeURIComponent(service.cta.message);
+                        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`, '_blank');
+                      }}
+                      className="inline-flex items-center gap-2 text-modern-accent hover:text-modern-white transition-colors duration-300"
+                    >
+                      {service.cta.label}
+                    </button>
+                  ) : (
+                    <a
+                      href={service.cta.link}
+                      className="inline-flex items-center gap-2 text-modern-accent hover:text-modern-white transition-colors duration-300"
+                    >
+                      {service.cta.label}
+                    </a>
+                  )
+                ) : null}
               </div>
 
               {/* Card hover effect */}

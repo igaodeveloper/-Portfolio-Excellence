@@ -119,6 +119,8 @@ const CursorImpl = memo(() => {
 
     // Add custom-cursor class to body
     document.body.classList.add('custom-cursor');
+    // Remove unwanted classes
+    document.body.classList.remove('smooth-scroll-enabled'); // Removed theme-modern, enable-motion, and underline-links classes
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
@@ -133,6 +135,8 @@ const CursorImpl = memo(() => {
 
       // Remove custom-cursor class from body
       document.body.classList.remove('custom-cursor');
+      // Remove unwanted classes
+      document.body.classList.remove('smooth-scroll-enabled'); // Removed theme-modern, enable-motion, and underline-links classes
     };
   }, [cursorX, cursorY]);
 

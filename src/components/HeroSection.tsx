@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   AnimatedCharacters,
@@ -61,7 +61,7 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="min-h-screen flex flex-col justify-center items-center bg-modern-dark px-2 sm:px-4 md:px-8 py-8 md:py-20 relative overflow-x-hidden perspective-[1200px]"
+      className=""
       onMouseMove={handleMouseMove}
     >
       {/* Conteúdo principal acima do parallax */}
@@ -161,6 +161,70 @@ const HeroSection = () => {
                   }}
                 >
                   <ArrowRight size={18} />
+                </motion.div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-modern-accent to-modern-accent2"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.4 }}
+                />
+              </Button>
+
+              <Button
+                size="lg"
+                className="relative flex items-center gap-2 overflow-hidden font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
+                onClick={() => {
+                  const phoneNumber = '5511982928508'; // WhatsApp phone number
+                  const message = 'Olá! Gostaria de saber mais sobre mentoria.';
+                  const encodedMessage = encodeURIComponent(message);
+                  window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`, '_blank');
+                }}
+              >
+                <motion.span className="relative z-10">Agente Mentoria</motion.span>
+                <motion.div
+                  className="relative z-10"
+                  initial={{ x: 0 }}
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    duration: 1.5,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  <Phone size={18} />
+                </motion.div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-modern-accent to-modern-accent2"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.4 }}
+                />
+              </Button>
+
+              <Button
+                size="lg"
+                className="relative flex items-center gap-2 overflow-hidden font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
+                onClick={() => {
+                  const phoneNumber = '5511982928508'; // WhatsApp phone number
+                  const message = 'Olá! Gostaria de contratar seus serviços.';
+                  const encodedMessage = encodeURIComponent(message);
+                  window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`, '_blank');
+                }}
+              >
+                <motion.span className="relative z-10">Contrate</motion.span>
+                <motion.div
+                  className="relative z-10"
+                  initial={{ x: 0 }}
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    duration: 1.5,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  <Phone size={18} />
                 </motion.div>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-modern-accent to-modern-accent2"

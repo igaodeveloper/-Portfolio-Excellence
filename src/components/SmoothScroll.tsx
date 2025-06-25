@@ -58,13 +58,13 @@ const SmoothScrollImpl = memo(({ children }: SmoothScrollProps) => {
       ).matches;
       if (!prefersReducedMotion) {
         document.documentElement.style.scrollBehavior = 'smooth';
-        document.body.classList.add('smooth-scroll-enabled');
+// Removed smooth-scroll-enabled class
       }
     }
     return () => {
       if ('scrollBehavior' in document.documentElement.style) {
         document.documentElement.style.scrollBehavior = '';
-        document.body.classList.remove('smooth-scroll-enabled');
+// Removed smooth-scroll-enabled class
       }
     };
   }, []);
