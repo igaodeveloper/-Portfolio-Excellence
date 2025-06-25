@@ -186,7 +186,7 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {services.map((service, index) => (
             <motion.div
@@ -227,7 +227,7 @@ export default function ServicesSection() {
                   }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <ArrowUpRight className="text-modern-gray group-hover:text-modern-accent transition-all duration-300" />
+                  <ArrowUpRight className="card" />
                 </motion.div>
               </div>
 

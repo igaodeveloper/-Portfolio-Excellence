@@ -1,3 +1,5 @@
+import React from 'react';
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -11,6 +13,7 @@ import { fadeIn, pulseVariants, staggerContainer } from '@/lib/animations';
 import { useRef, useState } from 'react';
 import { useScrollContext } from './SmoothScroll';
 import LazyImage from './LazyImage';
+import '@/styles/variables.css'; // Importando estilos globais para z-index
 
 const socialLinks = [
   {
@@ -45,7 +48,6 @@ const HeroSection = () => {
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * -30;
     setRotate({ x, y });
     
-    // Update mouse position for particle effects
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
   
@@ -61,13 +63,18 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className=""
+      className="relative z-[100] pt-[80px]"
       onMouseMove={handleMouseMove}
     >
-      {/* Conteúdo principal acima do parallax */}
-      <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
-        {/* Fundo com camadas 3D animadas */}
-        <motion.div className="absolute inset-0 opacity-10">
+      <motion.div
+        variants={staggerContainer(0.1, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="container grid items-center gap-8 mx-auto lg:grid-cols-2 z-[100]"
+      >
+        {/* Fundo decorativo */}
+        <motion.div className="absolute inset-0 opacity-10 z-[50]">
           <motion.div
             className="absolute top-0 left-0 w-32 h-32 rounded-full bg-modern-accent blur-3xl"
             animate={{ rotateZ: [0, 360] }}
@@ -85,23 +92,23 @@ const HeroSection = () => {
           />
         </motion.div>
 
+        {/* Conteúdo principal */}
         <motion.div
-          variants={staggerContainer(0.1, 0.1)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="relative z-10 grid items-center w-full max-w-2xl grid-cols-1 gap-8 mx-auto sm:max-w-4xl md:max-w-7xl lg:grid-cols-2 gap-y-8 sm:gap-y-12"
+          className="relative flex flex-col gap-8"
+          initial={{ opacity: 0, rotateX: -30 }}
+          whileInView={{ opacity: 1, rotateX: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         >
           {/* Texto com rotação 3D interativa */}
           <motion.div
             variants={fadeIn('right', 0.2)}
-            className="flex flex-col space-y-8"
+            className="flex flex-col gap-8"
             initial={{ opacity: 0, rotateX: -30, z: -200 }}
             whileInView={{ opacity: 1, rotateX: 0, z: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
           >
             <motion.div
-              className="relative z-10"
+              className="relative"
               style={{
                 transform: `rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)`,
                 transformStyle: 'preserve-3d',
@@ -137,7 +144,7 @@ const HeroSection = () => {
 
             <motion.div
               variants={fadeIn('up', 0.8)}
-              className="flex flex-wrap gap-6 pt-4"
+              className="flex flex-wrap gap-6 pt-4 z-index-content"
             >
               <Button
                 size="lg"
@@ -174,13 +181,13 @@ const HeroSection = () => {
                 size="lg"
                 className="relative flex items-center gap-2 overflow-hidden font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
                 onClick={() => {
-                  const phoneNumber = '5511982928508'; // WhatsApp phone number
+                  const phoneNumber = '5511982928508'; 
                   const message = 'Olá! Gostaria de saber mais sobre mentoria.';
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`, '_blank');
                 }}
               >
-                <motion.span className="relative z-10">Agente Mentoria</motion.span>
+                <motion.span className="relative z-10">Agende Mentoria</motion.span>
                 <motion.div
                   className="relative z-10"
                   initial={{ x: 0 }}
@@ -206,7 +213,7 @@ const HeroSection = () => {
                 size="lg"
                 className="relative flex items-center gap-2 overflow-hidden font-medium transition-all duration-300 rounded bg-modern-accent hover:bg-modern-accent/80 text-modern-white group"
                 onClick={() => {
-                  const phoneNumber = '5511982928508'; // WhatsApp phone number
+                  const phoneNumber = '5511982928508'; 
                   const message = 'Olá! Gostaria de contratar seus serviços.';
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`, '_blank');
@@ -239,7 +246,6 @@ const HeroSection = () => {
                 initial="hidden"
                 animate="show"
                 className="flex items-center space-x-6"
-                style={{}} // Removido socialParallax
               >
                 {socialLinks.map((link, index) => (
                   <motion.a
@@ -327,7 +333,7 @@ const HeroSection = () => {
         
         {/* Indicador de rolagem */}
         <motion.div 
-          className="absolute transform -translate-x-1/2 cursor-pointer bottom-10 left-1/2"
+          className="absolute transform -translate-x-1/2 cursor-pointer bottom-10 left-1/2 z-index-content"
           initial={{ y: 0, opacity: 0.5 }}
           animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -336,7 +342,7 @@ const HeroSection = () => {
           <ChevronDown size={32} className="text-modern-accent" />
           <span className="block mt-2 text-xs text-center text-modern-gray">Rolar para baixo</span>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
