@@ -1,71 +1,99 @@
-// Express server para rodar API OpenAI localmente
+// Main server entry point
 import express from 'express';
-import fetch from 'node-fetch';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import fetch from 'node-fetch';
 
+// Configure environment variables
 dotenv.config();
 
-const app = express();
-app.use(cors({ origin: 'http://localhost:5173' }));
-app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://portfolio-excellence.vercel.app', 'https://www.portfolio-excellence.vercel.app']
+    : 'http://localhost:5173',
+  credentials: true
+}));
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// API Routes
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server is running' });
+});
+
+// OpenAI API endpoint
 app.post('/api/openai', async (req, res) => {
   let topic = '';
   try {
+    // Handle both string and object request bodies
     if (typeof req.body === 'string') {
       const parsed = JSON.parse(req.body);
       topic = parsed.topic || '';
     } else if (typeof req.body === 'object' && req.body !== null) {
       topic = req.body.topic || '';
     }
-  } catch (err) {
-    return res.status(400).json({ error: 'Invalid JSON in request body.' });
-  }
+    
+    if (!topic) {
+      return res.status(400).json({ error: 'Topic is required' });
+    }
 
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-  if (!OPENAI_API_KEY) {
-    return res.status(500).json({ error: 'OpenAI API key not configured.' });
-  }
-
-  try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'gpt-4',
-        messages: [
-          {
-            role: 'system',
-            content: 'Você é um especialista em projetos de software e inovação. Gere ideias criativas e completas para projetos fictícios.'
-          },
-          {
-            role: 'user',
-            content: topic
-              ? `Gere uma ideia de projeto fictícia na área de: ${topic}. Descreva o projeto, a stack sugerida e etapas de desenvolvimento.`
-              : 'Gere uma ideia de projeto fictícia inovadora. Descreva o projeto, a stack sugerida e etapas de desenvolvimento.'
-          }
-        ],
-        max_tokens: 400,
-        temperature: 1.1
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: topic }],
+        temperature: 0.7
       })
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      return res.status(500).json({ error });
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || 'Failed to get response from OpenAI');
     }
 
     const data = await response.json();
-    const idea = data.choices?.[0]?.message?.content || 'Não foi possível gerar uma ideia.';
-    return res.status(200).json({ idea });
-  } catch (err) {
-    return res.status(500).json({ error: err && err.message ? err.message : 'Erro inesperado.' });
+    res.json(data);
+  } catch (error) {
+    console.error('Error calling OpenAI API:', error);
+    res.status(500).json({ 
+      error: 'Failed to process request',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`API rodando em http://localhost:${PORT}`));
+// Serve the frontend for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
+// Start the server
+const serverPort = process.env.PORT || 3000;
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(serverPort, () => {
+    console.log(`Server is running on port ${serverPort}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+}
+
+export default app;

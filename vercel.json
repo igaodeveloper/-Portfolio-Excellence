@@ -1,12 +1,26 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@4.0.0"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
     }
-  },
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" }
   ],
-  "outputDirectory": "dist"
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
