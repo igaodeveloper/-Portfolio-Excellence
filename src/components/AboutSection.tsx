@@ -14,14 +14,21 @@ type TimelineItem = {
 const workItems: TimelineItem[] = [
   {
     id: 1,
+    title: 'Desenvolvedor e CTO',
+    organization: 'Flex Velozz',
+    period: '2024 - Presente',
+    description: 'Responsável pela liderança técnica e estratégica da empresa, desenvolvimento de soluções inovadoras, gestão de equipe de tecnologia, definição de arquitetura de sistemas e implementação de boas práticas de desenvolvimento. Atuação direta no desenvolvimento fullstack, gestão de projetos e tomada de decisões técnicas.'
+  },
+  {
+    id: 2,
     title: 'Desenvolvedor Fullstack Sênior',
     organization: 'Appezshop',
-    period: '2021 - Presente',
+    period: '2021 - 2024',
     description:
       'Responsável por liderar squads multidisciplinares, arquitetar soluções escaláveis e implementar sistemas completos do front ao back-end. Atuação com React, Next.js, Node.js, PostgreSQL, MongoDB, integrações REST/GraphQL, automação de deploy (CI/CD) e cloud (Vercel, AWS). Mentoria de times, code review e definição de padrões de arquitetura.',
   },
   {
-    id: 2,
+    id: 3,
     title: 'Desenvolvedor Fullstack Sênior',
     organization: 'LATAM',
     period: '2024 - 2025',
@@ -29,7 +36,7 @@ const workItems: TimelineItem[] = [
       'Desenvolvimento de aplicações web robustas, APIs escaláveis e microsserviços. Implementação de autenticação, autorização, testes automatizados, pipelines CI/CD e monitoramento. Liderança técnica em projetos críticos, integração de sistemas legados e cloud migration.',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Desenvolvedor Fullstack Sênior',
     organization: 'RH SYSTEM',
     period: '2024 - 2025',
@@ -37,7 +44,7 @@ const workItems: TimelineItem[] = [
       'Projetos de automação de processos de RH, criação de dashboards analíticos, integrações com ERPs e desenvolvimento de APIs RESTful. Atuação em arquitetura de software, performance e segurança.',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Desenvolvedor Fullstack Pleno',
     organization: 'TechSmart Solutions',
     period: '2020 - 2021',
@@ -45,19 +52,12 @@ const workItems: TimelineItem[] = [
       'Desenvolvimento de sistemas completos (React, Node, Express, MongoDB). Implementação de gateways de pagamento, autenticação JWT, relatórios dinâmicos e painéis administrativos. Participação em sprints ágeis e code reviews.',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Desenvolvedor Fullstack Júnior',
     organization: 'Projetos Independentes',
     period: '2019 - 2020',
     description:
       'Criação de MVPs, landing pages, APIs e integrações de sistemas para startups e clientes diversos. Stack: React, Node.js, PostgreSQL, WordPress, Vue.js.',
-  },
-  {
-    id: 6,
-    title: 'Co-fundador e CTO',
-    organization: 'InovaStart',
-    period: '2017 - 2018',
-    description: 'Liderança técnica e desenvolvimento do MVP de uma plataforma SaaS para gestão de pequenas empresas. Responsável por montar o time de tecnologia, validar o produto com clientes reais e estruturar a arquitetura fullstack.'
   },
   {
     id: 7,

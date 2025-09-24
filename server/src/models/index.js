@@ -36,13 +36,23 @@ let data = {
   ],
   experience: [
     {
+      id: '3',
+      company: 'Flex Velozz',
+      title: 'CTO',
+      location: 'Brasil',
+      startDate: '2023-01-01',
+      endDate: null,
+      current: true,
+      description: 'Liderança técnica e estratégica da equipe de desenvolvimento, definição de arquitetura de software e tomada de decisões tecnológicas para a empresa.',
+    },
+    {
       id: '1',
       company: 'Tech Innovations Inc.',
       title: 'Senior Developer',
       location: 'Remote',
       startDate: '2021-01-01',
-      endDate: null,
-      current: true,
+      endDate: '2022-12-31',
+      current: false,
       description: 'Leading development of enterprise web applications.',
     },
     {
