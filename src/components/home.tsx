@@ -11,13 +11,6 @@ import AnimatedSection from './AnimatedSection';
 import React, { Suspense } from 'react';
 import Navbar from './Navbar';
 import CommentsSection from './CommentsSection';
-import { Mail } from 'lucide-react';
-import { subscribeToMailchimp } from '@/services/mailchimp';
-import { useState } from 'react';
-import ProjectAIWizard from './ProjectAIWizard';
-import TechComparator from './TechComparator';
-import BadUXSimulator from './BadUXSimulator';
-import MentoriaSimulada from './MentoriaSimulada';
 
 const CodeEditor = React.lazy(() => import('./CodeEditor'));
 
@@ -33,9 +26,6 @@ function Home() {
           <section className="transform rotateX-[5deg] rotateY-[-3deg] scale-[0.98] transition-all duration-500 hover:scale-[1] hover:rotateX-0 hover:rotateY-0">
             <HeroSection />
           </section>
-
-          {/* Banner Newsletter */}
-          <NewsletterBannerInline />
 
           <AnimatedSection direction="up" delay={0.2}>
             <div className="transform translate-z-[50px]">
@@ -77,30 +67,6 @@ function Home() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection direction="up" delay={0.2}>
-            <div className="transform translate-z-[40px]">
-              <ProjectAIWizard />
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection direction="up" delay={0.2}>
-            <div className="transform translate-z-[40px]">
-              <TechComparator />
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection direction="up" delay={0.2}>
-            <div className="transform translate-z-[40px]">
-              <BadUXSimulator />
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection direction="up" delay={0.2}>
-            <div className="transform translate-z-[40px]">
-              <MentoriaSimulada />
-            </div>
-          </AnimatedSection>
-
           <AnimatedSection staggerChildren={true} staggerDelay={0.1}>
             <div className="transform translate-z-[45px]">
               <ProjectsSection />
@@ -132,73 +98,7 @@ function Home() {
           </div>
         </AnimatedSection>
       </div>
-
       <WhatsAppButton />
-    </div>
-  );
-}
-
-function NewsletterBannerInline() {
-  const [form, setForm] = useState({ name: '', email: '' });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    const result = await subscribeToMailchimp(form.name, form.email);
-    setLoading(false);
-    if (result.success) {
-      setSuccess(true);
-      setForm({ name: '', email: '' });
-    } else {
-      setError(result.message);
-    }
-  };
-
-  return (
-    <div className="px-2 py-4 my-6 text-center text-white rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-700 sm:px-4 sm:py-6 sm:my-8">
-      <span className="block mb-2 mr-2 text-base sm:text-lg font-semibold">Receba novidades e conteúdos exclusivos!</span>
-      {success ? (
-        <div className="font-semibold text-green-200">Inscrição realizada com sucesso!</div>
-      ) : (
-        <form className="flex flex-col items-center justify-center gap-2 sm:flex-row" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Seu nome"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 text-gray-900 rounded sm:w-48"
-            disabled={loading}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="seu@email.com"
-            value={form.email}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 text-gray-900 rounded sm:w-64"
-            disabled={loading}
-          />
-          <button
-            type="submit"
-            className="inline-flex items-center px-4 py-2 font-semibold text-blue-700 transition-colors bg-white rounded-lg shadow hover:bg-gray-100 mt-2 sm:mt-0"
-            disabled={loading}
-          >
-            {loading ? 'Enviando...' : 'Assinar Newsletter'}
-          </button>
-        </form>
-      )}
-      {error && <div className="mt-2 text-red-200">{error}</div>}
     </div>
   );
 }

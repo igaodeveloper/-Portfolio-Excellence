@@ -8,7 +8,6 @@ import HiddenAdminButton from './components/HiddenAdminButton';
 import AnimationDemoButton from './components/AnimationDemoButton';
 import { AccessibilityProvider } from './contexts/AccessibilityContext';
 import SmoothScroll from './components/SmoothScroll';
-import NewsletterPopup from './components/NewsletterPopup';
 
 import WhatsAppButton from './components/WhatsAppButton';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -51,7 +50,6 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AnimationDemo = lazy(() => import('./pages/AnimationDemo'));
 const VideoPage = lazy(() => import('./pages/VideoPage'));
-const NewsletterPage = lazy(() => import('./pages/NewsletterPage'));
 const MiniGame = lazy(() => import('./pages/MiniGame'));
 const SuperMinigame = lazy(() => import('./pages/SuperMinigame'));
 
@@ -139,9 +137,6 @@ function AppRoutes() {
           <Route path="/blog/projetos" element={<ProjectsPage />} />
           <Route path="/blog/contato" element={<ContactPage />} />
 
-          {/* Newsletter Page */}
-          <Route path="/newsletter" element={<NewsletterPage />} />
-
           {/* Super Minigame Page */}
           <Route path="/super-minigame" element={<SuperMinigame />} />
 
@@ -163,8 +158,6 @@ function AppRoutes() {
         </Routes>
         {/* tempoRoutes removido pois dependia de 'routes' inexistente */}
       </AnimatedLayout>
-      <NewsletterPopup />
-      
     </Suspense>
   );
 }
